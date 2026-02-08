@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>📌制造业研发与质量管理核心手册（2026版）</title>
+    <url>/posts/c87c.html</url>
+    <content><![CDATA[<blockquote>
+<p><strong>导读</strong>：本手册旨在为研发工程师提供从产品开发（NPD）到量产管控的全流程逻辑框架。通过标准化工具的应用，将“经验驱动”转化为“数据与逻辑驱动”。</p>
+</blockquote>
+<h2 id="一、-项目管理：从-0-到-1-的受控开发-NPD-APQP"><a href="#一、-项目管理：从-0-到-1-的受控开发-NPD-APQP" class="headerlink" title="一、 项目管理：从 0 到 1 的受控开发 (NPD&#x2F;APQP)"></a>一、 项目管理：从 0 到 1 的受控开发 (NPD&#x2F;APQP)</h2><p>项目成功的核心在于阶段关口（Stage-Gate）的严格评审。</p>
+<ol>
+<li><strong>需求定义 (Concept)</strong>：CTQ（关键质量特性）识别，竞品材料 Benchmarking。</li>
+<li><strong>设计开发 (Design)</strong>：DFMEA（设计失效模式分析），识别潜在设计风险。</li>
+<li><strong>试制验证 (Validation)</strong>：DVT（设计验证测试），确定材料加工窗口。</li>
+<li><strong>量产移交 (Launch)</strong>：PVT（生产验证测试），确保制程能力 Cpk &gt; 1.33。</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="二、-工艺管控：波动抑制与标准化"><a href="#二、-工艺管控：波动抑制与标准化" class="headerlink" title="二、 工艺管控：波动抑制与标准化"></a>二、 工艺管控：波动抑制与标准化</h2><p>工艺的本质是<strong>能量与物质的稳定交换</strong>。</p>
+<h3 id="1-工艺参数三阶标准"><a href="#1-工艺参数三阶标准" class="headerlink" title="1. 工艺参数三阶标准"></a>1. 工艺参数三阶标准</h3><ul>
+<li><strong>第一阶：标准值 (Standard)</strong>：通过 DOE 实验确定的理论最优值。</li>
+<li><strong>第二阶：操作窗口 (Window)</strong>：允许的操作偏差范围（如 230°C ± 5°C）。</li>
+<li><strong>第三阶：行动阈值 (Action)</strong>：触发异常处理流程的临界点。</li>
+</ul>
+<h3 id="2-现场管控逻辑-Mermaid-流程图"><a href="#2-现场管控逻辑-Mermaid-流程图" class="headerlink" title="2. 现场管控逻辑 (Mermaid 流程图)"></a>2. 现场管控逻辑 (Mermaid 流程图)</h3><pre><code class="highlight mermaid">graph LR
+    A[投料检验] --&gt; B[工艺参数监控]
+    B --&gt; C&#123;SPC监控&#125;
+    C -- 受控 --&gt; D[继续生产]
+    C -- 失控 --&gt; E[RCA分析/停机整改]</code></pre>
+
+<h2 id="三、-质量工具箱-The-Quality-Toolbox"><a href="#三、-质量工具箱-The-Quality-Toolbox" class="headerlink" title="三、 质量工具箱 (The Quality Toolbox)"></a>三、 质量工具箱 (The Quality Toolbox)</h2><p>研发工程师应熟练掌握以下“手术刀”级别的工具：</p>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th><strong>应用场景</strong></th>
+<th><strong>核心价值</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DOE (实验设计)</strong></td>
+<td>新配方&#x2F;新工艺开发</td>
+<td>用最少的实验次数找寻最优解</td>
+</tr>
+<tr>
+<td><strong>MSA (测量系统分析)</strong></td>
+<td>实验室设备验收</td>
+<td>确保数据真实性，排除量具偏差</td>
+</tr>
+<tr>
+<td><strong>RCA (鱼骨图&#x2F;5Why)</strong></td>
+<td>质量缺陷排查</td>
+<td>穿透表象，定位物理根本原因</td>
+</tr>
+<tr>
+<td><strong>SPC (统计制程控制)</strong></td>
+<td>量产稳定性评估</td>
+<td>识别制程中的趋势性偏移</td>
+</tr>
+</tbody></table>
+<p>详情请参阅：<a href="5c61.html">材料研发中的 DOE 实战：如何快速锁定最优工艺窗口</a></p>
+<h2 id="四、-工程师的自我检查清单-Checklist"><a href="#四、-工程师的自我检查清单-Checklist" class="headerlink" title="四、 工程师的自我检查清单 (Checklist)"></a>四、 工程师的自我检查清单 (Checklist)</h2><ul>
+<li><input disabled="" type="checkbox"> <strong>逻辑一致性</strong>：实验结论是否有充分的数据支撑？</li>
+<li><input disabled="" type="checkbox"> <strong>公差匹配</strong>：材料收缩率是否与模具设计公差匹配？</li>
+<li><input disabled="" type="checkbox"> <strong>标准符合性</strong>：测试方法是否严格遵守 ISO&#x2F;GB 标准？</li>
+</ul>
+<p><strong>本手册将持续根据最新工程实践进行迭代。</strong></p>
+]]></content>
+      <categories>
+        <category>管理体系</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+        <tag>工艺管控</tag>
+        <tag>质量工具</tag>
+        <tag>SOP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git命令学习：20%核心指令</title>
     <url>/posts/3524.html</url>
     <content><![CDATA[<p>针对<strong>个人独立项目</strong>，核心诉求是：<strong>版本回溯（后悔药）</strong>、<strong>进度管理（存档点）以及多设备同步（云备份）</strong>。完全不需要学习多人协作中复杂的冲突解决和分支管理策略。</p>
@@ -39,8 +114,8 @@
         <category>数字化工具</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>ssh</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -124,6 +199,150 @@
       </categories>
       <tags>
         <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ssh生成密钥、配置及登录</title>
+    <url>/posts/3930.html</url>
+    <content><![CDATA[<h2 id="配置-SSH-Config-文件（强烈推荐）"><a href="#配置-SSH-Config-文件（强烈推荐）" class="headerlink" title="配置 SSH Config 文件（强烈推荐）"></a>配置 SSH Config 文件（强烈推荐）</h2><p>这是最专业、最快的方法。通过配置别名，你可以用 <code>ssh myserver</code> 代替一长串命令。</p>
+<h3 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h3><ol>
+<li><p>打开终端，编辑配置文件（如果没有则会自动创建）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano ~/.ssh/config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在文件中输入以下格式的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host dev             # 你自定义的别名</span><br><span class="line">    HostName 192.168.1.100  # 服务器真实 IP</span><br><span class="line">    User root               # 你的登录名</span><br><span class="line">    Port 22                 # 端口号（默认22可不写）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
+</li>
+<li><p><strong>连接：</strong> 现在你只需要在终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh dev</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<span id="more"></span>
+
+<h2 id="终极级：实现免密登录（SSH-Key）"><a href="#终极级：实现免密登录（SSH-Key）" class="headerlink" title="终极级：实现免密登录（SSH Key）"></a>终极级：实现免密登录（SSH Key）</h2><p>即使有了别名，每次输入密码依然很慢。通过密钥对认证，可以实现“秒连”。</p>
+<h3 id="操作流程："><a href="#操作流程：" class="headerlink" title="操作流程："></a>操作流程：</h3><ol>
+<li><p><strong>在本机生成密钥</strong>（如果已有可跳过）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
+
+<p>(一路回车即可)</p>
+</li>
+<li><p><strong>将公钥发送给服务器</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-copy-id dev  # 这里的 dev 是你在第 2 步设定的别名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入一次服务器密码后，建立信任关系。</p>
+</li>
+<li><p><strong>效果</strong>：以后输入 <code>ssh dev</code> 即可直接进入系统，无需密码。</p>
+</li>
+</ol>
+<h4 id="第一步：修改服务器配置"><a href="#第一步：修改服务器配置" class="headerlink" title="第一步：修改服务器配置"></a>第一步：修改服务器配置</h4><ol>
+<li><p>在服务器终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找到以下几行，确保它们没有被 <code>#</code> 注释，且参数如下：</p>
+<ul>
+<li><code>PubkeyAuthentication yes</code> （允许公钥认证）</li>
+<li><code>AuthorizedKeysFile .ssh/authorized_keys</code> （指定存放公钥的位置）</li>
+</ul>
+</li>
+<li><p>检查 <code>PasswordAuthentication</code> 是否为 <code>yes</code>（如果你还想保留密码登录）。</p>
+</li>
+<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
+</li>
+</ol>
+<h4 id="第二步：重启服务器-SSH-服务"><a href="#第二步：重启服务器-SSH-服务" class="headerlink" title="第二步：重启服务器 SSH 服务"></a>第二步：重启服务器 SSH 服务</h4><p>修改完配置后必须重启服务才能生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart ssh</span><br><span class="line"># 如果是较老的系统，请尝试：</span><br><span class="line"># sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="🧪-再次验证流程"><a href="#🧪-再次验证流程" class="headerlink" title="🧪 再次验证流程"></a>🧪 再次验证流程</h3><p>在完成上述操作后，回到你的 Mac 终端，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -v dev</span><br></pre></td></tr></table></figure>
+
+<p><strong>正常的情况应该是：</strong> 你会看到 <code>Authentications that can continue: publickey,password</code>。 接着看到 <code>debug1: Offering public key: /Users/yourname/.ssh/id_ed25519</code>。 最后直接进入系统。</p>
+<hr>
+<h3 id="⚠️-研发人员必须注意的安全点"><a href="#⚠️-研发人员必须注意的安全点" class="headerlink" title="⚠️ 研发人员必须注意的安全点"></a>⚠️ 研发人员必须注意的安全点</h3><p>如果你的服务器是暴露在公网（如阿里云、腾讯云等），一旦开启了公钥登录并验证成功，强烈建议：</p>
+<ol>
+<li><strong>先确保密钥登录彻底成功。</strong></li>
+<li>再次编辑 <code>/etc/ssh/sshd_config</code>，将 <code>PasswordAuthentication yes</code> 改为 <code>no</code>。</li>
+<li><strong>效果：</strong> 这样即便黑客有你的密码，没有你的物理电脑（私钥）也永远进不去系统，这对保护您的实验原始数据和知识产权至关重要。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>材料研发中的 DOE 实战：如何快速锁定最优工艺窗口</title>
+    <url>/posts/5c61.html</url>
+    <content><![CDATA[<blockquote>
+<p><strong>核心逻辑</strong>：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。</p>
+</blockquote>
+<h2 id="1-场景定义：为什么需要-DOE？"><a href="#1-场景定义：为什么需要-DOE？" class="headerlink" title="1. 场景定义：为什么需要 DOE？"></a>1. 场景定义：为什么需要 DOE？</h2><p>假设我们正在研发一种<strong>玻纤增强尼龙 (PA66+GF30)</strong>，目前发现制品<strong>浮纤严重</strong>且<strong>拉伸强度波动大</strong>。<br>涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。<br>若每个因子取 3 个水平，全因子实验需要 $3^4 &#x3D; 81$ 次，耗时耗财。而通过 <strong>正交设计 (Orthogonal Design)</strong> 或 <strong>响应面法 (RSM)</strong>，我们可以缩减至 15-20 次。</p>
+<span id="more"></span>
+
+<h2 id="2-DOE-实施五步法-SOP"><a href="#2-DOE-实施五步法-SOP" class="headerlink" title="2. DOE 实施五步法 (SOP)"></a>2. DOE 实施五步法 (SOP)</h2><h3 id="第一步：因子与水平设定-Factors-Levels"><a href="#第一步：因子与水平设定-Factors-Levels" class="headerlink" title="第一步：因子与水平设定 (Factors &amp; Levels)"></a>第一步：因子与水平设定 (Factors &amp; Levels)</h3><p>在开始实验前，需通过“鱼骨图”筛选出关键因子。</p>
+<table>
+<thead>
+<tr>
+<th align="left">因子</th>
+<th align="left">低水平 (-1)</th>
+<th align="left">高水平 (+1)</th>
+<th align="left">单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">A: 熔体温度</td>
+<td align="left">275</td>
+<td align="left">295</td>
+<td align="left">°C</td>
+</tr>
+<tr>
+<td align="left">B: 模具温度</td>
+<td align="left">80</td>
+<td align="left">110</td>
+<td align="left">°C</td>
+</tr>
+<tr>
+<td align="left">C: 注射压力</td>
+<td align="left">800</td>
+<td align="left">1200</td>
+<td align="left">Bar</td>
+</tr>
+</tbody></table>
+<h3 id="第二步：选择实验方案"><a href="#第二步：选择实验方案" class="headerlink" title="第二步：选择实验方案"></a>第二步：选择实验方案</h3><ul>
+<li><strong>筛选实验 (Screening)</strong>：因子多时使用，用于剔除次要变量。</li>
+<li><strong>析因实验 (Factorial)</strong>：分析因子间的<strong>交互作用 (Interaction)</strong>。例如：温度高时，压力对强度的影响是否更显著？</li>
+</ul>
+<h3 id="第三步：执行实验与数据采集"><a href="#第三步：执行实验与数据采集" class="headerlink" title="第三步：执行实验与数据采集"></a>第三步：执行实验与数据采集</h3><p>使用 Mermaid 记录实验流：</p>
+<pre><code class="highlight mermaid">graph LR
+    A[随机化顺序] --&gt; B[实验组运行]
+    B --&gt; C[样条恒温恒湿处理]
+    C --&gt; D[拉伸性能测试]
+    D --&gt; E[数据录入 Minitab]</code></pre>
+
+<h3 id="第四步：统计分析-Statistical-Analysis"><a href="#第四步：统计分析-Statistical-Analysis" class="headerlink" title="第四步：统计分析 (Statistical Analysis)"></a>第四步：统计分析 (Statistical Analysis)</h3><p>核心关注点：</p>
+<ol>
+<li><strong>帕累托图 (Pareto Chart)</strong>：哪些因子跨越了红线（显著性阈值）？</li>
+<li><strong>交互作用图</strong>：观察直线是否交叉。若交叉，说明因子 A 的效果依赖于因子 B 的水平。</li>
+</ol>
+<h3 id="第五步：模型验证与预测"><a href="#第五步：模型验证与预测" class="headerlink" title="第五步：模型验证与预测"></a>第五步：模型验证与预测</h3><p>得到回归方程： $$ 拉伸强度 &#x3D; \beta_0 + \beta_1 A + \beta_2 B + \beta_{12} AB + \epsilon $$</p>
+<h2 id="3-研发工程师的避坑指南"><a href="#3-研发工程师的避坑指南" class="headerlink" title="3. 研发工程师的避坑指南"></a>3. 研发工程师的避坑指南</h2><ol>
+<li><strong>必须随机化</strong>：不要按顺序做实验，防止设备漂移产生系统误差。</li>
+<li><strong>包含中心点</strong>：在低、高水平中间取一点，用于检测系统是否存在“非线性（弯曲）”关系。</li>
+<li><strong>数据真实性</strong>：异常值必须通过物理逻辑（如停机、漏胶）解释，严禁随意删除数据。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>研发工具</category>
+        <category>逻辑推演</category>
+      </categories>
+      <tags>
+        <tag>DOE</tag>
+        <tag>Minitab</tag>
+        <tag>过程优化</tag>
       </tags>
   </entry>
   <entry>
@@ -244,77 +463,6 @@
       </tags>
   </entry>
   <entry>
-    <title>材料研发中的 DOE 实战：如何快速锁定最优工艺窗口</title>
-    <url>/posts/5c61.html</url>
-    <content><![CDATA[<blockquote>
-<p><strong>核心逻辑</strong>：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。</p>
-</blockquote>
-<h2 id="1-场景定义：为什么需要-DOE？"><a href="#1-场景定义：为什么需要-DOE？" class="headerlink" title="1. 场景定义：为什么需要 DOE？"></a>1. 场景定义：为什么需要 DOE？</h2><p>假设我们正在研发一种<strong>玻纤增强尼龙 (PA66+GF30)</strong>，目前发现制品<strong>浮纤严重</strong>且<strong>拉伸强度波动大</strong>。<br>涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。<br>若每个因子取 3 个水平，全因子实验需要 $3^4 &#x3D; 81$ 次，耗时耗财。而通过 <strong>正交设计 (Orthogonal Design)</strong> 或 <strong>响应面法 (RSM)</strong>，我们可以缩减至 15-20 次。</p>
-<span id="more"></span>
-
-<h2 id="2-DOE-实施五步法-SOP"><a href="#2-DOE-实施五步法-SOP" class="headerlink" title="2. DOE 实施五步法 (SOP)"></a>2. DOE 实施五步法 (SOP)</h2><h3 id="第一步：因子与水平设定-Factors-Levels"><a href="#第一步：因子与水平设定-Factors-Levels" class="headerlink" title="第一步：因子与水平设定 (Factors &amp; Levels)"></a>第一步：因子与水平设定 (Factors &amp; Levels)</h3><p>在开始实验前，需通过“鱼骨图”筛选出关键因子。</p>
-<table>
-<thead>
-<tr>
-<th align="left">因子</th>
-<th align="left">低水平 (-1)</th>
-<th align="left">高水平 (+1)</th>
-<th align="left">单位</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">A: 熔体温度</td>
-<td align="left">275</td>
-<td align="left">295</td>
-<td align="left">°C</td>
-</tr>
-<tr>
-<td align="left">B: 模具温度</td>
-<td align="left">80</td>
-<td align="left">110</td>
-<td align="left">°C</td>
-</tr>
-<tr>
-<td align="left">C: 注射压力</td>
-<td align="left">800</td>
-<td align="left">1200</td>
-<td align="left">Bar</td>
-</tr>
-</tbody></table>
-<h3 id="第二步：选择实验方案"><a href="#第二步：选择实验方案" class="headerlink" title="第二步：选择实验方案"></a>第二步：选择实验方案</h3><ul>
-<li><strong>筛选实验 (Screening)</strong>：因子多时使用，用于剔除次要变量。</li>
-<li><strong>析因实验 (Factorial)</strong>：分析因子间的<strong>交互作用 (Interaction)</strong>。例如：温度高时，压力对强度的影响是否更显著？</li>
-</ul>
-<h3 id="第三步：执行实验与数据采集"><a href="#第三步：执行实验与数据采集" class="headerlink" title="第三步：执行实验与数据采集"></a>第三步：执行实验与数据采集</h3><p>使用 Mermaid 记录实验流：</p>
-<pre><code class="highlight mermaid">graph LR
-    A[随机化顺序] --&gt; B[实验组运行]
-    B --&gt; C[样条恒温恒湿处理]
-    C --&gt; D[拉伸性能测试]
-    D --&gt; E[数据录入 Minitab]</code></pre>
-
-<h3 id="第四步：统计分析-Statistical-Analysis"><a href="#第四步：统计分析-Statistical-Analysis" class="headerlink" title="第四步：统计分析 (Statistical Analysis)"></a>第四步：统计分析 (Statistical Analysis)</h3><p>核心关注点：</p>
-<ol>
-<li><strong>帕累托图 (Pareto Chart)</strong>：哪些因子跨越了红线（显著性阈值）？</li>
-<li><strong>交互作用图</strong>：观察直线是否交叉。若交叉，说明因子 A 的效果依赖于因子 B 的水平。</li>
-</ol>
-<h3 id="第五步：模型验证与预测"><a href="#第五步：模型验证与预测" class="headerlink" title="第五步：模型验证与预测"></a>第五步：模型验证与预测</h3><p>得到回归方程： $$ 拉伸强度 &#x3D; \beta_0 + \beta_1 A + \beta_2 B + \beta_{12} AB + \epsilon $$</p>
-<h2 id="3-研发工程师的避坑指南"><a href="#3-研发工程师的避坑指南" class="headerlink" title="3. 研发工程师的避坑指南"></a>3. 研发工程师的避坑指南</h2><ol>
-<li><strong>必须随机化</strong>：不要按顺序做实验，防止设备漂移产生系统误差。</li>
-<li><strong>包含中心点</strong>：在低、高水平中间取一点，用于检测系统是否存在“非线性（弯曲）”关系。</li>
-<li><strong>数据真实性</strong>：异常值必须通过物理逻辑（如停机、漏胶）解释，严禁随意删除数据。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>研发工具</category>
-        <category>逻辑推演</category>
-      </categories>
-      <tags>
-        <tag>DOE</tag>
-        <tag>Minitab</tag>
-        <tag>过程优化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用80/20法则阅读红楼梦</title>
     <url>/posts/35bb.html</url>
     <content><![CDATA[<p>阅读《红楼梦》这样百万字量级的巨著，普通人往往容易陷入琐碎的人物关系和复杂的诗词考据中，最终半途而废。根据帕累托法则，<strong>80% 的文学价值和情感共鸣，往往集中在 20% 的核心篇章和主线人物中</strong>。</p>
@@ -342,154 +490,6 @@
       </categories>
       <tags>
         <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ssh生成密钥、配置及登录</title>
-    <url>/posts/3930.html</url>
-    <content><![CDATA[<h2 id="配置-SSH-Config-文件（强烈推荐）"><a href="#配置-SSH-Config-文件（强烈推荐）" class="headerlink" title="配置 SSH Config 文件（强烈推荐）"></a>配置 SSH Config 文件（强烈推荐）</h2><p>这是最专业、最快的方法。通过配置别名，你可以用 <code>ssh myserver</code> 代替一长串命令。</p>
-<h3 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h3><ol>
-<li><p>打开终端，编辑配置文件（如果没有则会自动创建）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano ~/.ssh/config</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在文件中输入以下格式的内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host dev             # 你自定义的别名</span><br><span class="line">    HostName 192.168.1.100  # 服务器真实 IP</span><br><span class="line">    User root               # 你的登录名</span><br><span class="line">    Port 22                 # 端口号（默认22可不写）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
-</li>
-<li><p><strong>连接：</strong> 现在你只需要在终端输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh dev</span><br></pre></td></tr></table></figure></li>
-</ol>
-<hr>
-<span id="more"></span>
-
-<h2 id="终极级：实现免密登录（SSH-Key）"><a href="#终极级：实现免密登录（SSH-Key）" class="headerlink" title="终极级：实现免密登录（SSH Key）"></a>终极级：实现免密登录（SSH Key）</h2><p>即使有了别名，每次输入密码依然很慢。通过密钥对认证，可以实现“秒连”。</p>
-<h3 id="操作流程："><a href="#操作流程：" class="headerlink" title="操作流程："></a>操作流程：</h3><ol>
-<li><p><strong>在本机生成密钥</strong>（如果已有可跳过）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
-
-<p>(一路回车即可)</p>
-</li>
-<li><p><strong>将公钥发送给服务器</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-copy-id dev  # 这里的 dev 是你在第 2 步设定的别名</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输入一次服务器密码后，建立信任关系。</p>
-</li>
-<li><p><strong>效果</strong>：以后输入 <code>ssh dev</code> 即可直接进入系统，无需密码。</p>
-</li>
-</ol>
-<h4 id="第一步：修改服务器配置"><a href="#第一步：修改服务器配置" class="headerlink" title="第一步：修改服务器配置"></a>第一步：修改服务器配置</h4><ol>
-<li><p>在服务器终端输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>找到以下几行，确保它们没有被 <code>#</code> 注释，且参数如下：</p>
-<ul>
-<li><code>PubkeyAuthentication yes</code> （允许公钥认证）</li>
-<li><code>AuthorizedKeysFile .ssh/authorized_keys</code> （指定存放公钥的位置）</li>
-</ul>
-</li>
-<li><p>检查 <code>PasswordAuthentication</code> 是否为 <code>yes</code>（如果你还想保留密码登录）。</p>
-</li>
-<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
-</li>
-</ol>
-<h4 id="第二步：重启服务器-SSH-服务"><a href="#第二步：重启服务器-SSH-服务" class="headerlink" title="第二步：重启服务器 SSH 服务"></a>第二步：重启服务器 SSH 服务</h4><p>修改完配置后必须重启服务才能生效：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart ssh</span><br><span class="line"># 如果是较老的系统，请尝试：</span><br><span class="line"># sudo service ssh restart</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="🧪-再次验证流程"><a href="#🧪-再次验证流程" class="headerlink" title="🧪 再次验证流程"></a>🧪 再次验证流程</h3><p>在完成上述操作后，回到你的 Mac 终端，执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -v dev</span><br></pre></td></tr></table></figure>
-
-<p><strong>正常的情况应该是：</strong> 你会看到 <code>Authentications that can continue: publickey,password</code>。 接着看到 <code>debug1: Offering public key: /Users/yourname/.ssh/id_ed25519</code>。 最后直接进入系统。</p>
-<hr>
-<h3 id="⚠️-研发人员必须注意的安全点"><a href="#⚠️-研发人员必须注意的安全点" class="headerlink" title="⚠️ 研发人员必须注意的安全点"></a>⚠️ 研发人员必须注意的安全点</h3><p>如果你的服务器是暴露在公网（如阿里云、腾讯云等），一旦开启了公钥登录并验证成功，强烈建议：</p>
-<ol>
-<li><strong>先确保密钥登录彻底成功。</strong></li>
-<li>再次编辑 <code>/etc/ssh/sshd_config</code>，将 <code>PasswordAuthentication yes</code> 改为 <code>no</code>。</li>
-<li><strong>效果：</strong> 这样即便黑客有你的密码，没有你的物理电脑（私钥）也永远进不去系统，这对保护您的实验原始数据和知识产权至关重要。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数字化工具</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
-        <tag>mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>📌制造业研发与质量管理核心手册（2026版）</title>
-    <url>/posts/c87c.html</url>
-    <content><![CDATA[<blockquote>
-<p><strong>导读</strong>：本手册旨在为研发工程师提供从产品开发（NPD）到量产管控的全流程逻辑框架。通过标准化工具的应用，将“经验驱动”转化为“数据与逻辑驱动”。</p>
-</blockquote>
-<h2 id="一、-项目管理：从-0-到-1-的受控开发-NPD-APQP"><a href="#一、-项目管理：从-0-到-1-的受控开发-NPD-APQP" class="headerlink" title="一、 项目管理：从 0 到 1 的受控开发 (NPD&#x2F;APQP)"></a>一、 项目管理：从 0 到 1 的受控开发 (NPD&#x2F;APQP)</h2><p>项目成功的核心在于阶段关口（Stage-Gate）的严格评审。</p>
-<ol>
-<li><strong>需求定义 (Concept)</strong>：CTQ（关键质量特性）识别，竞品材料 Benchmarking。</li>
-<li><strong>设计开发 (Design)</strong>：DFMEA（设计失效模式分析），识别潜在设计风险。</li>
-<li><strong>试制验证 (Validation)</strong>：DVT（设计验证测试），确定材料加工窗口。</li>
-<li><strong>量产移交 (Launch)</strong>：PVT（生产验证测试），确保制程能力 Cpk &gt; 1.33。</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="二、-工艺管控：波动抑制与标准化"><a href="#二、-工艺管控：波动抑制与标准化" class="headerlink" title="二、 工艺管控：波动抑制与标准化"></a>二、 工艺管控：波动抑制与标准化</h2><p>工艺的本质是<strong>能量与物质的稳定交换</strong>。</p>
-<h3 id="1-工艺参数三阶标准"><a href="#1-工艺参数三阶标准" class="headerlink" title="1. 工艺参数三阶标准"></a>1. 工艺参数三阶标准</h3><ul>
-<li><strong>第一阶：标准值 (Standard)</strong>：通过 DOE 实验确定的理论最优值。</li>
-<li><strong>第二阶：操作窗口 (Window)</strong>：允许的操作偏差范围（如 230°C ± 5°C）。</li>
-<li><strong>第三阶：行动阈值 (Action)</strong>：触发异常处理流程的临界点。</li>
-</ul>
-<h3 id="2-现场管控逻辑-Mermaid-流程图"><a href="#2-现场管控逻辑-Mermaid-流程图" class="headerlink" title="2. 现场管控逻辑 (Mermaid 流程图)"></a>2. 现场管控逻辑 (Mermaid 流程图)</h3><pre><code class="highlight mermaid">graph LR
-    A[投料检验] --&gt; B[工艺参数监控]
-    B --&gt; C&#123;SPC监控&#125;
-    C -- 受控 --&gt; D[继续生产]
-    C -- 失控 --&gt; E[RCA分析/停机整改]</code></pre>
-
-<h2 id="三、-质量工具箱-The-Quality-Toolbox"><a href="#三、-质量工具箱-The-Quality-Toolbox" class="headerlink" title="三、 质量工具箱 (The Quality Toolbox)"></a>三、 质量工具箱 (The Quality Toolbox)</h2><p>研发工程师应熟练掌握以下“手术刀”级别的工具：</p>
-<table>
-<thead>
-<tr>
-<th><strong>工具</strong></th>
-<th><strong>应用场景</strong></th>
-<th><strong>核心价值</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>DOE (实验设计)</strong></td>
-<td>新配方&#x2F;新工艺开发</td>
-<td>用最少的实验次数找寻最优解</td>
-</tr>
-<tr>
-<td><strong>MSA (测量系统分析)</strong></td>
-<td>实验室设备验收</td>
-<td>确保数据真实性，排除量具偏差</td>
-</tr>
-<tr>
-<td><strong>RCA (鱼骨图&#x2F;5Why)</strong></td>
-<td>质量缺陷排查</td>
-<td>穿透表象，定位物理根本原因</td>
-</tr>
-<tr>
-<td><strong>SPC (统计制程控制)</strong></td>
-<td>量产稳定性评估</td>
-<td>识别制程中的趋势性偏移</td>
-</tr>
-</tbody></table>
-<p>详情请参阅：<a href="5c61.html">材料研发中的 DOE 实战：如何快速锁定最优工艺窗口</a></p>
-<h2 id="四、-工程师的自我检查清单-Checklist"><a href="#四、-工程师的自我检查清单-Checklist" class="headerlink" title="四、 工程师的自我检查清单 (Checklist)"></a>四、 工程师的自我检查清单 (Checklist)</h2><ul>
-<li><input disabled="" type="checkbox"> <strong>逻辑一致性</strong>：实验结论是否有充分的数据支撑？</li>
-<li><input disabled="" type="checkbox"> <strong>公差匹配</strong>：材料收缩率是否与模具设计公差匹配？</li>
-<li><input disabled="" type="checkbox"> <strong>标准符合性</strong>：测试方法是否严格遵守 ISO&#x2F;GB 标准？</li>
-</ul>
-<p><strong>本手册将持续根据最新工程实践进行迭代。</strong></p>
-]]></content>
-      <categories>
-        <category>管理体系</category>
-      </categories>
-      <tags>
-        <tag>项目管理</tag>
-        <tag>工艺管控</tag>
-        <tag>质量工具</tag>
-        <tag>SOP</tag>
       </tags>
   </entry>
 </search>
