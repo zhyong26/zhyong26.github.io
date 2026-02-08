@@ -154,7 +154,7 @@
   </url>
   
   <url>
-    <loc>https://zhyong.site/tags/vim/</loc>
+    <loc>https://zhyong.site/tags/%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -203,13 +203,6 @@
   </url>
   
   <url>
-    <loc>https://zhyong.site/tags/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2026-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zhyong.site/tags/DOE/</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -230,6 +223,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://zhyong.site/tags/vim/</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://zhyong.site/categories/%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</loc>
+    <loc>https://zhyong.site/categories/%E6%96%87%E5%AD%A6%E4%BD%9C%E5%93%81/</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://zhyong.site/categories/%E6%96%87%E5%AD%A6%E4%BD%9C%E5%93%81/</loc>
+    <loc>https://zhyong.site/categories/%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
