@@ -76,6 +76,133 @@
       </tags>
   </entry>
   <entry>
+    <title>Mac下好用的命令行工具(2026版)</title>
+    <url>/posts/5a6c.html</url>
+    <content><![CDATA[<p>结合对 <strong>Synology NAS</strong>、<strong>Vim&#x2F;fzf</strong> 以及 <strong>知识管理 (PKM)</strong> 的兴趣，以下是 2026 年 macOS 平台上最值得推荐的命令行工具，按功能类别进行精选：</p>
+<hr>
+<h3 id="一、-核心基础与文件导航"><a href="#一、-核心基础与文件导航" class="headerlink" title="一、 核心基础与文件导航"></a>一、 核心基础与文件导航</h3><p>这些工具是高效终端环境的基石，特别适合习惯使用 <code>fzf</code> 的用户。</p>
+<ul>
+<li><strong>Homebrew (<code>brew</code>)</strong>：必备的软件包管理器。</li>
+<li><strong>eza</strong> (替代 <code>ls</code>)：现代化的文件列表工具。支持图标显示、Git 状态集成以及更清晰的颜色分级。<ul>
+<li><em>安装</em>：<code>brew install eza</code></li>
+</ul>
+</li>
+<li><strong>fd</strong> (替代 <code>find</code>)：比原生 <code>find</code> 快且语法更简单，默认忽略 <code>.gitignore</code> 中的文件。<ul>
+<li><em>安装</em>：<code>brew install fd</code></li>
+</ul>
+</li>
+<li><strong>ripgrep (<code>rg</code>)</strong> (替代 <code>grep</code>)：极速的文本搜索工具，是目前性能最强的文件内容搜索工具。<ul>
+<li><em>安装</em>：<code>brew install ripgrep</code></li>
+</ul>
+</li>
+<li><strong>bat</strong> (替代 <code>cat</code>)：带有语法高亮、代码折行和 Git 修改标记的查看器。<ul>
+<li><em>安装</em>：<code>brew install bat</code></li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<hr>
+<h3 id="二、-生产力与数据处理"><a href="#二、-生产力与数据处理" class="headerlink" title="二、 生产力与数据处理"></a>二、 生产力与数据处理</h3><p>针对您在 <strong>制造工程文档处理</strong> 和 <strong>知识管理</strong> 方面的需求：</p>
+<ul>
+<li><strong>Pandoc</strong>：文档转换的“瑞士军刀”。支持 Markdown、Word、PDF、LaTeX 等数十种格式互转，非常适合处理工艺流程说明书。<ul>
+<li><em>安装</em>：<code>brew install pandoc</code></li>
+</ul>
+</li>
+<li><strong>jq &#x2F; yq</strong>：命令行 JSON 和 YAML 处理器。在调试 Synology API 或处理结构化文档时极度高效。<ul>
+<li><em>安装</em>：<code>brew install jq yq</code></li>
+</ul>
+</li>
+<li><strong>tldr</strong>：简化版的帮助手册（man pages）。快速获取命令的核心用法示例，而非冗长的文档。<ul>
+<li><em>安装</em>：<code>brew install tldr</code></li>
+</ul>
+</li>
+<li><strong>Zoxide</strong> (替代 <code>cd</code>)：智能路径跳转工具。它会记录您访问过的目录，只需输入 <code>z 部分目录名</code> 即可瞬间跳转。<ul>
+<li><em>安装</em>：<code>brew install zoxide</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="三、-系统监控与磁盘管理"><a href="#三、-系统监控与磁盘管理" class="headerlink" title="三、 系统监控与磁盘管理"></a>三、 系统监控与磁盘管理</h3><ul>
+<li><strong>btop &#x2F; htop</strong>：美观且功能强大的实时系统监视器，支持查看 CPU、内存、网络及进程。<ul>
+<li><em>安装</em>：<code>brew install btop</code></li>
+</ul>
+</li>
+<li><strong>ncdu</strong>：磁盘占用分析器。以交互式菜单形式显示哪些文件占用了空间，适合清理 Mac 和 Synology 挂载盘。<ul>
+<li><em>安装</em>：<code>brew install ncdu</code></li>
+</ul>
+</li>
+<li><strong>Mole</strong>：2026 年流行的一款针对 macOS 的“深层清理”命令行工具，用于清除系统冗余缓存。</li>
+</ul>
+<hr>
+<h3 id="四、-网络、存储与-NAS-同步"><a href="#四、-网络、存储与-NAS-同步" class="headerlink" title="四、 网络、存储与 NAS 同步"></a>四、 网络、存储与 NAS 同步</h3><p>考虑到您对 <strong>Synology NAS</strong> 的深度使用：</p>
+<ul>
+<li><strong>rclone</strong>：云存储同步管理的“终极工具”。支持将 Synology、Google Drive、S3 等挂载为本地磁盘，或进行加密备份。<ul>
+<li><em>安装</em>：<code>brew install rclone</code></li>
+</ul>
+</li>
+<li><strong>yt-dlp</strong>：目前最全能的视频下载工具，支持 YouTube 及国内主流视频平台。<ul>
+<li><em>安装</em>：<code>brew install yt-dlp</code></li>
+</ul>
+</li>
+<li><strong>Ollama</strong>：在本地终端运行大型语言模型（如 Llama 3, Mistral）。<ul>
+<li><em>安装</em>：<code>brew install ollama</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="五、-终端增强-2026-趋势"><a href="#五、-终端增强-2026-趋势" class="headerlink" title="五、 终端增强 (2026 趋势)"></a>五、 终端增强 (2026 趋势)</h3><ul>
+<li><strong>Warp</strong>：基于 Rust 的现代化终端模拟器。自带 AI 命令预测和块状输出（Blocks），极大提升了传统 CLI 的交互体验。</li>
+<li><strong>Starship</strong>：极其迅速、可高度定制的跨平台 Shell 提示符。能根据您当前的目录（如进入 Git 仓库、Python 环境）自动切换显示状态。<ul>
+<li><em>安装</em>：<code>brew install starship</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="推荐组合建议表"><a href="#推荐组合建议表" class="headerlink" title="推荐组合建议表"></a>推荐组合建议表</h3><table>
+<thead>
+<tr>
+<th><strong>传统命令</strong></th>
+<th><strong>推荐替代方案</strong></th>
+<th><strong>核心优势</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ls</code></td>
+<td><strong>eza</strong></td>
+<td>色彩、图标、Git 集成</td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td><strong>fd</strong></td>
+<td>速度快、语法直观、默认过滤</td>
+</tr>
+<tr>
+<td><code>grep</code></td>
+<td><strong>rg</strong></td>
+<td>性能极强、支持多核搜索</td>
+</tr>
+<tr>
+<td><code>cat</code></td>
+<td><strong>bat</strong></td>
+<td>语法高亮、代码预览</td>
+</tr>
+<tr>
+<td><code>cd</code></td>
+<td><strong>zoxide</strong></td>
+<td>历史路径模糊跳转</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>六西格玛在制造业研发技术工作中的具体实践</title>
     <url>/posts/824a.html</url>
     <content><![CDATA[<p><strong>摘要：研发质量的战略转型</strong></p>
@@ -580,8 +707,8 @@
         <category>数字化工具</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>ssh</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
