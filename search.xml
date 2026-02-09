@@ -1,300 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>mac 下文件及文本命令行检索方案</title>
-    <url>/posts/4b9.html</url>
-    <content><![CDATA[<p>在 macOS 环境下，针对文件名及文本内容的命令行检索方案通常分为<strong>模糊搜索（Fzf）</strong>、<strong>代码检索（Ag&#x2F;Rg）及索引检索</strong>三类。</p>
-<p>以下是主流工具的技术实现与方案对比：</p>
-<hr>
-<h2 id="1-文本内容检索-Content-Search"><a href="#1-文本内容检索-Content-Search" class="headerlink" title="1. 文本内容检索 (Content Search)"></a>1. 文本内容检索 (Content Search)</h2><p>这类工具主要用于在文件内部查找特定字符串。</p>
-<table>
-<thead>
-<tr>
-<th><strong>工具</strong></th>
-<th><strong>实现原理</strong></th>
-<th><strong>优势</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>grep</strong></td>
-<td>POSIX 标准工具，逐行扫描文件。</td>
-<td>无需安装，几乎所有 Unix 系统自带。</td>
-</tr>
-<tr>
-<td><strong>ag</strong> (The Silver Searcher)</td>
-<td>使用 C 编写，通过多线程、忽略 <code>.gitignore</code>、利用 <code>mmap()</code> 及特定的 <code>pcre</code> 库提高速度。</td>
-<td>速度远快于 grep，自动过滤版本控制文件。</td>
-</tr>
-<tr>
-<td><strong>rg</strong> (ripgrep)</td>
-<td>使用 Rust 编写，基于有限自动机（NFA）引擎。支持 SIMD 加速和内存映射。</td>
-<td><strong>目前同类最快</strong>；在处理大文件夹和多核心并发上表现最优。</td>
-</tr>
-</tbody></table>
-<span id="more"></span>
-
-<h3 id="实现方案建议："><a href="#实现方案建议：" class="headerlink" title="实现方案建议："></a>实现方案建议：</h3><p>Bash</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">brew install ripgrep</span><br><span class="line"></span><br><span class="line"># 使用示例：在当前目录下搜索 &quot;function_name&quot; 并忽略二进制文件</span><br><span class="line">rg &quot;function_name&quot;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="2-交互式模糊过滤-Fuzzy-Finder"><a href="#2-交互式模糊过滤-Fuzzy-Finder" class="headerlink" title="2. 交互式模糊过滤 (Fuzzy Finder)"></a>2. 交互式模糊过滤 (Fuzzy Finder)</h2><p>这类工具本身不产生数据，而是作为「管道」处理其他命令产生的列表。</p>
-<h3 id="fzf-Fuzzy-Finder"><a href="#fzf-Fuzzy-Finder" class="headerlink" title="fzf (Fuzzy Finder)"></a><strong>fzf (Fuzzy Finder)</strong></h3><ul>
-<li><strong>实现机制</strong>：采用 Go 语言编写，使用滑动窗口算法进行模糊匹配。它实时读取输入流（stdin），并在内存中进行打分和排序。</li>
-<li><strong>关键特性</strong>：支持非同步检索（输入流没读完就能开始过滤）、预览窗口功能。</li>
-<li><strong>集成方案</strong>：通常与 <code>fd</code> 或 <code>find</code> 配合。</li>
-</ul>
-<p>Bash</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 配合 fd (比 find 更快的路径查找工具) 进行文件快速打开</span><br><span class="line"># 将以下命令加入 .zshrc 或 .bash_profile</span><br><span class="line">export FZF_DEFAULT_COMMAND=&#x27;fd --type f&#x27;</span><br><span class="line">alias ff=&#x27;fzf --preview &quot;cat &#123;&#125;&quot;&#x27;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="3-文件名-路径检索-Path-Search"><a href="#3-文件名-路径检索-Path-Search" class="headerlink" title="3. 文件名&#x2F;路径检索 (Path Search)"></a>3. 文件名&#x2F;路径检索 (Path Search)</h2><p>替代传统的 <code>find</code> 命令。</p>
-<h3 id="fd"><a href="#fd" class="headerlink" title="fd"></a><strong>fd</strong></h3><ul>
-<li><strong>实现机制</strong>：Rust 编写。默认并行遍历目录，且默认忽略隐藏文件和 <code>.gitignore</code> 路径。</li>
-<li><strong>对比 <code>find</code></strong>：<code>find</code> 是单线程的，而 <code>fd</code> 在多核 CPU 上通过并行 I&#x2F;O 显著提升速度。</li>
-</ul>
-<hr>
-<h2 id="4-深度集成方案-Workflow"><a href="#4-深度集成方案-Workflow" class="headerlink" title="4. 深度集成方案 (Workflow)"></a>4. 深度集成方案 (Workflow)</h2><p>最高效的检索方式是将上述工具结合使用：</p>
-<h3 id="方案-A：即时搜索并编辑-rg-fzf-vim"><a href="#方案-A：即时搜索并编辑-rg-fzf-vim" class="headerlink" title="方案 A：即时搜索并编辑 (rg + fzf + vim)"></a>方案 A：即时搜索并编辑 (rg + fzf + vim)</h3><p>通过 <code>rg</code> 查找内容，传递给 <code>fzf</code> 进行交互式筛选，最后通过 <code>vim</code> 打开对应行。</p>
-<h3 id="方案-B：macOS-原生索引-mdfind"><a href="#方案-B：macOS-原生索引-mdfind" class="headerlink" title="方案 B：macOS 原生索引 (mdfind)"></a>方案 B：macOS 原生索引 (mdfind)</h3><ul>
-<li><strong>原理</strong>：调用 macOS Spotlight 的元数据索引数据库。</li>
-<li><strong>优点</strong>：速度极快，且能根据元数据（如作者、创建日期）搜索。</li>
-<li><strong>缺点</strong>：无法搜索未被 Spotlight 索引的目录（如 <code>node_modules</code>）。</li>
-</ul>
-<hr>
-<h2 id="fzf与rg相结合"><a href="#fzf与rg相结合" class="headerlink" title="fzf与rg相结合"></a>fzf与rg相结合</h2><p>以下是一个将 <code>rg</code> (ripgrep) 与 <code>fzf</code> 结合的 Shell 函数方案。该方案实现了<strong>交互式实时搜索</strong>：在输入搜索词时，下方实时显示匹配行，右侧实时预览文件内容及高亮行号。</p>
-<h3 id="1-核心代码实现"><a href="#1-核心代码实现" class="headerlink" title="1. 核心代码实现"></a>1. 核心代码实现</h3><p>请将以下代码添加至您的 <code>.zshrc</code> 或 <code>.bash_profile</code> 中：</p>
-<p>Bash</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">frg() &#123;</span><br><span class="line">  # 1. 初始搜索词（可选）</span><br><span class="line">  initial_query=&quot;$&#123;*:-&#125;&quot;</span><br><span class="line">  </span><br><span class="line">  # 2. 构造 rg 命令：强制颜色输出、列出行号</span><br><span class="line">  RG_PREFIX=&quot;rg --column --line-number --no-heading --color=always --smart-case &quot;</span><br><span class="line"></span><br><span class="line">  # 3. fzf 交互流程</span><br><span class="line">  selected=$(</span><br><span class="line">    FZF_DEFAULT_COMMAND=&quot;$RG_PREFIX &#x27;$initial_query&#x27;&quot; \</span><br><span class="line">    fzf --ansi \</span><br><span class="line">        --disabled --query &quot;$initial_query&quot; \</span><br><span class="line">        --bind &quot;change:reload:sleep 0.1; $RG_PREFIX &#123;q&#125; || true&quot; \</span><br><span class="line">        --delimiter : \</span><br><span class="line">        --preview &#x27;bat --color=always --highlight-line &#123;2&#125; &#123;1&#125;&#x27; \</span><br><span class="line">        --preview-window &#x27;right,60%,border-bottom,+&#123;2&#125;+3/3&#x27; \</span><br><span class="line">        --layout=reverse</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  # 4. 解析结果并用编辑器打开</span><br><span class="line">  [ -n &quot;$selected&quot; ] &amp;&amp; &#123;</span><br><span class="line">    file=$(echo &quot;$selected&quot; | cut -d: -f1)</span><br><span class="line">    line=$(echo &quot;$selected&quot; | cut -d: -f2)</span><br><span class="line">    # 此处以 cursor/vim 为例，跳转至指定行</span><br><span class="line">    $&#123;EDITOR:-vim&#125; &quot;$file&quot; +&quot;$line&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="2-方案逻辑解析"><a href="#2-方案逻辑解析" class="headerlink" title="2. 方案逻辑解析"></a>2. 方案逻辑解析</h3><table>
-<thead>
-<tr>
-<th><strong>参数&#x2F;组件</strong></th>
-<th><strong>作用描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>--disabled</code></td>
-<td>禁用 fzf 自身的内部过滤，转而使用 <code>reload</code> 触发 <code>rg</code> 实时检索，适合处理海量数据。</td>
-</tr>
-<tr>
-<td><code>{q}</code></td>
-<td>获取 fzf 搜索框中当前的实时查询字符串。</td>
-</tr>
-<tr>
-<td><code>bat</code></td>
-<td>预览组件。替代 <code>cat</code> 以提供代码语法高亮。</td>
-</tr>
-<tr>
-<td><code>--delimiter :</code></td>
-<td>以冒号分隔 <code>rg</code> 的输出（文件路径:行号:列号:文本）。</td>
-</tr>
-<tr>
-<td><code>+{2}+3/3</code></td>
-<td>预览窗口自动滚动，将匹配行置于窗口中心位置。</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="3-依赖安装"><a href="#3-依赖安装" class="headerlink" title="3. 依赖安装"></a>3. 依赖安装</h3><p>执行此脚本需要预装以下工具：</p>
-<ol>
-<li><strong>ripgrep</strong>: <code>brew install ripgrep</code> (提供检索能力)</li>
-<li><strong>fzf</strong>: <code>brew install fzf</code> (提供交互界面)</li>
-<li><strong>bat</strong>: <code>brew install bat</code> (提供带高亮的预览效果，可选，若无则将脚本中的 <code>bat</code> 改为 <code>cat</code>)</li>
-</ol>
-<hr>
-<h3 id="4-数据表现参考"><a href="#4-数据表现参考" class="headerlink" title="4. 数据表现参考"></a>4. 数据表现参考</h3><p>在 macOS (M1&#x2F;M2 芯片) 环境下，针对中大型项目（如 50,000+ 文件）：</p>
-<ul>
-<li><strong>响应延迟</strong>：<code>rg</code> 的增量搜索通常在 <strong>10ms - 50ms</strong> 内返回结果。</li>
-<li><strong>内存占用</strong>：由于采用流式处理，内存占用通常保持在 <strong>100MB</strong> 以下，远低于 GUI 编辑器的全局搜索。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数字化工具</category>
-      </categories>
-      <tags>
-        <tag>文本检索</tag>
-        <tag>文件搜索</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git命令学习：20%核心指令</title>
-    <url>/posts/3524.html</url>
-    <content><![CDATA[<p>针对<strong>个人独立项目</strong>，核心诉求是：<strong>版本回溯（后悔药）</strong>、<strong>进度管理（存档点）以及多设备同步（云备份）</strong>。完全不需要学习多人协作中复杂的冲突解决和分支管理策略。</p>
-<p>以下是精炼出的 macOS 个人项目 Git “最小作战手册”：</p>
-<h3 id="1-环境与极简配置-20-投入"><a href="#1-环境与极简配置-20-投入" class="headerlink" title="1. 环境与极简配置 (20% 投入)"></a>1. 环境与极简配置 (20% 投入)</h3><p>在 macOS 上，不要浪费时间研究各种 GUI 客户端。直接打开 <strong>Terminal</strong> 或 <strong>iTerm2</strong>，这是最高效的路径：</p>
-<ul>
-<li><strong>安装</strong>：执行 <code>brew install git</code>（若未装 Homebrew，直接输入 <code>git</code> 命令行会提示安装 Xcode 命令行工具）。</li>
-<li><strong>身份配置</strong>：只需配置一次，确保你的“存档”有名字。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<hr>
-<h3 id="2-核心工作流：存档三板斧-80-产出"><a href="#2-核心工作流：存档三板斧-80-产出" class="headerlink" title="2. 核心工作流：存档三板斧 (80% 产出)"></a>2. 核心工作流：存档三板斧 (80% 产出)</h3><p>对于个人项目，你 90% 的时间只会用到这三个操作。记住：<strong>小步快跑，频繁提交</strong>。</p>
-<ul>
-<li><strong><code>git init</code></strong>：在项目文件夹下执行，赋予项目“生命”。</li>
-<li><strong><code>git add .</code></strong>：把当前所有改动打包（准备存档）。</li>
-<li><strong><code>git commit -m &quot;说明&quot;</code></strong>：正式存档。<strong>这是最重要的步骤</strong>，建议每次完成一个功能点（哪怕只是改了一个 UI 颜色）就提交一次。</li>
-<li><strong><code>git status</code></strong>：随时查看你现在处于什么状态，它是你的“地图”。</li>
-</ul>
-<hr>
-<h3 id="3-安全备份与回溯-核心保障"><a href="#3-安全备份与回溯-核心保障" class="headerlink" title="3. 安全备份与回溯 (核心保障)"></a>3. 安全备份与回溯 (核心保障)</h3><p>为了防止电脑丢失或硬盘损坏，你需要一个远程仓库（GitHub 或 Gitee）。</p>
-<ul>
-<li><strong>同步</strong>：只需三行代码关联远程仓库：<br><code>git remote add origin [仓库地址]</code> → <code>git branch -M main</code> → <code>git push -u origin main</code>。此后只需 <code>git push</code>。</li>
-<li><strong>后悔药</strong>：万一代码写烂了，使用 <code>git checkout [文件名]</code> 即可瞬间恢复到上一个提交版本。这比手动 <code>Cmd+Z</code> 靠谱得多。</li>
-</ul>
-<h3 id="4-分支创建与合并"><a href="#4-分支创建与合并" class="headerlink" title="4. 分支创建与合并"></a>4. 分支创建与合并</h3><ol>
-<li><strong>开启实验（创建并切换）</strong>：<br>不要使用旧式的两步命令，直接用 <code>git checkout -b 分支名</code>。<br>例如：<code>git checkout -b add-login-page</code>。这会创建一个名为“添加登录页”的分支并立即把你传送到那里。在这个分支里，你随便怎么折腾，原来的 <code>main</code> 分支都稳如泰山。</li>
-<li><strong>成果验收（合并）</strong>：<br>当你在新分支写好了功能并完成了 <code>commit</code> 存档，想把它搬回主线时：<br>先切回主干：<code>git checkout main</code><br>执行合并：<code>git merge add-login-page</code><br>此时，主线就拥有了新功能。</li>
-<li><strong>过河拆桥（清理）</strong>：<br>个人项目不需要保留成百上千个历史分支。合并完成后，直接执行 <code>git branch -d add-login-page</code> 删除它。保持分支列表的清爽，能显著降低你维护项目的认知负担。</li>
-</ol>
-<blockquote>
-<p><strong>专家提示</strong>：在个人开发中，请彻底忽略 <code>rebase</code>、<code>fetch</code> 和复杂的 <code>merge</code>。如果你的代码只在本地和 GitHub 之间往返，你的分支逻辑应该是单线式的，这能节省你 95% 的排错时间。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数字化工具</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-        <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ssh生成密钥、配置及登录</title>
-    <url>/posts/3930.html</url>
-    <content><![CDATA[<h2 id="配置-SSH-Config-文件（强烈推荐）"><a href="#配置-SSH-Config-文件（强烈推荐）" class="headerlink" title="配置 SSH Config 文件（强烈推荐）"></a>配置 SSH Config 文件（强烈推荐）</h2><p>这是最专业、最快的方法。通过配置别名，你可以用 <code>ssh myserver</code> 代替一长串命令。</p>
-<h3 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h3><ol>
-<li><p>打开终端，编辑配置文件（如果没有则会自动创建）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano ~/.ssh/config</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在文件中输入以下格式的内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host dev             # 你自定义的别名</span><br><span class="line">    HostName 192.168.1.100  # 服务器真实 IP</span><br><span class="line">    User root               # 你的登录名</span><br><span class="line">    Port 22                 # 端口号（默认22可不写）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
-</li>
-<li><p><strong>连接：</strong> 现在你只需要在终端输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh dev</span><br></pre></td></tr></table></figure></li>
-</ol>
-<hr>
-<span id="more"></span>
-
-<h2 id="终极级：实现免密登录（SSH-Key）"><a href="#终极级：实现免密登录（SSH-Key）" class="headerlink" title="终极级：实现免密登录（SSH Key）"></a>终极级：实现免密登录（SSH Key）</h2><p>即使有了别名，每次输入密码依然很慢。通过密钥对认证，可以实现“秒连”。</p>
-<h3 id="操作流程："><a href="#操作流程：" class="headerlink" title="操作流程："></a>操作流程：</h3><ol>
-<li><p><strong>在本机生成密钥</strong>（如果已有可跳过）：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
-
-<p>(一路回车即可)</p>
-</li>
-<li><p><strong>将公钥发送给服务器</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-copy-id dev  # 这里的 dev 是你在第 2 步设定的别名</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输入一次服务器密码后，建立信任关系。</p>
-</li>
-<li><p><strong>效果</strong>：以后输入 <code>ssh dev</code> 即可直接进入系统，无需密码。</p>
-</li>
-</ol>
-<h4 id="第一步：修改服务器配置"><a href="#第一步：修改服务器配置" class="headerlink" title="第一步：修改服务器配置"></a>第一步：修改服务器配置</h4><ol>
-<li><p>在服务器终端输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>找到以下几行，确保它们没有被 <code>#</code> 注释，且参数如下：</p>
-<ul>
-<li><code>PubkeyAuthentication yes</code> （允许公钥认证）</li>
-<li><code>AuthorizedKeysFile .ssh/authorized_keys</code> （指定存放公钥的位置）</li>
-</ul>
-</li>
-<li><p>检查 <code>PasswordAuthentication</code> 是否为 <code>yes</code>（如果你还想保留密码登录）。</p>
-</li>
-<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
-</li>
-</ol>
-<h4 id="第二步：重启服务器-SSH-服务"><a href="#第二步：重启服务器-SSH-服务" class="headerlink" title="第二步：重启服务器 SSH 服务"></a>第二步：重启服务器 SSH 服务</h4><p>修改完配置后必须重启服务才能生效：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart ssh</span><br><span class="line"># 如果是较老的系统，请尝试：</span><br><span class="line"># sudo service ssh restart</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="🧪-再次验证流程"><a href="#🧪-再次验证流程" class="headerlink" title="🧪 再次验证流程"></a>🧪 再次验证流程</h3><p>在完成上述操作后，回到你的 Mac 终端，执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -v dev</span><br></pre></td></tr></table></figure>
-
-<p><strong>正常的情况应该是：</strong> 你会看到 <code>Authentications that can continue: publickey,password</code>。 接着看到 <code>debug1: Offering public key: /Users/yourname/.ssh/id_ed25519</code>。 最后直接进入系统。</p>
-<hr>
-<h3 id="⚠️-研发人员必须注意的安全点"><a href="#⚠️-研发人员必须注意的安全点" class="headerlink" title="⚠️ 研发人员必须注意的安全点"></a>⚠️ 研发人员必须注意的安全点</h3><p>如果你的服务器是暴露在公网（如阿里云、腾讯云等），一旦开启了公钥登录并验证成功，强烈建议：</p>
-<ol>
-<li><strong>先确保密钥登录彻底成功。</strong></li>
-<li>再次编辑 <code>/etc/ssh/sshd_config</code>，将 <code>PasswordAuthentication yes</code> 改为 <code>no</code>。</li>
-<li><strong>效果：</strong> 这样即便黑客有你的密码，没有你的物理电脑（私钥）也永远进不去系统，这对保护您的实验原始数据和知识产权至关重要。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数字化工具</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
-        <tag>mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用80/20法则阅读红楼梦</title>
-    <url>/posts/35bb.html</url>
-    <content><![CDATA[<p>阅读《红楼梦》这样百万字量级的巨著，普通人往往容易陷入琐碎的人物关系和复杂的诗词考据中，最终半途而废。根据帕累托法则，<strong>80% 的文学价值和情感共鸣，往往集中在 20% 的核心篇章和主线人物中</strong>。</p>
-<h3 id="识别关键的-20-：阅读的重心"><a href="#识别关键的-20-：阅读的重心" class="headerlink" title="识别关键的 20%：阅读的重心"></a>识别关键的 20%：阅读的重心</h3><p>在《红楼梦》中，真正的核心是<strong>前 80 回</strong>。这 20% 的篇幅贡献了全书 80% 以上的艺术造诣。</p>
-<ul>
-<li><strong>聚焦核心：</strong> 重点关注宝、黛、钗的爱情悲剧以及贾府由盛转衰的主线。不要试图在第一次阅读时就记住所有 400 多个有名有姓的人物。</li>
-<li><strong>战略性放弃：</strong> 遇到大量的诗词、灯谜或繁琐的葬礼&#x2F;祭祀礼仪描写时，如果你感到吃力，可以先快速扫读。这些属于“次要的 80%”，它们虽然精美，但初期过度沉溺会消耗你的阅读意志。</li>
-<li><strong>抓大放小：</strong> 关注前五回。这五回是整部书的“总纲”，预示了所有人的结局。读懂了这 5%，你就掌握了理解全书 80% 逻辑的钥匙。</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="减少无效投入：避开深坑"><a href="#减少无效投入：避开深坑" class="headerlink" title="减少无效投入：避开深坑"></a>减少无效投入：避开深坑</h3><p>许多读者在还没读完原著时就去钻研深奥的“红学”流派或考据版本，这往往是效率最低的做法。建议你<strong>停止寻找“标准答案”</strong>，先完成一次完整的感性阅读。不要强迫自己在第一遍就弄清楚每一个典故的来龙去脉，那种“完美主义”正是导致你无法读完书的头号杀手。</p>
-<h2 id="领略文学艺术"><a href="#领略文学艺术" class="headerlink" title="领略文学艺术"></a>领略文学艺术</h2><p><strong>领略文学艺术</strong>，那么我们的 80&#x2F;20 策略就需要从“故事情节”转向“美学核心”。在《红楼梦》浩如烟海的文字中，80% 的艺术感染力精炼地蕴含在 <strong>20% 的神来之笔</strong>中。</p>
-<h3 id="核心-20-：艺术审美的切入点"><a href="#核心-20-：艺术审美的切入点" class="headerlink" title="核心 20%：艺术审美的切入点"></a>核心 20%：艺术审美的切入点</h3><p>要高效领略其艺术价值，你只需死磕以下三个关键点：</p>
-<ul>
-<li><strong>判词与脂批（逻辑之美）：</strong> 重点研读前五回中的“红楼梦曲”和人物判词。这是曹雪芹预设的草蛇灰线，理解了这种“伏笔”艺术，你就能看懂全书结构的严密性。</li>
-<li><strong>典型场景的白描（张力之美）：</strong> 挑选出如“黛玉葬花”、“刘姥姥进大观园”、“宝玉挨打”等 10-15 个高光片段。这些片段贡献了全书 80% 的人物神采和戏剧冲突，值得反复精读。</li>
-<li><strong>草木风情与生活美学（意境之美）：</strong> 关注大观园的建筑布局与人物性格的呼应，以及书中对茶、酒、花、服饰的描写。这 20% 的细节构建了红楼梦独有的中式生活美学。</li>
-</ul>
-<hr>
-<h3 id="建议减少的投入"><a href="#建议减少的投入" class="headerlink" title="建议减少的投入"></a>建议减少的投入</h3><p>如果你是为了文学审美，可以果断减少在**后 40 回（续作）**上的精力。高鹗的续作在文字灵气和审美意境上与前 80 回有显著落差，将 80% 的心力放在曹雪芹的原笔原意上，才能触及这部作品的艺术灵魂。此外，不要纠结于复杂的辈分职级计算，那属于社会学范畴，而非文学艺术的核心。</p>
-]]></content>
-      <categories>
-        <category>文学作品</category>
-      </categories>
-      <tags>
-        <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用notebooklm + Gemini生成专业报告</title>
-    <url>/posts/21ca.html</url>
-    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>本文通过使用notebooklm与Gemini配合，学习生成专业报告的方法。具体概述如下：<br>1.gemini或notebookLM我们写专业提示<br>2.Fast Research 快速搜查资料<br>3.Deep Research 广充资料广度与深度<br>4.数据表快速将数据转换成表格<br>5.使用notebooklm生成报告提示词，然后生成报告<br>6.Gemini Canvas 补上视觉化仪表板</p>
-<p>生成内容为：AI时代的职场技能超势</p>
-<span id="more"></span>
-
-<h2 id="使用Gemini生成专业提示词"><a href="#使用Gemini生成专业提示词" class="headerlink" title="使用Gemini生成专业提示词"></a>使用Gemini生成专业提示词</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我要在notebooklm建立一个新笔记，最终任务是要完成人资部门的专业报告。</span><br><span class="line">主题是：AI时代的职场技能趋势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些技能，才不容易被淘汰？</span><br><span class="line">资料来源限制在国际与中国大陆的权威专业机构</span><br><span class="line"></span><br><span class="line">请针对这个任务，提供Notebooklm的系统提示词。只要给我提示词就好，不需要其它多余废话</span><br></pre></td></tr></table></figure>
-<p>将生成的内容导入notebooklm 笔记本的提示词中。</p>
-<h2 id="在新建立的笔记本中检索"><a href="#在新建立的笔记本中检索" class="headerlink" title="在新建立的笔记本中检索"></a>在新建立的笔记本中检索</h2><p>使用主题及主要内容，分别使用快速检索及深度检索，然后导入笔记本</p>
-<p>检索内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主题是：AI时代的职场技能趋势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些技能，才不容易被淘汰？</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用数据表格功能"><a href="#使用数据表格功能" class="headerlink" title="使用数据表格功能"></a>使用数据表格功能</h2><p>提示词：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">什么职位最容易被取代？</span><br><span class="line">栏位包括职位名称、风险高低、原因、提升方法</span><br><span class="line">并以风险高低由高至低排序</span><br></pre></td></tr></table></figure>
-
-<h2 id="生成报告提示词"><a href="#生成报告提示词" class="headerlink" title="生成报告提示词"></a>生成报告提示词</h2><p>使用notebooklm，生成报告提示词：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主题是：AI时代的职场技能超势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些职位，才成功被淘汰？</span><br><span class="line">报告格式：由摘要开始，内文至少需要六个章节，每个章节至少需要2个子章节，最后是参考文献</span><br><span class="line">字数：5000至6000字</span><br><span class="line">报告对象：中国上市公司传统产业人资部门高主管。</span><br><span class="line">请给我生成报告的提示词</span><br></pre></td></tr></table></figure>
-
-<h2 id="生成报告"><a href="#生成报告" class="headerlink" title="生成报告"></a>生成报告</h2><p>将上一步生成的提示词，直接输入到报告中，生成</p>
-<h2 id="生成图表"><a href="#生成图表" class="headerlink" title="生成图表"></a>生成图表</h2><p>使用Gemini中的<code>canvas</code>功能，生成图表<br><img data-src="/posts/21ca/canvas.png"></p>
-<p>生成报告内容见：<a href="https://zhyong.site/posts/5faa.html">重构与共生：AI 时代的职场技能趋势与人才战略蓝图</a></p>
-]]></content>
-      <categories>
-        <category>数字化工具</category>
-      </categories>
-      <tags>
-        <tag>AI</tag>
-        <tag>深度分析</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>📌制造业研发与质量管理核心手册（2026版）</title>
     <url>/posts/c87c.html</url>
     <content><![CDATA[<blockquote>
@@ -370,157 +76,146 @@
       </tags>
   </entry>
   <entry>
-    <title>材料研发中的 DOE 实战：如何快速锁定最优工艺窗口</title>
-    <url>/posts/5c61.html</url>
-    <content><![CDATA[<blockquote>
-<p><strong>核心逻辑</strong>：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。</p>
-</blockquote>
-<h2 id="1-场景定义：为什么需要-DOE？"><a href="#1-场景定义：为什么需要-DOE？" class="headerlink" title="1. 场景定义：为什么需要 DOE？"></a>1. 场景定义：为什么需要 DOE？</h2><p>假设我们正在研发一种<strong>玻纤增强尼龙 (PA66+GF30)</strong>，目前发现制品<strong>浮纤严重</strong>且<strong>拉伸强度波动大</strong>。<br>涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。<br>若每个因子取 3 个水平，全因子实验需要 $3^4 &#x3D; 81$ 次，耗时耗财。而通过 <strong>正交设计 (Orthogonal Design)</strong> 或 <strong>响应面法 (RSM)</strong>，我们可以缩减至 15-20 次。</p>
+    <title>六西格玛在制造业研发技术工作中的具体实践</title>
+    <url>/posts/824a.html</url>
+    <content><![CDATA[<p><strong>摘要：研发质量的战略转型</strong></p>
+<p>在现代制造业的全球竞争格局下，研发（R&amp;D）已不再仅仅是“原型设计”的同义词，而是企业质量竞争力的战略源头。本报告旨在阐述六西格玛（DMAIC与DFSS）如何在产品生命周期的早期阶段发挥“质量桥梁”的作用。</p>
+<p>作为研发领导者，必须建立一种战略性的思维转型：从“通过检验剔除不合格品”转变为“通过设计预防缺陷”。研发阶段投入1小时进行失效预防，其价值等同于量产阶段投入100小时的补救。本报告将引入<strong>集成项目交付（IPD）框架</strong>，通过**无刷电机（Brushless Motor）**的实战案例，系统性地解析六西格玛在研发流程中的宏观架构与微观落地路径。</p>
 <span id="more"></span>
 
-<h2 id="2-DOE-实施五步法-SOP"><a href="#2-DOE-实施五步法-SOP" class="headerlink" title="2. DOE 实施五步法 (SOP)"></a>2. DOE 实施五步法 (SOP)</h2><h3 id="第一步：因子与水平设定-Factors-Levels"><a href="#第一步：因子与水平设定-Factors-Levels" class="headerlink" title="第一步：因子与水平设定 (Factors &amp; Levels)"></a>第一步：因子与水平设定 (Factors &amp; Levels)</h3><p>在开始实验前，需通过“鱼骨图”筛选出关键因子。</p>
+<hr>
+<h2 id="汇总图"><a href="#汇总图" class="headerlink" title="汇总图"></a>汇总图</h2><p><img data-src="/posts/824a/%E5%85%A8%E6%99%AF%E5%9B%BE.webp"></p>
+<h2 id="1-第一章：六西格玛在研发中的战略定位"><a href="#1-第一章：六西格玛在研发中的战略定位" class="headerlink" title="1. 第一章：六西格玛在研发中的战略定位"></a>1. 第一章：六西格玛在研发中的战略定位</h2><h3 id="1-1-从宏观框架到微观执行：IPD框架的引入"><a href="#1-1-从宏观框架到微观执行：IPD框架的引入" class="headerlink" title="1.1 从宏观框架到微观执行：IPD框架的引入"></a>1.1 从宏观框架到微观执行：IPD框架的引入</h3><p>研发六西格玛的成功不仅取决于统计工具的堆砌，更取决于其背后的业务结构。</p>
+<ul>
+<li><strong>宏观框架 (Macro-Framework)：</strong> 这是企业的商业契约与业务结构。它明确了项目目标、部门间的法律&#x2F;职能关系及评价指标，确保所有研发参与者为“整体项目结果”负责，而不仅仅是个人绩效。这种结构为成功或失败创造了明确的后果。</li>
+<li><strong>微观框架 (Micro-Framework)：</strong> 包含实现项目所需的协议与流程（如DFSS中的IDOV流程）。它将集成延伸至操作层，涵盖工作设计（Work Design）与信息设计。</li>
+</ul>
+<h3 id="1-2-研发质量的量化语言：西格玛水平与-DPMO"><a href="#1-2-研发质量的量化语言：西格玛水平与-DPMO" class="headerlink" title="1.2 研发质量的量化语言：西格玛水平与 DPMO"></a>1.2 研发质量的量化语言：西格玛水平与 DPMO</h3><p>为了衡量原型机的稳健性，研发人员必须掌握统计语言：</p>
+<ul>
+<li><strong>西格玛水平（Sigma Level）：</strong> 反映流程满足设计规范的能力。</li>
+<li><strong>DPMO（单位缺陷数）：</strong> 每百万个机会中的缺陷数。</li>
+<li><strong>数据实证：</strong> 在无刷电机案例中，通过统计优化，研发团队将 <strong>DPMO 从 301.24 降至 152.65</strong>。这种直观的变化意味着工程指标从模糊的“设计感”进化为精准的量化控制，使研发过程具备了可预测性。</li>
+</ul>
+<hr>
+<h2 id="2-第二章：定义阶段（Define）——-市场需求向工程语言的精密转化"><a href="#2-第二章：定义阶段（Define）——-市场需求向工程语言的精密转化" class="headerlink" title="2. 第二章：定义阶段（Define）—— 市场需求向工程语言的精密转化"></a>2. 第二章：定义阶段（Define）—— 市场需求向工程语言的精密转化</h2><h3 id="2-1-SIPOC-架构：打破职能孤岛与信息流优化"><a href="#2-1-SIPOC-架构：打破职能孤岛与信息流优化" class="headerlink" title="2.1 SIPOC 架构：打破职能孤岛与信息流优化"></a>2.1 SIPOC 架构：打破职能孤岛与信息流优化</h3><p>SIPOC（供应商、输入、过程、输出、客户）是界定研发边界的核心。</p>
+<ul>
+<li><strong>战略意义：</strong> 传统研发中的“职能孤岛（Silos）”常导致沟通效率低下。</li>
+<li><strong>从“推式”到“拉式”沟通：</strong> 研发环境具有高度不确定性。SIPOC应促进从“推式（Push）”沟通（创建者主导，容易产生信息冗余）向“拉式（Pull）”沟通（接收者主导，基于需求调取信息）的转型。</li>
+<li><strong>无刷电机案例输入输出：</strong><ul>
+<li><strong>输入 (I)：</strong> 磁钢规格、漆包线热等级、驱动算法逻辑。</li>
+<li><strong>过程 (P)：</strong> 磁路模拟 -&gt; 结构动力学仿真 -&gt; 绕线工艺开发 -&gt; 样机组装。</li>
+<li><strong>输出 (O)：</strong> 性能参数表、BOM清单、制造控制计划。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-关键质量特性（CTQ）树：VOC-的操作化定义"><a href="#2-2-关键质量特性（CTQ）树：VOC-的操作化定义" class="headerlink" title="2.2 关键质量特性（CTQ）树：VOC 的操作化定义"></a>2.2 关键质量特性（CTQ）树：VOC 的操作化定义</h3><p>研发的核心挑战是将感性的“客户之声（VOC）”转化为理性的工程指标。根据 Air Academy 的最佳实践，每个 CTQ 必须具备<strong>操作化定义</strong>（指标+目标+方法+责任人）。</p>
+<p><strong>无刷电机 CTQ 树状拆解表：</strong></p>
 <table>
 <thead>
 <tr>
-<th align="left">因子</th>
-<th align="left">低水平 (-1)</th>
-<th align="left">高水平 (+1)</th>
-<th align="left">单位</th>
+<th>客户需求 (VOC)</th>
+<th>质量驱动因素</th>
+<th>关键特性 (CTQ)</th>
+<th>目标值 (Target)</th>
+<th>测量方法&#x2F;工具</th>
+<th>责任人</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">A: 熔体温度</td>
-<td align="left">275</td>
-<td align="left">295</td>
-<td align="left">°C</td>
+<td><strong>启动响应快</strong></td>
+<td>电气性能稳定性</td>
+<td><strong>反电动势波动率</strong></td>
+<td>≤ 2.5%</td>
+<td>示波器&#x2F;LIMS系统</td>
+<td>电子工程师</td>
 </tr>
 <tr>
-<td align="left">B: 模具温度</td>
-<td align="left">80</td>
-<td align="left">110</td>
-<td align="left">°C</td>
+<td><strong>运行安静</strong></td>
+<td>振动噪音控制</td>
+<td><strong>空载噪音值</strong></td>
+<td>≤ 45 dB</td>
+<td>声级计&#x2F;半消声室</td>
+<td>声学工程师</td>
 </tr>
 <tr>
-<td align="left">C: 注射压力</td>
-<td align="left">800</td>
-<td align="left">1200</td>
-<td align="left">Bar</td>
+<td><strong>持久耐用</strong></td>
+<td>绝缘可靠性</td>
+<td><strong>一分钟耐压测试</strong></td>
+<td>无击穿 (Pass)</td>
+<td>耐压测试仪</td>
+<td>质控主管</td>
 </tr>
 </tbody></table>
-<h3 id="第二步：选择实验方案"><a href="#第二步：选择实验方案" class="headerlink" title="第二步：选择实验方案"></a>第二步：选择实验方案</h3><ul>
-<li><strong>筛选实验 (Screening)</strong>：因子多时使用，用于剔除次要变量。</li>
-<li><strong>析因实验 (Factorial)</strong>：分析因子间的<strong>交互作用 (Interaction)</strong>。例如：温度高时，压力对强度的影响是否更显著？</li>
+<hr>
+<h2 id="3-第三章：测量阶段（Measure）——-研发数据的可信度保障与-MSA-深层分析"><a href="#3-第三章：测量阶段（Measure）——-研发数据的可信度保障与-MSA-深层分析" class="headerlink" title="3. 第三章：测量阶段（Measure）—— 研发数据的可信度保障与 MSA 深层分析"></a>3. 第三章：测量阶段（Measure）—— 研发数据的可信度保障与 MSA 深层分析</h2><h3 id="3-1-测量系统分析-MSA-的-R-D-陷阱"><a href="#3-1-测量系统分析-MSA-的-R-D-陷阱" class="headerlink" title="3.1 测量系统分析 (MSA) 的 R&amp;D 陷阱"></a>3.1 测量系统分析 (MSA) 的 R&amp;D 陷阱</h3><p>研发技术人员常陷入的陷阱是：在未验证“测量噪声”的情况下盲目进行设计迭代。如果测量系统的波动占据了总波动的30%以上，工程师可能会因“伪失败”而丢弃优秀的设计方向。</p>
+<h3 id="3-2-针对研发特殊场景的破坏性测试-Nested-Gage-R-R"><a href="#3-2-针对研发特殊场景的破坏性测试-Nested-Gage-R-R" class="headerlink" title="3.2 针对研发特殊场景的破坏性测试 (Nested Gage R&amp;R)"></a>3.2 针对研发特殊场景的破坏性测试 (Nested Gage R&amp;R)</h3><p>在研发中，诸如磁钢拉拔力、漆包线拉伸强度等测试具有不可重复性（样本在测量后被破坏）。</p>
+<ul>
+<li><strong>“捕获-22”困境 (Catch-22)：</strong> 为了验证测量系统，我们需要测量相似样本；但只有测量后才能知道样本是否相似，而测量本身又会破坏样本。</li>
+<li><strong>批次同质化假设 (Batch Homogeneity Assumption)：</strong> 研发 MBB 的解决策略是：必须假设同一批次连续生产的样本具有高度一致性，从而利用<strong>嵌套型 (Nested)</strong> 设计进行方差分量分析，将“样本间变异”与“测量系统变异”分离。</li>
 </ul>
-<h3 id="第三步：执行实验与数据采集"><a href="#第三步：执行实验与数据采集" class="headerlink" title="第三步：执行实验与数据采集"></a>第三步：执行实验与数据采集</h3><p>使用 Mermaid 记录实验流：</p>
-<pre><code class="highlight mermaid">graph LR
-    A[随机化顺序] --&gt; B[实验组运行]
-    B --&gt; C[样条恒温恒湿处理]
-    C --&gt; D[拉伸性能测试]
-    D --&gt; E[数据录入 Minitab]</code></pre>
-
-<h3 id="第四步：统计分析-Statistical-Analysis"><a href="#第四步：统计分析-Statistical-Analysis" class="headerlink" title="第四步：统计分析 (Statistical Analysis)"></a>第四步：统计分析 (Statistical Analysis)</h3><p>核心关注点：</p>
+<h3 id="3-3-属性一致性分析-Attribute-MSA"><a href="#3-3-属性一致性分析-Attribute-MSA" class="headerlink" title="3.3 属性一致性分析 (Attribute MSA)"></a>3.3 属性一致性分析 (Attribute MSA)</h3><p>针对电机外观、异音判定等定性指标，必须计算 <strong>Kappa 值</strong>。</p>
+<ul>
+<li><strong>目标：</strong> 追求 Kappa &#x3D; 1.0（完美契合）。</li>
+<li><strong>预警：</strong> 若 Kappa &lt; 0.75，说明内部判定准则存在严重歧义；若 Kappa &lt; 0，则说明判定结果甚至不如随机猜测。</li>
+</ul>
+<hr>
+<h2 id="4-第四章：分析阶段（Analyze）——-寻找变异的根本原因"><a href="#4-第四章：分析阶段（Analyze）——-寻找变异的根本原因" class="headerlink" title="4. 第四章：分析阶段（Analyze）—— 寻找变异的根本原因"></a>4. 第四章：分析阶段（Analyze）—— 寻找变异的根本原因</h2><h3 id="4-1-根本原因分析：从柏拉图到-5M1E"><a href="#4-1-根本原因分析：从柏拉图到-5M1E" class="headerlink" title="4.1 根本原因分析：从柏拉图到 5M1E"></a>4.1 根本原因分析：从柏拉图到 5M1E</h3><p>通过对无刷电机试产数据的 Pareto 分析，我们发现“外观划痕”与“电压异常”占据了 80% 的失效权重。随后，利用 5M1E 鱼骨图进行发散分析，重点识别出“绕线模具精度”与“操作员操作规范”是导致变异的 Vital Few。</p>
+<h3 id="4-2-FMEA-的前瞻性风险管理：从-RPN-到行动优先级-AP"><a href="#4-2-FMEA-的前瞻性风险管理：从-RPN-到行动优先级-AP" class="headerlink" title="4.2 FMEA 的前瞻性风险管理：从 RPN 到行动优先级 (AP)"></a>4.2 FMEA 的前瞻性风险管理：从 RPN 到行动优先级 (AP)</h3><p>虽然传统 RPN（S×O×D）仍在使用，但现代研发更倾向于使用<strong>行动优先级 (Action Priority)</strong>。</p>
+<ul>
+<li><strong>AP 逻辑：</strong> 这种方法能有效防止风险评估的“孤岛化”，强制研发团队关注那些即便 RPN 中等但严重度极高或探测度极低的组合，从而更科学地配置资源。</li>
+</ul>
+<hr>
+<h2 id="5-第五章：改进阶段（Improve）——-实验设计与参数优化"><a href="#5-第五章：改进阶段（Improve）——-实验设计与参数优化" class="headerlink" title="5. 第五章：改进阶段（Improve）—— 实验设计与参数优化"></a>5. 第五章：改进阶段（Improve）—— 实验设计与参数优化</h2><h3 id="5-1-实验设计-DOE-的应用策略"><a href="#5-1-实验设计-DOE-的应用策略" class="headerlink" title="5.1 实验设计 (DOE) 的应用策略"></a>5.1 实验设计 (DOE) 的应用策略</h3><p>DOE 是研发中最强大的博弈工具。</p>
+<ul>
+<li><strong>筛选实验 (Screening)：</strong> 在众多因子中筛选出关键因子（如转子间隙、绕组匝数）。</li>
+<li><strong>成本与信息的博弈：</strong> 研发早期可采用部分因子设计以降低实验成本，后期优化阶段则需使用全因子设计以捕捉交互作用。</li>
+</ul>
+<h3 id="5-2-效果验证：Sigma-水平的量化提升"><a href="#5-2-效果验证：Sigma-水平的量化提升" class="headerlink" title="5.2 效果验证：Sigma 水平的量化提升"></a>5.2 效果验证：Sigma 水平的量化提升</h3><p>通过优化绕线张力和模具结构，无刷电机项目的改进效果显著：</p>
+<table>
+<thead>
+<tr>
+<th>指标 (Metric)</th>
+<th>改进前 (Baseline)</th>
+<th>改进后 (Improved)</th>
+<th>改善幅度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DPMO</strong></td>
+<td>301.24</td>
+<td>152.65</td>
+<td>-49.3%</td>
+</tr>
+<tr>
+<td><strong>西格玛水平 (Sigma)</strong></td>
+<td><strong>4.93</strong></td>
+<td><strong>5.44</strong></td>
+<td><strong>+10.3%</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="6-第六章：控制阶段（Control）——-研发成果的标准化与知识资产化"><a href="#6-第六章：控制阶段（Control）——-研发成果的标准化与知识资产化" class="headerlink" title="6. 第六章：控制阶段（Control）—— 研发成果的标准化与知识资产化"></a>6. 第六章：控制阶段（Control）—— 研发成果的标准化与知识资产化</h2><h3 id="6-1-控制图在试产中的预警机制"><a href="#6-1-控制图在试产中的预警机制" class="headerlink" title="6.1 控制图在试产中的预警机制"></a>6.1 控制图在试产中的预警机制</h3><p>在小批量试产期间，利用 X-bar R 图监控关键特性的过程稳定性。研发团队必须建立失控响应机制（OCAP），区分是由于设计稳健性不足导致的“偶然原因变异”，还是由环境导致的“特殊原因变异”。</p>
+<h3 id="6-2-从-SOP-到知识资产化-Knowledge-Assetization"><a href="#6-2-从-SOP-到知识资产化-Knowledge-Assetization" class="headerlink" title="6.2 从 SOP 到知识资产化 (Knowledge Assetization)"></a>6.2 从 SOP 到知识资产化 (Knowledge Assetization)</h3><p>研发的终点不是图纸的交付，而是<strong>知识的资产化沉淀</strong>。</p>
+<ul>
+<li><strong>BIM 作为真理源 (BIM as a Truth Source)：</strong> 借鉴 IPD 模式，建筑信息模型（BIM）或产品全生命周期管理系统（PLM）应作为“共享知识资源”。</li>
+<li><strong>控制计划 (Control Plan)：</strong> 将验证成功的 DOE 参数转化为生产基准，包括噪音测试机的周检标准、操作员培训要求等。通过微观框架的固化，确保研发经验能在后续项目中被有效“拉取”。</li>
+</ul>
+<hr>
+<p><strong>参考文献</strong></p>
 <ol>
-<li><strong>帕累托图 (Pareto Chart)</strong>：哪些因子跨越了红线（显著性阈值）？</li>
-<li><strong>交互作用图</strong>：观察直线是否交叉。若交叉，说明因子 A 的效果依赖于因子 B 的水平。</li>
-</ol>
-<h3 id="第五步：模型验证与预测"><a href="#第五步：模型验证与预测" class="headerlink" title="第五步：模型验证与预测"></a>第五步：模型验证与预测</h3><p>得到回归方程： $$ 拉伸强度 &#x3D; \beta_0 + \beta_1 A + \beta_2 B + \beta_{12} AB + \epsilon $$</p>
-<h2 id="3-研发工程师的避坑指南"><a href="#3-研发工程师的避坑指南" class="headerlink" title="3. 研发工程师的避坑指南"></a>3. 研发工程师的避坑指南</h2><ol>
-<li><strong>必须随机化</strong>：不要按顺序做实验，防止设备漂移产生系统误差。</li>
-<li><strong>包含中心点</strong>：在低、高水平中间取一点，用于检测系统是否存在“非线性（弯曲）”关系。</li>
-<li><strong>数据真实性</strong>：异常值必须通过物理逻辑（如停机、漏胶）解释，严禁随意删除数据。</li>
+<li><strong>Air Academy Associates</strong>, <em>CTQ Six Sigma: Drive Measurable Quality Gains at Scale</em>. (关于CTQ操作化定义的权威指南)</li>
+<li><strong>Hanson Bridgett LLP</strong>, <em>The IPD Framework (Integrated Project Delivery)</em>. (关于宏观&#x2F;微观集成框架的战略理论)</li>
+<li><strong>Elsmar &#x2F; ISSSP</strong>, <em>Nested Gage R&amp;R and Catch-22 in Destructive Testing</em>. (针对破坏性测量系统的技术分析)</li>
+<li><strong>Qsutra &#x2F; Omnex</strong>, <em>Measurement System Analysis (MSA) 4th Edition Requirements</em>. (关于 Kappa 值与方差分析的统计准则)</li>
+<li><strong>Flevy</strong>, <em>How SIPOC facilitates cross-functional collaboration</em>. (关于推式与拉式沟通流程的研究)</li>
 </ol>
 ]]></content>
       <categories>
         <category>研发工具</category>
-        <category>逻辑推演</category>
+        <category>管理体系</category>
       </categories>
       <tags>
-        <tag>DOE</tag>
-        <tag>Minitab</tag>
-        <tag>过程优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vim中tab、buffer与windows区别及使用方法</title>
-    <url>/posts/39c4.html</url>
-    <content><![CDATA[<p>在 Vim 中，<strong>Buffer（缓冲区）</strong>、<strong>Window（窗口）</strong> 和 <strong>Tab（标签页）</strong> 构成了三层递进的视图管理体系。理解它们的区别是高效管理多文件的核心。</p>
-<hr>
-<h2 id="1-概念核心区别"><a href="#1-概念核心区别" class="headerlink" title="1. 概念核心区别"></a>1. 概念核心区别</h2><table>
-<thead>
-<tr>
-<th><strong>概念</strong></th>
-<th><strong>物理类比</strong></th>
-<th><strong>定义</strong></th>
-<th><strong>核心性质</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Buffer</strong></td>
-<td><strong>内存中的文件</strong></td>
-<td>文件在内存中的临时存储副本。</td>
-<td>一个文件对应一个 Buffer；它是不可见的，除非加载到窗口中。</td>
-</tr>
-<tr>
-<td><strong>Window</strong></td>
-<td><strong>观察镜&#x2F;视口</strong></td>
-<td>Buffer 的一个视图。</td>
-<td>你可以开多个窗口观察同一个 Buffer 的不同部分。</td>
-</tr>
-<tr>
-<td><strong>Tab</strong></td>
-<td><strong>工作区&#x2F;视区布局</strong></td>
-<td>一组窗口的容器或集合。</td>
-<td>Tab 在 Vim 里不是为了“一个标签一个文件”，而是为了“切换不同的窗口布局”。</td>
-</tr>
-</tbody></table>
-<hr>
-<span id="more"></span>
-
-<h2 id="2-详细使用方法"><a href="#2-详细使用方法" class="headerlink" title="2. 详细使用方法"></a>2. 详细使用方法</h2><h3 id="Buffer：管理文件的后台"><a href="#Buffer：管理文件的后台" class="headerlink" title="Buffer：管理文件的后台"></a>Buffer：管理文件的后台</h3><p>Buffer 是你打开的所有文件的集合。</p>
-<ul>
-<li><strong>查看列表</strong>：<code>:ls</code> 或 <code>:buffers</code></li>
-<li><strong>切换</strong>：<code>:bnext</code> (或 <code>L</code>), <code>:bprev</code> (或 <code>H</code>)，<code>:b [编号/文件名]</code></li>
-<li><strong>删除</strong>：<code>:bd</code> (关闭当前 Buffer，但不退出 Vim)</li>
-<li><strong>情景</strong>：你打开了 20 个项目文件，它们都存在于 Buffer 列表中。你通过 <code>Ctrl+f</code> (LeaderF) 搜索的就是这些 Buffer。</li>
-</ul>
-<h3 id="Window：分割屏幕显示内容"><a href="#Window：分割屏幕显示内容" class="headerlink" title="Window：分割屏幕显示内容"></a>Window：分割屏幕显示内容</h3><p>Window 让你同时看到多个文件或同一文件的不同位置。</p>
-<ul>
-<li><strong>水平分屏</strong>：<code>:sp</code> 或 <code>&lt;Leader&gt;s</code></li>
-<li><strong>垂直分屏</strong>：<code>:vs</code> 或 <code>&lt;Leader&gt;v</code></li>
-<li><strong>跳转</strong>：<code>Ctrl+w</code> + <code>h/j/k/l</code></li>
-<li><strong>关闭</strong>：<code>:q</code> 或 <code>Ctrl+w</code> + <code>c</code></li>
-<li><strong>情景</strong>：左边看 C++ 源代码，右边看对应的头文件；或者上方看代码，下方开一个终端。</li>
-</ul>
-<h3 id="Tab：切换工作任务"><a href="#Tab：切换工作任务" class="headerlink" title="Tab：切换工作任务"></a>Tab：切换工作任务</h3><p>Tab 用来保存整套窗口布局。</p>
-<ul>
-<li><strong>新建</strong>：<code>:tabnew</code></li>
-<li><strong>切换</strong>：<code>gt</code> (下一个), <code>gT</code> (上一个)</li>
-<li><strong>关闭</strong>：<code>:tabclose</code></li>
-<li><strong>情景</strong>：Tab 1 正在调试“聚氨酯浇筑逻辑”的代码（左右分屏）；Tab 2 正在编写“知识库文档”（单窗口）。你可以在两个完全不同的工作状态间一键切换。</li>
-</ul>
-<hr>
-<h2 id="3-推荐使用情景：如何组合？"><a href="#3-推荐使用情景：如何组合？" class="headerlink" title="3. 推荐使用情景：如何组合？"></a>3. 推荐使用情景：如何组合？</h2><h3 id="最佳实践建议"><a href="#最佳实践建议" class="headerlink" title="最佳实践建议"></a>最佳实践建议</h3><ol>
-<li><strong>文件多时用 Buffer</strong>：不要尝试为每个文件开一个 Tab。使用 <code>LeaderF</code> 或 <code>:b</code> 配合模糊搜索来在 Buffer 间穿梭。</li>
-<li><strong>关联开发用 Window</strong>：当你需要参考 A 文件来修改 B 文件时，使用分屏（Window）。</li>
-<li><strong>不同任务用 Tab</strong>：当你从“开发模式”切换到“文档编写模式”或“部署配置模式”时，开一个新 Tab。</li>
-</ol>
-<hr>
-<h2 id="4-快捷键映射建议"><a href="#4-快捷键映射建议" class="headerlink" title="4. 快捷键映射建议"></a>4. 快捷键映射建议</h2><p>在 <code>vimplus</code> 的 <code>~/.vimrc.custom.config</code> 中，你可以添加以下配置来简化操作：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot; --- Buffer 快捷切换 ---</span><br><span class="line">nnoremap &lt;silent&gt; [b :bprevious&lt;CR&gt;</span><br><span class="line">nnoremap &lt;silent&gt; ]b :bnext&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">&quot; --- Window 快速跳转 (vimplus 已默认支持 Ctrl+h/j/k/l) ---</span><br><span class="line"></span><br><span class="line">&quot; --- Tab 快速管理 ---</span><br><span class="line">nnoremap &lt;silent&gt; &lt;Leader&gt;tn :tabnew&lt;CR&gt;</span><br><span class="line">nnoremap &lt;silent&gt; &lt;Leader&gt;tc :tabclose&lt;CR&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="5-总结：工作流示例"><a href="#5-总结：工作流示例" class="headerlink" title="5. 总结：工作流示例"></a>5. 总结：工作流示例</h2><ol>
-<li>执行 <code>vim file1.cpp</code>。</li>
-<li>执行 <code>:vs file1.h</code>，此时有 <strong>2 个窗口</strong>，<strong>2 个 Buffer</strong>，<strong>1 个 Tab</strong>。</li>
-<li>执行 <code>:tabnew</code> 并在新标签页打开 <code>notes.md</code>。此时有 <strong>2 个 Tab</strong>。</li>
-<li>在任何时候执行 <code>:ls</code>，你会看到 <strong>3 个 Buffer</strong>（file1.cpp, file1.h, notes.md）。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数字化工具</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
+        <tag>六西格码</tag>
       </tags>
   </entry>
   <entry>
@@ -813,6 +508,454 @@
       </categories>
       <tags>
         <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用notebooklm + Gemini生成专业报告</title>
+    <url>/posts/21ca.html</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>本文通过使用notebooklm与Gemini配合，学习生成专业报告的方法。具体概述如下：<br>1.gemini或notebookLM我们写专业提示<br>2.Fast Research 快速搜查资料<br>3.Deep Research 广充资料广度与深度<br>4.数据表快速将数据转换成表格<br>5.使用notebooklm生成报告提示词，然后生成报告<br>6.Gemini Canvas 补上视觉化仪表板</p>
+<p>生成内容为：AI时代的职场技能超势</p>
+<span id="more"></span>
+
+<h2 id="使用Gemini生成专业提示词"><a href="#使用Gemini生成专业提示词" class="headerlink" title="使用Gemini生成专业提示词"></a>使用Gemini生成专业提示词</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我要在notebooklm建立一个新笔记，最终任务是要完成人资部门的专业报告。</span><br><span class="line">主题是：AI时代的职场技能趋势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些技能，才不容易被淘汰？</span><br><span class="line">资料来源限制在国际与中国大陆的权威专业机构</span><br><span class="line"></span><br><span class="line">请针对这个任务，提供Notebooklm的系统提示词。只要给我提示词就好，不需要其它多余废话</span><br></pre></td></tr></table></figure>
+<p>将生成的内容导入notebooklm 笔记本的提示词中。</p>
+<h2 id="在新建立的笔记本中检索"><a href="#在新建立的笔记本中检索" class="headerlink" title="在新建立的笔记本中检索"></a>在新建立的笔记本中检索</h2><p>使用主题及主要内容，分别使用快速检索及深度检索，然后导入笔记本</p>
+<p>检索内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主题是：AI时代的职场技能趋势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些技能，才不容易被淘汰？</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用数据表格功能"><a href="#使用数据表格功能" class="headerlink" title="使用数据表格功能"></a>使用数据表格功能</h2><p>提示词：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">什么职位最容易被取代？</span><br><span class="line">栏位包括职位名称、风险高低、原因、提升方法</span><br><span class="line">并以风险高低由高至低排序</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成报告提示词"><a href="#生成报告提示词" class="headerlink" title="生成报告提示词"></a>生成报告提示词</h2><p>使用notebooklm，生成报告提示词：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主题是：AI时代的职场技能超势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些职位，才成功被淘汰？</span><br><span class="line">报告格式：由摘要开始，内文至少需要六个章节，每个章节至少需要2个子章节，最后是参考文献</span><br><span class="line">字数：5000至6000字</span><br><span class="line">报告对象：中国上市公司传统产业人资部门高主管。</span><br><span class="line">请给我生成报告的提示词</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成报告"><a href="#生成报告" class="headerlink" title="生成报告"></a>生成报告</h2><p>将上一步生成的提示词，直接输入到报告中，生成</p>
+<h2 id="生成图表"><a href="#生成图表" class="headerlink" title="生成图表"></a>生成图表</h2><p>使用Gemini中的<code>canvas</code>功能，生成图表<br><img data-src="/posts/21ca/canvas.png"></p>
+<p>生成报告内容见：<a href="https://zhyong.site/posts/5faa.html">重构与共生：AI 时代的职场技能趋势与人才战略蓝图</a></p>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>深度分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git命令学习：20%核心指令</title>
+    <url>/posts/3524.html</url>
+    <content><![CDATA[<p>针对<strong>个人独立项目</strong>，核心诉求是：<strong>版本回溯（后悔药）</strong>、<strong>进度管理（存档点）以及多设备同步（云备份）</strong>。完全不需要学习多人协作中复杂的冲突解决和分支管理策略。</p>
+<p>以下是精炼出的 macOS 个人项目 Git “最小作战手册”：</p>
+<h3 id="1-环境与极简配置-20-投入"><a href="#1-环境与极简配置-20-投入" class="headerlink" title="1. 环境与极简配置 (20% 投入)"></a>1. 环境与极简配置 (20% 投入)</h3><p>在 macOS 上，不要浪费时间研究各种 GUI 客户端。直接打开 <strong>Terminal</strong> 或 <strong>iTerm2</strong>，这是最高效的路径：</p>
+<ul>
+<li><strong>安装</strong>：执行 <code>brew install git</code>（若未装 Homebrew，直接输入 <code>git</code> 命令行会提示安装 Xcode 命令行工具）。</li>
+<li><strong>身份配置</strong>：只需配置一次，确保你的“存档”有名字。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<hr>
+<h3 id="2-核心工作流：存档三板斧-80-产出"><a href="#2-核心工作流：存档三板斧-80-产出" class="headerlink" title="2. 核心工作流：存档三板斧 (80% 产出)"></a>2. 核心工作流：存档三板斧 (80% 产出)</h3><p>对于个人项目，你 90% 的时间只会用到这三个操作。记住：<strong>小步快跑，频繁提交</strong>。</p>
+<ul>
+<li><strong><code>git init</code></strong>：在项目文件夹下执行，赋予项目“生命”。</li>
+<li><strong><code>git add .</code></strong>：把当前所有改动打包（准备存档）。</li>
+<li><strong><code>git commit -m &quot;说明&quot;</code></strong>：正式存档。<strong>这是最重要的步骤</strong>，建议每次完成一个功能点（哪怕只是改了一个 UI 颜色）就提交一次。</li>
+<li><strong><code>git status</code></strong>：随时查看你现在处于什么状态，它是你的“地图”。</li>
+</ul>
+<hr>
+<h3 id="3-安全备份与回溯-核心保障"><a href="#3-安全备份与回溯-核心保障" class="headerlink" title="3. 安全备份与回溯 (核心保障)"></a>3. 安全备份与回溯 (核心保障)</h3><p>为了防止电脑丢失或硬盘损坏，你需要一个远程仓库（GitHub 或 Gitee）。</p>
+<ul>
+<li><strong>同步</strong>：只需三行代码关联远程仓库：<br><code>git remote add origin [仓库地址]</code> → <code>git branch -M main</code> → <code>git push -u origin main</code>。此后只需 <code>git push</code>。</li>
+<li><strong>后悔药</strong>：万一代码写烂了，使用 <code>git checkout [文件名]</code> 即可瞬间恢复到上一个提交版本。这比手动 <code>Cmd+Z</code> 靠谱得多。</li>
+</ul>
+<h3 id="4-分支创建与合并"><a href="#4-分支创建与合并" class="headerlink" title="4. 分支创建与合并"></a>4. 分支创建与合并</h3><ol>
+<li><strong>开启实验（创建并切换）</strong>：<br>不要使用旧式的两步命令，直接用 <code>git checkout -b 分支名</code>。<br>例如：<code>git checkout -b add-login-page</code>。这会创建一个名为“添加登录页”的分支并立即把你传送到那里。在这个分支里，你随便怎么折腾，原来的 <code>main</code> 分支都稳如泰山。</li>
+<li><strong>成果验收（合并）</strong>：<br>当你在新分支写好了功能并完成了 <code>commit</code> 存档，想把它搬回主线时：<br>先切回主干：<code>git checkout main</code><br>执行合并：<code>git merge add-login-page</code><br>此时，主线就拥有了新功能。</li>
+<li><strong>过河拆桥（清理）</strong>：<br>个人项目不需要保留成百上千个历史分支。合并完成后，直接执行 <code>git branch -d add-login-page</code> 删除它。保持分支列表的清爽，能显著降低你维护项目的认知负担。</li>
+</ol>
+<blockquote>
+<p><strong>专家提示</strong>：在个人开发中，请彻底忽略 <code>rebase</code>、<code>fetch</code> 和复杂的 <code>merge</code>。如果你的代码只在本地和 GitHub 之间往返，你的分支逻辑应该是单线式的，这能节省你 95% 的排错时间。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vim中tab、buffer与windows区别及使用方法</title>
+    <url>/posts/39c4.html</url>
+    <content><![CDATA[<p>在 Vim 中，<strong>Buffer（缓冲区）</strong>、<strong>Window（窗口）</strong> 和 <strong>Tab（标签页）</strong> 构成了三层递进的视图管理体系。理解它们的区别是高效管理多文件的核心。</p>
+<hr>
+<h2 id="1-概念核心区别"><a href="#1-概念核心区别" class="headerlink" title="1. 概念核心区别"></a>1. 概念核心区别</h2><table>
+<thead>
+<tr>
+<th><strong>概念</strong></th>
+<th><strong>物理类比</strong></th>
+<th><strong>定义</strong></th>
+<th><strong>核心性质</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Buffer</strong></td>
+<td><strong>内存中的文件</strong></td>
+<td>文件在内存中的临时存储副本。</td>
+<td>一个文件对应一个 Buffer；它是不可见的，除非加载到窗口中。</td>
+</tr>
+<tr>
+<td><strong>Window</strong></td>
+<td><strong>观察镜&#x2F;视口</strong></td>
+<td>Buffer 的一个视图。</td>
+<td>你可以开多个窗口观察同一个 Buffer 的不同部分。</td>
+</tr>
+<tr>
+<td><strong>Tab</strong></td>
+<td><strong>工作区&#x2F;视区布局</strong></td>
+<td>一组窗口的容器或集合。</td>
+<td>Tab 在 Vim 里不是为了“一个标签一个文件”，而是为了“切换不同的窗口布局”。</td>
+</tr>
+</tbody></table>
+<hr>
+<span id="more"></span>
+
+<h2 id="2-详细使用方法"><a href="#2-详细使用方法" class="headerlink" title="2. 详细使用方法"></a>2. 详细使用方法</h2><h3 id="Buffer：管理文件的后台"><a href="#Buffer：管理文件的后台" class="headerlink" title="Buffer：管理文件的后台"></a>Buffer：管理文件的后台</h3><p>Buffer 是你打开的所有文件的集合。</p>
+<ul>
+<li><strong>查看列表</strong>：<code>:ls</code> 或 <code>:buffers</code></li>
+<li><strong>切换</strong>：<code>:bnext</code> (或 <code>L</code>), <code>:bprev</code> (或 <code>H</code>)，<code>:b [编号/文件名]</code></li>
+<li><strong>删除</strong>：<code>:bd</code> (关闭当前 Buffer，但不退出 Vim)</li>
+<li><strong>情景</strong>：你打开了 20 个项目文件，它们都存在于 Buffer 列表中。你通过 <code>Ctrl+f</code> (LeaderF) 搜索的就是这些 Buffer。</li>
+</ul>
+<h3 id="Window：分割屏幕显示内容"><a href="#Window：分割屏幕显示内容" class="headerlink" title="Window：分割屏幕显示内容"></a>Window：分割屏幕显示内容</h3><p>Window 让你同时看到多个文件或同一文件的不同位置。</p>
+<ul>
+<li><strong>水平分屏</strong>：<code>:sp</code> 或 <code>&lt;Leader&gt;s</code></li>
+<li><strong>垂直分屏</strong>：<code>:vs</code> 或 <code>&lt;Leader&gt;v</code></li>
+<li><strong>跳转</strong>：<code>Ctrl+w</code> + <code>h/j/k/l</code></li>
+<li><strong>关闭</strong>：<code>:q</code> 或 <code>Ctrl+w</code> + <code>c</code></li>
+<li><strong>情景</strong>：左边看 C++ 源代码，右边看对应的头文件；或者上方看代码，下方开一个终端。</li>
+</ul>
+<h3 id="Tab：切换工作任务"><a href="#Tab：切换工作任务" class="headerlink" title="Tab：切换工作任务"></a>Tab：切换工作任务</h3><p>Tab 用来保存整套窗口布局。</p>
+<ul>
+<li><strong>新建</strong>：<code>:tabnew</code></li>
+<li><strong>切换</strong>：<code>gt</code> (下一个), <code>gT</code> (上一个)</li>
+<li><strong>关闭</strong>：<code>:tabclose</code></li>
+<li><strong>情景</strong>：Tab 1 正在调试“聚氨酯浇筑逻辑”的代码（左右分屏）；Tab 2 正在编写“知识库文档”（单窗口）。你可以在两个完全不同的工作状态间一键切换。</li>
+</ul>
+<hr>
+<h2 id="3-推荐使用情景：如何组合？"><a href="#3-推荐使用情景：如何组合？" class="headerlink" title="3. 推荐使用情景：如何组合？"></a>3. 推荐使用情景：如何组合？</h2><h3 id="最佳实践建议"><a href="#最佳实践建议" class="headerlink" title="最佳实践建议"></a>最佳实践建议</h3><ol>
+<li><strong>文件多时用 Buffer</strong>：不要尝试为每个文件开一个 Tab。使用 <code>LeaderF</code> 或 <code>:b</code> 配合模糊搜索来在 Buffer 间穿梭。</li>
+<li><strong>关联开发用 Window</strong>：当你需要参考 A 文件来修改 B 文件时，使用分屏（Window）。</li>
+<li><strong>不同任务用 Tab</strong>：当你从“开发模式”切换到“文档编写模式”或“部署配置模式”时，开一个新 Tab。</li>
+</ol>
+<hr>
+<h2 id="4-快捷键映射建议"><a href="#4-快捷键映射建议" class="headerlink" title="4. 快捷键映射建议"></a>4. 快捷键映射建议</h2><p>在 <code>vimplus</code> 的 <code>~/.vimrc.custom.config</code> 中，你可以添加以下配置来简化操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot; --- Buffer 快捷切换 ---</span><br><span class="line">nnoremap &lt;silent&gt; [b :bprevious&lt;CR&gt;</span><br><span class="line">nnoremap &lt;silent&gt; ]b :bnext&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">&quot; --- Window 快速跳转 (vimplus 已默认支持 Ctrl+h/j/k/l) ---</span><br><span class="line"></span><br><span class="line">&quot; --- Tab 快速管理 ---</span><br><span class="line">nnoremap &lt;silent&gt; &lt;Leader&gt;tn :tabnew&lt;CR&gt;</span><br><span class="line">nnoremap &lt;silent&gt; &lt;Leader&gt;tc :tabclose&lt;CR&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-总结：工作流示例"><a href="#5-总结：工作流示例" class="headerlink" title="5. 总结：工作流示例"></a>5. 总结：工作流示例</h2><ol>
+<li>执行 <code>vim file1.cpp</code>。</li>
+<li>执行 <code>:vs file1.h</code>，此时有 <strong>2 个窗口</strong>，<strong>2 个 Buffer</strong>，<strong>1 个 Tab</strong>。</li>
+<li>执行 <code>:tabnew</code> 并在新标签页打开 <code>notes.md</code>。此时有 <strong>2 个 Tab</strong>。</li>
+<li>在任何时候执行 <code>:ls</code>，你会看到 <strong>3 个 Buffer</strong>（file1.cpp, file1.h, notes.md）。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ssh生成密钥、配置及登录</title>
+    <url>/posts/3930.html</url>
+    <content><![CDATA[<h2 id="配置-SSH-Config-文件（强烈推荐）"><a href="#配置-SSH-Config-文件（强烈推荐）" class="headerlink" title="配置 SSH Config 文件（强烈推荐）"></a>配置 SSH Config 文件（强烈推荐）</h2><p>这是最专业、最快的方法。通过配置别名，你可以用 <code>ssh myserver</code> 代替一长串命令。</p>
+<h3 id="配置步骤："><a href="#配置步骤：" class="headerlink" title="配置步骤："></a>配置步骤：</h3><ol>
+<li><p>打开终端，编辑配置文件（如果没有则会自动创建）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano ~/.ssh/config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在文件中输入以下格式的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host dev             # 你自定义的别名</span><br><span class="line">    HostName 192.168.1.100  # 服务器真实 IP</span><br><span class="line">    User root               # 你的登录名</span><br><span class="line">    Port 22                 # 端口号（默认22可不写）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
+</li>
+<li><p><strong>连接：</strong> 现在你只需要在终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh dev</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<span id="more"></span>
+
+<h2 id="终极级：实现免密登录（SSH-Key）"><a href="#终极级：实现免密登录（SSH-Key）" class="headerlink" title="终极级：实现免密登录（SSH Key）"></a>终极级：实现免密登录（SSH Key）</h2><p>即使有了别名，每次输入密码依然很慢。通过密钥对认证，可以实现“秒连”。</p>
+<h3 id="操作流程："><a href="#操作流程：" class="headerlink" title="操作流程："></a>操作流程：</h3><ol>
+<li><p><strong>在本机生成密钥</strong>（如果已有可跳过）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
+
+<p>(一路回车即可)</p>
+</li>
+<li><p><strong>将公钥发送给服务器</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-copy-id dev  # 这里的 dev 是你在第 2 步设定的别名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入一次服务器密码后，建立信任关系。</p>
+</li>
+<li><p><strong>效果</strong>：以后输入 <code>ssh dev</code> 即可直接进入系统，无需密码。</p>
+</li>
+</ol>
+<h4 id="第一步：修改服务器配置"><a href="#第一步：修改服务器配置" class="headerlink" title="第一步：修改服务器配置"></a>第一步：修改服务器配置</h4><ol>
+<li><p>在服务器终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找到以下几行，确保它们没有被 <code>#</code> 注释，且参数如下：</p>
+<ul>
+<li><code>PubkeyAuthentication yes</code> （允许公钥认证）</li>
+<li><code>AuthorizedKeysFile .ssh/authorized_keys</code> （指定存放公钥的位置）</li>
+</ul>
+</li>
+<li><p>检查 <code>PasswordAuthentication</code> 是否为 <code>yes</code>（如果你还想保留密码登录）。</p>
+</li>
+<li><p>按 <code>Ctrl + O</code> 保存，<code>Ctrl + X</code> 退出。</p>
+</li>
+</ol>
+<h4 id="第二步：重启服务器-SSH-服务"><a href="#第二步：重启服务器-SSH-服务" class="headerlink" title="第二步：重启服务器 SSH 服务"></a>第二步：重启服务器 SSH 服务</h4><p>修改完配置后必须重启服务才能生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart ssh</span><br><span class="line"># 如果是较老的系统，请尝试：</span><br><span class="line"># sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="🧪-再次验证流程"><a href="#🧪-再次验证流程" class="headerlink" title="🧪 再次验证流程"></a>🧪 再次验证流程</h3><p>在完成上述操作后，回到你的 Mac 终端，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -v dev</span><br></pre></td></tr></table></figure>
+
+<p><strong>正常的情况应该是：</strong> 你会看到 <code>Authentications that can continue: publickey,password</code>。 接着看到 <code>debug1: Offering public key: /Users/yourname/.ssh/id_ed25519</code>。 最后直接进入系统。</p>
+<hr>
+<h3 id="⚠️-研发人员必须注意的安全点"><a href="#⚠️-研发人员必须注意的安全点" class="headerlink" title="⚠️ 研发人员必须注意的安全点"></a>⚠️ 研发人员必须注意的安全点</h3><p>如果你的服务器是暴露在公网（如阿里云、腾讯云等），一旦开启了公钥登录并验证成功，强烈建议：</p>
+<ol>
+<li><strong>先确保密钥登录彻底成功。</strong></li>
+<li>再次编辑 <code>/etc/ssh/sshd_config</code>，将 <code>PasswordAuthentication yes</code> 改为 <code>no</code>。</li>
+<li><strong>效果：</strong> 这样即便黑客有你的密码，没有你的物理电脑（私钥）也永远进不去系统，这对保护您的实验原始数据和知识产权至关重要。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>材料研发中的 DOE 实战：如何快速锁定最优工艺窗口</title>
+    <url>/posts/5c61.html</url>
+    <content><![CDATA[<blockquote>
+<p><strong>核心逻辑</strong>：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。</p>
+</blockquote>
+<h2 id="1-场景定义：为什么需要-DOE？"><a href="#1-场景定义：为什么需要-DOE？" class="headerlink" title="1. 场景定义：为什么需要 DOE？"></a>1. 场景定义：为什么需要 DOE？</h2><p>假设我们正在研发一种<strong>玻纤增强尼龙 (PA66+GF30)</strong>，目前发现制品<strong>浮纤严重</strong>且<strong>拉伸强度波动大</strong>。<br>涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。<br>若每个因子取 3 个水平，全因子实验需要 $3^4 &#x3D; 81$ 次，耗时耗财。而通过 <strong>正交设计 (Orthogonal Design)</strong> 或 <strong>响应面法 (RSM)</strong>，我们可以缩减至 15-20 次。</p>
+<span id="more"></span>
+
+<h2 id="2-DOE-实施五步法-SOP"><a href="#2-DOE-实施五步法-SOP" class="headerlink" title="2. DOE 实施五步法 (SOP)"></a>2. DOE 实施五步法 (SOP)</h2><h3 id="第一步：因子与水平设定-Factors-Levels"><a href="#第一步：因子与水平设定-Factors-Levels" class="headerlink" title="第一步：因子与水平设定 (Factors &amp; Levels)"></a>第一步：因子与水平设定 (Factors &amp; Levels)</h3><p>在开始实验前，需通过“鱼骨图”筛选出关键因子。</p>
+<table>
+<thead>
+<tr>
+<th align="left">因子</th>
+<th align="left">低水平 (-1)</th>
+<th align="left">高水平 (+1)</th>
+<th align="left">单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">A: 熔体温度</td>
+<td align="left">275</td>
+<td align="left">295</td>
+<td align="left">°C</td>
+</tr>
+<tr>
+<td align="left">B: 模具温度</td>
+<td align="left">80</td>
+<td align="left">110</td>
+<td align="left">°C</td>
+</tr>
+<tr>
+<td align="left">C: 注射压力</td>
+<td align="left">800</td>
+<td align="left">1200</td>
+<td align="left">Bar</td>
+</tr>
+</tbody></table>
+<h3 id="第二步：选择实验方案"><a href="#第二步：选择实验方案" class="headerlink" title="第二步：选择实验方案"></a>第二步：选择实验方案</h3><ul>
+<li><strong>筛选实验 (Screening)</strong>：因子多时使用，用于剔除次要变量。</li>
+<li><strong>析因实验 (Factorial)</strong>：分析因子间的<strong>交互作用 (Interaction)</strong>。例如：温度高时，压力对强度的影响是否更显著？</li>
+</ul>
+<h3 id="第三步：执行实验与数据采集"><a href="#第三步：执行实验与数据采集" class="headerlink" title="第三步：执行实验与数据采集"></a>第三步：执行实验与数据采集</h3><p>使用 Mermaid 记录实验流：</p>
+<pre><code class="highlight mermaid">graph LR
+    A[随机化顺序] --&gt; B[实验组运行]
+    B --&gt; C[样条恒温恒湿处理]
+    C --&gt; D[拉伸性能测试]
+    D --&gt; E[数据录入 Minitab]</code></pre>
+
+<h3 id="第四步：统计分析-Statistical-Analysis"><a href="#第四步：统计分析-Statistical-Analysis" class="headerlink" title="第四步：统计分析 (Statistical Analysis)"></a>第四步：统计分析 (Statistical Analysis)</h3><p>核心关注点：</p>
+<ol>
+<li><strong>帕累托图 (Pareto Chart)</strong>：哪些因子跨越了红线（显著性阈值）？</li>
+<li><strong>交互作用图</strong>：观察直线是否交叉。若交叉，说明因子 A 的效果依赖于因子 B 的水平。</li>
+</ol>
+<h3 id="第五步：模型验证与预测"><a href="#第五步：模型验证与预测" class="headerlink" title="第五步：模型验证与预测"></a>第五步：模型验证与预测</h3><p>得到回归方程： $$ 拉伸强度 &#x3D; \beta_0 + \beta_1 A + \beta_2 B + \beta_{12} AB + \epsilon $$</p>
+<h2 id="3-研发工程师的避坑指南"><a href="#3-研发工程师的避坑指南" class="headerlink" title="3. 研发工程师的避坑指南"></a>3. 研发工程师的避坑指南</h2><ol>
+<li><strong>必须随机化</strong>：不要按顺序做实验，防止设备漂移产生系统误差。</li>
+<li><strong>包含中心点</strong>：在低、高水平中间取一点，用于检测系统是否存在“非线性（弯曲）”关系。</li>
+<li><strong>数据真实性</strong>：异常值必须通过物理逻辑（如停机、漏胶）解释，严禁随意删除数据。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>研发工具</category>
+        <category>逻辑推演</category>
+      </categories>
+      <tags>
+        <tag>DOE</tag>
+        <tag>Minitab</tag>
+        <tag>过程优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mac 下文件及文本命令行检索方案</title>
+    <url>/posts/4b9.html</url>
+    <content><![CDATA[<p>在 macOS 环境下，针对文件名及文本内容的命令行检索方案通常分为<strong>模糊搜索（Fzf）</strong>、<strong>代码检索（Ag&#x2F;Rg）及索引检索</strong>三类。</p>
+<p>以下是主流工具的技术实现与方案对比：</p>
+<hr>
+<h2 id="1-文本内容检索-Content-Search"><a href="#1-文本内容检索-Content-Search" class="headerlink" title="1. 文本内容检索 (Content Search)"></a>1. 文本内容检索 (Content Search)</h2><p>这类工具主要用于在文件内部查找特定字符串。</p>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th><strong>实现原理</strong></th>
+<th><strong>优势</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>grep</strong></td>
+<td>POSIX 标准工具，逐行扫描文件。</td>
+<td>无需安装，几乎所有 Unix 系统自带。</td>
+</tr>
+<tr>
+<td><strong>ag</strong> (The Silver Searcher)</td>
+<td>使用 C 编写，通过多线程、忽略 <code>.gitignore</code>、利用 <code>mmap()</code> 及特定的 <code>pcre</code> 库提高速度。</td>
+<td>速度远快于 grep，自动过滤版本控制文件。</td>
+</tr>
+<tr>
+<td><strong>rg</strong> (ripgrep)</td>
+<td>使用 Rust 编写，基于有限自动机（NFA）引擎。支持 SIMD 加速和内存映射。</td>
+<td><strong>目前同类最快</strong>；在处理大文件夹和多核心并发上表现最优。</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h3 id="实现方案建议："><a href="#实现方案建议：" class="headerlink" title="实现方案建议："></a>实现方案建议：</h3><p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">brew install ripgrep</span><br><span class="line"></span><br><span class="line"># 使用示例：在当前目录下搜索 &quot;function_name&quot; 并忽略二进制文件</span><br><span class="line">rg &quot;function_name&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-交互式模糊过滤-Fuzzy-Finder"><a href="#2-交互式模糊过滤-Fuzzy-Finder" class="headerlink" title="2. 交互式模糊过滤 (Fuzzy Finder)"></a>2. 交互式模糊过滤 (Fuzzy Finder)</h2><p>这类工具本身不产生数据，而是作为「管道」处理其他命令产生的列表。</p>
+<h3 id="fzf-Fuzzy-Finder"><a href="#fzf-Fuzzy-Finder" class="headerlink" title="fzf (Fuzzy Finder)"></a><strong>fzf (Fuzzy Finder)</strong></h3><ul>
+<li><strong>实现机制</strong>：采用 Go 语言编写，使用滑动窗口算法进行模糊匹配。它实时读取输入流（stdin），并在内存中进行打分和排序。</li>
+<li><strong>关键特性</strong>：支持非同步检索（输入流没读完就能开始过滤）、预览窗口功能。</li>
+<li><strong>集成方案</strong>：通常与 <code>fd</code> 或 <code>find</code> 配合。</li>
+</ul>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 配合 fd (比 find 更快的路径查找工具) 进行文件快速打开</span><br><span class="line"># 将以下命令加入 .zshrc 或 .bash_profile</span><br><span class="line">export FZF_DEFAULT_COMMAND=&#x27;fd --type f&#x27;</span><br><span class="line">alias ff=&#x27;fzf --preview &quot;cat &#123;&#125;&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-文件名-路径检索-Path-Search"><a href="#3-文件名-路径检索-Path-Search" class="headerlink" title="3. 文件名&#x2F;路径检索 (Path Search)"></a>3. 文件名&#x2F;路径检索 (Path Search)</h2><p>替代传统的 <code>find</code> 命令。</p>
+<h3 id="fd"><a href="#fd" class="headerlink" title="fd"></a><strong>fd</strong></h3><ul>
+<li><strong>实现机制</strong>：Rust 编写。默认并行遍历目录，且默认忽略隐藏文件和 <code>.gitignore</code> 路径。</li>
+<li><strong>对比 <code>find</code></strong>：<code>find</code> 是单线程的，而 <code>fd</code> 在多核 CPU 上通过并行 I&#x2F;O 显著提升速度。</li>
+</ul>
+<hr>
+<h2 id="4-深度集成方案-Workflow"><a href="#4-深度集成方案-Workflow" class="headerlink" title="4. 深度集成方案 (Workflow)"></a>4. 深度集成方案 (Workflow)</h2><p>最高效的检索方式是将上述工具结合使用：</p>
+<h3 id="方案-A：即时搜索并编辑-rg-fzf-vim"><a href="#方案-A：即时搜索并编辑-rg-fzf-vim" class="headerlink" title="方案 A：即时搜索并编辑 (rg + fzf + vim)"></a>方案 A：即时搜索并编辑 (rg + fzf + vim)</h3><p>通过 <code>rg</code> 查找内容，传递给 <code>fzf</code> 进行交互式筛选，最后通过 <code>vim</code> 打开对应行。</p>
+<h3 id="方案-B：macOS-原生索引-mdfind"><a href="#方案-B：macOS-原生索引-mdfind" class="headerlink" title="方案 B：macOS 原生索引 (mdfind)"></a>方案 B：macOS 原生索引 (mdfind)</h3><ul>
+<li><strong>原理</strong>：调用 macOS Spotlight 的元数据索引数据库。</li>
+<li><strong>优点</strong>：速度极快，且能根据元数据（如作者、创建日期）搜索。</li>
+<li><strong>缺点</strong>：无法搜索未被 Spotlight 索引的目录（如 <code>node_modules</code>）。</li>
+</ul>
+<hr>
+<h2 id="fzf与rg相结合"><a href="#fzf与rg相结合" class="headerlink" title="fzf与rg相结合"></a>fzf与rg相结合</h2><p>以下是一个将 <code>rg</code> (ripgrep) 与 <code>fzf</code> 结合的 Shell 函数方案。该方案实现了<strong>交互式实时搜索</strong>：在输入搜索词时，下方实时显示匹配行，右侧实时预览文件内容及高亮行号。</p>
+<h3 id="1-核心代码实现"><a href="#1-核心代码实现" class="headerlink" title="1. 核心代码实现"></a>1. 核心代码实现</h3><p>请将以下代码添加至您的 <code>.zshrc</code> 或 <code>.bash_profile</code> 中：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">frg() &#123;</span><br><span class="line">  # 1. 初始搜索词（可选）</span><br><span class="line">  initial_query=&quot;$&#123;*:-&#125;&quot;</span><br><span class="line">  </span><br><span class="line">  # 2. 构造 rg 命令：强制颜色输出、列出行号</span><br><span class="line">  RG_PREFIX=&quot;rg --column --line-number --no-heading --color=always --smart-case &quot;</span><br><span class="line"></span><br><span class="line">  # 3. fzf 交互流程</span><br><span class="line">  selected=$(</span><br><span class="line">    FZF_DEFAULT_COMMAND=&quot;$RG_PREFIX &#x27;$initial_query&#x27;&quot; \</span><br><span class="line">    fzf --ansi \</span><br><span class="line">        --disabled --query &quot;$initial_query&quot; \</span><br><span class="line">        --bind &quot;change:reload:sleep 0.1; $RG_PREFIX &#123;q&#125; || true&quot; \</span><br><span class="line">        --delimiter : \</span><br><span class="line">        --preview &#x27;bat --color=always --highlight-line &#123;2&#125; &#123;1&#125;&#x27; \</span><br><span class="line">        --preview-window &#x27;right,60%,border-bottom,+&#123;2&#125;+3/3&#x27; \</span><br><span class="line">        --layout=reverse</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  # 4. 解析结果并用编辑器打开</span><br><span class="line">  [ -n &quot;$selected&quot; ] &amp;&amp; &#123;</span><br><span class="line">    file=$(echo &quot;$selected&quot; | cut -d: -f1)</span><br><span class="line">    line=$(echo &quot;$selected&quot; | cut -d: -f2)</span><br><span class="line">    # 此处以 cursor/vim 为例，跳转至指定行</span><br><span class="line">    $&#123;EDITOR:-vim&#125; &quot;$file&quot; +&quot;$line&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-方案逻辑解析"><a href="#2-方案逻辑解析" class="headerlink" title="2. 方案逻辑解析"></a>2. 方案逻辑解析</h3><table>
+<thead>
+<tr>
+<th><strong>参数&#x2F;组件</strong></th>
+<th><strong>作用描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--disabled</code></td>
+<td>禁用 fzf 自身的内部过滤，转而使用 <code>reload</code> 触发 <code>rg</code> 实时检索，适合处理海量数据。</td>
+</tr>
+<tr>
+<td><code>{q}</code></td>
+<td>获取 fzf 搜索框中当前的实时查询字符串。</td>
+</tr>
+<tr>
+<td><code>bat</code></td>
+<td>预览组件。替代 <code>cat</code> 以提供代码语法高亮。</td>
+</tr>
+<tr>
+<td><code>--delimiter :</code></td>
+<td>以冒号分隔 <code>rg</code> 的输出（文件路径:行号:列号:文本）。</td>
+</tr>
+<tr>
+<td><code>+{2}+3/3</code></td>
+<td>预览窗口自动滚动，将匹配行置于窗口中心位置。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-依赖安装"><a href="#3-依赖安装" class="headerlink" title="3. 依赖安装"></a>3. 依赖安装</h3><p>执行此脚本需要预装以下工具：</p>
+<ol>
+<li><strong>ripgrep</strong>: <code>brew install ripgrep</code> (提供检索能力)</li>
+<li><strong>fzf</strong>: <code>brew install fzf</code> (提供交互界面)</li>
+<li><strong>bat</strong>: <code>brew install bat</code> (提供带高亮的预览效果，可选，若无则将脚本中的 <code>bat</code> 改为 <code>cat</code>)</li>
+</ol>
+<hr>
+<h3 id="4-数据表现参考"><a href="#4-数据表现参考" class="headerlink" title="4. 数据表现参考"></a>4. 数据表现参考</h3><p>在 macOS (M1&#x2F;M2 芯片) 环境下，针对中大型项目（如 50,000+ 文件）：</p>
+<ul>
+<li><strong>响应延迟</strong>：<code>rg</code> 的增量搜索通常在 <strong>10ms - 50ms</strong> 内返回结果。</li>
+<li><strong>内存占用</strong>：由于采用流式处理，内存占用通常保持在 <strong>100MB</strong> 以下，远低于 GUI 编辑器的全局搜索。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数字化工具</category>
+      </categories>
+      <tags>
+        <tag>文本检索</tag>
+        <tag>文件搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用80/20法则阅读红楼梦</title>
+    <url>/posts/35bb.html</url>
+    <content><![CDATA[<p>阅读《红楼梦》这样百万字量级的巨著，普通人往往容易陷入琐碎的人物关系和复杂的诗词考据中，最终半途而废。根据帕累托法则，<strong>80% 的文学价值和情感共鸣，往往集中在 20% 的核心篇章和主线人物中</strong>。</p>
+<h3 id="识别关键的-20-：阅读的重心"><a href="#识别关键的-20-：阅读的重心" class="headerlink" title="识别关键的 20%：阅读的重心"></a>识别关键的 20%：阅读的重心</h3><p>在《红楼梦》中，真正的核心是<strong>前 80 回</strong>。这 20% 的篇幅贡献了全书 80% 以上的艺术造诣。</p>
+<ul>
+<li><strong>聚焦核心：</strong> 重点关注宝、黛、钗的爱情悲剧以及贾府由盛转衰的主线。不要试图在第一次阅读时就记住所有 400 多个有名有姓的人物。</li>
+<li><strong>战略性放弃：</strong> 遇到大量的诗词、灯谜或繁琐的葬礼&#x2F;祭祀礼仪描写时，如果你感到吃力，可以先快速扫读。这些属于“次要的 80%”，它们虽然精美，但初期过度沉溺会消耗你的阅读意志。</li>
+<li><strong>抓大放小：</strong> 关注前五回。这五回是整部书的“总纲”，预示了所有人的结局。读懂了这 5%，你就掌握了理解全书 80% 逻辑的钥匙。</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="减少无效投入：避开深坑"><a href="#减少无效投入：避开深坑" class="headerlink" title="减少无效投入：避开深坑"></a>减少无效投入：避开深坑</h3><p>许多读者在还没读完原著时就去钻研深奥的“红学”流派或考据版本，这往往是效率最低的做法。建议你<strong>停止寻找“标准答案”</strong>，先完成一次完整的感性阅读。不要强迫自己在第一遍就弄清楚每一个典故的来龙去脉，那种“完美主义”正是导致你无法读完书的头号杀手。</p>
+<h2 id="领略文学艺术"><a href="#领略文学艺术" class="headerlink" title="领略文学艺术"></a>领略文学艺术</h2><p><strong>领略文学艺术</strong>，那么我们的 80&#x2F;20 策略就需要从“故事情节”转向“美学核心”。在《红楼梦》浩如烟海的文字中，80% 的艺术感染力精炼地蕴含在 <strong>20% 的神来之笔</strong>中。</p>
+<h3 id="核心-20-：艺术审美的切入点"><a href="#核心-20-：艺术审美的切入点" class="headerlink" title="核心 20%：艺术审美的切入点"></a>核心 20%：艺术审美的切入点</h3><p>要高效领略其艺术价值，你只需死磕以下三个关键点：</p>
+<ul>
+<li><strong>判词与脂批（逻辑之美）：</strong> 重点研读前五回中的“红楼梦曲”和人物判词。这是曹雪芹预设的草蛇灰线，理解了这种“伏笔”艺术，你就能看懂全书结构的严密性。</li>
+<li><strong>典型场景的白描（张力之美）：</strong> 挑选出如“黛玉葬花”、“刘姥姥进大观园”、“宝玉挨打”等 10-15 个高光片段。这些片段贡献了全书 80% 的人物神采和戏剧冲突，值得反复精读。</li>
+<li><strong>草木风情与生活美学（意境之美）：</strong> 关注大观园的建筑布局与人物性格的呼应，以及书中对茶、酒、花、服饰的描写。这 20% 的细节构建了红楼梦独有的中式生活美学。</li>
+</ul>
+<hr>
+<h3 id="建议减少的投入"><a href="#建议减少的投入" class="headerlink" title="建议减少的投入"></a>建议减少的投入</h3><p>如果你是为了文学审美，可以果断减少在**后 40 回（续作）**上的精力。高鹗的续作在文字灵气和审美意境上与前 80 回有显著落差，将 80% 的心力放在曹雪芹的原笔原意上，才能触及这部作品的艺术灵魂。此外，不要纠结于复杂的辈分职级计算，那属于社会学范畴，而非文学艺术的核心。</p>
+]]></content>
+      <categories>
+        <category>文学作品</category>
+      </categories>
+      <tags>
+        <tag>阅读</tag>
       </tags>
   </entry>
 </search>
