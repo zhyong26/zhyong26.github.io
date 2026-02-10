@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="1. 欧标防火分类体系（Euroclass）综述在欧盟建筑产品法规（CPR, EU 305&#x2F;2011）的监管框架下，EN 13501-1（Euroclass 系统）是建筑材料进入欧洲市场的法定技术准绳。作为资深合规工程师，必须明确：该标准定义的是对火反应（Reaction to Fire），而非耐火性能（Fire Resistance）。前者评估材料在火灾初期的贡献（如引燃性、火焰蔓延、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EN 13501-1 建筑材料阻燃性能测试与分类技术指南：墙板与地板体系的深度解析">
+<meta property="og:url" content="https://zhyong.site/posts/e382.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="1. 欧标防火分类体系（Euroclass）综述在欧盟建筑产品法规（CPR, EU 305&#x2F;2011）的监管框架下，EN 13501-1（Euroclass 系统）是建筑材料进入欧洲市场的法定技术准绳。作为资深合规工程师，必须明确：该标准定义的是对火反应（Reaction to Fire），而非耐火性能（Fire Resistance）。前者评估材料在火灾初期的贡献（如引燃性、火焰蔓延、">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/posts/e382/floor.webp">
+<meta property="article:published_time" content="2026-02-10T12:52:30.000Z">
+<meta property="article:modified_time" content="2026-02-10T13:59:41.476Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="EN13501">
+<meta property="article:tag" content="阻燃测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/posts/e382/floor.webp">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/e382.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/e382.html","path":"posts/e382.html","title":"EN 13501-1 建筑材料阻燃性能测试与分类技术指南：墙板与地板体系的深度解析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>EN 13501-1 建筑材料阻燃性能测试与分类技术指南：墙板与地板体系的深度解析 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/e382.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%AC%A7%E6%A0%87%E9%98%B2%E7%81%AB%E5%88%86%E7%B1%BB%E4%BD%93%E7%B3%BB%EF%BC%88Euroclass%EF%BC%89%E7%BB%BC%E8%BF%B0"><span class="nav-text">1. 欧标防火分类体系（Euroclass）综述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%87%83%E7%83%A7%E7%AD%89%E7%BA%A7%E9%80%BB%E8%BE%91%E5%AF%B9%E6%AF%94"><span class="nav-text">核心燃烧等级逻辑对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F%E5%88%86%E7%B1%BB%E5%90%8E%E7%BC%80"><span class="nav-text">应用领域分类后缀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A2%99%E6%9D%BF%E4%B8%8E%E9%9D%9E%E9%93%BA%E5%9C%B0%E6%9D%90%E6%96%99%EF%BC%88Construction-Products-excluding-Floorings%EF%BC%89%E6%B5%8B%E8%AF%95%E8%AF%A6%E8%A7%A3"><span class="nav-text">2. 墙板与非铺地材料（Construction Products excluding Floorings）测试详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%A6%81%E6%B1%82%E4%B8%8E%E6%A0%B7%E5%93%81%E8%A7%84%E6%A0%BC%E7%9F%A9%E9%98%B5"><span class="nav-text">测试要求与样品规格矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9C%B0%E6%9D%BF%E5%8F%8A%E9%93%BA%E5%9C%B0%E6%9D%90%E6%96%99%EF%BC%88Floorings%EF%BC%89%E6%B5%8B%E8%AF%95%E4%BD%93%E7%B3%BB%E8%A7%A3%E6%9E%90"><span class="nav-text">3. 地板及铺地材料（Floorings）测试体系解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E6%9D%BF%E5%88%86%E7%BA%A7%E6%B5%8B%E8%AF%95%E8%A6%81%E6%B1%82"><span class="nav-text">地板分级测试要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%B3%E9%94%AE%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87%E7%9A%84%E5%AE%9A%E9%87%8F%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A4%E5%AE%9A%E6%A0%87%E5%87%86"><span class="nav-text">4. 关键评估指标的定量分析与判定标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E9%87%8F%E6%8C%87%E6%A0%87%E5%86%B3%E7%AD%96%E8%A1%A8%EF%BC%88B-D-%E7%BA%A7%E5%8F%8A-L-%E5%90%8E%E7%BC%80%EF%BC%89"><span class="nav-text">定量指标决策表（B-D 级及 L 后缀）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于制造业研发、材料改性与工艺流程优化。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/e382.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于制造业研发、材料改性与工艺流程优化。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="EN 13501-1 建筑材料阻燃性能测试与分类技术指南：墙板与地板体系的深度解析 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EN 13501-1 建筑材料阻燃性能测试与分类技术指南：墙板与地板体系的深度解析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-10 20:52:30 / 修改时间：21:59:41" itemprop="dateCreated datePublished" datetime="2026-02-10T20:52:30+08:00">2026-02-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%A1%8C%E4%B8%9A%E6%B4%9E%E5%AF%9F/" itemprop="url" rel="index"><span itemprop="name">行业洞察</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="1-欧标防火分类体系（Euroclass）综述"><a href="#1-欧标防火分类体系（Euroclass）综述" class="headerlink" title="1. 欧标防火分类体系（Euroclass）综述"></a>1. 欧标防火分类体系（Euroclass）综述</h2><p>在欧盟建筑产品法规（CPR, EU 305&#x2F;2011）的监管框架下，EN 13501-1（Euroclass 系统）是建筑材料进入欧洲市场的法定技术准绳。作为资深合规工程师，必须明确：该标准定义的是<strong>对火反应（Reaction to Fire）</strong>，而非<strong>耐火性能（Fire Resistance）</strong>。前者评估材料在火灾初期的贡献（如引燃性、火焰蔓延、热释放），是获得 CE 标记及性能声明（DoP）的核心依据；后者（EN 13501-2）则关注构件在充分发展阶段的承载力、完整性与隔热性。</p>
+<span id="more"></span>
+
+<h3 id="核心燃烧等级逻辑对比"><a href="#核心燃烧等级逻辑对比" class="headerlink" title="核心燃烧等级逻辑对比"></a>核心燃烧等级逻辑对比</h3><p>EN 13501-1 将建筑材料分为七个主要等级，反映其对火灾发展的潜在贡献度：</p>
+<table>
+<thead>
+<tr>
+<th>燃烧等级</th>
+<th>性能定义</th>
+<th>火灾初期表现与贡献度</th>
+<th>典型材料示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A1</strong></td>
+<td>不燃 (Non-combustible)</td>
+<td>无任何贡献；不助燃，不发烟</td>
+<td>混凝土、石材、矿棉量 &lt;1% 的金属</td>
+</tr>
+<tr>
+<td><strong>A2</strong></td>
+<td>不燃 (Limited Combustibility)</td>
+<td>极有限贡献；极低火灾载荷</td>
+<td>带有少量有机涂层的金属板、石膏板</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>可燃 (极有限贡献)</td>
+<td>贡献极小；有效延缓闪燃发生</td>
+<td>阻燃处理后的高压层压板 (HPL)</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>可燃 (有限贡献)</td>
+<td>较低火灾载荷；受火 10 分钟内贡献有限</td>
+<td>阻燃木材、普通石膏板</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>可燃 (中等贡献)</td>
+<td>显著火灾载荷；存在火势蔓延风险</td>
+<td>未经处理的木材、部分塑料板</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>高度易燃</td>
+<td>仅能在数秒内抵抗小火焰；极易点燃</td>
+<td>某些高分子泡沫材料</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>未定级</td>
+<td>未达到 E 级要求或未经测试</td>
+<td>易燃且无数据的材料</td>
+</tr>
+</tbody></table>
+<p><strong>工程师笔记——“免测”条款：</strong> 根据欧盟委员会决策，含有小于 1% 有机物含量的矿棉、玻璃、陶瓷及水泥制品，可无需测试直接判定为 A1 级。</p>
+<p><img data-src="/posts/e382/floor.webp"></p>
+<h3 id="应用领域分类后缀"><a href="#应用领域分类后缀" class="headerlink" title="应用领域分类后缀"></a>应用领域分类后缀</h3><ul>
+<li><strong>无后缀：</strong> 适用于墙板、吊顶及线性装饰材料。</li>
+<li><strong>fl (Floorings)：</strong> 地板体系。其受热机理主要源于上方烟气层的辐射热。</li>
+<li><strong>L (Linear)：</strong> 线性管道隔热产品（如管壳）。</li>
+<li><strong>ca (Cables)：</strong> 电线电缆（依据 EN 13501-6）。</li>
+</ul>
+<hr>
+<h2 id="2-墙板与非铺地材料（Construction-Products-excluding-Floorings）测试详解"><a href="#2-墙板与非铺地材料（Construction-Products-excluding-Floorings）测试详解" class="headerlink" title="2. 墙板与非铺地材料（Construction Products excluding Floorings）测试详解"></a>2. 墙板与非铺地材料（Construction Products excluding Floorings）测试详解</h2><p>墙板与吊顶在垂直或顶部安装环境下极易形成“烟囱效应”。因此，**单体燃烧项（SBI, EN 13823）**是研发的瓶颈。若横向火焰蔓延（LFS）触及试样边缘，产品将自动丧失 B&#x2F;C 级认证资格，直接降为 D 级。</p>
+<h3 id="测试要求与样品规格矩阵"><a href="#测试要求与样品规格矩阵" class="headerlink" title="测试要求与样品规格矩阵"></a>测试要求与样品规格矩阵</h3><p>所有试样在测试前必须依据 <strong>BS EN 13238:2010</strong> 进行状态调节，在 23\pm2^\circ C、相对湿度 50\pm5% 下直至达到恒重（每 24h 称重变化 &lt;0.1%）。</p>
+<table>
+<thead>
+<tr>
+<th align="left">目标等级</th>
+<th align="left">核心测试方法 (EN ISO)</th>
+<th align="left">判定关键指标与阈值</th>
+<th align="left">样品规格 (mm)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>A1</strong></td>
+<td align="left">1182 (不燃性) &amp; 1716 (燃烧热)</td>
+<td align="left"><span>$\Delta T \leq 30^\circ\text{C}$</span>; <span>$\Delta m \leq 50%$</span>; <span>$t_{\text{f}} &#x3D; 0$</span>; <span>$\text{PCS} \leq 2.0 \text{ MJ&#x2F;kg}$</span></td>
+<td align="left">$\Phi 45 \times \text{H}50$ (圆柱)</td>
+</tr>
+<tr>
+<td align="left"><strong>A2</strong></td>
+<td align="left">1182 (或 1716) &amp; 13823 (SBI)</td>
+<td align="left"><span>$\Delta T \leq 50^\circ\text{C}$</span>; <span>$t_{\text{f}} \leq 20\text{s}$</span>; <span>$\text{FIGRA} \leq 120 \text{ W&#x2F;s}$</span>; <span>$\text{THR}_{\text{600s}} \leq 7.5 \text{ MJ}$</span></td>
+<td align="left">SBI 翼片 (见下)</td>
+</tr>
+<tr>
+<td align="left"><strong>B</strong></td>
+<td align="left">13823 (SBI) &amp; 11925-2 (小火焰)</td>
+<td align="left"><span>$\text{FIGRA} \leq 120 \text{ W&#x2F;s}$</span>; <span>$\text{LFS} &lt; \text{边缘}$</span>; <span>$F_{\text{s}} \leq 150\text{mm}$</span> (30s 点火)</td>
+<td align="left">长 1000x1500; 短 495x1500</td>
+</tr>
+<tr>
+<td align="left"><strong>C</strong></td>
+<td align="left">13823 (SBI) &amp; 11925-2</td>
+<td align="left"><span>$\text{FIGRA} \leq 250 \text{ W&#x2F;s}$</span>; <span>$\text{THR}_{\text{600s}} \leq 15 \text{ MJ}$</span></td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><strong>D</strong></td>
+<td align="left">13823 (SBI) &amp; 11925-2</td>
+<td align="left"><span>$\text{FIGRA} \leq 750 \text{ W&#x2F;s}$</span>; <span>$F_{\text{s}} \leq 150\text{mm}$</span> (30s 点火)</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><strong>E</strong></td>
+<td align="left">11925-2</td>
+<td align="left"><span>$F_{\text{s}} \leq 150\text{mm}$</span> (15s 点火)</td>
+<td align="left">250 x 90</td>
+</tr>
+</tbody></table>
+<p><strong>研发关键参数评估（“So What”分析）：</strong></p>
+<ul>
+<li><strong>FIGRA (燃烧增长速率指数)：</strong> 瞬时热释放峰值与时间的比值。若材料在接触主火源后迅速分解产生可燃气，FIGRA 会瞬间超标。</li>
+<li><strong>LFS &gt; edge：</strong> 即使热释放极低，只要火焰横向扫过 1000mm 的长翼边缘，B 级认证即宣告失败。</li>
+</ul>
+<hr>
+<h2 id="3-地板及铺地材料（Floorings）测试体系解析"><a href="#3-地板及铺地材料（Floorings）测试体系解析" class="headerlink" title="3. 地板及铺地材料（Floorings）测试体系解析"></a>3. 地板及铺地材料（Floorings）测试体系解析</h2><p>地板测试模拟的是典型的火势上方辐射场景，核心判定指标为<strong>临界辐射通量（CHF）</strong>。</p>
+<h3 id="地板分级测试要求"><a href="#地板分级测试要求" class="headerlink" title="地板分级测试要求"></a>地板分级测试要求</h3><p>地板的 B_{fl}&#x2F;C_{fl}&#x2F;D_{fl} 级判定完全依赖于 <strong>EN ISO 9239-1</strong>。</p>
+<table>
+<thead>
+<tr>
+<th align="left">目标等级</th>
+<th align="left">临界辐射通量 ($\text{CHF, kW&#x2F;m}^2$)</th>
+<th align="left">产烟等级 $\text{s1}_{\text{fl}}$ 阈值</th>
+<th align="left">小火焰点火暴露时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>$\text{A2}_{\text{fl}}$</strong></td>
+<td align="left"><span>$\geq 8.0$</span></td>
+<td align="left"><span>$\leq 750% \cdot \text{min}$</span></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{B}_{\text{fl}}$</strong></td>
+<td align="left"><span>$\geq 8.0$</span></td>
+<td align="left"><span>$\leq 750% \cdot \text{min}$</span></td>
+<td align="left">$15\text{s}$ 点火 &#x2F; $20\text{s}$ 观察</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{C}_{\text{fl}}$</strong></td>
+<td align="left"><span>$\geq 4.5$</span></td>
+<td align="left"><span>$\leq 750% \cdot \text{min}$</span></td>
+<td align="left">$15\text{s}$ 点火 &#x2F; $20\text{s}$ 观察</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{D}_{\text{fl}}$</strong></td>
+<td align="left"><span>$\geq 3.0$</span></td>
+<td align="left">无限制</td>
+<td align="left">$15\text{s}$ 点火 &#x2F; $20\text{s}$ 观察</td>
+</tr>
+</tbody></table>
+<p><strong>技术差异点解析：</strong></p>
+<ol>
+<li><strong>引燃严苛度：</strong> 地板 B_{fl} 仅需通过 15s 点火测试，而墙面 B 级需通过 30s 点火（且观察期长达 60s），这反映了垂直面火势蔓延的极高风险。</li>
+<li><strong>物理机理：</strong> 地板不进行滴落物（d 级）判定。因为熔融物掉落至地板表面后不具备引发下方二次火灾的动力学条件，故分类中仅保留产烟量（s1&#x2F;s2）。</li>
+</ol>
+<hr>
+<h2 id="4-关键评估指标的定量分析与判定标准"><a href="#4-关键评估指标的定量分析与判定标准" class="headerlink" title="4. 关键评估指标的定量分析与判定标准"></a>4. 关键评估指标的定量分析与判定标准</h2><p>下表汇总了针对不同产品类型的定量判定阈值，是工程师在优化配方时的核心参考。</p>
+<h3 id="定量指标决策表（B-D-级及-L-后缀）"><a href="#定量指标决策表（B-D-级及-L-后缀）" class="headerlink" title="定量指标决策表（B-D 级及 L 后缀）"></a>定量指标决策表（B-D 级及 L 后缀）</h3><table>
+<thead>
+<tr>
+<th align="left">指标</th>
+<th align="left">墙板 B 级</th>
+<th align="left">墙板 C 级</th>
+<th align="left">墙板 D 级</th>
+<th align="left">线性管道 $\text{A2}<em>{\text{L}}&#x2F;\text{B}</em>{\text{L}}$</th>
+<th align="left">地板 $\text{B}_{\text{fl}}$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>$\text{FIGRA}$ (W&#x2F;s)</strong></td>
+<td align="left"><span>$\leq 120$</span></td>
+<td align="left"><span>$\leq 250$</span></td>
+<td align="left"><span>$\leq 750$</span></td>
+<td align="left"><span>$\leq 270$</span></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{THR}_{\text{600s}}$ (MJ)</strong></td>
+<td align="left"><span>$\leq 7.5$</span></td>
+<td align="left"><span>$\leq 15$</span></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+<td align="left"><span>$\leq 7.5$</span></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{CHF}$ ($\text{kW&#x2F;m}^2$)</strong></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+<td align="left">$\text{N&#x2F;A}$</td>
+<td align="left">$\text{N&#x2F;A}$</td>
+<td align="left">$\text{N&#x2F;A}$</td>
+<td align="left"><span>$\geq 8.0$</span></td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{SMOGRA}$ ($\text{m}^2&#x2F;\text{s}^2$)</strong></td>
+<td align="left"><span>$\text{s1: } \leq 30$</span></td>
+<td align="left"><span>$\text{s1: } \leq 30$</span></td>
+<td align="left"><span>$\text{s2: } \leq 180$</span></td>
+<td align="left"><span>$\text{s1: } \leq 105$</span></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+</tr>
+<tr>
+<td align="left"><strong>$\text{TSP}_{\text{600s}}$ ($\text{m}^2$)</strong></td>
+<td align="left"><span>$\text{s1: } \leq 50$</span></td>
+<td align="left"><span>$\text{s1: } \leq 50$</span></td>
+<td align="left"><span>$\text{s2: } \leq 200$</span></td>
+<td align="left"><span>$\text{s1: } \leq 250$</span></td>
+<td align="left">$\text{N&#x2F;A}$</td>
+</tr>
+</tbody></table>
+<p><strong>工程师特别提示：</strong></p>
+<ul>
+<li><strong>L 后缀特异性：</strong> 线性管道产品的 FIGRA 和 SMOGRA 阈值设定显著宽于普通墙面板（如 C_L 的 FIGRA 限制为 \le 460 W&#x2F;s），这源于管道包裹安装时的热损失特性。</li>
+<li><strong>热塑性退缩：</strong> PVC 或热塑性弹性体在受热时可能发生“收缩”从而逃离火源，这虽然在实验数据上表现较好，但在报告中必须记录物理形态变化，以确保其“最终应用（End-use）”的合规性。</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>EN 13501-1 体系的严谨性在于其量化了火灾中材料的动态物理行为。对于工程师而言，理解 FIGRA 的瞬间脉冲和 LFS 的边缘控制，比单纯追求不燃性更为关键。持续关注 CPR 法规更新，并将“Field of Application”与材料配方优化深度结合，是提升产品国际信誉的唯一路径。</p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-10 21:59:41</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一份面向建筑产品合规工程师的专业技术指南，系统解析了欧盟强制性标准 <strong>EN 13501-1（Euroclass）</strong> 在墙板与地板体系中的应用逻辑、测试方法与判定机制。其核心价值在于<strong>破除常见概念混淆</strong>（如“对火反应” vs “耐火性能”），并以工程实践为导向，揭示等级划分背后的<strong>物理机理、测试严苛性差异与失效临界点</strong>。</p>
+<p>全文逻辑严密，层层递进：<br>✅ <strong>第一层框架认知</strong>：厘清 Euroclass 是CPR法规下“进入欧盟市场的法定门槛”，聚焦材料在火灾初期的<strong>贡献度量化</strong>（引燃性、火焰蔓延、热释放、烟雾生成），而非结构耐火时间；明确A1–F七级本质是<strong>风险梯度排序</strong>，而非绝对安全分级。  </p>
+<p>✅ <strong>第二层测试逻辑解构</strong>：  </p>
+<ul>
+<li>对<strong>墙板类</strong>（含吊顶），强调 <strong>SBI（EN 13823）单体燃烧试验</strong>的核心地位，指出<strong>LFS（横向火焰蔓延）触及边缘即否决B&#x2F;C级</strong>这一“一票否决”机制，凸显垂直安装下烟囱效应的极端敏感性；  </li>
+<li>对<strong>地板类</strong>（fl后缀），转向<strong>EN ISO 9239-1辐射法</strong>，以<strong>临界辐射通量（CHF）</strong> 为核心判据，阐明其与墙面测试的物理本质差异（上方辐射主导 vs 直接火焰冲击），并解释为何地板无需评估滴落物（d级）。</li>
+</ul>
+<p>✅ <strong>第三层工程决策支撑</strong>：通过多维定量阈值表（FIGRA、THR₆₀₀ₛ、CHF、SMOGRA、TSP），将抽象等级转化为可优化的配方与工艺参数；特别提示**“免测条款”“热塑性退缩现象”“L后缀宽限逻辑”** 等易被忽略但影响认证成败的关键细节，体现从实验室数据到真实场景（End-use）的闭环思维。</p>
+<p>本质上，该指南超越标准条文复述，升华为一套<strong>以火灾动力学为底层逻辑、以测试失效模式为设计约束、以CPR合规为商业目标的系统性工程方法论</strong>。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#EN13501-1 #Euroclass #FIGRA #SBI测试 #CHF</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/e382.html" title="EN 13501-1 建筑材料阻燃性能测试与分类技术指南：墙板与地板体系的深度解析">https://zhyong.site/posts/e382.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E9%98%BB%E7%87%83%E6%B5%8B%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i> 阻燃测试</a>
+              <a href="/tags/EN13501/" rel="tag"><i class="fa fa-tag"></i> EN13501</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2cb3.html" rel="prev" title="EN 13501-1:2018 建筑产品燃烧性能分级报告指南">
+                  <i class="fa fa-angle-left"></i> EN 13501-1:2018 建筑产品燃烧性能分级报告指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">50 分钟</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
