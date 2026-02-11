@@ -377,50 +377,26 @@
     
     
 
-    <footer class="post-footer"><div class="post-comments-wrapper" style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee;">
-  <cwd-comments 
-    id="cwd-widget"
-    api="https://cwd-api.zhyong.workers.dev" 
-    site-id="blog">
-  </cwd-comments>
-</div>
+    <footer class="post-footer"><div id="comments"></div>
+<script src="https://unpkg.com/cwd-widget@0.0.x/dist/cwd.js"></script>
 
-<script src="https://unpkg.com/cwd-widget@latest/dist/cwd.js"></script>
-
+<!-- 实例调用 -->
 <script>
-  (function() {
-    var initCWD = function() {
-      var el = document.querySelector('cwd-comments');
-      if (el) {
-        // 如果 1.5 秒后还没出 Shadow DOM，强制重新挂载一次
-        setTimeout(function() {
-          if (!el.shadowRoot) {
-            var newEl = el.cloneNode(true);
-            el.parentNode.replaceChild(newEl, el);
-            console.log("CWD: 正在尝试最终激活...");
-          }
-        }, 1500);
-      }
-    };
+	const comments = new CWDComments({
+		el: '#comments',
+		apiBaseUrl: 'https://cwd-api.zhyong.workers.dev', // 换成你的 API 地址
+	});
+	comments.mount();
 
-    // 适配 NexT 的 PJAX 跳转
-    document.addEventListener('pjax:success', initCWD);
-    // 适配首次加载
-    if (document.readyState === 'complete') {
-      initCWD();
-    } else {
-      window.addEventListener('load', initCWD);
-    }
-  })();
+	// 或者
+	// document.addEventListener('DOMContentLoaded', () => {
+	// 	const comments = new window.CWDComments({
+	// 		el: '#comments',
+	// 		apiBaseUrl: 'https://your-api.example.com',
+	// 	});
+	// 	comments.mount();
+	// });
 </script>
-
-<style>
-  /* 确保组件有最小高度，防止 NexT 布局塌陷 */
-  cwd-comments { 
-    display: block !important; 
-    min-height: 250px !important; 
-  }
-</style>
 
           
 
