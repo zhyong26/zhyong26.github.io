@@ -1616,7 +1616,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #e0c8bf;
+    background: #6fffad;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -3259,4 +3259,9 @@ header.header {
   .comments {
     padding: 10px 12px;
   }
+}
+#cwd-container {
+  min-height: 200px !important;
+  background: transparent;
+  width: 100%;
 }

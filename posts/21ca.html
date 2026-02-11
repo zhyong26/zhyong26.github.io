@@ -328,7 +328,41 @@
     
     
 
-    <footer class="post-footer">
+    <footer class="post-footer"><div class="comments" id="cwd-wrapper" style="margin-top: 50px; min-height: 250px;">
+  <cwd-comments 
+    id="cwd-container"
+    api="https://cwd-api.zhyong.workers.dev"
+    site-id="blog">
+  </cwd-comments>
+</div>
+
+<script type="module" src="/js/cwd.js"></script>
+
+<script>
+  (function() {
+    const refreshCWD = () => {
+      const el = document.querySelector('cwd-comments');
+      if (el) {
+        // 强制重新挂载，触发 Web Component 的 connectedCallback
+        const newEl = document.createElement('cwd-comments');
+        // 复制所有属性
+        Array.from(el.attributes).forEach(attr => newEl.setAttribute(attr.name, attr.value));
+        el.parentNode.replaceChild(newEl, el);
+        console.log("✅ CWD: 组件已尝试重新激活");
+      }
+    };
+
+    // 监听 PJAX 完成事件
+    document.addEventListener('pjax:success', refreshCWD);
+    
+    // 首次加载检查
+    window.addEventListener('load', () => {
+      if (!customElements.get('cwd-comments')) {
+        console.warn("⚠️ CWD: 组件注册延迟，正在等待 Module 加载...");
+      }
+    });
+  })();
+</script>
 
           
 
