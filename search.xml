@@ -135,7 +135,7 @@
 </tr>
 </tbody></table>
 <p><strong>工程师笔记——“免测”条款：</strong> 根据欧盟委员会决策，含有小于 1% 有机物含量的矿棉、玻璃、陶瓷及水泥制品，可无需测试直接判定为 A1 级。</p>
-<p><img data-src="/posts/e382/floor.webp"></p>
+<p><img data-src="/floor.webp"></p>
 <h3 id="应用领域分类后缀"><a href="#应用领域分类后缀" class="headerlink" title="应用领域分类后缀"></a>应用领域分类后缀</h3><ul>
 <li><strong>无后缀：</strong> 适用于墙板、吊顶及线性装饰材料。</li>
 <li><strong>fl (Floorings)：</strong> 地板体系。其受热机理主要源于上方烟气层的辐射热。</li>
@@ -377,7 +377,7 @@
 <td>性能未定或未达最低要求</td>
 </tr>
 </tbody></table>
-<p>理解这一宏观架构是编制合规报告与开展产品研发优化的逻辑起点。<br><img data-src="/posts/2cb3/en13501.webp"></p>
+<p>理解这一宏观架构是编制合规报告与开展产品研发优化的逻辑起点。<br><img data-src="/en13501.webp"></p>
 <hr>
 <h3 id="2-专业提示词框架：符合认证要求的报告生成模组"><a href="#2-专业提示词框架：符合认证要求的报告生成模组" class="headerlink" title="2. 专业提示词框架：符合认证要求的报告生成模组"></a>2. 专业提示词框架：符合认证要求的报告生成模组</h3><p>一份高质量的分级报告需具备严谨的法律声明与详实的数据矩阵。以下模组可作为生成标准化报告的 Prompt 模板：</p>
 <h4 id="2-1-报告核心要素模组"><a href="#2-1-报告核心要素模组" class="headerlink" title="2.1 报告核心要素模组"></a>2.1 报告核心要素模组</h4><ul>
@@ -727,7 +727,7 @@
 <span id="more"></span>
 
 <hr>
-<h2 id="汇总图"><a href="#汇总图" class="headerlink" title="汇总图"></a>汇总图</h2><p><img data-src="/posts/824a/%E5%85%A8%E6%99%AF%E5%9B%BE.webp"></p>
+<h2 id="汇总图"><a href="#汇总图" class="headerlink" title="汇总图"></a>汇总图</h2><p><img data-src="/%E5%85%A8%E6%99%AF%E5%9B%BE.webp"></p>
 <h2 id="1-第一章：六西格玛在研发中的战略定位"><a href="#1-第一章：六西格玛在研发中的战略定位" class="headerlink" title="1. 第一章：六西格玛在研发中的战略定位"></a>1. 第一章：六西格玛在研发中的战略定位</h2><h3 id="1-1-从宏观框架到微观执行：IPD框架的引入"><a href="#1-1-从宏观框架到微观执行：IPD框架的引入" class="headerlink" title="1.1 从宏观框架到微观执行：IPD框架的引入"></a>1.1 从宏观框架到微观执行：IPD框架的引入</h3><p>研发六西格玛的成功不仅取决于统计工具的堆砌，更取决于其背后的业务结构。</p>
 <ul>
 <li><strong>宏观框架 (Macro-Framework)：</strong> 这是企业的商业契约与业务结构。它明确了项目目标、部门间的法律&#x2F;职能关系及评价指标，确保所有研发参与者为“整体项目结果”负责，而不仅仅是个人绩效。这种结构为成功或失败创造了明确的后果。</li>
@@ -874,7 +874,7 @@
 <hr>
 <h3 id="2-存量市场的震荡：职位替代风险图谱"><a href="#2-存量市场的震荡：职位替代风险图谱" class="headerlink" title="2. 存量市场的震荡：职位替代风险图谱"></a>2. 存量市场的震荡：职位替代风险图谱</h3><p>本轮AI浪潮对“白领阶层”构成了前所未有的压力。经济逻辑十分冷峻：当非结构化数据的处理、法律文案的合成及初级审计的边际成本趋向于零，传统知识劳务的价值护城河将迅速瓦解。</p>
 <h4 id="2-1-高风险职位清单与替代逻辑"><a href="#2-1-高风险职位清单与替代逻辑" class="headerlink" title="2.1 高风险职位清单与替代逻辑"></a>2.1 高风险职位清单与替代逻辑</h4><p>Goldman Sachs（高盛）的研究指出，全球约<strong>三分之二</strong>的职位暴露于AI自动化风险之中。这种“风险暴露”呈现高度的非对称性。</p>
-<p><img data-src="/posts/5faa/moredanger.png"></p>
+<p><img data-src="/moredanger.png"></p>
 <ul>
 <li><strong>法律服务</strong>：约**50%**以上的任务处于高度暴露状态。高盛披露的案例显示，AI已能完成95%的IPO申报文件整理工作。</li>
 <li><strong>财务与审计</strong>：基于固定规则的数据合并、基础模型构建及合规检查正被AI快速替代。</li>
@@ -916,7 +916,7 @@
 <p>单纯的岗位替代只是表象，真正的战略重心在于“技能溢价”向高阶认知的加速转移。</p>
 <hr>
 <h3 id="3-增量市场的机遇：高溢价技能识别"><a href="#3-增量市场的机遇：高溢价技能识别" class="headerlink" title="3. 增量市场的机遇：高溢价技能识别"></a>3. 增量市场的机遇：高溢价技能识别</h3><p>在执行成本大幅下降的时代，“品味（Taste）”与“判断（Judgment）”正成为劳动力市场中最为稀缺的商品。</p>
-<p><img data-src="/posts/5faa/skills.png"></p>
+<p><img data-src="/skills.png"></p>
 <h4 id="3-1-技术硬核：AI流利度（AI-Fluency）"><a href="#3-1-技术硬核：AI流利度（AI-Fluency）" class="headerlink" title="3.1 技术硬核：AI流利度（AI Fluency）"></a>3.1 技术硬核：AI流利度（AI Fluency）</h4><p>AI流利度不再仅仅是工具使用，而是涵盖了任务拆解、提示词工程（Prompt Engineering）及对模型输出结果的<strong>幻觉猎寻（Hallucination Hunting）</strong>。</p>
 <p>“AI流利度已成为2026年后的核心溢价基础。研究表明，利用GitHub Copilot等工具的开发者在编码任务上实现了<strong>56%的速度增量</strong>。在金融前台，AI加持的员工人均增量收入有望达到<strong>350万美元</strong>。” —— 结合Whitehat&#x2F;Makebot&#x2F;Deloitte综合测算</p>
 <h4 id="3-2-人类特质：软技能的硬核化"><a href="#3-2-人类特质：软技能的硬核化" class="headerlink" title="3.2 人类特质：软技能的硬核化"></a>3.2 人类特质：软技能的硬核化</h4><p>根据WEF报告，2030年职业胜任力的核心将聚焦于以下特质：</p>
@@ -1173,7 +1173,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主题是：AI时代的职场技能超势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些职位，才成功被淘汰？</span><br><span class="line">报告格式：由摘要开始，内文至少需要六个章节，每个章节至少需要2个子章节，最后是参考文献</span><br><span class="line">字数：5000至6000字</span><br><span class="line">报告对象：中国上市公司传统产业人资部门高主管。</span><br><span class="line">请给我生成报告的提示词</span><br></pre></td></tr></table></figure>
 
 <h2 id="生成报告"><a href="#生成报告" class="headerlink" title="生成报告"></a>生成报告</h2><p>将上一步生成的提示词，直接输入到报告中，生成</p>
-<h2 id="生成图表"><a href="#生成图表" class="headerlink" title="生成图表"></a>生成图表</h2><p>使用Gemini中的<code>canvas</code>功能，生成图表<br><img data-src="/posts/21ca/canvas.png"></p>
+<h2 id="生成图表"><a href="#生成图表" class="headerlink" title="生成图表"></a>生成图表</h2><p>使用Gemini中的<code>canvas</code>功能，生成图表<br><img data-src="/canvas.png"></p>
 <p>生成报告内容见：<a href="https://zhyong.site/posts/5faa.html">重构与共生：AI 时代的职场技能趋势与人才战略蓝图</a></p>
 ]]></content>
       <categories>
@@ -1223,8 +1223,8 @@
         <category>数字化工具</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>ssh</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
