@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言一直以来很喜欢词云图，能够很直观地体现文本的关键词，无奈技术有限，现使用AI写出了比较完整、功能强大的词图，分享给大家。可以先看下成果，这是使用脚本生成的由chinese-poetry&#x2F;chinese-poetry中宋词的词云图。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自制多功能词云图生成程序——多文件分析、删除关键词等">
+<meta property="og:url" content="https://zhyong.site/posts/59b8.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="前言一直以来很喜欢词云图，能够很直观地体现文本的关键词，无奈技术有限，现使用AI写出了比较完整、功能强大的词图，分享给大家。可以先看下成果，这是使用脚本生成的由chinese-poetry&#x2F;chinese-poetry中宋词的词云图。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/14/698fdeb10089a.png">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/14/698fdf80610f7.png">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/14/698fe149d1bba.png">
+<meta property="article:published_time" content="2026-02-14T02:34:14.000Z">
+<meta property="article:modified_time" content="2026-02-14T03:13:40.580Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="多文件批量分析">
+<meta property="article:tag" content="词云图">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.zhyong.site/i/2026/02/14/698fdeb10089a.png">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/59b8.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/59b8.html","path":"posts/59b8.html","title":"自制多功能词云图生成程序——多文件分析、删除关键词等"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自制多功能词云图生成程序——多文件分析、删除关键词等 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/59b8.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+<link rel="dns-prefetch" href="https://comment.zhyong.site">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">运行环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="nav-text">脚本文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-text">使用说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于制造业研发、材料改性与工艺流程优化。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/59b8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于制造业研发、材料改性与工艺流程优化。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="自制多功能词云图生成程序——多文件分析、删除关键词等 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自制多功能词云图生成程序——多文件分析、删除关键词等
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-14 10:34:14 / 修改时间：11:13:40" itemprop="dateCreated datePublished" datetime="2026-02-14T10:34:14+08:00">2026-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%97%E5%8C%96%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">数字化工具</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/59b8.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/59b8.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直以来很喜欢词云图，能够很直观地体现文本的关键词，无奈技术有限，现使用AI写出了比较完整、功能强大的词图，分享给大家。<br>可以先看下成果，这是使用脚本生成的由<a target="_blank" rel="noopener" href="https://github.com/chinese-poetry/chinese-poetry">chinese-poetry&#x2F;chinese-poetry</a>中宋词的词云图。</p>
+<span id="more"></span>
+
+<p><img src="https://i.zhyong.site/i/2026/02/14/698fdeb10089a.png" alt="1771036336628.png"></p>
+<h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>系统环境：<br><img src="https://i.zhyong.site/i/2026/02/14/698fdf80610f7.png" alt="1771036543649.png"><br>安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install jieba wordcloud matplotlib</span><br></pre></td></tr></table></figure>
+<p>需要的文件：</p>
+<ul>
+<li>字体：<a target="_blank" rel="noopener" href="https://github.com/StellarCN/scp_zh/blob/master/fonts/SimHei.ttf">scp_zh&#x2F;fonts&#x2F;SimHei.ttf at master · StellarCN&#x2F;scp_zh</a></li>
+<li>停用词表：<a target="_blank" rel="noopener" href="https://github.com/goto456/stopwords">goto456&#x2F;stopwords: 中文常用停用词表（哈工大停用词表、百度停用词表等）</a></li>
+</ul>
+<p>常见停用词表来源说明：</p>
+<p>根据中文自然语言处理（NLP）任务的差异，可选择不同版本的词表：</p>
+<ul>
+<li>﻿﻿哈工大（HIT）停用词表：应用最广泛，包含约767个词，涵盖了大多数日常用语中的无意义词汇。</li>
+<li>﻿﻿百度停用词表：包含约1395 个词，对搜索引擎产生的冗余词过滤效果较好。</li>
+<li>﻿﻿四川大学（SCU）停用词表：包含约1208个词，在处理社交媒体和长文章时表现较稳健。</li>
+</ul>
+<h2 id="脚本文件"><a href="#脚本文件" class="headerlink" title="脚本文件"></a>脚本文件</h2><p>开源地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zhyong26/Mac_shells/tree/main?tab=readme-ov-file#%E8%AF%8D%E4%BA%91%E5%9B%BE">zhyong26&#x2F;Mac_shells: Mac M1个人使用脚本</a></p>
+<p>其中第24行的停用词表文件路径，可根据实际修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> wordcloud <span class="keyword">import</span> WordCloud</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_macos_font</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;自动化获取 macOS 可用的中文字体路径&quot;&quot;&quot;</span></span><br><span class="line">    paths = [</span><br><span class="line">        <span class="string">&quot;/System/Library/Fonts/STHeiti Light.ttc&quot;</span>,</span><br><span class="line">        <span class="string">&quot;/System/Library/Fonts/PingFang.ttc&quot;</span>,</span><br><span class="line">        <span class="string">&quot;/Library/Fonts/Arial Unicode.ttf&quot;</span>,</span><br><span class="line">        <span class="string">&quot;/System/Library/Fonts/Hiragino Sans GB.ttc&quot;</span></span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> paths:</span><br><span class="line">        <span class="keyword">if</span> os.path.exists(p):</span><br><span class="line">            <span class="keyword">return</span> p</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_combined_analysis</span>(<span class="params">file_paths, font_path=<span class="literal">None</span>, stop_words_path=<span class="string">&quot;~/Project/Python_wordcloud/stopwords/scu_stopwords.txt&quot;</span>, exclude_words=<span class="literal">None</span>, skip_top=<span class="number">0</span></span>):</span><br><span class="line">    all_word_counts = Counter()</span><br><span class="line">    processed_files = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1. 停用词与排除词处理</span></span><br><span class="line">    filter_set = <span class="built_in">set</span>()</span><br><span class="line">    <span class="keyword">if</span> stop_words_path <span class="keyword">and</span> os.path.exists(stop_words_path):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(stop_words_path, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            filter_set.update([line.strip() <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines() <span class="keyword">if</span> line.strip()])</span><br><span class="line">    <span class="keyword">if</span> exclude_words:</span><br><span class="line">        filter_set.update(exclude_words)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2. 文本处理</span></span><br><span class="line">    <span class="keyword">for</span> file_path <span class="keyword">in</span> file_paths:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(file_path):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;跳过不存在的文件: <span class="subst">&#123;file_path&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                content = f.read()</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> content.strip(): <span class="keyword">continue</span></span><br><span class="line">                words = jieba.cut(content)</span><br><span class="line">                filtered = [w <span class="keyword">for</span> w <span class="keyword">in</span> words <span class="keyword">if</span> <span class="built_in">len</span>(w) &gt; <span class="number">1</span> <span class="keyword">and</span> w <span class="keyword">not</span> <span class="keyword">in</span> filter_set]</span><br><span class="line">                all_word_counts.update(filtered)</span><br><span class="line">                processed_files += <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;读取文件 <span class="subst">&#123;file_path&#125;</span> 出错: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. 数据校验与 Skip 逻辑</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> all_word_counts:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;错误：未提取到任何有效关键词，请检查输入文件内容或编码。&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> skip_top &gt; <span class="number">0</span>:</span><br><span class="line">        top_n = [item[<span class="number">0</span>] <span class="keyword">for</span> item <span class="keyword">in</span> all_word_counts.most_common(skip_top)]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;已跳过最高频词: <span class="subst">&#123;top_n&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> top_n:</span><br><span class="line">            <span class="keyword">del</span> all_word_counts[w]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> all_word_counts:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;错误：跳过高频词后，数据为空。&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4. 字体适配 (核心修复点)</span></span><br><span class="line">    final_font = font_path</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> final_font <span class="keyword">or</span> <span class="keyword">not</span> os.path.exists(final_font):</span><br><span class="line">        <span class="keyword">if</span> sys.platform == <span class="string">&quot;darwin&quot;</span>:  <span class="comment"># macOS</span></span><br><span class="line">            final_font = get_macos_font()</span><br><span class="line">        <span class="keyword">elif</span> sys.platform == <span class="string">&quot;win32&quot;</span>: <span class="comment"># Windows</span></span><br><span class="line">            final_font = <span class="string">&quot;C:/Windows/Fonts/simhei.ttf&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> final_font <span class="keyword">or</span> <span class="keyword">not</span> os.path.exists(final_font):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;错误：未找到有效的字体文件，请通过 --font 参数手动指定。&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 5. 生成词云</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;正在使用字体: <span class="subst">&#123;final_font&#125;</span>&quot;</span>)</span><br><span class="line">        wc = WordCloud(</span><br><span class="line">            font_path=final_font,</span><br><span class="line">            background_color=<span class="string">&#x27;white&#x27;</span>,</span><br><span class="line">            width=<span class="number">1000</span>,</span><br><span class="line">            height=<span class="number">800</span>,</span><br><span class="line">            max_words=<span class="number">150</span></span><br><span class="line">        )</span><br><span class="line">        wc.generate_from_frequencies(all_word_counts)</span><br><span class="line"></span><br><span class="line">        output_name = <span class="string">&quot;analysis_result.png&quot;</span></span><br><span class="line">        wc.to_file(output_name)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;成功！处理文件: <span class="subst">&#123;processed_files&#125;</span> | 结果保存至: <span class="subst">&#123;os.path.abspath(output_name)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 打印排名前10的词供校验</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;最终分析高频词 (Top 20):&quot;</span>, all_word_counts.most_common(<span class="number">20</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;词云生成失败，具体原因: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    parser = argparse.ArgumentParser(description=<span class="string">&quot;多文件词频分析工具&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;filenames&quot;</span>, nargs=<span class="string">&#x27;+&#x27;</span>, <span class="built_in">help</span>=<span class="string">&quot;文件路径&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--font&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;手动指定字体路径&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--stop&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;停用词路径&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--exclude&quot;</span>, <span class="string">&quot;-e&quot;</span>, nargs=<span class="string">&#x27;*&#x27;</span>, <span class="built_in">help</span>=<span class="string">&quot;排除特定词&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--skip_top&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">0</span>, <span class="built_in">help</span>=<span class="string">&quot;跳过前N个词&quot;</span>)</span><br><span class="line"></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    generate_combined_analysis(args.filenames, args.font, args.stop, args.exclude, args.skip_top)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><p>帮助文档：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">usage: get_word_cloud.py [-h] [--font FONT] [--stop STOP] [--exclude [EXCLUDE ...]] [--skip_top SKIP_TOP] filenames [filenames ...]</span><br><span class="line"></span><br><span class="line">多文件词频分析工具</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line">  filenames             文件路径</span><br><span class="line"></span><br><span class="line">options:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  --font FONT           手动指定字体路径</span><br><span class="line">  --stop STOP           停用词路径</span><br><span class="line">  --exclude, -e [EXCLUDE ...]</span><br><span class="line">                        排除特定词</span><br><span class="line">  --skip_top SKIP_TOP   跳过前N个词</span><br></pre></td></tr></table></figure>
+
+<p>如进行宋词的内容分析，根据实际关键词请问，去除不必要关键字，最终使用及输出如下：</p>
+<p><img src="https://i.zhyong.site/i/2026/02/14/698fe149d1bba.png" alt="1771037001191.png"></p>
+<p>其中<code>get_wc</code>命令即为脚本文件，为方便使用，设置了alias。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias get_wc=&quot;~/Project/Python_wordcloud/.venv/bin/python3 ~/Project/Python_wordcloud/get_word_cloud.py&quot;</span><br></pre></td></tr></table></figure>
+
+<p>转换为正常使用命令，即为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 get_word_cloud.py *song* --skip_top 8 -e tags null</span><br></pre></td></tr></table></figure>
+
+<p>分析文件即为chinese poety中所有含有”song”的文件名。</p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-14 10:53:18</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>该文章介绍了一个<strong>自主开发、面向中文文本的多功能词云图生成工具</strong>，核心目标是提升文本关键词可视化分析的实用性与灵活性。不同于基础词云脚本，该项目具备显著的工程化特征：  </p>
+<ul>
+<li><strong>多文件批量处理能力</strong>：支持通配符（如 <code>*song*</code>）传入多个文本文件，自动合并词频统计，适用于大规模语料（如宋词全集）；  </li>
+<li><strong>精细化文本过滤机制</strong>：集成停用词表（哈工大&#x2F;百度等主流资源）、用户自定义排除词（<code>--exclude</code>）及高频词自动跳过（<code>--skip_top</code>），有效抑制“的”“了”“人”等无意义高频干扰项，提升语义代表性；  </li>
+<li><strong>跨平台字体智能适配</strong>：针对 macOS、Windows 系统预置常见中文字体路径，并支持手动指定，彻底解决 <code>wordcloud</code> 中文乱码&#x2F;方块字问题——这是中文词云落地的关键技术瓶颈；  </li>
+<li><strong>鲁棒性设计</strong>：包含文件存在性校验、编码异常捕获、空内容防护、数据空值预警等生产级容错逻辑，保障非专业用户也能稳定运行；  </li>
+<li><strong>开源可扩展架构</strong>：代码结构清晰（模块化函数 + Argparse CLI），便于二次开发（如接入 TF-IDF 权重、情感加权、词性筛选等高级功能）。</li>
+</ul>
+<p>整体体现了“小而美”的数字人文工具理念：以轻量 Python 脚本为载体，融合自然语言处理（jieba 分词）、数据聚合（Counter）、可视化（WordCloud + Matplotlib）与系统交互（跨平台字体探测），在学术分析、内容运营、教学演示等场景中具备直接复用价值。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#词云图 #中文分词 #停用词过滤 #跨平台字体适配 #多文件批量分析</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/59b8.html" title="自制多功能词云图生成程序——多文件分析、删除关键词等">https://zhyong.site/posts/59b8.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/13/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%8D%E4%BA%91%E5%9B%BE/" rel="tag"><i class="fa fa-tag"></i> 词云图</a>
+              <a href="/tags/%E5%A4%9A%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 多文件批量分析</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/7193.html" rel="prev" title="逻辑重构与效率革命：金字塔原理在制造业研发技术中的深度应用分析">
+                  <i class="fa fa-angle-left"></i> 逻辑重构与效率革命：金字塔原理在制造业研发技术中的深度应用分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">49k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:22</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://comment.zhyong.site","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":{"placeholder":"欢迎评论，一起学习成长～"},"emoji":["https://unpkg.com/@waline/emojis@1.0.1/qq"],"requiredMeta":["nick","mail"],"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/posts/59b8.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
