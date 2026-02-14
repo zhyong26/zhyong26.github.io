@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="1. 简化提交信息：使用 git commit -m 和 Commit Message Template  问题： 每次手动输入完整的 commit message 比较繁琐。  方案：  简单提交： 使用 git commit -m &quot;你的简短提交信息&quot;  (适用于快速修复或不重要的提交)。 Commit Message Template： 创建一个 commit messa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git下如何快速提交及推送">
+<meta property="og:url" content="https://zhyong.site/posts/7819.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="1. 简化提交信息：使用 git commit -m 和 Commit Message Template  问题： 每次手动输入完整的 commit message 比较繁琐。  方案：  简单提交： 使用 git commit -m &quot;你的简短提交信息&quot;  (适用于快速修复或不重要的提交)。 Commit Message Template： 创建一个 commit messa">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-14T11:23:27.000Z">
+<meta property="article:modified_time" content="2026-02-14T11:29:46.554Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/7819.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/7819.html","path":"posts/7819.html","title":"Git下如何快速提交及推送"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Git下如何快速提交及推送 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/7819.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+<link rel="dns-prefetch" href="https://comment.zhyong.site">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://umami.zhyong.site/script.js" data-website-id="2064e91a-7190-4b62-959b-9924c8b3bdc2"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于制造业研发、材料改性与工艺流程优化。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/7819.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于制造业研发、材料改性与工艺流程优化。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Git下如何快速提交及推送 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git下如何快速提交及推送
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-14 19:23:27 / 修改时间：19:29:46" itemprop="dateCreated datePublished" datetime="2026-02-14T19:23:27+08:00">2026-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">效率优化</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/7819.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/7819.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>1. 简化提交信息：使用 <code>git commit -m</code> 和 Commit Message Template</strong></p>
+<ul>
+<li><p><strong>问题：</strong> 每次手动输入完整的 commit message 比较繁琐。</p>
+</li>
+<li><p><strong>方案：</strong></p>
+<ul>
+<li><strong>简单提交：</strong> 使用 <code>git commit -m &quot;你的简短提交信息&quot;</code>  (适用于快速修复或不重要的提交)。</li>
+<li><strong>Commit Message Template：</strong> 创建一个 commit message 模板，Git 会自动加载，你只需要填充内容。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建模板文件（例如：.gitmessage）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;feat: 添加新功能\n\n详细描述：\n\n[影响范围]\n\n[问题跟踪]&quot;</span> &gt; ~/.gitmessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 配置 Git 使用该模板</span></span><br><span class="line">git config --global commit.template ~/.gitmessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 提交时，直接 git commit，编辑器会自动打开并加载模板</span></span><br><span class="line">git commit</span><br></pre></td></tr></table></figure></li>
+</ul>
+<span id="more"></span>
+
+<p><strong>2. 简化分支操作：使用别名和自动补全</strong></p>
+<ul>
+<li><p><strong>问题：</strong> 分支名称长且容易输错，频繁切换分支比较麻烦。</p>
+</li>
+<li><p><strong>方案：</strong></p>
+<ul>
+<li><strong>Git 别名：</strong>  创建常用命令的别名，例如 <code>git co</code> 代替 <code>git checkout</code>。</li>
+<li><strong>自动补全：</strong>  配置 Git 自动补全分支名称。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置 Git 别名 (推荐添加到 ~/.zshrc 或 ~/.bashrc)</span></span><br><span class="line">git config --global alias.co checkout</span><br><span class="line">git config --global alias.br branch</span><br><span class="line">git config --global alias.st status</span><br><span class="line">git config --global alias.cm commit</span><br><span class="line">git config --global alias.ps push</span><br><span class="line">git config --global alias.df diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用 Git 自动补全 (不同 shell 的配置方式不同，这里以 Zsh 为例)</span></span><br><span class="line"><span class="comment"># 在 ~/.zshrc 中添加以下内容：</span></span><br><span class="line"><span class="keyword">if</span> [ -f /usr/share/git/completion/git-completion.zsh ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">source</span> /usr/share/git/completion/git-completion.zsh</span><br><span class="line"><span class="keyword">elif</span> [ -f /opt/homebrew/share/git/completion/git-completion.zsh ]; <span class="keyword">then</span>  <span class="comment"># 适用于 Homebrew 安装的 Git</span></span><br><span class="line">  <span class="built_in">source</span> /opt/homebrew/share/git/completion/git-completion.zsh</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使配置生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>3. 快速暂存：使用 <code>git add -p</code> 和 <code>git add .</code></strong></p>
+<ul>
+<li><strong>问题：</strong> 手动选择要暂存的文件比较耗时。</li>
+<li><strong>方案：</strong><ul>
+<li><strong><code>git add .</code>：</strong>  暂存所有修改的文件 (适用于所有修改都需要提交的情况)。</li>
+<li><strong><code>git add -p</code>：</strong>  交互式暂存，可以分块选择要暂存的内容 (适用于需要部分提交的情况)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 一键提交推送：Shell 脚本</strong></p>
+<ul>
+<li><p><strong>问题：</strong> 需要依次执行 <code>git add .</code>, <code>git commit</code>, <code>git push</code>。</p>
+</li>
+<li><p><strong>方案：</strong>  编写一个 Shell 脚本，将这些命令合并成一个。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否有提交信息作为参数</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Usage: ./git-push.sh &lt;commit_message&gt;&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加所有修改</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送到远程仓库 (假设是 origin 和当前分支)</span></span><br><span class="line">git push origin $(git branch --show-current)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;提交和推送完成！&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用方法：</span></span><br><span class="line"><span class="comment"># 1. 保存为 git-push.sh</span></span><br><span class="line"><span class="comment"># 2. 赋予执行权限：chmod +x git-push.sh</span></span><br><span class="line"><span class="comment"># 3. 执行：./git-push.sh &quot;你的提交信息&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>5. 跳过暂存区：<code>git commit -am</code></strong></p>
+<ul>
+<li><strong>问题：</strong> 修改后需要先 <code>git add</code> 再 <code>git commit</code>。</li>
+<li><strong>方案：</strong> 使用 <code>git commit -am &quot;message&quot;</code>，它相当于 <code>git add</code> 所有已跟踪（tracked）的文件，然后进行提交。 <strong>注意：它不包括新文件，新文件还是需要 <code>git add</code>。</strong></li>
+</ul>
+<p><strong>6. 优化网络传输：配置 SSH 和 HTTP&#x2F;2</strong></p>
+<ul>
+<li><strong>问题：</strong>  网络不稳定导致推送速度慢。</li>
+<li><strong>方案：</strong><ul>
+<li><strong>使用 SSH：</strong>  SSH 协议通常比 HTTPS 更快，特别是对于大型仓库。确保你已经配置了 SSH key 并将其添加到你的 Git 服务提供商（如 GitHub、GitLab）中。</li>
+<li><strong>配置 HTTP&#x2F;2：</strong>  Git 2.14 版本开始支持 HTTP&#x2F;2，可以提高传输速度。  检查你的 Git 版本是否支持，并确保你的 Git 服务提供商也支持 HTTP&#x2F;2。  通常不需要手动配置，Git 会自动协商使用。</li>
+</ul>
+</li>
+</ul>
+<p><strong>7. 使用 GUI 工具：GitKraken、SourceTree</strong></p>
+<ul>
+<li><strong>问题：</strong> 命令行操作不直观。</li>
+<li><strong>方案：</strong>  使用图形化的 Git 客户端，例如 GitKraken 或 SourceTree，它们提供了更直观的界面，可以简化提交和推送操作。</li>
+</ul>
+<p><strong>8. 避免大型提交：拆分成小而精的提交</strong></p>
+<ul>
+<li><strong>问题：</strong>  一次提交包含大量修改，导致审查困难，推送时间长。</li>
+<li><strong>方案：</strong>  将大型功能拆分成多个小的、独立的提交，每个提交只关注一个小的改动。 这样做的好处是：<ul>
+<li>更容易审查代码。</li>
+<li>更容易回滚。</li>
+<li>减少冲突。</li>
+<li>推送速度更快。</li>
+</ul>
+</li>
+</ul>
+<p><strong>9. 定期清理 Git 仓库：<code>git gc --prune=now --aggressive</code></strong></p>
+<ul>
+<li><strong>问题：</strong>  Git 仓库越来越大，影响性能。</li>
+<li><strong>方案：</strong>  定期运行 <code>git gc --prune=now --aggressive</code>  来清理 Git 仓库，删除不必要的文件和对象，优化仓库结构。  这个命令会消耗一些时间，所以建议在非工作时间运行。</li>
+</ul>
+<p><strong>10. 使用快速提交工具：lazygit</strong></p>
+<ul>
+<li><p><strong>问题:</strong> 命令行操作繁琐，GUI 工具占用资源。</p>
+</li>
+<li><p><strong>方案:</strong> <code>lazygit</code> 是一个基于终端的 Git 客户端，它提供了一个交互式的界面，可以快速浏览、暂存、提交、推送代码。它比命令行更直观，比 GUI 工具更轻量级。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># macOS (使用 Homebrew)</span></span><br><span class="line">brew install lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linux (使用 apt)</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 lazygit</span></span><br><span class="line">lazygit</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>总结：</strong></p>
+<p>选择哪种方案取决于你的个人习惯和项目需求。  可以根据自己的情况，组合使用这些方法，以达到最佳的效率。 建议优先配置别名和自动补全，并养成编写清晰 commit message 的习惯。  如果网络环境较差，可以考虑使用 SSH 协议。 对于大型项目，拆分成小而精的提交非常重要。</p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-14 19:25:01</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>该文档系统性地梳理了在 Git 工作流中<strong>提升提交（commit）与推送（push）效率</strong>的十大实践方案，覆盖从基础命令优化到高级自动化与性能调优的全链路。其核心逻辑并非追求“一步到位”的捷径，而是围绕 <strong>开发者体验（DX）、操作确定性、协作可维护性与仓库健康度</strong> 四大维度展开：</p>
+<ul>
+<li><strong>人因工程层面</strong>：通过别名（<code>git co</code>）、自动补全、模板化 Commit Message 和交互式工具（<code>git add -p</code> &#x2F; <code>lazygit</code>），显著降低认知负荷与输入错误率；</li>
+<li><strong>流程精简层面</strong>：提供分场景的暂存&#x2F;提交策略（如 <code>-am</code> 跳过已跟踪文件暂存、<code>.sh</code> 一键脚本封装完整流程），兼顾速度与可控性；</li>
+<li><strong>协作规范层面</strong>：强调小粒度、语义化提交（feat&#x2F;fix 等前缀 + 清晰体例），直接支撑代码审查、Git Bisect、Changelog 生成及团队知识沉淀；</li>
+<li><strong>基础设施层面</strong>：从协议优化（SSH &gt; HTTPS）、HTTP&#x2F;2 支持到仓库垃圾回收（<code>git gc</code>），体现对底层性能与长期可维护性的深度关注；</li>
+<li><strong>工具理性层面</strong>：不盲目推崇 GUI 或 CLI，而是提出「终端 GUI」（lazygit）这一中间态方案，在可视化与轻量性间取得平衡。</li>
+</ul>
+<p>值得注意的是，所有技巧均隐含前提：<strong>不牺牲 Git 的原子性、可追溯性与协作安全性</strong>。例如 <code>git commit -am</code> 明确排除未跟踪文件，避免误提交；<code>git add -p</code> 强制内容级确认；模板机制引导而非替代思考——这体现了专业 Git 实践的本质：<strong>效率是纪律的副产品，而非混乱的加速器。</strong></p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#Git效率优化 #语义化提交 #命令行工程化 #Git工作流自动化 #仓库健康维护</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/7819.html" title="Git下如何快速提交及推送">https://zhyong.site/posts/7819.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/13/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/5633.html" rel="prev" title="ISO 56005 创新管理体系学习与企业实施深度报告">
+                  <i class="fa fa-angle-left"></i> ISO 56005 创新管理体系学习与企业实施深度报告
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">57k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:35</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://comment.zhyong.site","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":{"placeholder":"欢迎评论，一起学习成长～"},"emoji":["https://unpkg.com/@waline/emojis@1.0.1/qq"],"requiredMeta":["nick","mail"],"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/posts/7819.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
