@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="由于 Mac 下载文件夹经常性文件非常杂乱，自己动手整理又感觉很麻烦，因此制作了一个多功能脚本，可在想整理时，瞬间完成整理。现将脚本分享出来，供有需要的小伙伴使用。 以下是该脚本的功能特点与使用说明。  1. 功能特点 全深度递归扫描：不仅整理目标根目录，还会穿透所有子文件夹，将散落在深层路径的文件全部提取出来。 中文语义分类：根据文件扩展名，将文件自动归类至“图片”、“文档”、“安装包”、“压缩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多功能、自动化整理文件夹Python脚本">
+<meta property="og:url" content="https://zhyong.site/posts/6f80.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="由于 Mac 下载文件夹经常性文件非常杂乱，自己动手整理又感觉很麻烦，因此制作了一个多功能脚本，可在想整理时，瞬间完成整理。现将脚本分享出来，供有需要的小伙伴使用。 以下是该脚本的功能特点与使用说明。  1. 功能特点 全深度递归扫描：不仅整理目标根目录，还会穿透所有子文件夹，将散落在深层路径的文件全部提取出来。 中文语义分类：根据文件扩展名，将文件自动归类至“图片”、“文档”、“安装包”、“压缩">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/14/69907ff8679fb.png">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/14/6990801d1eb3e.png">
+<meta property="article:published_time" content="2026-02-14T13:53:47.000Z">
+<meta property="article:modified_time" content="2026-02-14T14:06:10.544Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="Python自动化">
+<meta property="article:tag" content="文件智能归类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.zhyong.site/i/2026/02/14/69907ff8679fb.png">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/6f80.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/6f80.html","path":"posts/6f80.html","title":"多功能、自动化整理文件夹Python脚本"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>多功能、自动化整理文件夹Python脚本 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/6f80.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+<link rel="dns-prefetch" href="https://comment.zhyong.site">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://umami.zhyong.site/script.js" data-website-id="2064e91a-7190-4b62-959b-9924c8b3bdc2"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"><span class="nav-text">1. 功能特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="nav-text">2. 脚本文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-text">3. 使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%AD%A5%E9%AA%A4"><span class="nav-text">执行步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E6%93%8D%E4%BD%9C"><span class="nav-text">示例操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E4%B8%8E%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%AF%B4%E6%98%8E"><span class="nav-text">4. 注意事项与不确定性说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于制造业研发、材料改性与工艺流程优化。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/6f80.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于制造业研发、材料改性与工艺流程优化。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="多功能、自动化整理文件夹Python脚本 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多功能、自动化整理文件夹Python脚本
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-14 21:53:47 / 修改时间：22:06:10" itemprop="dateCreated datePublished" datetime="2026-02-14T21:53:47+08:00">2026-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">效率优化</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/6f80.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/6f80.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>由于 Mac 下载文件夹经常性文件非常杂乱，自己动手整理又感觉很麻烦，因此制作了一个多功能脚本，可在想整理时，瞬间完成整理。现将脚本分享出来，供有需要的小伙伴使用。</p>
+<p>以下是该脚本的功能特点与使用说明。</p>
+<hr>
+<h2 id="1-功能特点"><a href="#1-功能特点" class="headerlink" title="1. 功能特点"></a>1. 功能特点</h2><ul>
+<li><strong>全深度递归扫描</strong>：不仅整理目标根目录，还会穿透所有子文件夹，将散落在深层路径的文件全部提取出来。</li>
+<li><strong>中文语义分类</strong>：根据文件扩展名，将文件自动归类至“图片”、“文档”、“安装包”、“压缩包”、“视频”、“音频”、“脚本与代码”、“设计工程”及“其他”等 9 个中文文件夹。</li>
+<li><strong>冲突防止机制</strong>：若目标分类文件夹中已存在同名文件，脚本会自动重命名新移动的文件（例如：<code>测试文件.pdf</code> 变为 <code>测试文件_1.pdf</code>），确保数据不会被覆盖。</li>
+<li><strong>自动清理冗余目录</strong>：在文件移动完成后，脚本会采用“自底向上”的逻辑检测并删除所有因文件移出而产生的空文件夹。</li>
+<li><strong>系统环境适配</strong>：针对 macOS 优化，自动忽略 <code>.DS_Store</code> 等系统隐藏文件，且在判定文件夹是否为空时会先行排除此类干扰文件。</li>
+<li><strong>动态路径支持</strong>：支持在执行命令时实时输入目标路径，兼容 <code>~</code>（家目录）及 <code>.</code>（当前目录）等快捷路径符。</li>
+</ul>
+<span id="more"></span>
+
+<hr>
+<h2 id="2-脚本文件"><a href="#2-脚本文件" class="headerlink" title="2. 脚本文件"></a>2. 脚本文件</h2><p>脚本地址：<a target="_blank" rel="noopener" href="https://github.com/zhyong26/Mac_shells/blob/main/organize.py">Mac_shells&#x2F;organize.py at main · zhyong26&#x2F;Mac_shells</a></p>
+<p>脚本内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 中文分类映射配置 ---</span></span><br><span class="line">FILE_CATEGORIES = &#123;</span><br><span class="line">    <span class="string">&quot;图片&quot;</span>: [<span class="string">&quot;.jpg&quot;</span>, <span class="string">&quot;.jpeg&quot;</span>, <span class="string">&quot;.png&quot;</span>, <span class="string">&quot;.gif&quot;</span>, <span class="string">&quot;.svg&quot;</span>, <span class="string">&quot;.heic&quot;</span>, <span class="string">&quot;.webp&quot;</span>, <span class="string">&quot;.raw&quot;</span>, <span class="string">&quot;.tiff&quot;</span>],</span><br><span class="line">    <span class="string">&quot;文档&quot;</span>: [<span class="string">&quot;.pdf&quot;</span>, <span class="string">&quot;.doc&quot;</span>, <span class="string">&quot;.docx&quot;</span>, <span class="string">&quot;.txt&quot;</span>, <span class="string">&quot;.xlsx&quot;</span>, <span class="string">&quot;.csv&quot;</span>, <span class="string">&quot;.pptx&quot;</span>, <span class="string">&quot;.pages&quot;</span>, <span class="string">&quot;.numbers&quot;</span>, <span class="string">&quot;.key&quot;</span>, <span class="string">&quot;.md&quot;</span>],</span><br><span class="line">    <span class="string">&quot;安装包&quot;</span>: [<span class="string">&quot;.dmg&quot;</span>, <span class="string">&quot;.pkg&quot;</span>, <span class="string">&quot;.iso&quot;</span>, <span class="string">&quot;.app&quot;</span>],</span><br><span class="line">    <span class="string">&quot;压缩包&quot;</span>: [<span class="string">&quot;.zip&quot;</span>, <span class="string">&quot;.tar&quot;</span>, <span class="string">&quot;.gz&quot;</span>, <span class="string">&quot;.rar&quot;</span>, <span class="string">&quot;.7z&quot;</span>],</span><br><span class="line">    <span class="string">&quot;视频&quot;</span>: [<span class="string">&quot;.mp4&quot;</span>, <span class="string">&quot;.mov&quot;</span>, <span class="string">&quot;.webm&quot;</span>,<span class="string">&quot;.avi&quot;</span>, <span class="string">&quot;.mkv&quot;</span>, <span class="string">&quot;.wmv&quot;</span>, <span class="string">&quot;.flv&quot;</span>],</span><br><span class="line">    <span class="string">&quot;音频&quot;</span>: [<span class="string">&quot;.mp3&quot;</span>, <span class="string">&quot;.wav&quot;</span>, <span class="string">&quot;.aac&quot;</span>, <span class="string">&quot;.flac&quot;</span>, <span class="string">&quot;.m4a&quot;</span>],</span><br><span class="line">    <span class="string">&quot;电子书&quot;</span>: [<span class="string">&quot;.epub&quot;</span>, <span class="string">&quot;.mobi&quot;</span>, <span class="string">&quot;.azw3&quot;</span>],</span><br><span class="line">    <span class="string">&quot;脚本与代码&quot;</span>: [<span class="string">&quot;.py&quot;</span>, <span class="string">&quot;.sh&quot;</span>, <span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.html&quot;</span>, <span class="string">&quot;.css&quot;</span>, <span class="string">&quot;.cpp&quot;</span>, <span class="string">&quot;.json&quot;</span>, <span class="string">&quot;.yaml&quot;</span>, <span class="string">&quot;.go&quot;</span>, <span class="string">&quot;.rs&quot;</span>],</span><br><span class="line">    <span class="string">&quot;设计工程&quot;</span>: [<span class="string">&quot;.psd&quot;</span>, <span class="string">&quot;.ai&quot;</span>, <span class="string">&quot;.sketch&quot;</span>, <span class="string">&quot;.fig&quot;</span>, <span class="string">&quot;.dwg&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_unique_path</span>(<span class="params">path</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;处理同名文件冲突：若文件已存在，则添加数字后缀&quot;&quot;&quot;</span></span><br><span class="line">    counter = <span class="number">1</span></span><br><span class="line">    original_path = path</span><br><span class="line">    <span class="keyword">while</span> path.exists():</span><br><span class="line">        path = original_path.with_name(<span class="string">f&quot;<span class="subst">&#123;original_path.stem&#125;</span>_<span class="subst">&#123;counter&#125;</span><span class="subst">&#123;original_path.suffix&#125;</span>&quot;</span>)</span><br><span class="line">        counter += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> path</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">clean_empty_folders</span>(<span class="params">target_dir, category_names</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;递归删除空文件夹（自底向上遍历）&quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n--- 正在清理空文件夹 ---&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(target_dir, topdown=<span class="literal">False</span>):</span><br><span class="line">        current_path = Path(root)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 跳过根目录及预设的分类文件夹</span></span><br><span class="line">        <span class="keyword">if</span> current_path == target_dir <span class="keyword">or</span> current_path.name <span class="keyword">in</span> category_names:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查是否为空目录（排除 macOS 的隐藏文件 .DS_Store）</span></span><br><span class="line">        items = [i <span class="keyword">for</span> i <span class="keyword">in</span> os.listdir(current_path) <span class="keyword">if</span> i != <span class="string">&#x27;.DS_Store&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> items:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="comment"># 删除可能存在的 .DS_Store 随后删除文件夹</span></span><br><span class="line">                ds_store = current_path / <span class="string">&#x27;.DS_Store&#x27;</span></span><br><span class="line">                <span class="keyword">if</span> ds_store.exists():</span><br><span class="line">                    ds_store.unlink()</span><br><span class="line">                current_path.rmdir()</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;[Deleted] 空文件夹: <span class="subst">&#123;current_path.relative_to(target_dir)&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;[Error] 无法删除文件夹 <span class="subst">&#123;current_path&#125;</span>: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">organize_folder</span>(<span class="params">target_path_str</span>):</span><br><span class="line">    target_dir = Path(target_path_str).expanduser().resolve()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> target_dir.exists() <span class="keyword">or</span> <span class="keyword">not</span> target_dir.is_dir():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;错误: 路径 &#x27;<span class="subst">&#123;target_path_str&#125;</span>&#x27; 不存在或不是有效的目录。&quot;</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 预设分类文件夹名称集合</span></span><br><span class="line">    category_names = <span class="built_in">set</span>(FILE_CATEGORIES.keys())</span><br><span class="line">    category_names.add(<span class="string">&quot;其他&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;开始整理目录: <span class="subst">&#123;target_dir&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第一阶段：移动文件</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(target_dir):</span><br><span class="line">        current_path = Path(root)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 避免进入已经生成的分类文件夹进行扫描</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            relative_parts = current_path.relative_to(target_dir).parts</span><br><span class="line">            <span class="keyword">if</span> relative_parts <span class="keyword">and</span> relative_parts[<span class="number">0</span>] <span class="keyword">in</span> category_names:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> file_name <span class="keyword">in</span> files:</span><br><span class="line">            <span class="keyword">if</span> file_name.startswith(<span class="string">&#x27;.&#x27;</span>):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            file_path = current_path / file_name</span><br><span class="line">            file_ext = file_path.suffix.lower()</span><br><span class="line"></span><br><span class="line">            target_category = <span class="string">&quot;其他&quot;</span></span><br><span class="line">            <span class="keyword">for</span> category, exts <span class="keyword">in</span> FILE_CATEGORIES.items():</span><br><span class="line">                <span class="keyword">if</span> file_ext <span class="keyword">in</span> exts:</span><br><span class="line">                    target_category = category</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            dest_folder = target_dir / target_category</span><br><span class="line">            dest_folder.mkdir(exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">            dest_path = get_unique_path(dest_folder / file_name)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                shutil.move(<span class="built_in">str</span>(file_path), <span class="built_in">str</span>(dest_path))</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;[Error] 移动失败 <span class="subst">&#123;file_name&#125;</span>: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第二阶段：清理空目录</span></span><br><span class="line">    clean_empty_folders(target_dir, category_names)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;用法: python3 脚本名.py &lt;目标文件夹路径&gt;&quot;</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    organize_folder(sys.argv[<span class="number">1</span>])</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n--- 整理及清理任务执行完毕 ---&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="3-使用说明"><a href="#3-使用说明" class="headerlink" title="3. 使用说明"></a>3. 使用说明</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li><strong>系统版本</strong>：macOS（或其他安装了 Python 3 的操作系统）。</li>
+<li><strong>运行环境</strong>：需预装 <strong>Python 3.x</strong>。可通过在终端输入 <code>python3 --version</code> 确认。</li>
+</ul>
+<h3 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a>执行步骤</h3><ol>
+<li><p><strong>保存脚本</strong>：将代码保存为文本文件，命名为 <code>organizer.py</code>。</p>
+</li>
+<li><p><strong>打开终端</strong>：启动 macOS 终端 (Terminal)。</p>
+</li>
+<li><p><strong>运行命令</strong>：</p>
+<p>输入以下指令并回车（将 <code>[目标路径]</code> 替换为实际文件夹路径）：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 organizer.py [目标路径]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="示例操作"><a href="#示例操作" class="headerlink" title="示例操作"></a>示例操作</h3><ul>
+<li><p><strong>整理下载文件夹</strong>：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 organizer.py ~/Downloads</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>整理当前目录</strong>：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 organizer.py .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>整理特定工作目录</strong>：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 organizer.py /Users/YourName/Desktop/Project_Files</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>执行后瞬间清爽很多：<br><img src="https://i.zhyong.site/i/2026/02/14/69907ff8679fb.png" alt="1771077624172.png"><br><img src="https://i.zhyong.site/i/2026/02/14/6990801d1eb3e.png" alt="1771077656044.png"></p>
+<hr>
+<h2 id="4-注意事项与不确定性说明"><a href="#4-注意事项与不确定性说明" class="headerlink" title="4. 注意事项与不确定性说明"></a>4. 注意事项与不确定性说明</h2><ul>
+<li><strong>路径权限</strong>：若目标目录下包含受系统保护的文件或文件夹，脚本可能会因权限不足（Permission Denied）报错。此时可尝试在命令前添加 <code>sudo</code>（慎用）。</li>
+<li><strong>非空判断标准</strong>：脚本在检测“空文件夹”时仅排除了 <code>.DS_Store</code>。如果文件夹内包含 <code>.gitignore</code> 或其他脚本未定义的隐藏配置文件，该文件夹将<strong>不会</strong>被删除。</li>
+<li><strong>操作不可逆</strong>：脚本执行的是物理移动和目录删除操作（不进入废纸篓）。建议在对重要数据执行前先进行备份，或在小范围内进行测试。</li>
+<li><strong>文件类型识别限制</strong>：分类完全基于文件后缀名。若文件无后缀或后缀不符合预设列表，将被统一归类至“其他”。</li>
+</ul>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-14 22:02:13</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>该内容介绍了一个面向 macOS 用户设计的<strong>高度实用化、生产就绪型文件整理自动化工具</strong>——一个用 Python 3 编写的命令行脚本 <code>organize.py</code>。其核心价值在于<strong>将重复性高、易出错的手动文件归档工作，转化为一次敲击即可完成的智能、安全、可复现的操作流程</strong>。</p>
+<p>脚本并非简单地按扩展名移动文件，而是构建了一套完整的“整理-防冲突-清理”闭环逻辑：<br>✅ <strong>全路径深度扫描</strong>确保不遗漏任何嵌套层级中的散落文件；<br>✅ <strong>中文语义化分类体系</strong>兼顾用户直觉与实用性（如区分“安装包”“.dmg&#x2F;.pkg”与“压缩包”“.zip&#x2F;.7z”，而非笼统归为“归档”）；<br>✅ <strong>健壮的冲突解决机制</strong>（自动重命名而非覆盖&#x2F;报错），保障数据完整性；<br>✅ <strong>自底向上空目录清理</strong>结合 <code>.DS_Store</code> 过滤，精准还原目录结构清爽度；<br>✅ <strong>动态路径解析能力</strong>（支持 <code>~</code>、<code>.</code>、绝对路径）显著提升交互友好性；<br>✅ <strong>模块化设计与清晰注释</strong>使代码具备良好可读性、可维护性与可扩展性（如新增分类只需修改 <code>FILE_CATEGORIES</code> 字典）。</p>
+<p>尤为值得注意的是，作者在技术实现中体现出对<strong>系统特性（macOS 隐藏文件）、用户心理（中文界面、即时反馈）、工程实践（错误捕获、权限提示、不可逆操作警示）</strong> 的深度考量，远超一般“玩具脚本”，已接近轻量级开源工具的标准。</p>
+<p>同时，文档严谨标注了<strong>适用边界与潜在风险</strong>（如权限限制、隐藏文件识别盲区、后缀依赖等），体现了负责任的技术传播意识。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#Python自动化 #文件智能归类 #macOS效率工具 #目录结构清理 #中文语义分类</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/6f80.html" title="多功能、自动化整理文件夹Python脚本">https://zhyong.site/posts/6f80.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/13/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> Python自动化</a>
+              <a href="/tags/%E6%96%87%E4%BB%B6%E6%99%BA%E8%83%BD%E5%BD%92%E7%B1%BB/" rel="tag"><i class="fa fa-tag"></i> 文件智能归类</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/7819.html" rel="prev" title="Git下如何快速提交及推送">
+                  <i class="fa fa-angle-left"></i> Git下如何快速提交及推送
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">63k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:45</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://comment.zhyong.site","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"locale":{"placeholder":"欢迎评论，一起学习成长～"},"emoji":["https://unpkg.com/@waline/emojis@1.0.1/qq"],"requiredMeta":["nick","mail"],"el":"#waline","comment":true,"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","path":"/posts/6f80.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
