@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逻辑思维全景导图 - 离线版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .node-hover:hover { transform: scale(1.05); }
+        .transition-all { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen">
+    <div class="max-w-6xl mx-auto p-8">
+        <header class="mb-8 border-b pb-4">
+            <h1 class="text-3xl font-bold text-gray-900">逻辑思维方法论全景图</h1>
+            <p class="text-gray-500 mt-2">包含 4 大维度与 16 种核心工具</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- 底层推理 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
+                <h2 class="text-xl font-bold text-blue-700 mb-4 flex items-center">
+                    <span class="mr-2">⚡</span> 底层推理模式
+                </h2>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-blue-50 rounded-lg"><strong class="block text-blue-900">演绎推理</strong><span class="text-sm text-blue-700">从一般规律推导特殊结论 (三段论)</span></li>
+                    <li class="p-3 bg-blue-50 rounded-lg"><strong class="block text-blue-900">归纳推理</strong><span class="text-sm text-blue-700">从多个案例总结共性规律</span></li>
+                    <li class="p-3 bg-blue-50 rounded-lg"><strong class="block text-blue-900">溯因推理</strong><span class="text-sm text-blue-700">根据结果寻找最合理解释</span></li>
+                    <li class="p-3 bg-blue-50 rounded-lg"><strong class="block text-blue-900">第一性原理</strong><span class="text-sm text-blue-700">拆解至物理本质重新构建系统</span></li>
+                </ul>
+            </div>
+
+            <!-- 问题分析 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-emerald-500">
+                <h2 class="text-xl font-bold text-emerald-700 mb-4 flex items-center">
+                    <span class="mr-2">🎯</span> 问题分析工具
+                </h2>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-emerald-50 rounded-lg"><strong class="block text-emerald-900">MECE原则</strong><span class="text-sm text-emerald-700">不重叠、不遗漏的分类标准</span></li>
+                    <li class="p-3 bg-emerald-50 rounded-lg"><strong class="block text-emerald-900">5 Whys</strong><span class="text-sm text-emerald-700">连续追问，挖掘根本原因</span></li>
+                    <li class="p-3 bg-emerald-50 rounded-lg"><strong class="block text-emerald-900">5W2H法</strong><span class="text-sm text-emerald-700">全要素审视，消除信息盲区</span></li>
+                    <li class="p-3 bg-emerald-50 rounded-lg"><strong class="block text-emerald-900">逻辑树</strong><span class="text-sm text-emerald-700">将复杂议题拆解为可操作子项</span></li>
+                </ul>
+            </div>
+
+            <!-- 表达架构 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-500">
+                <h2 class="text-xl font-bold text-indigo-700 mb-4 flex items-center">
+                    <span class="mr-2">💬</span> 表达输出架构
+                </h2>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-indigo-50 rounded-lg"><strong class="block text-indigo-900">PREP模型</strong><span class="text-sm text-indigo-700">结论先行-理由-证据-强化</span></li>
+                    <li class="p-3 bg-indigo-50 rounded-lg"><strong class="block text-indigo-900">SCQA模型</strong><span class="text-sm text-indigo-700">情境-冲突-问题-答案 (叙事)</span></li>
+                    <li class="p-3 bg-indigo-50 rounded-lg"><strong class="block text-indigo-900">STAR原则</strong><span class="text-sm text-indigo-700">背景-任务-行动-结果 (简历/面试)</span></li>
+                    <li class="p-3 bg-indigo-50 rounded-lg"><strong class="block text-indigo-900">金字塔原理</strong><span class="text-sm text-indigo-700">结论先行，以上统下，归类分组</span></li>
+                </ul>
+            </div>
+
+            <!-- 认知优化 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-slate-500">
+                <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                    <span class="mr-2">🛡️</span> 批判与认知优化
+                </h2>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-slate-50 rounded-lg"><strong class="block text-slate-900">奥卡姆剃刀</strong><span class="text-sm text-slate-700">若无必要勿增实体，追求最简解释</span></li>
+                    <li class="p-3 bg-slate-50 rounded-lg"><strong class="block text-slate-900">逆向思维</strong><span class="text-sm text-slate-700">预判失败路径来锁定成功逻辑</span></li>
+                    <li class="p-3 bg-slate-50 rounded-lg"><strong class="block text-slate-900">逻辑谬误识别</strong><span class="text-sm text-slate-700">规避因果倒置、幸存者偏差等陷阱</span></li>
+                    <li class="p-3 bg-slate-50 rounded-lg"><strong class="block text-slate-900">二阶思维</strong><span class="text-sm text-slate-700">考虑决策后的连锁反应与长期后果</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-gray-400 text-sm">
+            本工具由 逻辑思维 合集生成
+        </footer>
+    </div>
+</body>
+</html>
