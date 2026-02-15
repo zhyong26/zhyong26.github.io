@@ -1,6 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>终端提效：用 fzf 打造极致的历史命令搜索体验</title>
+    <url>/posts/eb17.html</url>
+    <content><![CDATA[<p>作为一名在制造业材料研发与 IT 技术间切换的工程师，终端（Terminal）是我最高频工具之一。然而，原生终端的历史搜索（Ctrl+R）交互生硬，难以满足快速定位复杂命令的需求。</p>
+<p>今天分享一个基于 <code>fzf</code> 的 Zsh 增强脚本，只需一个快捷键，即可实现历史命令的模糊搜索与快速回填，推荐使用。</p>
+<h3 id="1-核心功能"><a href="#1-核心功能" class="headerlink" title="1. 核心功能"></a>1. 核心功能</h3><ul>
+<li><strong>模糊匹配</strong>：支持跨字符搜索（如输入 <code>hexo d</code> 匹配 <code>hexo deploy</code>）。</li>
+<li><strong>可视化选择</strong>：在光标下方弹出交互式列表，支持上下跳转。</li>
+<li><strong>安全回填</strong>：选中命令后不立即执行，而是填入输入行，支持二次修改后再回车。</li>
+</ul>
+<span id="more"></span>
+
+<hr>
+<h3 id="2-配置步骤"><a href="#2-配置步骤" class="headerlink" title="2. 配置步骤"></a>2. 配置步骤</h3><h4 id="第一步：安装-fzf"><a href="#第一步：安装-fzf" class="headerlink" title="第一步：安装 fzf"></a>第一步：安装 fzf</h4><p>如果尚未安装，请通过 Homebrew 安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install fzf</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步：配置-zshrc"><a href="#第二步：配置-zshrc" class="headerlink" title="第二步：配置 .zshrc"></a>第二步：配置 .zshrc</h4><p>将以下代码添加到您的 <code>~/.zshrc</code> 文件末尾。这段代码解决了 Zsh 函数无法直接绑定快捷键（No such widget）的问题。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># --- 历史命令快速搜索函数 (fh) ---</span></span><br><span class="line"><span class="function"><span class="title">fh</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> selected_cmd</span><br><span class="line">  <span class="comment"># 1. 获取历史记录，不带行号进行匹配</span></span><br><span class="line">  <span class="comment"># 2. --reverse 使列表从上往下排列，--height 限制窗口高度</span></span><br><span class="line">  selected_cmd=$(<span class="built_in">fc</span> -rl 1 | fzf --height 40% --reverse --nth=2..)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$selected_cmd</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 3. 提取命令内容（去除行号前缀）</span></span><br><span class="line">    <span class="built_in">local</span> final_cmd=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$selected_cmd</span>&quot;</span> | sed <span class="string">&#x27;s/^[ ]*[0-9]*[ ]*//&#x27;</span>)</span><br><span class="line">    <span class="comment"># 4. 将结果填入当前输入缓冲区</span></span><br><span class="line">    LBUFFER=<span class="string">&quot;<span class="variable">$final_cmd</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="comment"># 5. 重新绘制提示符</span></span><br><span class="line">  <span class="built_in">zle</span> reset-prompt</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册为 Zle Widget 并绑定快捷键 Ctrl+H</span></span><br><span class="line"><span class="built_in">zle</span> -N fh</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&#x27;^H&#x27;</span> fh</span><br></pre></td></tr></table></figure>
+
+<p>此时，只要在终端按下<code>Ctrl+H</code>键，马上即可跳出搜索框，配合<code>fzf</code>命令，体验非常好。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/15/69918c4db9439.png" alt="1771146316990.png"></p>
+<hr>
+<h3 id="3-技术要点解析"><a href="#3-技术要点解析" class="headerlink" title="3. 技术要点解析"></a>3. 技术要点解析</h3><table>
+<thead>
+<tr>
+<th><strong>关键技术</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>fc -rl 1</code></strong></td>
+<td>获取 Zsh 格式的历史列表。</td>
+</tr>
+<tr>
+<td><strong><code>--nth=2..</code></strong></td>
+<td>告知 fzf 在搜索时忽略第一列（行号），只匹配后面的命令内容。</td>
+</tr>
+<tr>
+<td><strong><code>LBUFFER</code></strong></td>
+<td>Zsh 特有的环境变量，用于操作光标左侧的文本，实现命令回填。</td>
+</tr>
+<tr>
+<td><strong><code>zle -N</code></strong></td>
+<td>将普通 Shell 函数注册为「行编辑器组件」，解决 <code>No such widget</code> 报错。</td>
+</tr>
+</tbody></table>
+<h3 id="4-附：其它方式命令实现"><a href="#4-附：其它方式命令实现" class="headerlink" title="4. 附：其它方式命令实现"></a>4. 附：其它方式命令实现</h3><h4 id="1-查找并执行"><a href="#1-查找并执行" class="headerlink" title="1. 查找并执行"></a>1. 查找并执行</h4><ul>
+<li><p><strong>场景</strong>：交互式搜索历史命令并立即执行。</p>
+</li>
+<li><p><strong>命令</strong>：</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fc</span> -s</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>fc</code> (fix command): 是一个用于编辑和重新执行历史命令的内建命令。</li>
+<li><code>-s</code>:  无需编辑直接执行历史命令。</li>
+<li>执行后，会打开一个交互式界面，可以使用 <code>j</code> 和 <code>k</code> 移动光标选择历史命令，然后按 <code>Enter</code> 执行。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-使用-命令"><a href="#2-使用-命令" class="headerlink" title="2. 使用 ! 命令"></a>2. 使用 <code>!</code> 命令</h4><ul>
+<li><p><strong>场景</strong>：执行最近一条命令。</p>
+</li>
+<li><p><strong>命令</strong>：</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">!!</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>!!</code>:  执行上一条命令。</li>
+</ul>
+</li>
+<li><p><strong>场景</strong>：执行历史命令中以 “keyword” 开头的最近一条命令。</p>
+</li>
+<li><p><strong>命令</strong>：</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">!keyword</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>!keyword</code>: 执行最近一条以 “keyword” 开头的命令。</li>
+</ul>
+</li>
+<li><p><strong>场景</strong>：执行指定序号的历史命令。</p>
+</li>
+<li><p><strong>命令</strong>：</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">!123</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>!123</code>: 执行历史列表中第 123 条命令。  要查看历史列表，使用 <code>history</code> 命令。</li>
+</ul>
+</li>
+<li><p><strong>场景</strong>：执行倒数第 N 条历史命令。</p>
+</li>
+<li><p><strong>命令</strong>：</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">!-2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>!-2</code>: 执行倒数第二条命令。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-使用-Ctrl-R-反向搜索"><a href="#3-使用-Ctrl-R-反向搜索" class="headerlink" title="3. 使用 Ctrl + R 反向搜索"></a>3. 使用 <code>Ctrl + R</code> 反向搜索</h4><ul>
+<li><p><strong>场景</strong>：增量式搜索包含特定字符串的历史命令。</p>
+</li>
+<li><p><strong>操作</strong>：按下 <code>Ctrl + R</code>，然后输入关键词。</p>
+</li>
+<li><p><strong>说明</strong>：</p>
+<ul>
+<li><code>Ctrl + R</code>: 启动反向搜索。输入字符开始搜索，再次按下 <code>Ctrl + R</code> 查找下一个匹配项。 按 <code>Enter</code> 执行找到的命令。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-使用-Up-Down-箭头键"><a href="#4-使用-Up-Down-箭头键" class="headerlink" title="4. 使用 Up/Down 箭头键"></a>4. 使用 <code>Up/Down</code> 箭头键</h4><ul>
+<li><strong>场景</strong>：按时间顺序浏览最近使用的命令。</li>
+<li><strong>操作</strong>：按向上箭头键 <code>↑</code> 浏览之前的命令，按向下箭头键 <code>↓</code> 浏览之后的命令。</li>
+</ul>
+<h4 id="5-使用-history-命令结合管道和-awk-或-sed"><a href="#5-使用-history-命令结合管道和-awk-或-sed" class="headerlink" title="5. 使用 history 命令结合管道和 awk 或 sed"></a>5. 使用 <code>history</code> 命令结合管道和 <code>awk</code> 或 <code>sed</code></h4><ul>
+<li><p><strong>场景</strong>:  打印历史命令，然后选择一个执行。</p>
+</li>
+<li><p><strong>命令</strong>:</p>
+<figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">history</span> | awk <span class="string">&#x27;&#123;print $1, $2&#125;&#x27;</span> | <span class="built_in">head</span> -n 20 |  fzf --reverse | awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> | xargs <span class="built_in">history</span> -p</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>说明</strong>:</p>
+<ul>
+<li><code>history</code>:  显示历史命令列表。</li>
+<li><code>awk &#39;{print $1, $2}&#39;</code>: 提取历史命令的序号和命令内容。</li>
+<li><code>head -n 20</code>: 只显示前 20 条，方便选择。</li>
+<li><code>fzf --reverse</code>: 使用 <code>fzf</code> 进行模糊搜索和选择，<code>--reverse</code> 让列表从下往上显示。</li>
+<li><code>awk &#39;{print $1}&#39;</code>:  提取选中的历史命令的序号。</li>
+<li><code>xargs history -p</code>:  将序号传递给 <code>history -p</code> 来执行对应的命令。</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-利用-zsh-autosuggestions-插件"><a href="#6-利用-zsh-autosuggestions-插件" class="headerlink" title="6. 利用 zsh-autosuggestions 插件"></a>6. 利用 <code>zsh-autosuggestions</code> 插件</h4><ul>
+<li>如果安装了 <code>zsh-autosuggestions</code> 插件，它会自动根据你的历史记录和已输入的命令给出建议。按下 <code>→</code> 即可采纳建议。</li>
+</ul>
+<p>以上方法中，<code>fc -s</code> 和 <code>Ctrl + R</code> 提供了交互式查找和执行，而 <code>!</code> 命令提供直接执行特定历史命令的方式。 选择哪种方法取决于你的具体需求。</p>
+<h3 id="4-结语"><a href="#4-结语" class="headerlink" title="4. 结语"></a>4. 结语</h3><p>对于习惯于自动化工作流的用户来说，每一个微小的摩擦力（如查命令、翻路径）都值得被工具化。通过这个简单的脚本，我将原本需要数秒的「搜索-复制-粘贴」过程缩短到了毫秒级的「快捷键-输入-回车」。</p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-15 17:38:41</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一篇面向高效终端用户的实践型技术笔记，核心聚焦于<strong>提升命令行历史检索效率</strong>这一高频痛点。作者以自身跨领域工程师（制造业材料研发 + IT）的实战视角切入，指出原生 <code>Ctrl+R</code> 反向搜索在复杂命令场景下存在交互僵硬、匹配精度低、缺乏预览与编辑缓冲等局限。为此，文章提出一套基于 <code>fzf</code>（模糊查找工具）与 Zsh 行编辑器（ZLE）深度集成的轻量级增强方案。</p>
+<p>该方案并非简单封装，而是精准击中 Zsh 的底层机制：通过 <code>fc -rl 1</code> 获取结构化历史、利用 <code>--nth=2..</code> 实现语义级模糊匹配（跳过行号）、借助 <code>LBUFFER</code> 变量实现“安全回填”（非自动执行，保留修改权），并巧妙运用 <code>zle -N</code> 和 <code>bindkey</code> 将 Shell 函数注册为可绑定的编辑器 widget，彻底规避常见报错。整个配置仅十余行，却实现了<strong>可视化、模糊化、交互式、可编辑、低侵入</strong>五大特性，显著降低认知负荷与操作延迟。</p>
+<p>文中还系统对比了 6 类主流历史命令调用方式（<code>fc -s</code>、<code>!</code> 系列、<code>Ctrl+R</code>、方向键、<code>history | fzf</code> 管道组合、<code>zsh-autosuggestions</code>），既凸显本方案的独特价值（兼顾速度、安全与体验），也体现了作者对 Zsh 生态的全面理解——不推崇“银弹”，而强调<strong>按场景选型、以最小成本解决最大摩擦</strong>。结语升华至工作流自动化哲学：将“秒级摩擦”转化为“毫秒响应”，是工程师持续优化数字劳作体验的本能。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#fzf #Zsh #终端提效 #命令行历史 #模糊搜索</p>
+]]></content>
+      <categories>
+        <category>效率优化</category>
+      </categories>
+      <tags>
+        <tag>终端提效</tag>
+        <tag>模糊搜索</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用 80/20 法则掌握演绎推理</title>
     <url>/posts/e3e0.html</url>
     <content><![CDATA[<h2 id="1-逻辑效能的帕累托分布：演绎推理的战略定位"><a href="#1-逻辑效能的帕累托分布：演绎推理的战略定位" class="headerlink" title="1. 逻辑效能的帕累托分布：演绎推理的战略定位"></a>1. 逻辑效能的帕累托分布：演绎推理的战略定位</h2><p>在跨学科决策与复杂问题解决的领域中，逻辑并非仅仅是修辞的点缀，它是思维的底层操作系统。投资大师查理·芒格曾指出：“<strong>80 到 90 个核心模型能承载约 90% 的重量，让你成为一个具备世俗智慧的人；而在这些模型中，只有极少数几个承载着极其沉重的分量。</strong>”</p>
@@ -1043,8 +1194,8 @@
         <category>方法论</category>
       </categories>
       <tags>
-        <tag>金字塔原理</tag>
         <tag>逻辑思维</tag>
+        <tag>金字塔原理</tag>
       </tags>
   </entry>
   <entry>
@@ -1434,8 +1585,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>EN13501</tag>
         <tag>阻燃测试</tag>
+        <tag>EN13501</tag>
       </tags>
   </entry>
   <entry>
@@ -1705,8 +1856,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>EN13501</tag>
         <tag>阻燃测试</tag>
+        <tag>EN13501</tag>
       </tags>
   </entry>
   <entry>
