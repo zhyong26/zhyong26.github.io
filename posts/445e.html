@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="对于博客作者、开发者或任何经常需要处理图片的人来说，图床是绕不开的工具。兰空图床（Lsky Pro）凭借其强大的功能和现代化的界面，成为了许多自建图床用户的首选。 但是，传统的“打开浏览器 -&gt; 登录 -&gt; 拖拽上传 -&gt; 点击复制链接”的流程在需要频繁插入图片时显得格外繁琐，严重打断写作或开发的思路。 今天，我将分享一个简单的 Python 脚本，它能彻底改变你的图片上传体验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Python 脚本一键上传图片到兰空图床并自动复制链接">
+<meta property="og:url" content="https://zhyong.site/posts/445e.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="对于博客作者、开发者或任何经常需要处理图片的人来说，图床是绕不开的工具。兰空图床（Lsky Pro）凭借其强大的功能和现代化的界面，成为了许多自建图床用户的首选。 但是，传统的“打开浏览器 -&gt; 登录 -&gt; 拖拽上传 -&gt; 点击复制链接”的流程在需要频繁插入图片时显得格外繁琐，严重打断写作或开发的思路。 今天，我将分享一个简单的 Python 脚本，它能彻底改变你的图片上传体验。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/18/6995aa61a6de0.png">
+<meta property="article:published_time" content="2026-02-18T11:48:46.000Z">
+<meta property="article:modified_time" content="2026-02-18T12:17:28.766Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="Python 自动化">
+<meta property="article:tag" content="剪切板集成">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.zhyong.site/i/2026/02/18/6995aa61a6de0.png">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/445e.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/445e.html","path":"posts/445e.html","title":"使用 Python 脚本一键上传图片到兰空图床并自动复制链接"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用 Python 脚本一键上传图片到兰空图床并自动复制链接 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/445e.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://umami.zhyong.site/script.js" data-website-id="2064e91a-7190-4b62-959b-9924c8b3bdc2"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友联</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%EF%BC%9A%E5%BF%AB%EF%BC%8C%E5%87%86%EF%BC%8C%E7%8B%A0"><span class="nav-text">核心功能：快，准，狠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-text">第一步：安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E8%8E%B7%E5%8F%96%E5%B9%B6%E9%85%8D%E7%BD%AE%E8%84%9A%E6%9C%AC"><span class="nav-text">第二步：获取并配置脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BA%AB%E5%8F%97%E6%9E%81%E9%80%9F%E4%BD%93%E9%AA%8C"><span class="nav-text">第三步：享受极速体验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E7%BB%AD%E4%BC%98%E5%8C%96%EF%BC%9A%E4%BD%BF%E7%94%A8alias%E5%91%BD%E4%BB%A4"><span class="nav-text">继续优化：使用alias命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于制造业研发、材料改性与工艺流程优化。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/445e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于制造业研发、材料改性与工艺流程优化。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用 Python 脚本一键上传图片到兰空图床并自动复制链接 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Python 脚本一键上传图片到兰空图床并自动复制链接
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-18 19:48:46 / 修改时间：20:17:28" itemprop="dateCreated datePublished" datetime="2026-02-18T19:48:46+08:00">2026-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">效率优化</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>对于博客作者、开发者或任何经常需要处理图片的人来说，图床是绕不开的工具。兰空图床（Lsky Pro）凭借其强大的功能和现代化的界面，成为了许多自建图床用户的首选。</p>
+<p>但是，传统的“打开浏览器 -&gt; 登录 -&gt; 拖拽上传 -&gt; 点击复制链接”的流程在需要频繁插入图片时显得格外繁琐，严重打断写作或开发的思路。</p>
+<p>今天，我将分享一个简单的 Python 脚本，它能彻底改变你的图片上传体验。</p>
+<span id="more"></span>
+
+<h3 id="核心功能：快，准，狠"><a href="#核心功能：快，准，狠" class="headerlink" title="核心功能：快，准，狠"></a>核心功能：快，准，狠</h3><p>这个脚本旨在实现一个目标：<strong>以最快速度将本地图片转换为可用的网络链接。</strong></p>
+<p>它具备以下核心特性：</p>
+<ol>
+<li><strong>完全脱离浏览器</strong>：直接在终端（命令行）通过一条命令完成上传。</li>
+<li><strong>基于文件名传参</strong>：无需复杂的配置，只需告诉脚本你要传哪个文件。</li>
+<li><strong>自动复制到剪切板</strong>：这是灵魂功能！上传成功后，图片 URL 会自动进入你的系统剪切板，你只需在 Markdown 编辑器里按下 <code>Ctrl+V</code> (或 <code>Cmd+V</code>) 即可。</li>
+<li><strong>安全鉴权</strong>：使用 Lsky Pro V2 标准的 API Token 进行验证，无需暴露账号密码。</li>
+</ol>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>在使用脚本之前，请确保你满足以下条件：</p>
+<ul>
+<li><strong>Python 环境</strong>：已安装 Python 3.x。</li>
+<li><strong>兰空图床账号</strong>：你拥有一个 Lsky Pro (V2版本) 的使用权限。</li>
+<li><strong>API Token</strong>：在图床后台获取了有效的 API 令牌（通常在“个人中心” -&gt; “令牌管理”中生成）。</li>
+</ul>
+<h3 id="第一步：安装依赖"><a href="#第一步：安装依赖" class="headerlink" title="第一步：安装依赖"></a>第一步：安装依赖</h3><p>这个脚本依赖两个强大的 Python 库：</p>
+<ul>
+<li><code>requests</code>: 用于发送 HTTP 上传请求。</li>
+<li><code>pyperclip</code>: 用于操作系剪切板。</li>
+</ul>
+<p>打开你的终端或命令提示符，运行以下命令安装它们：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests pyperclip</span><br></pre></td></tr></table></figure>
+
+<p><em>(注：Linux 用户如果发现剪切板功能失效，可能需要额外安装 <code>xclip</code> 或 <code>xsel</code>，例如：<code>sudo apt-get install xclip</code>)</em></p>
+<h3 id="第二步：获取并配置脚本"><a href="#第二步：获取并配置脚本" class="headerlink" title="第二步：获取并配置脚本"></a>第二步：获取并配置脚本</h3><p>新建一个文本文件，命名为 <code>upload.py</code>（或者你喜欢的任何名字），然后将下方的代码粘贴进去。</p>
+<blockquote>
+<p>查看其它好用的脚本：<a target="_blank" rel="noopener" href="https://github.com/zhyong26/Mac_shells">zhyong26&#x2F;Mac_shells: 个人使用脚本</a></p>
+</blockquote>
+<p><strong>⚠️ 重要配置：</strong> 在保存之前，你必须修改代码顶部的 <strong>配置区</strong>，填入你自己的图床信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pyperclip  <span class="comment"># 引入剪切板库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ============================================</span></span><br><span class="line"><span class="comment"># --- 配置区 (请在此处修改为你的信息) ---</span></span><br><span class="line"><span class="comment"># 1. 你的图床 API 地址，必须以 /api/v1/upload 结尾</span></span><br><span class="line">API_URL = <span class="string">&quot;https://your-domain.com/api/v1/upload&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 你的 API Token (在个人中心 -&gt; 令牌管理中获取)</span></span><br><span class="line"><span class="comment"># 或者使用curl命令获取</span></span><br><span class="line"><span class="comment"># 注意：Token 通常是一长串字符，有时包含开头的数字和竖线，请完整复制。</span></span><br><span class="line">TOKEN = <span class="string">&quot;your_auth_token_here&quot;</span></span><br><span class="line"><span class="comment"># ============================================</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">upload_to_lsky</span>(<span class="params">file_path</span>):</span><br><span class="line">    <span class="comment"># 1. 检查文件是否存在</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isfile(file_path):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;❌ 错误: 找不到文件 &#x27;<span class="subst">&#123;file_path&#125;</span>&#x27;&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;正在上传: <span class="subst">&#123;os.path.basename(file_path)&#125;</span> ...&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2. 构造请求头 (使用 Bearer Token 鉴权)</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&#x27;Authorization&#x27;</span>: <span class="string">f&#x27;Bearer <span class="subst">&#123;TOKEN&#125;</span>&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Accept&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">        <span class="comment"># 伪装 User-Agent 防止部分防火墙拦截</span></span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Python Lsky Uploader)&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 3. 读取文件并准备上传</span></span><br><span class="line">        <span class="comment"># 使用 &#x27;rb&#x27; 模式读取二进制流</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="comment"># 构造 multipart/form-data 表单，字段名为 &#x27;file&#x27;</span></span><br><span class="line">            files = &#123;</span><br><span class="line">                <span class="string">&#x27;file&#x27;</span>: (os.path.basename(file_path), f)</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 4. 发送 POST 请求</span></span><br><span class="line">            <span class="comment"># 设置 timeout 防止网络卡死</span></span><br><span class="line">            response = requests.post(API_URL, headers=headers, files=files, timeout=<span class="number">30</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 5. 处理响应</span></span><br><span class="line">            <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">                res_data = response.json()</span><br><span class="line">                <span class="comment"># 再次确认 API 返回的状态也是 true</span></span><br><span class="line">                <span class="keyword">if</span> res_data.get(<span class="string">&#x27;status&#x27;</span>):</span><br><span class="line">                    <span class="comment"># 提取 URL</span></span><br><span class="line">                    img_url = res_data[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;links&#x27;</span>][<span class="string">&#x27;url&#x27;</span>]</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># ---&gt; 核心步骤：复制到剪切板 &lt;---</span></span><br><span class="line">                    pyperclip.copy(img_url)</span><br><span class="line">                    </span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;✅ 上传成功！&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;🔗 URL: <span class="subst">&#123;img_url&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;📋 状态: 链接已自动复制到剪切板，直接粘贴即可！&quot;</span>)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;❌ 上传失败 (API拒绝): <span class="subst">&#123;res_data.get(<span class="string">&#x27;message&#x27;</span>)&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">elif</span> response.status_code == <span class="number">401</span>:</span><br><span class="line">                 <span class="built_in">print</span>(<span class="string">&quot;❌ 认证失败：Token 无效或已过期，请检查配置。&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;❌ 网络请求失败 | HTTP 状态码: <span class="subst">&#123;response.status_code&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="comment"># 调试时可取消下面注释查看详细信息</span></span><br><span class="line">                <span class="comment"># print(f&quot;响应内容: &#123;response.text&#125;&quot;)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;❌ 程序运行异常: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># 检查命令行参数是否足够</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;使用方法错误。&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;正确用法: python upload.py &lt;本地图片路径&gt;&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;示例: python upload.py screenshot.png&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 获取命令行传入的第一个参数作为文件路径</span></span><br><span class="line">        target_file = sys.argv[<span class="number">1</span>]</span><br><span class="line">        upload_to_lsky(target_file)</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三步：享受极速体验"><a href="#第三步：享受极速体验" class="headerlink" title="第三步：享受极速体验"></a>第三步：享受极速体验</h3><p>配置完成后，保存文件。现在你可以体验飞一般的上传速度了。</p>
+<p>打开终端，进入 <code>upload.py</code> 所在的目录。</p>
+<p><strong>场景 1：上传当前目录下的图片</strong></p>
+<p>假设你有一个 <code>demo.jpg</code> 在当前目录下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python upload.py demo.jpg</span><br></pre></td></tr></table></figure>
+
+<p><strong>场景 2：上传其他目录的图片</strong></p>
+<p>你也可以使用绝对路径或相对路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python upload.py /Users/username/Desktop/截图.png</span><br></pre></td></tr></table></figure>
+
+<p><strong>神奇时刻：</strong></p>
+<p>执行命令几秒后，你将看到如下输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在上传: demo.jpg ...</span><br><span class="line">✅ 上传成功！</span><br><span class="line">🔗 URL: https://your-domain.com/i/2023/10/27/653a1b2c3d4e5.jpg</span><br><span class="line">📋 状态: 链接已自动复制到剪切板，直接粘贴即可！</span><br></pre></td></tr></table></figure>
+
+<p>此时，无需任何额外操作，直接回到你的 Markdown 编辑器中按下粘贴键，图片链接就出现在那里了。</p>
+<h3 id="继续优化：使用alias命令"><a href="#继续优化：使用alias命令" class="headerlink" title="继续优化：使用alias命令"></a>继续优化：使用alias命令</h3><p>为方便更好地复制，可以使用<code>alias</code>直接执行命令，任意地方即可上传图片，可参考我的配置，在<code>.zshrc</code>或<code>.bashrc</code>虽添加，注意路径更改为自己实际的全路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias upload_lsky=&quot;/Users/zhyong/Project/local_python_env/.venv/bin/python3 ~/Project/local_python_env/upload_lsky.py&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如下任意位置执行<code>upload_lsky</code>命令，即可快捷上传图片了。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/18/6995aa61a6de0.png"></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>通过这个不到 80 行的 Python 脚本，我们成功地将一个繁琐的图床交互过程简化为了一行命令。这不仅节省了时间，更保持了工作心流的连贯性。相比使用<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">Molunerfinn&#x2F;PicGo</a>等本地图片上传软件，也更加方便快捷。</p>
+<p>如果你是 Typora 用户，甚至可以将此脚本配置为 Typora 的自定义上传服务，实现真正的“复制图片 -&gt; 粘贴到 Typora -&gt; 自动上传”的无缝体验。</p>
+<p>快去试试吧，让你的写作效率起飞！</p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-18 20:04:11</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>该文是一篇面向开发者与内容创作者的<strong>高效工作流实践指南</strong>，核心围绕**自动化图片上传至自建图床（Lsky Pro）**这一高频痛点展开。文章不仅提供了一个轻量、健壮、开箱即用的 Python 脚本，更系统性地构建了一套「命令行驱动 + API 鉴权 + 剪切板集成」的端到端解决方案。</p>
+<p>其深层价值体现在三个维度：<br>🔹 <strong>人机交互优化</strong>：彻底摒弃浏览器 GUI 依赖，将多步手动操作压缩为单条终端命令（<code>python upload.py xxx.png</code>），显著降低认知负荷，保障写作&#x2F;开发心流；<br>🔹 <strong>安全与可维护性设计</strong>：采用标准 Bearer Token 鉴权（符合 Lsky Pro V2 API 规范），避免明文账号密码，配置解耦清晰（API_URL&#x2F;TOKEN 独立声明），便于团队复用与环境隔离；<br>🔹 <strong>跨平台工程意识</strong>：兼顾 Windows&#x2F;macOS&#x2F;Linux 差异（如提示安装 <code>xclip</code>&#x2F;<code>xsel</code>），并内建健壮错误处理（文件存在性校验、HTTP 状态码分级响应、JSON 解析容错、超时控制），体现生产级脚本思维。</p>
+<p>此外，脚本虽仅约 80 行，却精准覆盖了现代 CLI 工具的关键能力：参数解析、HTTP 文件上传（multipart&#x2F;form-data）、剪切板交互、用户反馈（emoji 可视化状态）、调试友好性（注释掉的 debug 输出）。它不仅是“工具”，更是<strong>可扩展自动化生态的原子组件</strong>——文中提及的 Typora 集成即印证其作为底层能力被上层应用调用的潜力。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#Python脚本 #LskyPro #图床自动化 #API上传 #剪切板集成</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/445e.html" title="使用 Python 脚本一键上传图片到兰空图床并自动复制链接">https://zhyong.site/posts/445e.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/13/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/15/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python-%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> Python 自动化</a>
+              <a href="/tags/%E5%89%AA%E5%88%87%E6%9D%BF%E9%9B%86%E6%88%90/" rel="tag"><i class="fa fa-tag"></i> 剪切板集成</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/618.html" rel="prev" title="你的私有知识库：自托管 Markdown 笔记方案 NoteDiscovery">
+                  <i class="fa fa-angle-left"></i> 你的私有知识库：自托管 Markdown 笔记方案 NoteDiscovery
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">85k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:22</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://comment.zhyong.site","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
