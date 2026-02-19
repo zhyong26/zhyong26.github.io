@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="这是一篇关于如何在远程 Linux 服务器上通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive 的技术指南。 方案简介本方案通过 Shell 脚本集成 mariadb-dump 数据库导出、tar 文件压缩及 rclone 同步功能。适用于 Docker 部署且无法直接使用浏览器进行 OAuth 授权的远程服务器。 我目前的安装环境为：Debian GNU&#x2F;Linu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive">
+<meta property="og:url" content="https://zhyong.site/posts/70dc.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="这是一篇关于如何在远程 Linux 服务器上通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive 的技术指南。 方案简介本方案通过 Shell 脚本集成 mariadb-dump 数据库导出、tar 文件压缩及 rclone 同步功能。适用于 Docker 部署且无法直接使用浏览器进行 OAuth 授权的远程服务器。 我目前的安装环境为：Debian GNU&#x2F;Linu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png">
+<meta property="article:published_time" content="2026-02-19T07:32:19.000Z">
+<meta property="article:modified_time" content="2026-02-19T08:26:53.065Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="LskyPro">
+<meta property="article:tag" content="rclone">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/70dc.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/70dc.html","path":"posts/70dc.html","title":"通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/70dc.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://umami.zhyong.site/script.js" data-website-id="2064e91a-7190-4b62-959b-9924c8b3bdc2"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E7%AE%80%E4%BB%8B"><span class="nav-text">方案简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E5%88%97%E8%A1%A8"><span class="nav-text">备份核心数据列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Rclone"><span class="nav-text">第一步：远程服务器配置 Rclone</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%93%8D%E4%BD%9C"><span class="nav-text">1. 远程服务器端操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9C%AC%E5%9C%B0%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C-Windows-Mac"><span class="nav-text">2. 本地电脑操作 (Windows&#x2F;Mac)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%94%E5%9B%9E%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%8C%E6%88%90%E9%85%8D%E7%BD%AE"><span class="nav-text">3. 返回远程服务器完成配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%AA%8C%E8%AF%81%E8%BF%9E%E6%8E%A5"><span class="nav-text">4. 验证连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%87%E4%BB%BD%E8%84%9A%E6%9C%AC"><span class="nav-text">第二步：编写自动化备份脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1-Crontab"><span class="nav-text">第三步：设置定时任务 (Crontab)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E7%82%B9%E6%8F%90%E7%A4%BA"><span class="nav-text">关键技术点提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/70dc.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-19 15:32:19 / 修改时间：16:26:53" itemprop="dateCreated datePublished" datetime="2026-02-19T15:32:19+08:00">2026-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%87%E4%BB%BD/" itemprop="url" rel="index"><span itemprop="name">自动化备份</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>这是一篇关于如何在远程 Linux 服务器上通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive 的技术指南。</p>
+<h2 id="方案简介"><a href="#方案简介" class="headerlink" title="方案简介"></a>方案简介</h2><p>本方案通过 Shell 脚本集成 <code>mariadb-dump</code> 数据库导出、<code>tar</code> 文件压缩及 <code>rclone</code> 同步功能。适用于 Docker 部署且无法直接使用浏览器进行 OAuth 授权的远程服务器。</p>
+<p>我目前的安装环境为：<code>Debian GNU/Linux 13 (trixie)</code>+1Panel面板，docker部署的Lsky pro和对应数据库 mariadb，见图：</p>
+<span id="more"></span>
+
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png" alt="image-20260219154223533"></p>
+<h3 id="备份核心数据列表"><a href="#备份核心数据列表" class="headerlink" title="备份核心数据列表"></a>备份核心数据列表</h3><table>
+<thead>
+<tr>
+<th><strong>数据类型</strong></th>
+<th><strong>路径&#x2F;来源</strong></th>
+<th><strong>重要性</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据库</strong></td>
+<td>容器内 <code>mariadb-dump</code> 导出</td>
+<td>高（包含所有图片索引与用户数据）</td>
+</tr>
+<tr>
+<td><strong>配置文件</strong></td>
+<td><code>/data/lsky-pro/.env</code></td>
+<td>高（包含 APP_KEY，丢失将导致无法解析图片路径）</td>
+</tr>
+<tr>
+<td><strong>存储数据</strong></td>
+<td><code>/data/lsky-pro/storage/app/uploads</code></td>
+<td>高（所有原图文件）</td>
+</tr>
+<tr>
+<td><strong>安装锁</strong></td>
+<td><code>/data/lsky-pro/installed.lock</code></td>
+<td>中（防止重复触发初始化安装）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="第一步：远程服务器配置-Rclone"><a href="#第一步：远程服务器配置-Rclone" class="headerlink" title="第一步：远程服务器配置 Rclone"></a>第一步：远程服务器配置 Rclone</h2><p>由于远程服务器无法打开浏览器，需采用“授权传递”模式。</p>
+<ol>
+<li><p><strong>服务器端启动配置</strong>：</p>
+<p>执行 <code>rclone config</code>，创建名为 <code>onedrive</code> 的配置。在 <code>Use auto config?</code> 处输入 <code>n</code>。</p>
+</li>
+<li><p><strong>本地端获取 Token</strong>：</p>
+<p>在本地电脑（Windows&#x2F;Mac）下载 rclone，运行服务器给出的命令：</p>
+<p><code>rclone authorize &quot;onedrive&quot; &quot;XXXXXXXX&quot;</code></p>
+</li>
+<li><p><strong>完成授权</strong>：</p>
+<p>将本地浏览器授权后生成的 JSON Token 粘贴回服务器。</p>
+</li>
+</ol>
+<details class="note default"><summary><p>rclone具体配置方法</p>
+</summary>
+<p>注意：博主Onedrive账号为office 365，以下实际使用以此为例</p>
+<p><strong>安装</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://rclone.org/install.sh | sudo bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-远程服务器端操作"><a href="#1-远程服务器端操作" class="headerlink" title="1. 远程服务器端操作"></a>1. 远程服务器端操作</h3><ol>
+<li><p>执行 <code>rclone config</code>。</p>
+</li>
+<li><p>输入 <code>n</code> 新建配置，命名为 <code>onedrive</code>。</p>
+</li>
+<li><p>Storage 选择 <code>Microsoft OneDrive</code>（通常编号在 30 左右，请核对列表）。</p>
+</li>
+<li><p><code>client_id</code> 和 <code>client_secret</code>：直接回车跳过（使用默认值）。</p>
+</li>
+<li><p><code>region</code>：选择 <code>global</code> (通常是 <code>1</code>)：经实际使用，一定要选1，虽然4有365和china字样，不要选4</p>
+</li>
+<li><p><strong>关键步骤：</strong> 当出现 <code>Use auto config?</code> 时，输入 <strong><code>n</code></strong> (即：<code>Edit advanced config? [y/n] n</code> 之后，询问 <code>Use auto config?</code> 时选 <code>n</code>)。</p>
+</li>
+<li><p>此时服务器会显示一行命令，类似：</p>
+<blockquote>
+<p><code>rclone authorize &quot;onedrive&quot; &quot;XXXXXXXXX&quot;</code></p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h3 id="2-本地电脑操作-Windows-Mac"><a href="#2-本地电脑操作-Windows-Mac" class="headerlink" title="2. 本地电脑操作 (Windows&#x2F;Mac)"></a>2. 本地电脑操作 (Windows&#x2F;Mac)</h3><ol>
+<li><p>在你的本地电脑（有浏览器的机器）上<a target="_blank" rel="noopener" href="https://rclone.org/downloads/">下载 rclone</a> ，如果为mac或linux直接使用上述脚本安装即可。</p>
+</li>
+<li><p>打开终端（CMD、PowerShell 或 Terminal）。</p>
+</li>
+<li><p>输入服务器上给出的那行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone authorize <span class="string">&quot;onedrive&quot;</span> <span class="string">&quot;XXXXXXXXX&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时本地电脑会自动弹出浏览器，登录你的 OneDrive 账号并点击“授权”。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
+</li>
+<li><p>授权成功后，本地终端会返回一段 <strong>JSON 格式的 Token</strong>（以 <code>{&quot;access_token&quot;:...}</code> 开头）。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
+</li>
+<li><p>复制这段完整的 JSON 字符串。</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-返回远程服务器完成配置"><a href="#3-返回远程服务器完成配置" class="headerlink" title="3. 返回远程服务器完成配置"></a>3. 返回远程服务器完成配置</h3><ol>
+<li><p>将本地获取的 Token 粘贴回服务器的 <code>result&gt;</code> 提示符处。</p>
+</li>
+<li><p><code>Your choice&gt;</code>：选择 <code>OneDrive Personal or Business</code> (通常是 <code>1</code>)。</p>
+</li>
+<li><p><code>Chose drive to use</code>：rclone 会列出检测到的盘符，具体可打开网页版onedrive，下面的字符与浏览器地址对应上即可。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
+</li>
+<li><p><code>Is that OK?</code>：确认配置，输入 <code>y</code>。</p>
+</li>
+<li><p>退出配置。</p>
+</li>
+</ol>
+<h3 id="4-验证连接"><a href="#4-验证连接" class="headerlink" title="4. 验证连接"></a>4. 验证连接</h3><p>在服务器上执行以下命令，看是否能列出文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone lsd onedrive:</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
+
+</details>
+
+<hr>
+<h2 id="第二步：编写自动化备份脚本"><a href="#第二步：编写自动化备份脚本" class="headerlink" title="第二步：编写自动化备份脚本"></a>第二步：编写自动化备份脚本</h2><p>在服务器创建脚本文件，例如 <code>/root/my_shells/lsky_backup.sh</code>。脚本同时上传至<a target="_blank" rel="noopener" href="https://github.com/zhyong26/Mac_shells">zhyong26&#x2F;Mac_shells: 个人使用脚本</a></p>
+<blockquote>
+<p>注意查看脚本备注，需根据实际修改</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 基础配置 ---</span></span><br><span class="line">DB_CONTAINER=<span class="string">&quot;1Panel-mariadb-HnT9 根据实际替换&quot;</span>     <span class="comment"># 数据库容器名</span></span><br><span class="line">DB_USER=<span class="string">&quot;lsky-pro 根据实际替换&quot;</span>                     <span class="comment"># 数据库用户名</span></span><br><span class="line">DB_PASS=<span class="string">&quot;xxxxxxxxxxxxxx   根据实际替换&quot;</span>             <span class="comment"># 数据库密码</span></span><br><span class="line">DB_NAME=<span class="string">&quot;lsky-pro 根据实际替换&quot;</span>                     <span class="comment"># 数据库名</span></span><br><span class="line">SOURCE_DIR=<span class="string">&quot;/data/lsky-pro 根据docker目录映射&quot;</span>            <span class="comment"># Lsky Pro 挂载根目录</span></span><br><span class="line">BACKUP_TEMP_DIR=<span class="string">&quot;/data/backups/temp&quot;</span>   <span class="comment"># 临时目录</span></span><br><span class="line">REMOTE_NAME=<span class="string">&quot;onedrive 根据实际替换&quot;</span>                 <span class="comment"># rclone配置名</span></span><br><span class="line">REMOTE_PATH=<span class="string">&quot;Backup/LskyPro&quot;</span>           <span class="comment"># 远程存储路径</span></span><br><span class="line">RCLONE_CONF=<span class="string">&quot;<span class="variable">$HOME</span>/.config/rclone/rclone.conf&quot;</span></span><br><span class="line"></span><br><span class="line">DATE=$(<span class="built_in">date</span> +%Y%m%d)</span><br><span class="line">FILE_NAME=<span class="string">&quot;lsky_full_backup_<span class="variable">$DATE</span>.tar.gz&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 环境准备 ---</span></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="variable">$BACKUP_TEMP_DIR</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 1. 导出数据库 ---</span></span><br><span class="line"><span class="comment"># 注意：-u 和 -p 后不要加中括号或空格</span></span><br><span class="line"><span class="comment"># 备份命令：mariadb-dump，如果为mysql，备份命令为 /usr/bin/mysqldump 或 mysqldump</span></span><br><span class="line">docker <span class="built_in">exec</span> <span class="variable">$DB_CONTAINER</span> mariadb-dump -hlocalhost -u<span class="variable">$DB_USER</span> -p<span class="variable">$DB_PASS</span> <span class="variable">$DB_NAME</span> &gt; <span class="variable">$BACKUP_TEMP_DIR</span>/db_backup_<span class="variable">$DATE</span>.sql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 校验 SQL 文件是否存在</span></span><br><span class="line"><span class="keyword">if</span> [ ! -s <span class="string">&quot;<span class="variable">$BACKUP_TEMP_DIR</span>/db_backup_<span class="variable">$DATE</span>.sql&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Database export failed.&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 2. 打包核心文件 ---</span></span><br><span class="line">tar -czvf <span class="variable">$BACKUP_TEMP_DIR</span>/<span class="variable">$FILE_NAME</span> \</span><br><span class="line">    -C / \</span><br><span class="line">    <span class="variable">$&#123;BACKUP_TEMP_DIR#/&#125;</span>/db_backup_<span class="variable">$DATE</span>.sql \</span><br><span class="line">    <span class="variable">$&#123;SOURCE_DIR#/&#125;</span>/.env \</span><br><span class="line">    <span class="variable">$&#123;SOURCE_DIR#/&#125;</span>/storage/app/uploads \</span><br><span class="line">    <span class="variable">$&#123;SOURCE_DIR#/&#125;</span>/installed.lock</span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 3. 同步至 OneDrive ---</span></span><br><span class="line">rclone --config <span class="string">&quot;<span class="variable">$RCLONE_CONF</span>&quot;</span> copy <span class="variable">$BACKUP_TEMP_DIR</span>/<span class="variable">$FILE_NAME</span> <span class="variable">$REMOTE_NAME</span>:<span class="variable">$REMOTE_PATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- 4. 清理 ---</span></span><br><span class="line"><span class="built_in">rm</span> -rf <span class="variable">$BACKUP_TEMP_DIR</span>/*</span><br><span class="line"><span class="comment"># 自动保留最近 30 天的远程备份</span></span><br><span class="line">rclone --config <span class="string">&quot;<span class="variable">$RCLONE_CONF</span>&quot;</span> delete <span class="variable">$REMOTE_NAME</span>:<span class="variable">$REMOTE_PATH</span> --min-age 30d</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="第三步：设置定时任务-Crontab"><a href="#第三步：设置定时任务-Crontab" class="headerlink" title="第三步：设置定时任务 (Crontab)"></a>第三步：设置定时任务 (Crontab)</h2><p>配置脚本每天凌晨 02:00 自动执行。</p>
+<ol>
+<li><p><strong>赋予执行权限</strong>：</p>
+<p><code>chmod 700 /root/my_shells/lsky_backup.sh</code></p>
+</li>
+<li><p><strong>编辑 Crontab</strong>：</p>
+<p>输入 <code>crontab -e</code> 并添加以下行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 02 * * * /bin/bash /root/my_shells/lsky_backup.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>首先执行一次，脚本，即可在onedrive上查看备份好的文件了，这样再也不怕珍贵的图片丢失了。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
+<p>下载下来后，可查看备份目录。上述所列的四个重要文件，包括数据库就全部备份好了。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
+<hr>
+<h2 id="关键技术点提示"><a href="#关键技术点提示" class="headerlink" title="关键技术点提示"></a>关键技术点提示</h2><ul>
+<li><strong>权限安全</strong>：脚本内包含明文密码，必须通过 <code>chmod 700</code> 确保仅 Root 用户可读。</li>
+<li><strong>容器执行环境</strong>：<code>mariadb-dump</code> 命令在容器内执行，若容器镜像非 MariaDB（如 MySQL），请根据实际镜像名调整命令。</li>
+<li><strong>配置文件路径</strong>：在 Crontab 中运行脚本时，环境变量与登录 Shell 不同，脚本中应使用绝对路径引用 <code>rclone.conf</code>。</li>
+<li><strong>数据完整性</strong>：建议定期从 OneDrive 下载备份包，并在本地测试环境中尝试恢复，以验证备份的有效性。</li>
+</ul>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-19 16:12:25</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一篇面向运维实践者的<strong>生产级图床数据容灾方案指南</strong>，聚焦于 <strong>Lsky Pro（兰空图床）在 Docker 环境下的全量自动化备份体系构建</strong>。其核心价值不仅在于“如何备份”，更在于系统性解决了远程无图形界面服务器（如 VPS）对接 OneDrive 这类需 OAuth 交互的云存储所面临的<strong>授权断点难题</strong>——通过创新采用“本地授权 + Token 传递”模式，绕过传统 <code>rclone config --auto</code> 的浏览器依赖限制，实现安全、可复现的配置闭环。</p>
+<p>技术方案采用<strong>分层备份策略</strong>：<br>✅ <strong>数据库层</strong>：通过 <code>docker exec</code> 调用容器内 <code>mariadb-dump</code> 实现一致性逻辑备份（规避文件锁与事务不一致风险）；<br>✅ <strong>配置层</strong>：精准提取 <code>.env</code>（含关键 <code>APP_KEY</code>，丢失将导致所有图片 URL 解析失败）；<br>✅ <strong>静态资产层</strong>：压缩 <code>uploads/</code> 目录保障原始图片完整性；<br>✅ <strong>状态控制层</strong>：保留 <code>installed.lock</code> 防止误恢复引发重复初始化。  </p>
+<p>脚本设计强调<strong>健壮性与可维护性</strong>：包含 SQL 导出校验、绝对路径显式声明、环境变量隔离处理（适配 Crontab）、自动清理策略（30 天远端保留），并嵌入关键安全提示（如密码明文保护、权限最小化 <code>chmod 700</code>）。整套流程已验证于 Debian 13 + 1Panel + Docker 栈，具备强落地性与跨平台参考价值。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#rclone #LskyPro #自动化备份 #OneDrive同步 #Docker运维</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/70dc.html" title="通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive">https://zhyong.site/posts/70dc.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/13/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ</span>
+          </span>
+
+          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/15/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/LskyPro/" rel="tag"><i class="fa fa-tag"></i> LskyPro</a>
+              <a href="/tags/rclone/" rel="tag"><i class="fa fa-tag"></i> rclone</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/b60a.html" rel="prev" title="使用 Mole 进行 macOS 深度清理与系统优化">
+                  <i class="fa fa-angle-left"></i> 使用 Mole 进行 macOS 深度清理与系统优化
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">96k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:41</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://comment.zhyong.site","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
