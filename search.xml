@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>轻量级多服务器监控：Beszel 的安装与实战部署</title>
+    <url>/posts/1b16.html</url>
+    <content><![CDATA[<h3 id="1-为什么选择-Beszel？"><a href="#1-为什么选择-Beszel？" class="headerlink" title="1. 为什么选择 Beszel？"></a>1. 为什么选择 Beszel？</h3><p>在折腾 VPS 和 NAS 的过程中，实时掌握各台设备的负载情况是刚需。相比于重量级的 Zabbix 或 Prometheus，<strong>Beszel</strong> 的优势在于：</p>
+<ul>
+<li><strong>极度轻量</strong>：对系统资源消耗微乎其微。</li>
+<li><strong>架构清晰</strong>：Hub（面板）+ Agent（客户端）模式，单面板监控多台机器。</li>
+<li><strong>Docker 原生</strong>：完美支持监控各个容器的资源占用。</li>
+<li><strong>UI 现代</strong>：简洁、响应式，支持移动端访问。</li>
+</ul>
+<p>官网地址：<a href="https://beszel.dev/zh/">Beszel | 轻量易用的服务器监控</a></p>
+<span id="more"></span>
+
+<hr>
+<h3 id="2-部署环境说明"><a href="#2-部署环境说明" class="headerlink" title="2. 部署环境说明"></a>2. 部署环境说明</h3><ul>
+<li><strong>服务器</strong>：一台或多台运行中的 Linux VPS</li>
+<li><strong>环境</strong>：已安装 Docker 和 Docker Compose</li>
+<li><strong>端口</strong>：Hub 使用 <code>8090</code>，Agent 使用 <code>45876</code></li>
+</ul>
+<hr>
+<h3 id="3-安装步骤"><a href="#3-安装步骤" class="headerlink" title="3. 安装步骤"></a>3. 安装步骤</h3><h4 id="第一步：部署-Beszel-Hub"><a href="#第一步：部署-Beszel-Hub" class="headerlink" title="第一步：部署 Beszel Hub"></a>第一步：部署 Beszel Hub</h4><p>Hub 是监控系统的控制中心，建议部署在最稳定的一台服务器上。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># docker-compose.yml</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">beszel:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">henrygd/beszel:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">beszel</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8090</span><span class="string">:8090</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./beszel_data:/beszel_data</span></span><br></pre></td></tr></table></figure>
+
+<p>运行 <code>docker compose up -d</code> 启动后，通过 <code>IP:8090</code> 进入后台设置管理员。</p>
+<p>建议设置反向代理，并申请https证书访问，推荐使用1panel面板。</p>
+<h4 id="第二步：添加受控端-Agent"><a href="#第二步：添加受控端-Agent" class="headerlink" title="第二步：添加受控端 (Agent)"></a>第二步：添加受控端 (Agent)</h4><p>进入面板点击 <strong>Add System</strong>，添加名称及主机IP后，即可自动生成<code>docker-compose.yml</code>文件。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/69967ab55a6e0.png" alt="image-20260219104942380"></p>
+<p>在受控服务器上运行 Agent 容器：</p>
+<p>复制的文件内容格式如下，无需修改，直接部署即可。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># agent-compose.yml</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">beszel-agent:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">henrygd/beszel-agent:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">beszel-agent</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">PORT:</span> <span class="number">45876</span></span><br><span class="line">      <span class="attr">KEY:</span> <span class="string">&quot;你的公钥内容&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：<code>network_mode: host</code> 是为了让 Agent 能读取主机的网络流量和统计信息。</p>
+</blockquote>
+<p>然后运行<code>docker compose up -d</code>启动</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/69967c1cd6385.png" alt="image-20260219105731995"></p>
+<hr>
+<h3 id="4-进阶玩法：外网访问与安全"><a href="#4-进阶玩法：外网访问与安全" class="headerlink" title="4. 进阶玩法：外网访问与安全"></a>4. 进阶玩法：外网访问与安全</h3><p>为了方便在外网随时查看，推荐配合 <strong>Nginx Proxy Manager</strong> 或 <strong>Caddy</strong> 进行反向代理：</p>
+<ol>
+<li>解析一个子域名（如 <code>status.yourdomain.com</code>）到 Hub IP。</li>
+<li>开启 SSL 证书（HTTPS）。</li>
+<li>在防火墙中仅对 Hub 的 IP 开放 Agent 的 <code>45876</code> 端口，进一步提升安全等级。</li>
+</ol>
+<hr>
+<h3 id="5-结语"><a href="#5-结语" class="headerlink" title="5. 结语"></a>5. 结语</h3><p>Beszel 填补了简单监控与复杂集群管理之间的空白。对于拥有多台 VPS 的玩家来说，它不仅是一个工具，更是让你对数字化资产了如指掌的“仪表盘”。</p>
+<p>功能非常强大，推荐安装使用。成品如下：</p>
+<p>![](&#x2F;Users&#x2F;zhyong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20260219110852572.png)</p>
+<p>还可查看具体的使用情况</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/69967f0bbcb2e.png" alt="image-20260219111002194"></p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-19 11:12:00</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一篇面向个人&#x2F;小团队运维场景的<strong>轻量级多服务器监控解决方案实践指南</strong>，聚焦于开源工具 <strong>Beszel</strong> 的选型理由、全链路部署流程与安全优化策略。文章并非泛泛而谈，而是以真实技术栈（Docker + Docker Compose）为基底，贯穿“理念—环境—安装—集成—加固”逻辑闭环：</p>
+<ul>
+<li><strong>定位精准</strong>：明确将 Beszel 定义为 Zabbix&#x2F;Prometheus 的「轻量替代品」，直击个人开发者、极客玩家在管理多台 VPS&#x2F;NAS 时对「低开销、易上手、可视化强」的核心诉求；</li>
+<li><strong>架构清晰</strong>：采用经典的 Hub-Agent 分布式模型，Hub 集中展示+配置，Agent 轻量采集（支持主机+容器双维度指标），且通过 <code>host</code> 网络模式突破容器网络限制，保障系统级监控数据（如 CPU、内存、磁盘 I&#x2F;O、网络流量、Docker 容器列表及资源占用）的完整性与实时性；</li>
+<li><strong>部署极简</strong>：全程基于 Docker Compose，无编译、无依赖冲突；Agent 配置由 Hub 动态生成（含唯一认证 KEY），实现“零手动配置”，大幅降低接入门槛；</li>
+<li><strong>安全可扩展</strong>：强调反向代理（Nginx Proxy Manager&#x2F;Caddy）、HTTPS 强制加密、端口最小化开放（仅放行 Agent 端口 45876 给 Hub IP）等生产级实践，兼顾便捷性与安全性；</li>
+<li><strong>体验友好</strong>：现代响应式 UI、移动端适配、直观仪表盘，将监控从运维刚需升维为「数字资产掌控感」的可视化表达。</li>
+</ul>
+<p>本质上，Beszel 不仅是监控工具，更是面向边缘计算与个人云基础设施的「可观测性入口」——用最小成本构建起对异构 Linux 设备集群的基础健康感知能力。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#Beszel #轻量监控 #Hub-Agent架构 #Docker监控 #反向代理安全</p>
+]]></content>
+      <categories>
+        <category>效率工具</category>
+        <category>自托管服务</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>轻量监控</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python 自动化实践：Typora 自定义上传接口与兰空图床集成</title>
     <url>/posts/36e9.html</url>
     <content><![CDATA[<p>针对上一篇博客<a href="https://zhyong.site/posts/445e.html">使用 Python 脚本一键上传图片到兰空图床并自动复制链接</a>，此篇博客使用自己常用的Typora md编辑器，将 Python 脚本集成到 Typora 的“上传服务”中，可以实现插入图片时自动上传至兰空图床（Lsky Pro）并自动替换链接。</p>
@@ -792,8 +864,8 @@
         <category>逻辑思维</category>
       </categories>
       <tags>
-        <tag>演绎推理</tag>
         <tag>80/20法则</tag>
+        <tag>演绎推理</tag>
       </tags>
   </entry>
   <entry>
@@ -1590,8 +1662,8 @@
         <category>方法论</category>
       </categories>
       <tags>
-        <tag>逻辑思维</tag>
         <tag>金字塔原理</tag>
+        <tag>逻辑思维</tag>
       </tags>
   </entry>
   <entry>
@@ -1981,8 +2053,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>EN13501</tag>
         <tag>阻燃测试</tag>
+        <tag>EN13501</tag>
       </tags>
   </entry>
   <entry>
@@ -2252,8 +2324,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>EN13501</tag>
         <tag>阻燃测试</tag>
+        <tag>EN13501</tag>
       </tags>
   </entry>
   <entry>
@@ -3338,8 +3410,8 @@
         <category>文学作品</category>
       </categories>
       <tags>
-        <tag>80/20法则</tag>
         <tag>阅读</tag>
+        <tag>80/20法则</tag>
       </tags>
   </entry>
 </search>

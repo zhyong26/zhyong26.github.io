@@ -21,29 +21,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="核心逻辑：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。  1. 场景定义：为什么需要 DOE？假设我们正在研发一种玻纤增强尼龙 (PA66+GF30)，目前发现制品浮纤严重且拉伸强度波动大。涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。若每个因子取 3 个水平，全">
+    <meta name="description" content="1. 为什么选择 Beszel？在折腾 VPS 和 NAS 的过程中，实时掌握各台设备的负载情况是刚需。相比于重量级的 Zabbix 或 Prometheus，Beszel 的优势在于：  极度轻量：对系统资源消耗微乎其微。 架构清晰：Hub（面板）+ Agent（客户端）模式，单面板监控多台机器。 Docker 原生：完美支持监控各个容器的资源占用。 UI 现代：简洁、响应式，支持移动端访问。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="材料研发中的 DOE 实战：如何快速锁定最优工艺窗口">
-<meta property="og:url" content="https://zhyong.site/posts/5c61.html">
+<meta property="og:title" content="轻量级多服务器监控：Beszel 的安装与实战部署">
+<meta property="og:url" content="https://zhyong.site/posts/1b16.html">
 <meta property="og:site_name" content="材料与逻辑">
-<meta property="og:description" content="核心逻辑：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。  1. 场景定义：为什么需要 DOE？假设我们正在研发一种玻纤增强尼龙 (PA66+GF30)，目前发现制品浮纤严重且拉伸强度波动大。涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。若每个因子取 3 个水平，全">
+<meta property="og:description" content="1. 为什么选择 Beszel？在折腾 VPS 和 NAS 的过程中，实时掌握各台设备的负载情况是刚需。相比于重量级的 Zabbix 或 Prometheus，Beszel 的优势在于：  极度轻量：对系统资源消耗微乎其微。 架构清晰：Hub（面板）+ Agent（客户端）模式，单面板监控多台机器。 Docker 原生：完美支持监控各个容器的资源占用。 UI 现代：简洁、响应式，支持移动端访问。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-02-01T14:48:43.000Z">
-<meta property="article:modified_time" content="2026-02-09T10:32:03.869Z">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/69967ab55a6e0.png">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/69967c1cd6385.png">
+<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/69967f0bbcb2e.png">
+<meta property="article:published_time" content="2026-02-19T02:49:59.000Z">
+<meta property="article:modified_time" content="2026-02-19T03:14:16.358Z">
 <meta property="article:author" content="ZhangYong">
-<meta property="article:tag" content="DOE">
-<meta property="article:tag" content="Minitab">
-<meta property="article:tag" content="过程优化">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="轻量监控">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.zhyong.site/i/2026/02/19/69967ab55a6e0.png">
 
 
-<link rel="canonical" href="https://zhyong.site/posts/5c61.html">
+<link rel="canonical" href="https://zhyong.site/posts/1b16.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/5c61.html","path":"posts/5c61.html","title":"材料研发中的 DOE 实战：如何快速锁定最优工艺窗口"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/1b16.html","path":"posts/1b16.html","title":"轻量级多服务器监控：Beszel 的安装与实战部署"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>材料研发中的 DOE 实战：如何快速锁定最优工艺窗口 | 材料与逻辑</title>
+<title>轻量级多服务器监控：Beszel 的安装与实战部署 | 材料与逻辑</title>
   
 
 
@@ -80,12 +83,12 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js" defer></script>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/5c61.html"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/1b16.html"}</script>
   <script src="/js/third-party/quicklink.js" defer></script>
 
   <noscript>
@@ -181,7 +184,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9C%BA%E6%99%AF%E5%AE%9A%E4%B9%89%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-DOE%EF%BC%9F"><span class="nav-text">1. 场景定义：为什么需要 DOE？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DOE-%E5%AE%9E%E6%96%BD%E4%BA%94%E6%AD%A5%E6%B3%95-SOP"><span class="nav-text">2. DOE 实施五步法 (SOP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%9B%A0%E5%AD%90%E4%B8%8E%E6%B0%B4%E5%B9%B3%E8%AE%BE%E5%AE%9A-Factors-Levels"><span class="nav-text">第一步：因子与水平设定 (Factors &amp; Levels)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E9%80%89%E6%8B%A9%E5%AE%9E%E9%AA%8C%E6%96%B9%E6%A1%88"><span class="nav-text">第二步：选择实验方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%AE%9E%E9%AA%8C%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="nav-text">第三步：执行实验与数据采集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90-Statistical-Analysis"><span class="nav-text">第四步：统计分析 (Statistical Analysis)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81%E4%B8%8E%E9%A2%84%E6%B5%8B"><span class="nav-text">第五步：模型验证与预测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97"><span class="nav-text">3. 研发工程师的避坑指南</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Beszel%EF%BC%9F"><span class="nav-text">1. 为什么选择 Beszel？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E"><span class="nav-text">2. 部署环境说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-text">3. 安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E9%83%A8%E7%BD%B2-Beszel-Hub"><span class="nav-text">第一步：部署 Beszel Hub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%B7%BB%E5%8A%A0%E5%8F%97%E6%8E%A7%E7%AB%AF-Agent"><span class="nav-text">第二步：添加受控端 (Agent)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%BF%9B%E9%98%B6%E7%8E%A9%E6%B3%95%EF%BC%9A%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E4%B8%8E%E5%AE%89%E5%85%A8"><span class="nav-text">4. 进阶玩法：外网访问与安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BB%93%E8%AF%AD"><span class="nav-text">5. 结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -247,7 +250,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/5c61.html">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/1b16.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -260,12 +263,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="材料研发中的 DOE 实战：如何快速锁定最优工艺窗口 | 材料与逻辑">
+      <meta itemprop="name" content="轻量级多服务器监控：Beszel 的安装与实战部署 | 材料与逻辑">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          材料研发中的 DOE 实战：如何快速锁定最优工艺窗口
+          轻量级多服务器监控：Beszel 的安装与实战部署
         </h1>
 
         <div class="post-meta-container">
@@ -275,15 +278,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2026-02-01 22:48:43" itemprop="dateCreated datePublished" datetime="2026-02-01T22:48:43+08:00">2026-02-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-09 18:32:03" itemprop="dateModified" datetime="2026-02-09T18:32:03+08:00">2026-02-09</time>
+      <time title="创建时间：2026-02-19 10:49:59 / 修改时间：11:14:16" itemprop="dateCreated datePublished" datetime="2026-02-19T10:49:59+08:00">2026-02-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -291,11 +288,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">研发工具</span></a>
+          <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">效率工具</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/%E9%80%BB%E8%BE%91%E6%8E%A8%E6%BC%94/" itemprop="url" rel="index"><span itemprop="name">逻辑推演</span></a>
+          <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/%E8%87%AA%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">自托管服务</span></a>
         </span>
     </span>
 
@@ -306,14 +303,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>912</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -323,63 +320,65 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
-<p><strong>核心逻辑</strong>：DOE 的本质是通过统计学手段，在包含多个变量（因子）的复杂系统中，用最少的实验次数，找出各因子与结果（响应）之间的数学模型。</p>
-</blockquote>
-<h2 id="1-场景定义：为什么需要-DOE？"><a href="#1-场景定义：为什么需要-DOE？" class="headerlink" title="1. 场景定义：为什么需要 DOE？"></a>1. 场景定义：为什么需要 DOE？</h2><p>假设我们正在研发一种<strong>玻纤增强尼龙 (PA66+GF30)</strong>，目前发现制品<strong>浮纤严重</strong>且<strong>拉伸强度波动大</strong>。<br>涉及因子：注塑温度 ($A$)、模具温度 ($B$)、注射压力 ($C$)、保压时间 ($D$)。<br>若每个因子取 3 个水平，全因子实验需要 $3^4 &#x3D; 81$ 次，耗时耗财。而通过 <strong>正交设计 (Orthogonal Design)</strong> 或 <strong>响应面法 (RSM)</strong>，我们可以缩减至 15-20 次。</p>
+    <div class="post-body" itemprop="articleBody"><h3 id="1-为什么选择-Beszel？"><a href="#1-为什么选择-Beszel？" class="headerlink" title="1. 为什么选择 Beszel？"></a>1. 为什么选择 Beszel？</h3><p>在折腾 VPS 和 NAS 的过程中，实时掌握各台设备的负载情况是刚需。相比于重量级的 Zabbix 或 Prometheus，<strong>Beszel</strong> 的优势在于：</p>
+<ul>
+<li><strong>极度轻量</strong>：对系统资源消耗微乎其微。</li>
+<li><strong>架构清晰</strong>：Hub（面板）+ Agent（客户端）模式，单面板监控多台机器。</li>
+<li><strong>Docker 原生</strong>：完美支持监控各个容器的资源占用。</li>
+<li><strong>UI 现代</strong>：简洁、响应式，支持移动端访问。</li>
+</ul>
+<p>官网地址：<a target="_blank" rel="noopener" href="https://beszel.dev/zh/">Beszel | 轻量易用的服务器监控</a></p>
 <span id="more"></span>
 
-<h2 id="2-DOE-实施五步法-SOP"><a href="#2-DOE-实施五步法-SOP" class="headerlink" title="2. DOE 实施五步法 (SOP)"></a>2. DOE 实施五步法 (SOP)</h2><h3 id="第一步：因子与水平设定-Factors-Levels"><a href="#第一步：因子与水平设定-Factors-Levels" class="headerlink" title="第一步：因子与水平设定 (Factors &amp; Levels)"></a>第一步：因子与水平设定 (Factors &amp; Levels)</h3><p>在开始实验前，需通过“鱼骨图”筛选出关键因子。</p>
-<table>
-<thead>
-<tr>
-<th align="left">因子</th>
-<th align="left">低水平 (-1)</th>
-<th align="left">高水平 (+1)</th>
-<th align="left">单位</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">A: 熔体温度</td>
-<td align="left">275</td>
-<td align="left">295</td>
-<td align="left">°C</td>
-</tr>
-<tr>
-<td align="left">B: 模具温度</td>
-<td align="left">80</td>
-<td align="left">110</td>
-<td align="left">°C</td>
-</tr>
-<tr>
-<td align="left">C: 注射压力</td>
-<td align="left">800</td>
-<td align="left">1200</td>
-<td align="left">Bar</td>
-</tr>
-</tbody></table>
-<h3 id="第二步：选择实验方案"><a href="#第二步：选择实验方案" class="headerlink" title="第二步：选择实验方案"></a>第二步：选择实验方案</h3><ul>
-<li><strong>筛选实验 (Screening)</strong>：因子多时使用，用于剔除次要变量。</li>
-<li><strong>析因实验 (Factorial)</strong>：分析因子间的<strong>交互作用 (Interaction)</strong>。例如：温度高时，压力对强度的影响是否更显著？</li>
+<hr>
+<h3 id="2-部署环境说明"><a href="#2-部署环境说明" class="headerlink" title="2. 部署环境说明"></a>2. 部署环境说明</h3><ul>
+<li><strong>服务器</strong>：一台或多台运行中的 Linux VPS</li>
+<li><strong>环境</strong>：已安装 Docker 和 Docker Compose</li>
+<li><strong>端口</strong>：Hub 使用 <code>8090</code>，Agent 使用 <code>45876</code></li>
 </ul>
-<h3 id="第三步：执行实验与数据采集"><a href="#第三步：执行实验与数据采集" class="headerlink" title="第三步：执行实验与数据采集"></a>第三步：执行实验与数据采集</h3><p>使用 Mermaid 记录实验流：</p>
-<pre><code class="highlight mermaid">graph LR
-    A[随机化顺序] --&gt; B[实验组运行]
-    B --&gt; C[样条恒温恒湿处理]
-    C --&gt; D[拉伸性能测试]
-    D --&gt; E[数据录入 Minitab]</code></pre>
+<hr>
+<h3 id="3-安装步骤"><a href="#3-安装步骤" class="headerlink" title="3. 安装步骤"></a>3. 安装步骤</h3><h4 id="第一步：部署-Beszel-Hub"><a href="#第一步：部署-Beszel-Hub" class="headerlink" title="第一步：部署 Beszel Hub"></a>第一步：部署 Beszel Hub</h4><p>Hub 是监控系统的控制中心，建议部署在最稳定的一台服务器上。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker-compose.yml</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">beszel:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">henrygd/beszel:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">beszel</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8090</span><span class="string">:8090</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./beszel_data:/beszel_data</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="第四步：统计分析-Statistical-Analysis"><a href="#第四步：统计分析-Statistical-Analysis" class="headerlink" title="第四步：统计分析 (Statistical Analysis)"></a>第四步：统计分析 (Statistical Analysis)</h3><p>核心关注点：</p>
+<p>运行 <code>docker compose up -d</code> 启动后，通过 <code>IP:8090</code> 进入后台设置管理员。</p>
+<p>建议设置反向代理，并申请https证书访问，推荐使用1panel面板。</p>
+<h4 id="第二步：添加受控端-Agent"><a href="#第二步：添加受控端-Agent" class="headerlink" title="第二步：添加受控端 (Agent)"></a>第二步：添加受控端 (Agent)</h4><p>进入面板点击 <strong>Add System</strong>，添加名称及主机IP后，即可自动生成<code>docker-compose.yml</code>文件。</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/69967ab55a6e0.png" alt="image-20260219104942380"></p>
+<p>在受控服务器上运行 Agent 容器：</p>
+<p>复制的文件内容格式如下，无需修改，直接部署即可。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># agent-compose.yml</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">beszel-agent:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">henrygd/beszel-agent:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">beszel-agent</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">PORT:</span> <span class="number">45876</span></span><br><span class="line">      <span class="attr">KEY:</span> <span class="string">&quot;你的公钥内容&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：<code>network_mode: host</code> 是为了让 Agent 能读取主机的网络流量和统计信息。</p>
+</blockquote>
+<p>然后运行<code>docker compose up -d</code>启动</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/69967c1cd6385.png" alt="image-20260219105731995"></p>
+<hr>
+<h3 id="4-进阶玩法：外网访问与安全"><a href="#4-进阶玩法：外网访问与安全" class="headerlink" title="4. 进阶玩法：外网访问与安全"></a>4. 进阶玩法：外网访问与安全</h3><p>为了方便在外网随时查看，推荐配合 <strong>Nginx Proxy Manager</strong> 或 <strong>Caddy</strong> 进行反向代理：</p>
 <ol>
-<li><strong>帕累托图 (Pareto Chart)</strong>：哪些因子跨越了红线（显著性阈值）？</li>
-<li><strong>交互作用图</strong>：观察直线是否交叉。若交叉，说明因子 A 的效果依赖于因子 B 的水平。</li>
+<li>解析一个子域名（如 <code>status.yourdomain.com</code>）到 Hub IP。</li>
+<li>开启 SSL 证书（HTTPS）。</li>
+<li>在防火墙中仅对 Hub 的 IP 开放 Agent 的 <code>45876</code> 端口，进一步提升安全等级。</li>
 </ol>
-<h3 id="第五步：模型验证与预测"><a href="#第五步：模型验证与预测" class="headerlink" title="第五步：模型验证与预测"></a>第五步：模型验证与预测</h3><p>得到回归方程： $$ 拉伸强度 &#x3D; \beta_0 + \beta_1 A + \beta_2 B + \beta_{12} AB + \epsilon $$</p>
-<h2 id="3-研发工程师的避坑指南"><a href="#3-研发工程师的避坑指南" class="headerlink" title="3. 研发工程师的避坑指南"></a>3. 研发工程师的避坑指南</h2><ol>
-<li><strong>必须随机化</strong>：不要按顺序做实验，防止设备漂移产生系统误差。</li>
-<li><strong>包含中心点</strong>：在低、高水平中间取一点，用于检测系统是否存在“非线性（弯曲）”关系。</li>
-<li><strong>数据真实性</strong>：异常值必须通过物理逻辑（如停机、漏胶）解释，严禁随意删除数据。</li>
-</ol>
+<hr>
+<h3 id="5-结语"><a href="#5-结语" class="headerlink" title="5. 结语"></a>5. 结语</h3><p>Beszel 填补了简单监控与复杂集群管理之间的空白。对于拥有多台 VPS 的玩家来说，它不仅是一个工具，更是让你对数字化资产了如指掌的“仪表盘”。</p>
+<p>功能非常强大，推荐安装使用。成品如下：</p>
+<p>![](&#x2F;Users&#x2F;zhyong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20260219110852572.png)</p>
+<p>还可查看具体的使用情况</p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/69967f0bbcb2e.png" alt="image-20260219111002194"></p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-19 11:12:00</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一篇面向个人&#x2F;小团队运维场景的<strong>轻量级多服务器监控解决方案实践指南</strong>，聚焦于开源工具 <strong>Beszel</strong> 的选型理由、全链路部署流程与安全优化策略。文章并非泛泛而谈，而是以真实技术栈（Docker + Docker Compose）为基底，贯穿“理念—环境—安装—集成—加固”逻辑闭环：</p>
+<ul>
+<li><strong>定位精准</strong>：明确将 Beszel 定义为 Zabbix&#x2F;Prometheus 的「轻量替代品」，直击个人开发者、极客玩家在管理多台 VPS&#x2F;NAS 时对「低开销、易上手、可视化强」的核心诉求；</li>
+<li><strong>架构清晰</strong>：采用经典的 Hub-Agent 分布式模型，Hub 集中展示+配置，Agent 轻量采集（支持主机+容器双维度指标），且通过 <code>host</code> 网络模式突破容器网络限制，保障系统级监控数据（如 CPU、内存、磁盘 I&#x2F;O、网络流量、Docker 容器列表及资源占用）的完整性与实时性；</li>
+<li><strong>部署极简</strong>：全程基于 Docker Compose，无编译、无依赖冲突；Agent 配置由 Hub 动态生成（含唯一认证 KEY），实现“零手动配置”，大幅降低接入门槛；</li>
+<li><strong>安全可扩展</strong>：强调反向代理（Nginx Proxy Manager&#x2F;Caddy）、HTTPS 强制加密、端口最小化开放（仅放行 Agent 端口 45876 给 Hub IP）等生产级实践，兼顾便捷性与安全性；</li>
+<li><strong>体验友好</strong>：现代响应式 UI、移动端适配、直观仪表盘，将监控从运维刚需升维为「数字资产掌控感」的可视化表达。</li>
+</ul>
+<p>本质上，Beszel 不仅是监控工具，更是面向边缘计算与个人云基础设施的「可观测性入口」——用最小成本构建起对异构 Linux 设备集群的基础健康感知能力。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#Beszel #轻量监控 #Hub-Agent架构 #Docker监控 #反向代理安全</p>
 
     </div>
 
@@ -397,7 +396,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://zhyong.site/posts/5c61.html" title="材料研发中的 DOE 实战：如何快速锁定最优工艺窗口">https://zhyong.site/posts/5c61.html</a>
+      <a href="https://zhyong.site/posts/1b16.html" title="轻量级多服务器监控：Beszel 的安装与实战部署">https://zhyong.site/posts/1b16.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -457,23 +456,19 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/DOE/" rel="tag"><i class="fa fa-tag"></i> DOE</a>
-              <a href="/tags/Minitab/" rel="tag"><i class="fa fa-tag"></i> Minitab</a>
-              <a href="/tags/%E8%BF%87%E7%A8%8B%E4%BC%98%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 过程优化</a>
+              <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+              <a href="/tags/%E8%BD%BB%E9%87%8F%E7%9B%91%E6%8E%A7/" rel="tag"><i class="fa fa-tag"></i> 轻量监控</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/c87c.html" rel="prev" title="📌制造业研发与质量管理核心手册（2026版）">
-                  <i class="fa fa-angle-left"></i> 📌制造业研发与质量管理核心手册（2026版）
+                <a href="/posts/36e9.html" rel="prev" title="Python 自动化实践：Typora 自定义上传接口与兰空图床集成">
+                  <i class="fa fa-angle-left"></i> Python 自动化实践：Typora 自定义上传接口与兰空图床集成
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/3930.html" rel="next" title="ssh生成密钥、配置及登录">
-                  ssh生成密钥、配置及登录 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
