@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="这是一篇关于如何在远程 Linux 服务器上通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive 的技术指南。 方案简介本方案通过 Shell 脚本集成 mariadb-dump 数据库导出、tar 文件压缩及 rclone 同步功能。适用于 Docker 部署且无法直接使用浏览器进行 OAuth 授权的远程服务器。 我目前的安装环境为：Debian GNU&#x2F;Linu">
 <meta property="og:type" content="article">
@@ -63,7 +63,6 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
 
@@ -326,7 +325,7 @@
 <p>我目前的安装环境为：<code>Debian GNU/Linux 13 (trixie)</code>+1Panel面板，docker部署的Lsky pro和对应数据库 mariadb，见图：</p>
 <span id="more"></span>
 
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png" alt="image-20260219154223533"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png" alt="image-20260219154223533"></p>
 <h3 id="备份核心数据列表"><a href="#备份核心数据列表" class="headerlink" title="备份核心数据列表"></a>备份核心数据列表</h3><table>
 <thead>
 <tr>
@@ -405,10 +404,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone authorize <span class="string">&quot;onedrive&quot;</span> <span class="string">&quot;XXXXXXXXX&quot;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>此时本地电脑会自动弹出浏览器，登录你的 OneDrive 账号并点击“授权”。</p>
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
 </li>
 <li><p>授权成功后，本地终端会返回一段 <strong>JSON 格式的 Token</strong>（以 <code>{&quot;access_token&quot;:...}</code> 开头）。</p>
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
 </li>
 <li><p>复制这段完整的 JSON 字符串。</p>
 </li>
@@ -420,7 +419,7 @@
 <li><p><code>Your choice&gt;</code>：选择 <code>OneDrive Personal or Business</code> (通常是 <code>1</code>)。</p>
 </li>
 <li><p><code>Chose drive to use</code>：rclone 会列出检测到的盘符，具体可打开网页版onedrive，下面的字符与浏览器地址对应上即可。</p>
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
 </li>
 <li><p><code>Is that OK?</code>：确认配置，输入 <code>y</code>。</p>
 </li>
@@ -430,7 +429,7 @@
 <h3 id="4-验证连接"><a href="#4-验证连接" class="headerlink" title="4. 验证连接"></a>4. 验证连接</h3><p>在服务器上执行以下命令，看是否能列出文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone lsd onedrive:</span><br></pre></td></tr></table></figure>
 
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
 
 </details>
 
@@ -452,9 +451,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 02 * * * /bin/bash /root/my_shells/lsky_backup.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>首先执行一次，脚本，即可在onedrive上查看备份好的文件了，这样再也不怕珍贵的图片丢失了。</p>
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
 <p>下载下来后，可查看备份目录。上述所列的四个重要文件，包括数据库就全部备份好了。</p>
-<p><img data-src="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
+<p><img src="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
 <hr>
 <h2 id="关键技术点提示"><a href="#关键技术点提示" class="headerlink" title="关键技术点提示"></a>关键技术点提示</h2><ul>
 <li><strong>权限安全</strong>：脚本内包含明文密码，必须通过 <code>chmod 700</code> 确保仅 Root 用户可读。</li>
