@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="针对上一篇博客使用 Python 脚本一键上传图片到兰空图床并自动复制链接，此篇博客使用自己常用的Typora md编辑器，将 Python 脚本集成到 Typora 的“上传服务”中，可以实现插入图片时自动上传至兰空图床（Lsky Pro）并自动替换链接。 以下是具体操作步骤及针对 Typora 优化的脚本代码。 1. 编写 Typora 专用上传脚本Typora 的自定义上传功能要求脚本在成功">
 <meta property="og:type" content="article">
@@ -60,6 +60,7 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
 <script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
 
@@ -356,14 +357,14 @@
 <li><strong>macOS&#x2F;Linux 示例</strong>：<code>python3 &quot;/Users/路径/to/typora_upload.py&quot;</code></li>
 <li>若为虚拟环境，可填写实际环境的python路径，如<code>/Users/zhyong/Project/local_python_env/.venv/bin/python3  /Users/路径/to/typora_upload.py</code></li>
 </ul>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995bf85c6d5d.png" alt="PixPin_2026-02-18_21-23-11"></p>
+<p><img data-src="https://i.zhyong.site/i/2026/02/18/6995bf85c6d5d.png" alt="PixPin_2026-02-18_21-23-11"></p>
 </li>
 <li><p>点击 <strong>验证图片上传选项 (Test Uploader)</strong> 进行测试。</p>
 </li>
 </ol>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995bf674910e.png" alt="PixPin_2026-02-18_21-23-56"></p>
+<p><img data-src="https://i.zhyong.site/i/2026/02/18/6995bf674910e.png" alt="PixPin_2026-02-18_21-23-56"></p>
 <p>此时，打开图床后，就有测试上传的两张图片了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995bf313808d.png" alt="image-20260218213127050"></p>
+<p><img data-src="https://i.zhyong.site/i/2026/02/18/6995bf313808d.png" alt="image-20260218213127050"></p>
 <h3 id="3-技术要点与注意事项"><a href="#3-技术要点与注意事项" class="headerlink" title="3. 技术要点与注意事项"></a>3. 技术要点与注意事项</h3><ul>
 <li><strong>Stdout 依赖</strong>：Typora 通过捕获脚本的控制台输出来获取 URL。脚本内不可存在多余的 <code>print</code> 语句，否则会导致 Typora 解析失败。</li>
 <li><strong>多图处理</strong>：Typora 有时会同时传输多张图片（例如批量粘贴时），脚本中使用 <code>sys.argv[1:]</code> 获取所有路径参数并循环处理。</li>
