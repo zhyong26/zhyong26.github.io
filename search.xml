@@ -684,7 +684,7 @@
 </ul>
 <hr>
 <h3 id="3-使用指南"><a href="#3-使用指南" class="headerlink" title="3. 使用指南"></a>3. 使用指南</h3><h4 id="第一步：准备工作"><a href="#第一步：准备工作" class="headerlink" title="第一步：准备工作"></a>第一步：准备工作</h4><ol>
-<li>前往 <a href="https://github.com/tanaer/WindowsClear/releases">WindowsClear GitHub Releases</a> 下载最新的 <code>.exe</code> 文件。（若Github下载较慢，可去博主自建下载站：<a href="https://dl.zhyong.site/share/GuMlwCnU">点击下载 v0.1.2</a></li>
+<li>前往 <a href="https://github.com/tanaer/WindowsClear/releases">WindowsClear GitHub Releases</a> 下载最新的 <code>.exe</code> 文件。（若Github下载较慢，可去博主自建下载站：<a href="https://file.zhyong.site/#/soft/WindowsClear.exe?type=file">点击下载 v0.1.2</a></li>
 <li><strong>关键：</strong> 务必<strong>以管理员身份运行</strong>，因为创建目录联接需要系统高级权限。</li>
 </ol>
 <h4 id="第二步：扫描分析"><a href="#第二步：扫描分析" class="headerlink" title="第二步：扫描分析"></a>第二步：扫描分析</h4><ul>
@@ -1478,7 +1478,7 @@
 <li><strong>高层领导力的核心驱动</strong>：着眼未来的领导者（Future-focused leaders）必须在顶层设计中将 IP 视为创造长期价值的战略资产，而非研发的成本中心。</li>
 </ul>
 <p><strong>总结</strong>：ISO 56005 不仅是一份证书，它是重塑企业创新基因、实现无形资产向长期商业价值转型的<strong>战略操作系统</strong>。企业应通过其系统化方法，将创新的不确定性转化为资产化的确定性。</p>
-<h2 id="附：ISO-56005主要内容"><a href="#附：ISO-56005主要内容" class="headerlink" title="附：ISO -56005主要内容"></a>附：ISO -56005主要内容</h2><p>下载：<a href="https://dl.zhyong.site/share/XgOd83wl">下载链接</a></p>
+<h2 id="附：ISO-56005主要内容"><a href="#附：ISO-56005主要内容" class="headerlink" title="附：ISO -56005主要内容"></a>附：ISO -56005主要内容</h2><p>标准下载：<a href="https://file.zhyong.site/#/file/ISO%2056005%E5%9B%BD%E9%99%85%E6%A0%87%E5%87%86%E4%B8%AD%E6%96%87%E7%BF%BB%E8%AF%91%E7%A8%BF.pdf?type=file">下载链接</a></p>
 <table>
 <thead>
 <tr>
@@ -2316,8 +2316,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>阻燃测试</tag>
         <tag>EN13501</tag>
+        <tag>阻燃测试</tag>
       </tags>
   </entry>
   <entry>
@@ -2587,8 +2587,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>阻燃测试</tag>
         <tag>EN13501</tag>
+        <tag>阻燃测试</tag>
       </tags>
   </entry>
   <entry>
@@ -3223,8 +3223,8 @@
         <category>数字化工具</category>
       </categories>
       <tags>
-        <tag>ssh</tag>
         <tag>git</tag>
+        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
