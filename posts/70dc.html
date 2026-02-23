@@ -28,20 +28,20 @@
 <meta property="og:site_name" content="材料与逻辑">
 <meta property="og:description" content="这是一篇关于如何在远程 Linux 服务器上通过 rclone 自动备份 Lsky Pro（兰空图床）数据至 OneDrive 的技术指南。 方案简介本方案通过 Shell 脚本集成 mariadb-dump 数据库导出、tar 文件压缩及 rclone 同步功能。适用于 Docker 部署且无法直接使用浏览器进行 OAuth 授权的远程服务器。 我目前的安装环境为：Debian GNU&#x2F;Linu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp">
-<meta property="og:image" content="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png">
+<meta property="og:image" content="https://zhyong.site/img/6996bee7d31ba.png">
+<meta property="og:image" content="https://zhyong.site/img/6996c2d311755.webp">
+<meta property="og:image" content="https://zhyong.site/img/6996c2aa1827c.webp">
+<meta property="og:image" content="https://zhyong.site/img/6996c31ad5ac4.webp">
+<meta property="og:image" content="https://zhyong.site/img/6996c392a738d.webp">
+<meta property="og:image" content="https://zhyong.site/img/6996c4b901045.webp">
+<meta property="og:image" content="https://zhyong.site/img/6996c56d2fbf6.png">
 <meta property="article:published_time" content="2026-02-19T07:32:19.000Z">
-<meta property="article:modified_time" content="2026-02-19T08:26:53.065Z">
+<meta property="article:modified_time" content="2026-02-23T09:21:53.481Z">
 <meta property="article:author" content="ZhangYong">
 <meta property="article:tag" content="LskyPro">
 <meta property="article:tag" content="rclone">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png">
+<meta name="twitter:image" content="https://zhyong.site/img/6996bee7d31ba.png">
 
 
 <link rel="canonical" href="https://zhyong.site/posts/70dc.html">
@@ -137,7 +137,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-瞬间"><a href="https://memos.zhyong.site/" rel="section" target="_blank"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-网盘"><a href="https://file.zhyong.site/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-瞬间"><a href="https://memos.zhyong.site/" rel="section" target="_blank"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -282,9 +282,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2026-02-19 15:32:19 / 修改时间：16:26:53" itemprop="dateCreated datePublished" datetime="2026-02-19T15:32:19+08:00">2026-02-19</time>
+      <time title="创建时间：2026-02-19 15:32:19" itemprop="dateCreated datePublished" datetime="2026-02-19T15:32:19+08:00">2026-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-02-23 17:21:53" itemprop="dateModified" datetime="2026-02-23T17:21:53+08:00">2026-02-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -325,7 +331,7 @@
 <p>我目前的安装环境为：<code>Debian GNU/Linux 13 (trixie)</code>+1Panel面板，docker部署的Lsky pro和对应数据库 mariadb，见图：</p>
 <span id="more"></span>
 
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png" alt="image-20260219154223533"></p>
+<p><img src="/img/6996bee7d31ba.png" alt="image-20260219154223533"></p>
 <h3 id="备份核心数据列表"><a href="#备份核心数据列表" class="headerlink" title="备份核心数据列表"></a>备份核心数据列表</h3><table>
 <thead>
 <tr>
@@ -404,10 +410,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone authorize <span class="string">&quot;onedrive&quot;</span> <span class="string">&quot;XXXXXXXXX&quot;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>此时本地电脑会自动弹出浏览器，登录你的 OneDrive 账号并点击“授权”。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
+<p><img src="/img/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
 </li>
 <li><p>授权成功后，本地终端会返回一段 <strong>JSON 格式的 Token</strong>（以 <code>{&quot;access_token&quot;:...}</code> 开头）。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
+<p><img src="/img/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
 </li>
 <li><p>复制这段完整的 JSON 字符串。</p>
 </li>
@@ -419,7 +425,7 @@
 <li><p><code>Your choice&gt;</code>：选择 <code>OneDrive Personal or Business</code> (通常是 <code>1</code>)。</p>
 </li>
 <li><p><code>Chose drive to use</code>：rclone 会列出检测到的盘符，具体可打开网页版onedrive，下面的字符与浏览器地址对应上即可。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
+<p><img src="/img/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
 </li>
 <li><p><code>Is that OK?</code>：确认配置，输入 <code>y</code>。</p>
 </li>
@@ -429,7 +435,7 @@
 <h3 id="4-验证连接"><a href="#4-验证连接" class="headerlink" title="4. 验证连接"></a>4. 验证连接</h3><p>在服务器上执行以下命令，看是否能列出文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone lsd onedrive:</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
+<p><img src="/img/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
 
 </details>
 
@@ -451,9 +457,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 02 * * * /bin/bash /root/my_shells/lsky_backup.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>首先执行一次，脚本，即可在onedrive上查看备份好的文件了，这样再也不怕珍贵的图片丢失了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
+<p><img src="/img/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
 <p>下载下来后，可查看备份目录。上述所列的四个重要文件，包括数据库就全部备份好了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
+<p><img src="/img/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
 <hr>
 <h2 id="关键技术点提示"><a href="#关键技术点提示" class="headerlink" title="关键技术点提示"></a>关键技术点提示</h2><ul>
 <li><strong>权限安全</strong>：脚本内包含明文密码，必须通过 <code>chmod 700</code> 确保仅 Root 用户可读。</li>
@@ -507,7 +513,7 @@
             <span class="label">WeChat</span>
           </span>
 
-          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/13/698f222de001c.jpg">
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
       </div>
 
       <div class="social-item">
@@ -519,7 +525,7 @@
             <span class="label">QQ</span>
           </span>
 
-          <img class="social-item-img" src="https://i.zhyong.site/i/2026/02/15/6991b53c2e5db.png">
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
       </div>
 
       <div class="social-item">

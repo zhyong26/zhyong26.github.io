@@ -25,7 +25,7 @@
 <li><strong>应力诱导结晶：</strong> 挤出、注射中的剪切应力能显著加快结晶速度并提高结晶度，增加制品的硬度与气密性。</li>
 </ul>
 <hr>
-<h2 id="2-核心加工工艺原理与特点详述"><a href="#2-核心加工工艺原理与特点详述" class="headerlink" title="2. 核心加工工艺原理与特点详述"></a>2. 核心加工工艺原理与特点详述</h2><p><img src="https://i.zhyong.site/i/2026/02/22/699a7c0b42c32.webp" alt="jccx"></p>
+<h2 id="2-核心加工工艺原理与特点详述"><a href="#2-核心加工工艺原理与特点详述" class="headerlink" title="2. 核心加工工艺原理与特点详述"></a>2. 核心加工工艺原理与特点详述</h2><p><img src="/img/699a7c0b42c32.webp" alt="jccx"></p>
 <h3 id="2-1-挤出成型-Extrusion-Molding"><a href="#2-1-挤出成型-Extrusion-Molding" class="headerlink" title="2.1. 挤出成型 (Extrusion Molding)"></a>2.1. 挤出成型 (Extrusion Molding)</h3><p>挤出成型是塑料加工中产量居首位、应用最广的方法，主要用于热塑性塑料。</p>
 <ul>
 <li><p><strong>工艺原理</strong>：将塑料在挤出机料筒内加热熔融，利用螺杆旋转加压，迫使物料通过具有一定截面形状的口模，经冷却定型后成为连续制品。螺杆在机筒内通过加料段（输送）、压缩段（压实熔融）及均化段（定量定压），将物料连续挤出口模。</p>
@@ -264,7 +264,7 @@
 </li>
 </ul>
 <p>理解了归纳推理的定义后，必须深入探究如何在复杂的经验现象中剥离干扰，提取唯一的因果机制。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/22/699a58e8610a9.webp" alt="gntl"></p>
+<p><img src="/img/699a58e8610a9.webp" alt="gntl"></p>
 <h3 id="2-因果机制探究：穆勒五法与实证步骤"><a href="#2-因果机制探究：穆勒五法与实证步骤" class="headerlink" title="2. 因果机制探究：穆勒五法与实证步骤"></a>2. 因果机制探究：穆勒五法与实证步骤</h3><p>在嘈杂且充满伪相关的现实数据中，识别“唯一原因”是极具挑战的工程任务。科学研究通常遵循一套严谨的归纳流程：<strong>观察&#x2F;数据收集 -&gt; 模式识别（Pattern Recognition） -&gt; 假设建立 -&gt; 理论概括</strong>。</p>
 <p>十九世纪逻辑学家约翰·斯图尔特·密尔（John Stuart Mill）总结的“穆勒五法”，本质上是一套基于<strong>排除法</strong>（Eliminative Logic）的逻辑调查工具。它们通过控制变量，实现从相关性到因果性的逻辑跳跃：</p>
 <ol>
@@ -432,7 +432,7 @@
 </ol>
 <p>这些材料的底层物理特性——如铝表面极负的电极电位导致其极易自发氧化——直接决定了后续表面处理工艺的必要性与选择逻辑。</p>
 <p>常见的处理工艺如下：</p>
-<p><img src="https://i.zhyong.site/i/2026/02/21/6999916b29231.webp" alt="al"></p>
+<p><img src="/img/6999916b29231.webp" alt="al"></p>
 <hr>
 <h2 id="2-电化学转换工艺：阳极氧化、硬质氧化与微弧氧化-MAO-PEO"><a href="#2-电化学转换工艺：阳极氧化、硬质氧化与微弧氧化-MAO-PEO" class="headerlink" title="2. 电化学转换工艺：阳极氧化、硬质氧化与微弧氧化 (MAO&#x2F;PEO)"></a>2. 电化学转换工艺：阳极氧化、硬质氧化与微弧氧化 (MAO&#x2F;PEO)</h2><p>电化学转换是利用外加电压在电解液中驱动铝原子与氧离子结合，原位生长出氧化膜。其核心价值在于通过受控的膜层生长提升零件的硬度与耐化学侵蚀能力。</p>
 <h3 id="2-1-阳极氧化体系的技术对比"><a href="#2-1-阳极氧化体系的技术对比" class="headerlink" title="2.1 阳极氧化体系的技术对比"></a>2.1 阳极氧化体系的技术对比</h3><table>
@@ -684,7 +684,7 @@
 <p>我目前的安装环境为：<code>Debian GNU/Linux 13 (trixie)</code>+1Panel面板，docker部署的Lsky pro和对应数据库 mariadb，见图：</p>
 <span id="more"></span>
 
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996bee7d31ba.png" alt="image-20260219154223533"></p>
+<p><img src="/img/6996bee7d31ba.png" alt="image-20260219154223533"></p>
 <h3 id="备份核心数据列表"><a href="#备份核心数据列表" class="headerlink" title="备份核心数据列表"></a>备份核心数据列表</h3><table>
 <thead>
 <tr>
@@ -763,10 +763,10 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rclone authorize <span class="string">&quot;onedrive&quot;</span> <span class="string">&quot;XXXXXXXXX&quot;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>此时本地电脑会自动弹出浏览器，登录你的 OneDrive 账号并点击“授权”。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
+<p><img src="/img/6996c2d311755.webp" alt="PixPin_2026-02-19_14-25-54"></p>
 </li>
 <li><p>授权成功后，本地终端会返回一段 <strong>JSON 格式的 Token</strong>（以 <code>{&quot;access_token&quot;:...}</code> 开头）。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
+<p><img src="/img/6996c2aa1827c.webp" alt="PixPin_2026-02-19_14-27-25"></p>
 </li>
 <li><p>复制这段完整的 JSON 字符串。</p>
 </li>
@@ -778,7 +778,7 @@
 <li><p><code>Your choice&gt;</code>：选择 <code>OneDrive Personal or Business</code> (通常是 <code>1</code>)。</p>
 </li>
 <li><p><code>Chose drive to use</code>：rclone 会列出检测到的盘符，具体可打开网页版onedrive，下面的字符与浏览器地址对应上即可。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
+<p><img src="/img/6996c31ad5ac4.webp" alt="PixPin_2026-02-19_14-32-56"></p>
 </li>
 <li><p><code>Is that OK?</code>：确认配置，输入 <code>y</code>。</p>
 </li>
@@ -788,7 +788,7 @@
 <h3 id="4-验证连接"><a href="#4-验证连接" class="headerlink" title="4. 验证连接"></a>4. 验证连接</h3><p>在服务器上执行以下命令，看是否能列出文件：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rclone lsd onedrive:</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
+<p><img src="/img/6996c392a738d.webp" alt="PixPin_2026-02-19_14-35-54"></p>
 
 </details>
 
@@ -810,9 +810,9 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">00 02 * * * /bin/bash /root/my_shells/lsky_backup.sh &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>首先执行一次，脚本，即可在onedrive上查看备份好的文件了，这样再也不怕珍贵的图片丢失了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
+<p><img src="/img/6996c4b901045.webp" alt="PixPin_2026-02-19_14-45-07"></p>
 <p>下载下来后，可查看备份目录。上述所列的四个重要文件，包括数据库就全部备份好了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
+<p><img src="/img/6996c56d2fbf6.png" alt="image-20260219161019787"></p>
 <hr>
 <h2 id="关键技术点提示"><a href="#关键技术点提示" class="headerlink" title="关键技术点提示"></a>关键技术点提示</h2><ul>
 <li><strong>权限安全</strong>：脚本内包含明文密码，必须通过 <code>chmod 700</code> 确保仅 Root 用户可读。</li>
@@ -849,7 +849,7 @@
 
 <hr>
 <h2 id="核心功能模块"><a href="#核心功能模块" class="headerlink" title="核心功能模块"></a>核心功能模块</h2><p>主界面如下：</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/69969471eb85b.png" alt="image-20260219124120612"></p>
+<p><img src="/img/69969471eb85b.png" alt="image-20260219124120612"></p>
 <h3 id="1-系统清理与卸载"><a href="#1-系统清理与卸载" class="headerlink" title="1. 系统清理与卸载"></a>1. 系统清理与卸载</h3><ul>
 <li><strong><code>mo clean</code></strong>：扫描并清理用户应用缓存、浏览器残留、Xcode&#x2F;Node.js 等开发工具中间件、系统日志及垃圾桶。</li>
 <li><strong><code>mo uninstall</code></strong>：扫描应用关联的 Launch Agents、Preferences、WebKit 存储等隐藏残留文件，实现彻底卸载。</li>
@@ -913,9 +913,9 @@
 </tr>
 </tbody></table>
 <h2 id="实际体验"><a href="#实际体验" class="headerlink" title="实际体验"></a>实际体验</h2><p>使用 clean功能，扫描后发现很多之前卸载的残留。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/6996956b13a85.png" alt="image-20260219124529938"></p>
+<p><img src="/img/6996956b13a85.png" alt="image-20260219124529938"></p>
 <p>最终获得3.15G空间</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/699695b1d4543.png" alt="image-20260219124640470"></p>
+<p><img src="/img/699695b1d4543.png" alt="image-20260219124640470"></p>
 <hr>
 <h2 id="安全性与不确定性说明"><a href="#安全性与不确定性说明" class="headerlink" title="安全性与不确定性说明"></a>安全性与不确定性说明</h2><ul>
 <li><strong>文件安全性</strong>：虽然 Mole 设有保护机制（如不删除 7 天内修改的项目文件），但文件删除操作具有不可逆性。</li>
@@ -963,7 +963,7 @@
 <p>运行 <code>docker compose up -d</code> 启动后，通过 <code>IP:8090</code> 进入后台设置管理员。</p>
 <p>建议设置反向代理，并申请https证书访问，推荐使用1panel面板。</p>
 <h4 id="第二步：添加受控端-Agent"><a href="#第二步：添加受控端-Agent" class="headerlink" title="第二步：添加受控端 (Agent)"></a>第二步：添加受控端 (Agent)</h4><p>进入面板点击 <strong>Add System</strong>，添加名称及主机IP后，即可自动生成<code>docker-compose.yml</code>文件。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/69967ab55a6e0.png" alt="image-20260219104942380"></p>
+<p><img src="/img/69967ab55a6e0.png" alt="image-20260219104942380"></p>
 <p>在受控服务器上运行 Agent 容器：</p>
 <p>复制的文件内容格式如下，无需修改，直接部署即可。</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># agent-compose.yml</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">beszel-agent:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">henrygd/beszel-agent:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">beszel-agent</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">PORT:</span> <span class="number">45876</span></span><br><span class="line">      <span class="attr">KEY:</span> <span class="string">&quot;你的公钥内容&quot;</span></span><br></pre></td></tr></table></figure>
@@ -972,7 +972,7 @@
 <p><strong>注意</strong>：<code>network_mode: host</code> 是为了让 Agent 能读取主机的网络流量和统计信息。</p>
 </blockquote>
 <p>然后运行<code>docker compose up -d</code>启动</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/69967c1cd6385.png" alt="image-20260219105731995"></p>
+<p><img src="/img/69967c1cd6385.png" alt="image-20260219105731995"></p>
 <hr>
 <h3 id="4-进阶玩法：外网访问与安全"><a href="#4-进阶玩法：外网访问与安全" class="headerlink" title="4. 进阶玩法：外网访问与安全"></a>4. 进阶玩法：外网访问与安全</h3><p>为了方便在外网随时查看，推荐配合 <strong>Nginx Proxy Manager</strong> 或 <strong>Caddy</strong> 进行反向代理：</p>
 <ol>
@@ -983,9 +983,9 @@
 <hr>
 <h3 id="5-结语"><a href="#5-结语" class="headerlink" title="5. 结语"></a>5. 结语</h3><p>Beszel 填补了简单监控与复杂集群管理之间的空白。对于拥有多台 VPS 的玩家来说，它不仅是一个工具，更是让你对数字化资产了如指掌的“仪表盘”。</p>
 <p>功能非常强大，推荐安装使用。成品如下：</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/69968386df24f.png" alt="image-20260219110852572.png"></p>
+<p><img src="/img/69968386df24f.png" alt="image-20260219110852572.png"></p>
 <p>还可查看具体的使用情况</p>
-<p><img src="https://i.zhyong.site/i/2026/02/19/69967f0bbcb2e.png" alt="image-20260219111002194"></p>
+<p><img src="/img/69967f0bbcb2e.png" alt="image-20260219111002194"></p>
 <hr>
 <h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-19 11:12:00</p>
 <h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一篇面向个人&#x2F;小团队运维场景的<strong>轻量级多服务器监控解决方案实践指南</strong>，聚焦于开源工具 <strong>Beszel</strong> 的选型理由、全链路部署流程与安全优化策略。文章并非泛泛而谈，而是以真实技术栈（Docker + Docker Compose）为基底，贯穿“理念—环境—安装—集成—加固”逻辑闭环：</p>
@@ -1045,14 +1045,14 @@
 <li><strong>macOS&#x2F;Linux 示例</strong>：<code>python3 &quot;/Users/路径/to/typora_upload.py&quot;</code></li>
 <li>若为虚拟环境，可填写实际环境的python路径，如<code>/Users/zhyong/Project/local_python_env/.venv/bin/python3  /Users/路径/to/typora_upload.py</code></li>
 </ul>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995bf85c6d5d.png" alt="PixPin_2026-02-18_21-23-11"></p>
+<p><img src="/img/6995bf85c6d5d.png" alt="PixPin_2026-02-18_21-23-11"></p>
 </li>
 <li><p>点击 <strong>验证图片上传选项 (Test Uploader)</strong> 进行测试。</p>
 </li>
 </ol>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995bf674910e.png" alt="PixPin_2026-02-18_21-23-56"></p>
+<p><img src="/img/6995bf674910e.png" alt="PixPin_2026-02-18_21-23-56"></p>
 <p>此时，打开图床后，就有测试上传的两张图片了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995bf313808d.png" alt="image-20260218213127050"></p>
+<p><img src="/img/6995bf313808d.png" alt="image-20260218213127050"></p>
 <h3 id="3-技术要点与注意事项"><a href="#3-技术要点与注意事项" class="headerlink" title="3. 技术要点与注意事项"></a>3. 技术要点与注意事项</h3><ul>
 <li><strong>Stdout 依赖</strong>：Typora 通过捕获脚本的控制台输出来获取 URL。脚本内不可存在多余的 <code>print</code> 语句，否则会导致 Typora 解析失败。</li>
 <li><strong>多图处理</strong>：Typora 有时会同时传输多张图片（例如批量粘贴时），脚本中使用 <code>sys.argv[1:]</code> 获取所有路径参数并循环处理。</li>
@@ -1142,7 +1142,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alias upload_lsky=&quot;/Users/zhyong/Project/local_python_env/.venv/bin/python3 ~/Project/local_python_env/upload_lsky.py&quot;</span><br></pre></td></tr></table></figure>
 
 <p>如下任意位置执行<code>upload_lsky</code>命令，即可快捷上传图片了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/18/6995aa61a6de0.png"></p>
+<p><img src="/img/6995aa61a6de0.png"></p>
 <h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>通过这个不到 80 行的 Python 脚本，我们成功地将一个繁琐的图床交互过程简化为了一行命令。这不仅节省了时间，更保持了工作心流的连贯性。相比使用<a href="https://github.com/Molunerfinn/PicGo">Molunerfinn&#x2F;PicGo</a>等本地图片上传软件，也更加方便快捷。</p>
 <p>如果你是 Typora 用户，甚至可以将此脚本配置为 Typora 的自定义上传服务，实现真正的“复制图片 -&gt; 粘贴到 Typora -&gt; 自动上传”的无缝体验。</p>
 <p>快去试试吧，让你的写作效率起飞！</p>
@@ -1191,12 +1191,12 @@
 
 <p>运行 <code>docker-compose up -d</code> 即可。</p>
 <p>我部署在VPS上，指向一个域名到服务器，利用1panl面板管理，申请证书，再加上反射代理，就可以愉快地访问了。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/17/6994079e1179b.png" alt="1771308957097.png"></p>
-<p><img src="https://i.zhyong.site/i/2026/02/17/69940b226cbab.png" alt="1771309857107.png"></p>
+<p><img src="/img/6994079e1179b.png" alt="1771308957097.png"></p>
+<p><img src="/img/69940b226cbab.png" alt="1771309857107.png"></p>
 <p>代理地址：写上本地加docker上的应用端口即可。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/17/69940b9ea8893.png" alt="1771309981497.png"></p>
+<p><img src="/img/69940b9ea8893.png" alt="1771309981497.png"></p>
 <p>进入主界面（默认英文，可在设置里更改）：</p>
-<p><img src="https://i.zhyong.site/i/2026/02/17/69940c32485ac.png" alt="1771310129132.png"></p>
+<p><img src="/img/69940c32485ac.png" alt="1771310129132.png"></p>
 <hr>
 <h3 id="3-针对工作流的建议"><a href="#3-针对工作流的建议" class="headerlink" title="3. 针对工作流的建议"></a>3. 针对工作流的建议</h3><ul>
 <li><strong>材料研发文档管理</strong>：您可以利用其 <strong>Smart Tags</strong> 功能。通过在 Markdown 顶部添加 YAML 标签（如 <code>tags: [复合材料, 聚氨酯]</code>），NoteDiscovery 会在侧边栏自动生成分类索引。</li>
@@ -1270,7 +1270,7 @@
 <hr>
 <h3 id="4-进阶说明与小贴士"><a href="#4-进阶说明与小贴士" class="headerlink" title="4. 进阶说明与小贴士"></a>4. 进阶说明与小贴士</h3><p>作为一个仍处于活跃迭代中的开源项目，Cardinal 目前在大规模文件索引效率和自动化过滤机制（如自动屏蔽 <code>.DS_Store</code> 等系统文件）上仍有进步空间。</p>
 <p>如我添加平时主要使用的目录，大量的<code>.DS_Store</code>文件非常影响搜索体验，后续在更新时需要自动过滤此类文件及加入自定义过滤文件功能。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/17/6994002911c80.png" alt="1771307047981.png"></p>
+<p><img src="/img/6994002911c80.png" alt="1771307047981.png"></p>
 <ul>
 <li><strong>优化小建议</strong>：在使用时，建议配合定期的系统垃圾清理。如果您发现搜索结果中出现了过多的系统残留文件，可以通过简单的终端指令 <code>find . -name &#39;.DS_Store&#39; -type f -delete</code> 来手动净化您的工作目录。</li>
 </ul>
@@ -1316,8 +1316,8 @@
 
 <p>毕业十三载，时光将少年的身影拉得修长，却未能冲淡浮山在我心中的轮廓。当我翻开《魅力浮山》这本书，那些印在纸上的文字与图片，瞬间化作了通往记忆深处的路标。作为一名浮山中学的学子，我曾以为自己足够了解这座山，但透过这本书的厚重叙述，我才惊觉：<strong>当年我们不仅是在一所学校里读书，更是在一座“露天的历史博物馆”里成长。</strong></p>
 <p>如今，高中的回忆，只留下NAS里这两张珍贵的照片。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/16/6992c76a8cf66.png" alt="十三年前所拍"></p>
-<p><img src="https://i.zhyong.site/i/2026/02/16/6992c86f7df28.jpeg" alt="1771227246592.jpeg"></p>
+<p><img src="/img/6992c76a8cf66.png" alt="十三年前所拍"></p>
+<p><img src="/img/6992c86f7df28.jpeg" alt="1771227246592.jpeg"></p>
 <p><strong>一、 钟楼下的回响：重温“教育植国本”的浮中风骨</strong></p>
 <p>书页翻动，当看到那座熟悉的“浮山中学大钟楼”图片时，记忆瞬间被拉回到了十三年前的校园。书中记载，浮山中学由现代教育家房秩五先生于上世纪20年代创办，选址于浮山南麓、妙高峰下。</p>
 <p>那是我们无数次路过的地方，而今读来，才更懂其中深意。书中写道，房先生抱着“愤时事不可为，思以教育植国本”的信念建校。那座我们曾经习以为常的“双瞻阁”，原来寄托着“瞻彼咕兮，瞻望父兮”的深情，既是对父母养育之恩的铭记，更是对那一泓清水塘“如镜自照”的修身期许。</p>
@@ -1367,7 +1367,7 @@
 <li>打开软件后，点击“<strong>扫描大文件夹</strong>”。</li>
 <li>工具会自动分析 <code>%LOCALAPPDATA%</code> 和 <code>%APPDATA%</code> 等目录，按占用空间大小排序显示。</li>
 </ul>
-<p><img src="https://i.zhyong.site/i/2026/02/15/69919b3624e5d.png" alt="1771150133425.png"></p>
+<p><img src="/img/69919b3624e5d.png" alt="1771150133425.png"></p>
 <h4 id="第三步：选择与迁移"><a href="#第三步：选择与迁移" class="headerlink" title="第三步：选择与迁移"></a>第三步：选择与迁移</h4><ol>
 <li>在列表中勾选你想要迁移的文件夹（通常建议先从微信、浏览器、编辑器等非系统关键软件开始）。</li>
 <li>设置“<strong>目标根目录</strong>”（例如 <code>D:\AppData_Backup</code>）。</li>
@@ -1427,7 +1427,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># --- 历史命令快速搜索函数 (fh) ---</span></span><br><span class="line"><span class="function"><span class="title">fh</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> selected_cmd</span><br><span class="line">  <span class="comment"># 1. 获取历史记录，不带行号进行匹配</span></span><br><span class="line">  <span class="comment"># 2. --reverse 使列表从上往下排列，--height 限制窗口高度</span></span><br><span class="line">  selected_cmd=$(<span class="built_in">fc</span> -rl 1 | fzf --height 40% --reverse --nth=2..)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$selected_cmd</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 3. 提取命令内容（去除行号前缀）</span></span><br><span class="line">    <span class="built_in">local</span> final_cmd=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$selected_cmd</span>&quot;</span> | sed <span class="string">&#x27;s/^[ ]*[0-9]*[ ]*//&#x27;</span>)</span><br><span class="line">    <span class="comment"># 4. 将结果填入当前输入缓冲区</span></span><br><span class="line">    LBUFFER=<span class="string">&quot;<span class="variable">$final_cmd</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="comment"># 5. 重新绘制提示符</span></span><br><span class="line">  <span class="built_in">zle</span> reset-prompt</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册为 Zle Widget 并绑定快捷键 Ctrl+H</span></span><br><span class="line"><span class="built_in">zle</span> -N fh</span><br><span class="line"><span class="built_in">bindkey</span> <span class="string">&#x27;^H&#x27;</span> fh</span><br></pre></td></tr></table></figure>
 
 <p>此时，只要在终端按下<code>Ctrl+H</code>键，马上即可跳出搜索框，配合<code>fzf</code>命令，体验非常好。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/15/69918c4db9439.png" alt="1771146316990.png"></p>
+<p><img src="/img/69918c4db9439.png" alt="1771146316990.png"></p>
 <hr>
 <h3 id="3-技术要点解析"><a href="#3-技术要点解析" class="headerlink" title="3. 技术要点解析"></a>3. 技术要点解析</h3><table>
 <thead>
@@ -1625,7 +1625,7 @@
 <td><strong>因果建模</strong>：假前提可导出任何结论</td>
 </tr>
 </tbody></table>
-<p><img src="https://i.zhyong.site/i/2026/02/15/69915f464d694.webp" alt="1771134788672.webp"></p>
+<p><img src="/img/69915f464d694.webp" alt="1771134788672.webp"></p>
 <hr>
 <h2 id="3-具象化实战校验：剥离修辞的结构化建模"><a href="#3-具象化实战校验：剥离修辞的结构化建模" class="headerlink" title="3. 具象化实战校验：剥离修辞的结构化建模"></a>3. 具象化实战校验：剥离修辞的结构化建模</h2><p>逻辑专家不应受修辞蒙蔽，而应通过具象化实例校准认知。</p>
 <h3 id="效力对比：真确性的界限"><a href="#效力对比：真确性的界限" class="headerlink" title="效力对比：真确性的界限"></a>效力对比：真确性的界限</h3><ul>
@@ -1940,7 +1940,7 @@
 <p>Bash</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 organizer.py /Users/YourName/Desktop/Project_Files</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>执行后瞬间清爽很多：<br><img src="https://i.zhyong.site/i/2026/02/14/69907ff8679fb.png" alt="1771077624172.png"><br><img src="https://i.zhyong.site/i/2026/02/14/6990801d1eb3e.png" alt="1771077656044.png"></p>
+<p>执行后瞬间清爽很多：<br><img src="/img/69907ff8679fb.png" alt="1771077624172.png"><br><img src="/img/6990801d1eb3e.png" alt="1771077656044.png"></p>
 <hr>
 <h2 id="4-注意事项与不确定性说明"><a href="#4-注意事项与不确定性说明" class="headerlink" title="4. 注意事项与不确定性说明"></a>4. 注意事项与不确定性说明</h2><ul>
 <li><strong>路径权限</strong>：若目标目录下包含受系统保护的文件或文件夹，脚本可能会因权限不足（Permission Denied）报错。此时可尝试在命令前添加 <code>sudo</code>（慎用）。</li>
@@ -2110,7 +2110,7 @@
 <td>嵌入式治理：在“识别机会”至“方案部署”的五个非线性阶段中精准嵌入 IP 任务。</td>
 </tr>
 </tbody></table>
-<p><img src="https://i.zhyong.site/i/2026/02/14/6990087dd32d9.webp" alt="1771047036557.webp"></p>
+<p><img src="/img/6990087dd32d9.webp" alt="1771047036557.webp"></p>
 <hr>
 <h2 id="2-战略协同：为何-ISO-56005-是现代企业的必然选择"><a href="#2-战略协同：为何-ISO-56005-是现代企业的必然选择" class="headerlink" title="2. 战略协同：为何 ISO 56005 是现代企业的必然选择"></a>2. 战略协同：为何 ISO 56005 是现代企业的必然选择</h2><p>许多企业在创新中面临“研发与市场脱节、成果流失、侵权风险频发”等阵痛，其根源在于缺乏<strong>创知融合</strong>的顶层设计。</p>
 <h3 id="“创知融合”：三维协同的治理逻辑"><a href="#“创知融合”：三维协同的治理逻辑" class="headerlink" title="“创知融合”：三维协同的治理逻辑"></a>“创知融合”：三维协同的治理逻辑</h3><p>专家视角下的企业治理要求<strong>业务战略、创新战略、知识产权战略</strong>实现高度协同（Strategic IP Orchestration）。若 IP 战略孤立于业务，则产生的专利仅是“证书”而非“资产”；通过 ISO 56005，企业可确保每一项研发投入都能通过法律确权转化为市场排他性优势，实现从技术领先到市场主导的逻辑闭环。</p>
@@ -2246,8 +2246,8 @@
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直以来很喜欢词云图，能够很直观地体现文本的关键词，无奈技术有限，现使用AI写出了比较完整、功能强大的词图，分享给大家。<br>可以先看下成果，这是使用脚本生成的由<a href="https://github.com/chinese-poetry/chinese-poetry">chinese-poetry&#x2F;chinese-poetry</a>中宋词的词云图。</p>
 <span id="more"></span>
 
-<p><img src="https://i.zhyong.site/i/2026/02/14/698fdeb10089a.png" alt="1771036336628.png"></p>
-<h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>系统环境：<br><img src="https://i.zhyong.site/i/2026/02/14/698fdf80610f7.png" alt="1771036543649.png"><br>安装：</p>
+<p><img src="/img/698fdeb10089a.png" alt="1771036336628.png"></p>
+<h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>系统环境：<br><img src="/img/698fdf80610f7.png" alt="1771036543649.png"><br>安装：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3 install jieba wordcloud matplotlib</span><br></pre></td></tr></table></figure>
 <p>需要的文件：</p>
 <ul>
@@ -2272,7 +2272,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usage: get_word_cloud.py [-h] [--font FONT] [--stop STOP] [--exclude [EXCLUDE ...]] [--skip_top SKIP_TOP] filenames [filenames ...]</span><br><span class="line"></span><br><span class="line">多文件词频分析工具</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line">  filenames             文件路径</span><br><span class="line"></span><br><span class="line">options:</span><br><span class="line">  -h, --help            show this help message and exit</span><br><span class="line">  --font FONT           手动指定字体路径</span><br><span class="line">  --stop STOP           停用词路径</span><br><span class="line">  --exclude, -e [EXCLUDE ...]</span><br><span class="line">                        排除特定词</span><br><span class="line">  --skip_top SKIP_TOP   跳过前N个词</span><br></pre></td></tr></table></figure>
 
 <p>如进行宋词的内容分析，根据实际关键词请问，去除不必要关键字，最终使用及输出如下：</p>
-<p><img src="https://i.zhyong.site/i/2026/02/14/698fe149d1bba.png" alt="1771037001191.png"></p>
+<p><img src="/img/698fe149d1bba.png" alt="1771037001191.png"></p>
 <p>其中<code>get_wc</code>命令即为脚本文件，为方便使用，设置了alias。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alias get_wc=&quot;~/Project/Python_wordcloud/.venv/bin/python3 ~/Project/Python_wordcloud/get_word_cloud.py&quot;</span><br></pre></td></tr></table></figure>
 
@@ -2379,7 +2379,7 @@
 </ul>
 <h3 id="5-2-丰田A3报告的逻辑解构"><a href="#5-2-丰田A3报告的逻辑解构" class="headerlink" title="5.2 丰田A3报告的逻辑解构"></a>5.2 丰田A3报告的逻辑解构</h3><p>由丰田在1940年代开发的 <em>A3</em> 报告（11x17英寸规格），本质上是**“单页纸上的金字塔”**。极致的页面空间约束强制研发者进行高度的逻辑抽象与概括。它遵循 <em>PDCA</em> 循环，要求在单页内完成从现状到标准化对策的完整逻辑闭环。</p>
 <h3 id="5-3-复杂工程文档的“倒金字塔”简化"><a href="#5-3-复杂工程文档的“倒金字塔”简化" class="headerlink" title="5.3 复杂工程文档的“倒金字塔”简化"></a>5.3 复杂工程文档的“倒金字塔”简化</h3><p>针对数百页的技术规格书（Specifications），必须采用“倒金字塔”编写法。文档的最顶端必须优先列出核心性能指标限制与关键质量特性（<em>CTQ</em>），而非单纯罗列目录，确保下游环节能在第一时间掌握技术边界。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/15/6991649df19f2.webp" alt="1771136156369.webp"></p>
+<p><img src="/img/6991649df19f2.webp" alt="1771136156369.webp"></p>
 <hr>
 <h2 id="6-未来展望与结语"><a href="#6-未来展望与结语" class="headerlink" title="6. 未来展望与结语"></a>6. 未来展望与结语</h2><h3 id="6-1-数字化与AI辅助的逻辑构建"><a href="#6-1-数字化与AI辅助的逻辑构建" class="headerlink" title="6.1 数字化与AI辅助的逻辑构建"></a>6.1 数字化与AI辅助的逻辑构建</h3><p>在工业4.0与 <em>AI</em> 辅助研发时代，逻辑思维已成为与 <em>AI</em> 协作的“底层协议”。<em>Prompt Engineering</em>（提示词工程）的本质即是向 <em>AI</em> 提供一套金字塔式的逻辑框架。<em>AI</em> 能够处理海量事实，但从事实中提炼“逻辑跃迁”并驱动技术洞察，依然要求工程师具备极强的结构化思维。</p>
 <h3 id="6-2-总结"><a href="#6-2-总结" class="headerlink" title="6.2 总结"></a>6.2 总结</h3><p>结构化逻辑能力是高新技术企业技术主管从“技术专家”跨越至“管理精英”的非谈判性领导力。组织必须将金字塔原理内化为底层基因，以逻辑的确定性应对技术开发的各种不确定性，确保在复杂的技术迷雾中做出正确的商业决策。</p>
@@ -2560,7 +2560,7 @@
 <li><strong>平庸表达：</strong> “上半年疫情严重，书店关门了，主营收入掉了10.97%，后来我们做了直播，还行。”</li>
 <li><strong>SCQA重塑：</strong> “2020年上半年，受疫情冲击，实体店渠道销售额腰斩，公司主营业务收入面临两位数下滑风险（S-C）。在此战略瓶颈期，我方如何实现逆势突围？（Q）我们迅速执行‘电商+直播’新模式，激活新媒体矩阵，使线上渠道占比跃升至70%以上，有效抵消了线下渠道的系统性风险（A）。”</li>
 </ul>
-<p><img src="https://i.zhyong.site/i/2026/02/15/699165126225e.webp" alt="1771136273176.webp"></p>
+<p><img src="/img/699165126225e.webp" alt="1771136273176.webp"></p>
 <hr>
 <h2 id="4-问题解决：结构化思维与精益实践的算法融合"><a href="#4-问题解决：结构化思维与精益实践的算法融合" class="headerlink" title="4. 问题解决：结构化思维与精益实践的算法融合"></a>4. 问题解决：结构化思维与精益实践的算法融合</h2><p>金字塔原理不仅是表达的艺术，更是精益生产中解决复杂问题的核心算法。</p>
 <h3 id="4-1-界定问题：R1-R2差距分析法"><a href="#4-1-界定问题：R1-R2差距分析法" class="headerlink" title="4.1 界定问题：R1-R2差距分析法"></a>4.1 界定问题：R1-R2差距分析法</h3><p>问题被定义为“现状（R1）”与“目标（R2）”之间的鸿沟。清晰的界定本身就是一种MECE分类。无法准确界定差距的人，注定无法找到精准的对策。</p>
@@ -2652,7 +2652,7 @@
 <li><strong>1 级（局部生长受阻）：</strong> <strong>So What?</strong> 虽然在某些工业标准下视为通过，但属于“边缘性及格”。在环境湿度波动时，极易诱发生物定植风险，可能导致产品在大规模商业应用中面临召回风险。</li>
 <li><strong>2 级（生长明显）：</strong> <strong>So What?</strong> 样品不具备有效抑菌能力。这预示着材料在实际使用中将迅速霉变或失效，无法通过全球生物杀灭剂法规准入。</li>
 </ul>
-<p><img src="https://i.zhyong.site/i/2026/02/15/699165465f223.webp" alt="1771136323932.webp"></p>
+<p><img src="/img/699165465f223.webp" alt="1771136323932.webp"></p>
 <hr>
 <h2 id="3-前沿案例研究-A：绿色工艺纳米银（AgNPs）增强型生物材料"><a href="#3-前沿案例研究-A：绿色工艺纳米银（AgNPs）增强型生物材料" class="headerlink" title="3. 前沿案例研究 A：绿色工艺纳米银（AgNPs）增强型生物材料"></a>3. 前沿案例研究 A：绿色工艺纳米银（AgNPs）增强型生物材料</h2><p>针对创伤修复领域，蛋壳膜（ESM）- 纳米银支架的研究展现了如何通过适应性测试验证技术突破。</p>
 <h3 id="3-1-创新路径与生物适配性"><a href="#3-1-创新路径与生物适配性" class="headerlink" title="3.1 创新路径与生物适配性"></a>3.1 创新路径与生物适配性</h3><p>该研究利用 0.5 M 乙酸提取 ESM 作为生物支架，并采用 <strong>Metalchemy 绿色合成法</strong>整合纳米银。实验精确设定纳米银浓度为 <strong>5 μg&#x2F;mL</strong>，在此阈值下，材料对人真皮成纤维细胞（HDFs）和 BJ 细胞展现出优异的生物相容性，确保了临床应用的安全性。</p>
@@ -2813,7 +2813,7 @@
 </tr>
 </tbody></table>
 <p><strong>工程师笔记——“免测”条款：</strong> 根据欧盟委员会决策，含有小于 1% 有机物含量的矿棉、玻璃、陶瓷及水泥制品，可无需测试直接判定为 A1 级。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/15/699166212ed2d.webp" alt="1771136543830.webp"></p>
+<p><img src="/img/699166212ed2d.webp" alt="1771136543830.webp"></p>
 <h3 id="应用领域分类后缀"><a href="#应用领域分类后缀" class="headerlink" title="应用领域分类后缀"></a>应用领域分类后缀</h3><ul>
 <li><strong>无后缀：</strong> 适用于墙板、吊顶及线性装饰材料。</li>
 <li><strong>fl (Floorings)：</strong> 地板体系。其受热机理主要源于上方烟气层的辐射热。</li>
@@ -2995,8 +2995,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>阻燃测试</tag>
         <tag>EN13501</tag>
+        <tag>阻燃测试</tag>
       </tags>
   </entry>
   <entry>
@@ -3056,7 +3056,7 @@
 </tr>
 </tbody></table>
 <p>理解这一宏观架构是编制合规报告与开展产品研发优化的逻辑起点。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/15/699165caf2644.webp" alt="1771136458262.webp"></p>
+<p><img src="/img/699165caf2644.webp" alt="1771136458262.webp"></p>
 <hr>
 <h3 id="2-专业提示词框架：符合认证要求的报告生成模组"><a href="#2-专业提示词框架：符合认证要求的报告生成模组" class="headerlink" title="2. 专业提示词框架：符合认证要求的报告生成模组"></a>2. 专业提示词框架：符合认证要求的报告生成模组</h3><p>一份高质量的分级报告需具备严谨的法律声明与详实的数据矩阵。以下模组可作为生成标准化报告的 Prompt 模板：</p>
 <h4 id="2-1-报告核心要素模组"><a href="#2-1-报告核心要素模组" class="headerlink" title="2.1 报告核心要素模组"></a>2.1 报告核心要素模组</h4><ul>
@@ -3266,8 +3266,8 @@
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>阻燃测试</tag>
         <tag>EN13501</tag>
+        <tag>阻燃测试</tag>
       </tags>
   </entry>
   <entry>
@@ -3406,7 +3406,7 @@
 <span id="more"></span>
 
 <hr>
-<h2 id="汇总图"><a href="#汇总图" class="headerlink" title="汇总图"></a>汇总图</h2><p><img src="https://i.zhyong.site/i/2026/02/15/699164389ec63.webp" alt="1771136054896.webp"></p>
+<h2 id="汇总图"><a href="#汇总图" class="headerlink" title="汇总图"></a>汇总图</h2><p><img src="/img/699164389ec63.webp" alt="1771136054896.webp"></p>
 <h2 id="1-第一章：六西格玛在研发中的战略定位"><a href="#1-第一章：六西格玛在研发中的战略定位" class="headerlink" title="1. 第一章：六西格玛在研发中的战略定位"></a>1. 第一章：六西格玛在研发中的战略定位</h2><h3 id="1-1-从宏观框架到微观执行：IPD框架的引入"><a href="#1-1-从宏观框架到微观执行：IPD框架的引入" class="headerlink" title="1.1 从宏观框架到微观执行：IPD框架的引入"></a>1.1 从宏观框架到微观执行：IPD框架的引入</h3><p>研发六西格玛的成功不仅取决于统计工具的堆砌，更取决于其背后的业务结构。</p>
 <ul>
 <li><strong>宏观框架 (Macro-Framework)：</strong> 这是企业的商业契约与业务结构。它明确了项目目标、部门间的法律&#x2F;职能关系及评价指标，确保所有研发参与者为“整体项目结果”负责，而不仅仅是个人绩效。这种结构为成功或失败创造了明确的后果。</li>
@@ -3553,7 +3553,7 @@
 <hr>
 <h3 id="2-存量市场的震荡：职位替代风险图谱"><a href="#2-存量市场的震荡：职位替代风险图谱" class="headerlink" title="2. 存量市场的震荡：职位替代风险图谱"></a>2. 存量市场的震荡：职位替代风险图谱</h3><p>本轮AI浪潮对“白领阶层”构成了前所未有的压力。经济逻辑十分冷峻：当非结构化数据的处理、法律文案的合成及初级审计的边际成本趋向于零，传统知识劳务的价值护城河将迅速瓦解。</p>
 <h4 id="2-1-高风险职位清单与替代逻辑"><a href="#2-1-高风险职位清单与替代逻辑" class="headerlink" title="2.1 高风险职位清单与替代逻辑"></a>2.1 高风险职位清单与替代逻辑</h4><p>Goldman Sachs（高盛）的研究指出，全球约<strong>三分之二</strong>的职位暴露于AI自动化风险之中。这种“风险暴露”呈现高度的非对称性。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/15/6991659d2771d.png" alt="1771136412855.png"></p>
+<p><img src="/img/6991659d2771d.png" alt="1771136412855.png"></p>
 <ul>
 <li><strong>法律服务</strong>：约**50%**以上的任务处于高度暴露状态。高盛披露的案例显示，AI已能完成95%的IPO申报文件整理工作。</li>
 <li><strong>财务与审计</strong>：基于固定规则的数据合并、基础模型构建及合规检查正被AI快速替代。</li>
@@ -3595,7 +3595,7 @@
 <p>单纯的岗位替代只是表象，真正的战略重心在于“技能溢价”向高阶认知的加速转移。</p>
 <hr>
 <h3 id="3-增量市场的机遇：高溢价技能识别"><a href="#3-增量市场的机遇：高溢价技能识别" class="headerlink" title="3. 增量市场的机遇：高溢价技能识别"></a>3. 增量市场的机遇：高溢价技能识别</h3><p>在执行成本大幅下降的时代，“品味（Taste）”与“判断（Judgment）”正成为劳动力市场中最为稀缺的商品。</p>
-<p><img src="https://i.zhyong.site/i/2026/02/15/6991657ac67de.png" alt="1771136378381.png"></p>
+<p><img src="/img/6991657ac67de.png" alt="1771136378381.png"></p>
 <h4 id="3-1-技术硬核：AI流利度（AI-Fluency）"><a href="#3-1-技术硬核：AI流利度（AI-Fluency）" class="headerlink" title="3.1 技术硬核：AI流利度（AI Fluency）"></a>3.1 技术硬核：AI流利度（AI Fluency）</h4><p>AI流利度不再仅仅是工具使用，而是涵盖了任务拆解、提示词工程（Prompt Engineering）及对模型输出结果的<strong>幻觉猎寻</strong>（Hallucination Hunting）。</p>
 <p>“AI流利度已成为2026年后的核心溢价基础。研究表明，利用GitHub Copilot等工具的开发者在编码任务上实现了<strong>56%的速度增量</strong>。在金融前台，AI加持的员工人均增量收入有望达到<strong>350万美元</strong>。” —— 结合Whitehat&#x2F;Makebot&#x2F;Deloitte综合测算</p>
 <h4 id="3-2-人类特质：软技能的硬核化"><a href="#3-2-人类特质：软技能的硬核化" class="headerlink" title="3.2 人类特质：软技能的硬核化"></a>3.2 人类特质：软技能的硬核化</h4><p>根据WEF报告，2030年职业胜任力的核心将聚焦于以下特质：</p>
@@ -3852,7 +3852,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主题是：AI时代的职场技能超势</span><br><span class="line">内容要分析：哪些职位容易被取代？哪些技能最有价值？以及要提升哪些职位，才成功被淘汰？</span><br><span class="line">报告格式：由摘要开始，内文至少需要六个章节，每个章节至少需要2个子章节，最后是参考文献</span><br><span class="line">字数：5000至6000字</span><br><span class="line">报告对象：中国上市公司传统产业人资部门高主管。</span><br><span class="line">请给我生成报告的提示词</span><br></pre></td></tr></table></figure>
 
 <h2 id="生成报告"><a href="#生成报告" class="headerlink" title="生成报告"></a>生成报告</h2><p>将上一步生成的提示词，直接输入到报告中，生成</p>
-<h2 id="生成图表"><a href="#生成图表" class="headerlink" title="生成图表"></a>生成图表</h2><p>使用Gemini中的<code>canvas</code>功能，生成图表<br><img src="https://i.zhyong.site/i/2026/02/15/699164c780936.png" alt="1771136198745.png"></p>
+<h2 id="生成图表"><a href="#生成图表" class="headerlink" title="生成图表"></a>生成图表</h2><p>使用Gemini中的<code>canvas</code>功能，生成图表<br><img src="/img/699164c780936.png" alt="1771136198745.png"></p>
 <p>生成报告内容见：<a href="https://zhyong.site/posts/5faa.html">重构与共生：AI 时代的职场技能趋势与人才战略蓝图</a></p>
 ]]></content>
       <categories>
