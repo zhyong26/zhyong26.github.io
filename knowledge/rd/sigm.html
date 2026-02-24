@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="六西格玛（Six Sigma）在研发阶段（R&amp;D）的核心流程通常被称为 DFSS（Design for Six Sigma，六西格玛设计）。与用于改进现有流程的 DMAIC 不同，DFSS 旨在从源头设计出具有高可靠性和极低缺陷率的产品或服务。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="六西格玛">
+<meta property="og:url" content="https://zhyong.site/knowledge/rd/sigm.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="六西格玛（Six Sigma）在研发阶段（R&amp;D）的核心流程通常被称为 DFSS（Design for Six Sigma，六西格玛设计）。与用于改进现有流程的 DMAIC 不同，DFSS 旨在从源头设计出具有高可靠性和极低缺陷率的产品或服务。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-24T02:24:58.000Z">
+<meta property="article:modified_time" content="2026-02-24T02:45:33.261Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="材料研发, Python自动化, AI集成, 工艺优化, 生产力工具">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhyong.site/knowledge/rd/sigm.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/knowledge/rd/sigm.html","path":"knowledge/rd/sigm.html","title":"六西格玛"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>六西格玛 | 材料与逻辑
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/knowledge/rd/sigm.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-瞬间"><a href="/memos/" rel="section"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Define%EF%BC%88%E5%AE%9A%E4%B9%89%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="nav-text">1. Define（定义阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Measure%EF%BC%88%E6%B5%8B%E9%87%8F%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="nav-text">2. Measure（测量阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Analyze%EF%BC%88%E5%88%86%E6%9E%90%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="nav-text">3. Analyze（分析阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Design%EF%BC%88%E8%AE%BE%E8%AE%A1%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="nav-text">4. Design（设计阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Verify%EF%BC%88%E9%AA%8C%E8%AF%81%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="nav-text">5. Verify（验证阶段）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFSS-%E4%B8%8E%E4%BC%A0%E7%BB%9F%E7%A0%94%E5%8F%91%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB"><span class="nav-text">DFSS 与传统研发的主要区别</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">六西格玛
+</h1>
+
+<div class="post-meta-container">
+    <div class="post-description">六西格玛（Six Sigma）在研发阶段（R&D）的核心流程通常被称为 DFSS（Design for Six Sigma，六西格玛设计）。与用于改进现有流程的 DMAIC 不同，DFSS 旨在从源头设计出具有高可靠性和极低缺陷率的产品或服务。</div>
+  <ul class="breadcrumb">
+            <li><a href="/knowledge/">知识</a></li>
+            <li><a href="/knowledge/rd/">研发流程</a></li>
+            <li>SIGM</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>最常用的 DFSS 模型是 <strong>DMADV</strong>，其具体流程及内容如下：</p>
+<h3 id="1-Define（定义阶段）"><a href="#1-Define（定义阶段）" class="headerlink" title="1. Define（定义阶段）"></a>1. Define（定义阶段）</h3><ul>
+<li><strong>核心目标</strong>：确定项目范围、目标及客户需求。</li>
+<li><strong>关键工作</strong>：</li>
+<li>制定项目章程（Project Charter）。</li>
+<li>识别内外部客户，收集 <strong>VOC</strong>（客户声音）。</li>
+<li>明确业务价值与技术可行性。</li>
+</ul>
+<h3 id="2-Measure（测量阶段）"><a href="#2-Measure（测量阶段）" class="headerlink" title="2. Measure（测量阶段）"></a>2. Measure（测量阶段）</h3><ul>
+<li><strong>核心目标</strong>：将客户感性的需求转化为可量化的技术指标。</li>
+<li><strong>关键工作</strong>：</li>
+<li>识别 <strong>CTQ</strong>（关键质量特性）。</li>
+<li>进行竞争对手分析与基准研究（Benchmarking）。</li>
+<li>评估当前的测量系统分析（MSA）。</li>
+</ul>
+<h3 id="3-Analyze（分析阶段）"><a href="#3-Analyze（分析阶段）" class="headerlink" title="3. Analyze（分析阶段）"></a>3. Analyze（分析阶段）</h3><ul>
+<li><strong>核心目标</strong>：评估设计概念，确定最佳的技术方案。</li>
+<li><strong>关键工作</strong>：</li>
+<li>概念生成与筛选（如使用 Pugh 矩阵）。</li>
+<li>进行 <strong>FMEA</strong>（失效模式及影响分析），识别潜在风险。</li>
+<li>初步功能分解，确定各模块的性能要求。</li>
+</ul>
+<h3 id="4-Design（设计阶段）"><a href="#4-Design（设计阶段）" class="headerlink" title="4. Design（设计阶段）"></a>4. Design（设计阶段）</h3><ul>
+<li><strong>核心目标</strong>：进行详细设计，并优化设计参数。</li>
+<li><strong>关键工作</strong>：</li>
+<li><strong>DOE</strong>（实验设计）：通过统计学方法确定关键参数的最佳组合。</li>
+<li><strong>稳健设计</strong>（Taguchi Methods）：确保设计对环境干扰（噪声）不敏感。</li>
+<li>模拟与仿真，预测产品在 6$\sigma$ 水平下的良率。</li>
+</ul>
+<h3 id="5-Verify（验证阶段）"><a href="#5-Verify（验证阶段）" class="headerlink" title="5. Verify（验证阶段）"></a>5. Verify（验证阶段）</h3><ul>
+<li><strong>核心目标</strong>：通过原型测试确认设计是否达到目标指标。</li>
+<li><strong>关键工作</strong>：</li>
+<li>实施试产（Pilot Run）。</li>
+<li>验证产品性能是否满足 CTQ 要求。</li>
+<li>将设计文档和控制计划（Control Plan）移交给生产部门，结束研发。</li>
+</ul>
+<hr>
+<h3 id="DFSS-与传统研发的主要区别"><a href="#DFSS-与传统研发的主要区别" class="headerlink" title="DFSS 与传统研发的主要区别"></a>DFSS 与传统研发的主要区别</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>传统研发</th>
+<th>六西格玛研发 (DFSS)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>工作重心</strong></td>
+<td>解决生产中出现的问题（消防式）</td>
+<td>在设计阶段消除潜在缺陷（预防式）</td>
+</tr>
+<tr>
+<td><strong>决策依据</strong></td>
+<td>经验与直觉</td>
+<td>数据与统计模型</td>
+</tr>
+<tr>
+<td><strong>质量水平</strong></td>
+<td>通常在 3$\sigma$ - 4$\sigma$</td>
+<td>目标为 6$\sigma$（3.4 DPMO）</td>
+</tr>
+</tbody></table>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/knowledge/">知识</a></li>
+            <li><a href="/knowledge/rd/">研发流程</a></li>
+            <li>SIGM</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">113k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:09</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
