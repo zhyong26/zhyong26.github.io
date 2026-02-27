@@ -271,7 +271,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-02-27 22:30:13 / 修改时间：22:49:37" itemprop="dateCreated datePublished" datetime="2026-02-27T22:30:13+08:00">2026-02-27</time>
+      <time title="创建时间：2026-02-27 22:30:13 / 修改时间：23:04:26" itemprop="dateCreated datePublished" datetime="2026-02-27T22:30:13+08:00">2026-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,37 +310,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>若期望更清晰地查阅Markdown文件，以思维导图的形式呈现将更有助于阅读与记忆。然而，博主在尝试使用诸多软件，诸如Processon、DrawIO等，将Markdown文件转换为思维导图图片时，操作极为不便。最终发现一款Vscode插件（<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode">Markmap - Visual Studio Marketplace</a>）能够较为轻松地达成此功能，但该插件仅支持导出html或svg格式，后续查看时存在诸多不便。</p>
 <p>基于此情形，特自行开发一款脚本，借助该脚本可极为便捷地自动导出美观的思维导图图片。此方案依托Python的自动化特性，旨在将Markdown格式的文档转换为高分辨率的静态图片（PNG）思维导图。该方案有效融合了Markmap的解析能力与Playwright的浏览器渲染技术。 </p>
-<hr>
-<h2 id="技术架构与工具链"><a href="#技术架构与工具链" class="headerlink" title="技术架构与工具链"></a>技术架构与工具链</h2><p>该脚本通过以下三个阶段完成数据转换：</p>
-<ol>
-<li><strong>解析阶段</strong>：利用 <code>markmap-cli</code> (Node.js) 将 Markdown 标题层级转换为包含动态 SVG 的独立 HTML 文件。</li>
-<li><strong>渲染阶段</strong>：通过 <code>Playwright</code> 启动 Chromium 无头浏览器加载生成的 HTML。</li>
-<li><strong>捕获阶段</strong>：定位页面中的 <code>svg.markmap</code> 元素，并执行像素级截图。</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th><strong>组件</strong></th>
-<th><strong>作用</strong></th>
-<th><strong>备注</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Markmap</strong></td>
-<td>核心转换引擎</td>
-<td>负责层级逻辑与 SVG 生成</td>
-</tr>
-<tr>
-<td><strong>Playwright</strong></td>
-<td>浏览器自动化</td>
-<td>解决 JavaScript 异步渲染的截图问题</td>
-</tr>
-<tr>
-<td><strong>Python</strong></td>
-<td>胶水语言</td>
-<td>控制流程、管理文件系统及异步任务</td>
-</tr>
-</tbody></table>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/f040.html#more" rel="contents">
