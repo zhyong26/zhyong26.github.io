@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -232,6 +232,139 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/f040.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/f040.html" class="post-title-link" itemprop="url">自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-27 22:30:13 / 修改时间：22:49:37" itemprop="dateCreated datePublished" datetime="2026-02-27T22:30:13+08:00">2026-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">自动化工具</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>若期望更清晰地查阅Markdown文件，以思维导图的形式呈现将更有助于阅读与记忆。然而，博主在尝试使用诸多软件，诸如Processon、DrawIO等，将Markdown文件转换为思维导图图片时，操作极为不便。最终发现一款Vscode插件（<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode">Markmap - Visual Studio Marketplace</a>）能够较为轻松地达成此功能，但该插件仅支持导出html或svg格式，后续查看时存在诸多不便。</p>
+<p>基于此情形，特自行开发一款脚本，借助该脚本可极为便捷地自动导出美观的思维导图图片。此方案依托Python的自动化特性，旨在将Markdown格式的文档转换为高分辨率的静态图片（PNG）思维导图。该方案有效融合了Markmap的解析能力与Playwright的浏览器渲染技术。 </p>
+<hr>
+<h2 id="技术架构与工具链"><a href="#技术架构与工具链" class="headerlink" title="技术架构与工具链"></a>技术架构与工具链</h2><p>该脚本通过以下三个阶段完成数据转换：</p>
+<ol>
+<li><strong>解析阶段</strong>：利用 <code>markmap-cli</code> (Node.js) 将 Markdown 标题层级转换为包含动态 SVG 的独立 HTML 文件。</li>
+<li><strong>渲染阶段</strong>：通过 <code>Playwright</code> 启动 Chromium 无头浏览器加载生成的 HTML。</li>
+<li><strong>捕获阶段</strong>：定位页面中的 <code>svg.markmap</code> 元素，并执行像素级截图。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>组件</strong></th>
+<th><strong>作用</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Markmap</strong></td>
+<td>核心转换引擎</td>
+<td>负责层级逻辑与 SVG 生成</td>
+</tr>
+<tr>
+<td><strong>Playwright</strong></td>
+<td>浏览器自动化</td>
+<td>解决 JavaScript 异步渲染的截图问题</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>胶水语言</td>
+<td>控制流程、管理文件系统及异步任务</td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/f040.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -728,7 +861,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-23 17:21:53" itemprop="dateModified" datetime="2026-02-23T17:21:53+08:00">2026-02-23</time>
+      <time title="修改时间：2026-02-27 22:48:34" itemprop="dateModified" datetime="2026-02-27T22:48:34+08:00">2026-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -736,7 +869,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%87%E4%BB%BD/" itemprop="url" rel="index"><span itemprop="name">自动化备份</span></a>
+          <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">自动化工具</span></a>
         </span>
     </span>
 
@@ -1250,128 +1383,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/618.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ZhangYong">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="材料与逻辑">
-      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 材料与逻辑">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/618.html" class="post-title-link" itemprop="url">你的私有知识库：自托管 Markdown 笔记方案 NoteDiscovery</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-17 14:20:19" itemprop="dateCreated datePublished" datetime="2026-02-17T14:20:19+08:00">2026-02-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-02-23 17:21:53" itemprop="dateModified" datetime="2026-02-23T17:21:53+08:00">2026-02-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">效率工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/%E8%87%AA%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">自托管服务</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在追求「第二大脑」的道路上，数据的隐私性与跨设备访问的便捷性往往难以兼得。<strong>NoteDiscovery</strong> 提供了一个平衡点：它是一款基于 Rust&#x2F;Python 开发的轻量级笔记应用，支持在自己的服务器（如 Synology NAS、VPS）上运行，通过 Web 界面随时随地管理你的 Markdown 笔记。</p>
-<h3 id="1-核心亮点"><a href="#1-核心亮点" class="headerlink" title="1. 核心亮点"></a>1. 核心亮点</h3><ul>
-<li><strong>完全私有化</strong>：笔记以纯文本 Markdown 格式存储在你的服务器上，无厂商锁定，备份极其简单。</li>
-<li><strong>类 Obsidian 体验</strong>：支持双向链接 <code>[[Wikilinks]]</code>、图谱视图（Graph View）、标签管理以及 YAML 元数据扫描。</li>
-<li><strong>功能全能</strong>：<ul>
-<li><strong>数学公式</strong>：集成 MathJax，完美支持 LaTeX 渲染。</li>
-<li><strong>流程图</strong>：支持 Mermaid 语法绘制流程图、甘特图。</li>
-<li><strong>模板系统</strong>：支持带占位符（如日期、标题）的自定义模板，快速创建日记或会议记录。</li>
-</ul>
-</li>
-<li><strong>轻量极速</strong>：针对大规模笔记库进行了性能优化，支持 PWA（可作为 App 安装至手机或桌面）。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/618.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1395,13 +1406,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">120k</span>
+    <span title="站点总字数">124k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:26</span>
   </span>
 </div>
 

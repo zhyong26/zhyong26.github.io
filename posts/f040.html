@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="若期望更清晰地查阅Markdown文件，以思维导图的形式呈现将更有助于阅读与记忆。然而，博主在尝试使用诸多软件，诸如Processon、DrawIO等，将Markdown文件转换为思维导图图片时，操作极为不便。最终发现一款Vscode插件（Markmap - Visual Studio Marketplace）能够较为轻松地达成此功能，但该插件仅支持导出html或svg格式，后续查看时存在诸多不便">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本">
+<meta property="og:url" content="https://zhyong.site/posts/f040.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="若期望更清晰地查阅Markdown文件，以思维导图的形式呈现将更有助于阅读与记忆。然而，博主在尝试使用诸多软件，诸如Processon、DrawIO等，将Markdown文件转换为思维导图图片时，操作极为不便。最终发现一款Vscode插件（Markmap - Visual Studio Marketplace）能够较为轻松地达成此功能，但该插件仅支持导出html或svg格式，后续查看时存在诸多不便">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/img/md2png.webp">
+<meta property="article:published_time" content="2026-02-27T14:30:13.000Z">
+<meta property="article:modified_time" content="2026-02-27T14:49:37.296Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="Markdown可视化">
+<meta property="article:tag" content="思维导图自动化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/img/md2png.webp">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/f040.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/f040.html","path":"posts/f040.html","title":"自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/f040.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-瞬间"><a href="/memos/" rel="section"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%B7%A5%E5%85%B7%E9%93%BE"><span class="nav-text">技术架构与工具链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E5%85%A8%E5%B1%80%E5%B7%A5%E5%85%B7-Node-js"><span class="nav-text">1. 安装全局工具 (Node.js)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85-Python-%E4%BE%9D%E8%B5%96"><span class="nav-text">2. 安装 Python 依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0-md2img-py"><span class="nav-text">自动化脚本实现 (md2img.py)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%94%E7%BB%8E%E3%80%81%E5%BD%92%E7%BA%B3%E3%80%81%E6%BA%AF%E5%9B%A0%E6%8E%A8%E7%90%86-%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE"><span class="nav-text">演绎、归纳、溯因推理 对比分析思维导图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-text">核心技术参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7%E4%B8%8E%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98"><span class="nav-text">局限性与已知问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/f040.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-02-27 22:30:13 / 修改时间：22:49:37" itemprop="dateCreated datePublished" datetime="2026-02-27T22:30:13+08:00">2026-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">自动化工具</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>若期望更清晰地查阅Markdown文件，以思维导图的形式呈现将更有助于阅读与记忆。然而，博主在尝试使用诸多软件，诸如Processon、DrawIO等，将Markdown文件转换为思维导图图片时，操作极为不便。最终发现一款Vscode插件（<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode">Markmap - Visual Studio Marketplace</a>）能够较为轻松地达成此功能，但该插件仅支持导出html或svg格式，后续查看时存在诸多不便。</p>
+<p>基于此情形，特自行开发一款脚本，借助该脚本可极为便捷地自动导出美观的思维导图图片。此方案依托Python的自动化特性，旨在将Markdown格式的文档转换为高分辨率的静态图片（PNG）思维导图。该方案有效融合了Markmap的解析能力与Playwright的浏览器渲染技术。 </p>
+<hr>
+<h2 id="技术架构与工具链"><a href="#技术架构与工具链" class="headerlink" title="技术架构与工具链"></a>技术架构与工具链</h2><p>该脚本通过以下三个阶段完成数据转换：</p>
+<ol>
+<li><strong>解析阶段</strong>：利用 <code>markmap-cli</code> (Node.js) 将 Markdown 标题层级转换为包含动态 SVG 的独立 HTML 文件。</li>
+<li><strong>渲染阶段</strong>：通过 <code>Playwright</code> 启动 Chromium 无头浏览器加载生成的 HTML。</li>
+<li><strong>捕获阶段</strong>：定位页面中的 <code>svg.markmap</code> 元素，并执行像素级截图。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>组件</strong></th>
+<th><strong>作用</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Markmap</strong></td>
+<td>核心转换引擎</td>
+<td>负责层级逻辑与 SVG 生成</td>
+</tr>
+<tr>
+<td><strong>Playwright</strong></td>
+<td>浏览器自动化</td>
+<td>解决 JavaScript 异步渲染的截图问题</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>胶水语言</td>
+<td>控制流程、管理文件系统及异步任务</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<hr>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>运行此脚本需要 Node.js 和 Python 环境。</p>
+<h3 id="1-安装全局工具-Node-js"><a href="#1-安装全局工具-Node-js" class="headerlink" title="1. 安装全局工具 (Node.js)"></a>1. 安装全局工具 (Node.js)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g markmap-cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装-Python-依赖"><a href="#2-安装-Python-依赖" class="headerlink" title="2. 安装 Python 依赖"></a>2. 安装 Python 依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install playwright</span><br><span class="line">playwright install chromium</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="自动化脚本实现-md2img-py"><a href="#自动化脚本实现-md2img-py" class="headerlink" title="自动化脚本实现 (md2img.py)"></a>自动化脚本实现 (<code>md2img.py</code>)</h2><p>此脚本文件也可查看：<a target="_blank" rel="noopener" href="https://github.com/zhyong26/Mac_shells/tree/main">zhyong26&#x2F;Mac_shells: 个人使用脚本</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> playwright.async_api <span class="keyword">import</span> async_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">capture_map</span>(<span class="params">html_file, output_png</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    渲染并截取高分辨率思维导图</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> async_playwright() <span class="keyword">as</span> p:</span><br><span class="line">        <span class="comment"># 启动 Chromium，建议在调试时将 headless 设为 False</span></span><br><span class="line">        browser = <span class="keyword">await</span> p.chromium.launch(headless=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># device_scale_factor=2 用于提升 200% 的导出清晰度</span></span><br><span class="line">        context = <span class="keyword">await</span> browser.new_context(device_scale_factor=<span class="number">2</span>)</span><br><span class="line">        page = <span class="keyword">await</span> context.new_page()</span><br><span class="line">        </span><br><span class="line">        abs_path = os.path.abspath(html_file)</span><br><span class="line">        <span class="keyword">await</span> page.goto(<span class="string">f&quot;file://<span class="subst">&#123;abs_path&#125;</span>&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 等待 Markmap 渲染核心类加载</span></span><br><span class="line">            svg_selector = <span class="string">&quot;svg.markmap&quot;</span></span><br><span class="line">            <span class="keyword">await</span> page.wait_for_selector(svg_selector, timeout=<span class="number">10000</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 强制等待 2 秒以确保初始缩放动画（fit）结束</span></span><br><span class="line">            <span class="keyword">await</span> asyncio.sleep(<span class="number">2</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 定位 SVG 并截图</span></span><br><span class="line">            element = page.locator(svg_selector)</span><br><span class="line">            <span class="keyword">await</span> element.screenshot(path=output_png, omit_background=<span class="literal">False</span>)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;渲染过程出错: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="keyword">await</span> browser.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_conversion</span>(<span class="params">input_md</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(input_md):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;找不到输入文件: <span class="subst">&#123;input_md&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    base_name = os.path.splitext(input_md)[<span class="number">0</span>]</span><br><span class="line">    temp_html = <span class="string">f&quot;<span class="subst">&#123;base_name&#125;</span>_temp.html&quot;</span></span><br><span class="line">    output_png = <span class="string">f&quot;<span class="subst">&#123;base_name&#125;</span>.png&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 调用 markmap-cli，--offline 参数确保内嵌 JS 资源</span></span><br><span class="line">        subprocess.run([<span class="string">&quot;markmap&quot;</span>, input_md, <span class="string">&quot;-o&quot;</span>, temp_html, <span class="string">&quot;--offline&quot;</span>], check=<span class="literal">True</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 执行异步渲染截图</span></span><br><span class="line">        asyncio.run(capture_map(temp_html, output_png))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 清理中间 HTML</span></span><br><span class="line">        <span class="keyword">if</span> os.path.exists(temp_html):</span><br><span class="line">            os.remove(temp_html)</span><br><span class="line">            </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;完成: <span class="subst">&#123;output_png&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;执行失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">import</span> sys</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;用法: python md2img.py test.md&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        run_conversion(sys.argv[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>生成的思维导图如下：</p>
+<p><img src="/img/md2png.webp"></p>
+<details class="note info"><summary><p>原markdown内容</p>
+</summary>
+<h1 id="演绎、归纳、溯因推理-对比分析思维导图"><a href="#演绎、归纳、溯因推理-对比分析思维导图" class="headerlink" title="演绎、归纳、溯因推理 对比分析思维导图"></a>演绎、归纳、溯因推理 对比分析思维导图</h1><ul>
+<li><p>三大推理核心定位</p>
+<ul>
+<li>演绎：从一般到特殊，必然推导</li>
+<li>归纳：从特殊到一般，概率总结</li>
+<li>溯因：从结果到原因，解释假设</li>
+</ul>
+</li>
+<li><p>一、演绎推理 Deduction</p>
+<ul>
+<li>逻辑公式：规则 + 情况 → 结果</li>
+<li>推理方向：普遍 → 特殊</li>
+<li>核心特点<ul>
+<li>必然性推理</li>
+<li>前提真 → 结论必真</li>
+<li>非扩张性：不产生新知识</li>
+</ul>
+</li>
+<li>经典例子：袋子里都是白豆 + 豆子来自此袋 → 豆子是白色</li>
+</ul>
+</li>
+<li><p>二、归纳推理 Induction</p>
+<ul>
+<li>逻辑公式：情况 + 结果 → 规则</li>
+<li>推理方向：特殊 → 一般</li>
+<li>核心特点<ul>
+<li>概率性、或然性</li>
+<li>经验泛化，描述性扩展</li>
+<li>结论不一定绝对正确</li>
+</ul>
+</li>
+<li>经典例子：这些豆子来自此袋且是白色 → 袋子里都是白豆</li>
+</ul>
+</li>
+<li><p>三、溯因推理 Abduction</p>
+<ul>
+<li>逻辑公式：规则 + 结果 → 情况</li>
+<li>推理方向：结果 → 最可能原因</li>
+<li>核心特点<ul>
+<li>似真性、假设性</li>
+<li>唯一具有生成性扩展的推理</li>
+<li>提出解释、引入新概念</li>
+</ul>
+</li>
+<li>经典例子：袋子里都是白豆 + 豆子是白色 → 可能来自此袋</li>
+</ul>
+</li>
+<li><p>四、三者关键对比</p>
+<ul>
+<li>演绎：保真、不扩知识、确定性</li>
+<li>归纳：不保真、扩知识、经验总结</li>
+<li>溯因：不保真、扩知识、生成解释</li>
+</ul>
+</li>
+<li><p>五、溯因推理应用风险</p>
+<ul>
+<li>逻辑谬误：肯定后件</li>
+<li>性质：非单调、可废止</li>
+<li>风险：背景知识不足 → 虚假假设</li>
+</ul>
+</li>
+</ul>
+
+</details>
+
+<hr>
+<h2 id="核心技术参数说明"><a href="#核心技术参数说明" class="headerlink" title="核心技术参数说明"></a>核心技术参数说明</h2><ul>
+<li><strong><code>device_scale_factor=2</code></strong>：该参数模拟高分辨率屏幕。若不设置，生成的图片在放大时会出现明显的文字锯齿。</li>
+<li><strong><code>omit_background=False</code></strong>：确保生成的图片具有非透明的底色（默认为白色），增加在各类文档查看器中的兼容性。</li>
+<li><strong><code>await asyncio.sleep(2)</code></strong>：Markmap 渲染后会自动调整缩放级别以适应窗口。如果立即截图，可能会截取到动画过程中的偏移画面。</li>
+<li><strong><code>svg.markmap</code> 定位器</strong>：不同于整页截图，此定位器能自动修剪掉浏览器窗口的冗余空白，仅保留思维导图主体。</li>
+</ul>
+<hr>
+<h2 id="局限性与已知问题"><a href="#局限性与已知问题" class="headerlink" title="局限性与已知问题"></a>局限性与已知问题</h2><ul>
+<li><strong>性能开销</strong>：由于需要启动 Chromium 内核，转换大型 Markdown 文件时 CPU 和内存占用较高。</li>
+<li><strong>层级深度</strong>：若 Markdown 层级超过 6 级，生成的图片宽度可能会极长，建议在输入文件中适当控制内容密度。</li>
+</ul>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-02-27 22:44:33</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>该技术方案是一项面向知识工作者与技术写作者的<strong>轻量级自动化知识可视化工具</strong>，核心目标是解决 Markdown 文档“可读性弱、结构感知难、静态分享不便”的痛点。它并非简单调用现有 GUI 工具，而是通过<strong>跨语言协同（Node.js + Python）、浏览器渲染闭环（Playwright + Chromium）与语义化 SVG 提取</strong>，构建了一条从纯文本（<code>.md</code>）到高保真静态图像（<code>.png</code>）的端到端自动化流水线。</p>
+<p>其创新性体现在三重融合：</p>
+<ol>
+<li><strong>语义解析与视觉表达的解耦</strong>：复用 <code>markmap-cli</code> 的成熟 Markdown→思维导图逻辑（基于标题层级+语法糖），避免重复造轮子；</li>
+<li><strong>动态渲染与静态输出的桥接</strong>：利用 Playwright 精确控制浏览器生命周期与渲染时机（含异步等待、缩放动画规避、设备像素比增强），攻克了纯前端导出 SVG 后需手动转 PNG&#x2F;适配显示的瓶颈；</li>
+<li><strong>工程化交付意识</strong>：脚本具备错误防御（文件存在性检查、超时捕获）、资源清理（临时 HTML 自动删除）、参数可调（DPI&#x2F;背景&#x2F;等待策略），并附带明确的环境依赖说明与调试建议，已达到准生产级可用标准。</li>
+</ol>
+<p>本质上，该项目是“文档即图谱”理念的一次务实落地——将 Markdown 这一极简标记语言所隐含的层次化认知结构，通过自动化手段升维为符合人类视觉认知规律的思维导图图像，显著提升了技术文档、学习笔记、逻辑分析等内容的<strong>传播效率、记忆锚点强度与跨平台兼容性</strong>。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#Markdown可视化 #思维导图自动化 #Playwright渲染 #Markmap集成 #静态PNG生成</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/f040.html" title="自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本">https://zhyong.site/posts/f040.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Markdown%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> Markdown可视化</a>
+              <a href="/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 思维导图自动化</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/60f3.html" rel="prev" title="溯因推理：原理、应用与智能演进研究">
+                  <i class="fa fa-angle-left"></i> 溯因推理：原理、应用与智能演进研究
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">124k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:26</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
