@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="在材料研发与质量控制（QC）领域，定量评估材料在环境暴露后的颜色稳定性是核心任务。本文旨在系统化梳理色差值（$\Delta E$）与抗老化等级（灰度等级）之间的定量关系，并对比主流评估标准及其在工业报告中的应用。  一、 色差计算基础：CIELAB 系统材料颜色的变化通常通过测色仪获取 $L^*$ （明度）、$a^*$ （红绿轴）、$b^*$（黄蓝轴）数据。色差值 $\Delta E^*_{ab}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="材料耐候性评价指南：色差值 $\Delta E$ 与抗老化等级的标准转换及年限推算">
+<meta property="og:url" content="https://zhyong.site/posts/8698.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="在材料研发与质量控制（QC）领域，定量评估材料在环境暴露后的颜色稳定性是核心任务。本文旨在系统化梳理色差值（$\Delta E$）与抗老化等级（灰度等级）之间的定量关系，并对比主流评估标准及其在工业报告中的应用。  一、 色差计算基础：CIELAB 系统材料颜色的变化通常通过测色仪获取 $L^*$ （明度）、$a^*$ （红绿轴）、$b^*$（黄蓝轴）数据。色差值 $\Delta E^*_{ab}">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/img/sczpt.webp">
+<meta property="og:image" content="https://zhyong.site/img/scwsl.webp">
+<meta property="article:published_time" content="2026-03-01T09:09:36.000Z">
+<meta property="article:modified_time" content="2026-03-01T10:39:02.203Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="加速老化等效">
+<meta property="article:tag" content="抗老化等级">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/img/sczpt.webp">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/8698.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/8698.html","path":"posts/8698.html","title":"材料耐候性评价指南：色差值 $\\Delta E$ 与抗老化等级的标准转换及年限推算"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>材料耐候性评价指南：色差值 $\Delta E$ 与抗老化等级的标准转换及年限推算 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/8698.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-瞬间"><a href="/memos/" rel="section"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E8%89%B2%E5%B7%AE%E8%AE%A1%E7%AE%97%E5%9F%BA%E7%A1%80%EF%BC%9ACIELAB-%E7%B3%BB%E7%BB%9F"><span class="nav-text">一、 色差计算基础：CIELAB 系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E8%AF%84%E7%BA%A7%E4%BD%93%E7%B3%BB%E5%AF%B9%E6%AF%94%EF%BC%9AISO-105-A02-%E4%B8%8E-ISO-105-A05"><span class="nav-text">二、 评级体系对比：ISO 105-A02 与 ISO 105-A05</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E8%89%B2%E5%B7%AE%E5%80%BC%E4%B8%8E%E7%AD%89%E7%BA%A7%E7%9A%84%E5%AE%9A%E9%87%8F%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB"><span class="nav-text">三、 色差值与等级的定量对应关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E8%AE%A1%E7%AE%97%E9%80%BB%E8%BE%91"><span class="nav-text">1. 核心计算逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%95%B0%E5%AD%97%E5%8C%96%E7%AD%89%E7%BA%A7%E4%B8%8E%E8%89%B2%E5%B7%AE-Delta-E-%E7%9A%84%E5%AF%B9%E5%BA%94%E9%98%88%E5%80%BC"><span class="nav-text">2. 数字化等级与色差 ($\Delta E$) 的对应阈值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%AF%A5%E6%A0%87%E5%87%86%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">3. 该标准的优势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%85%B7%E4%BD%93%E6%8A%A5%E5%91%8A%E5%88%86%E6%9E%90"><span class="nav-text">四、具体报告分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%8A%A5%E5%91%8A%E6%A0%B8%E5%BF%83%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE"><span class="nav-text">1. 报告核心测试数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AF%84%E7%BA%A7%E4%B8%BA-4-5-%E7%BA%A7%E7%9A%84%E9%80%BB%E8%BE%91%E4%BE%9D%E6%8D%AE"><span class="nav-text">2. 评级为 4-5 级的逻辑依据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%80%81%E5%8C%96%E6%80%A7%E8%83%BD%E8%AF%84%E4%BB%B7"><span class="nav-text">3. 老化性能评价</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%E5%AF%B9%E5%BA%94%E6%88%B7%E5%A4%96%E4%BD%BF%E7%94%A8%E5%B9%B4%E9%99%90%E6%8E%A8%E7%AE%97"><span class="nav-text">五、测试结果对应户外使用年限推算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E6%8E%A8%E7%AE%97%E9%80%BB%E8%BE%91%EF%BC%9A%E8%BE%90%E5%B0%84%E8%83%BD%E9%87%8F%E7%AD%89%E6%95%88%E6%B3%95"><span class="nav-text">1. 核心推算逻辑：辐射能量等效法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%8D%E5%90%8C%E5%9C%B0%E7%90%86%E5%8C%BA%E5%9F%9F%E7%9A%84%E5%B9%B4%E8%BE%90%E5%B0%84%E9%87%8F%E5%8F%82%E8%80%83%E5%80%BC"><span class="nav-text">2. 不同地理区域的年辐射量参考值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%BD%B1%E5%93%8D%E6%8E%A8%E7%AE%97%E5%87%86%E7%A1%AE%E6%80%A7%E7%9A%84%E5%85%B3%E9%94%AE%E4%BF%AE%E6%AD%A3%E5%9B%A0%E5%AD%90-Acceleration-Factor-AF"><span class="nav-text">3. 影响推算准确性的关键修正因子 (Acceleration Factor, AF)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%A1%8C%E4%B8%9A%E7%BB%8F%E9%AA%8C%E5%80%BC%EF%BC%88%E9%92%88%E5%AF%B9%E6%88%B7%E5%A4%96%E5%9C%B0%E6%9D%BF-%E5%BB%BA%E6%9D%90%EF%BC%89"><span class="nav-text">4. 行业经验值（针对户外地板&#x2F;建材）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">技术总结与局限性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/8698.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="材料耐候性评价指南：色差值 $\Delta E$ 与抗老化等级的标准转换及年限推算 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          材料耐候性评价指南：色差值 $\Delta E$ 与抗老化等级的标准转换及年限推算
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-01 17:09:36 / 修改时间：18:39:02" itemprop="dateCreated datePublished" datetime="2026-03-01T17:09:36+08:00">2026-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%A0%87%E5%87%86%E8%A7%A3%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">标准解析</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>在材料研发与质量控制（QC）领域，定量评估材料在环境暴露后的颜色稳定性是核心任务。本文旨在系统化梳理色差值（$\Delta E$）与抗老化等级（灰度等级）之间的定量关系，并对比主流评估标准及其在工业报告中的应用。</p>
+<hr>
+<h3 id="一、-色差计算基础：CIELAB-系统"><a href="#一、-色差计算基础：CIELAB-系统" class="headerlink" title="一、 色差计算基础：CIELAB 系统"></a>一、 色差计算基础：CIELAB 系统</h3><p>材料颜色的变化通常通过测色仪获取 $L^*$ （明度）、$a^*$ （红绿轴）、$b^*$（黄蓝轴）数据。色差值 $\Delta E^*_{ab}$ 是通过以下公式计算的欧几里得距离：</p>
+<p>$$\Delta E^*_{ab} &#x3D; \sqrt{(\Delta L^*)^2 + (\Delta a^*)^2 + (\Delta b^*)^2}$$</p>
+<ul>
+<li><strong>$\Delta L^*$</strong>：正值代表变浅，负值代表变暗。</li>
+<li><strong>$\Delta a^*$</strong>：正值代表偏红，负值代表偏绿。</li>
+<li><strong>$\Delta b^*$</strong>：正值代表偏黄，负值代表偏蓝。</li>
+</ul>
+<span id="more"></span>
+
+<p><img src="/img/sczpt.webp"></p>
+<hr>
+<h3 id="二、-评级体系对比：ISO-105-A02-与-ISO-105-A05"><a href="#二、-评级体系对比：ISO-105-A02-与-ISO-105-A05" class="headerlink" title="二、 评级体系对比：ISO 105-A02 与 ISO 105-A05"></a>二、 评级体系对比：ISO 105-A02 与 ISO 105-A05</h3><p>抗老化等级（1-5级）的评定存在两种并行路径：视觉评估与仪器计算。</p>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th><strong>ISO 105-A02(视觉评定)</strong></th>
+<th><strong>ISO 105-A05(仪器评定)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定义名称</strong></td>
+<td>评定变色用灰色样卡 (Visual Gray Scale)</td>
+<td>测定变色用数字化灰卡评级 (Instrumental Gray Scale)</td>
+</tr>
+<tr>
+<td><strong>评估方式</strong></td>
+<td><strong>肉眼视觉比对</strong>。评级员在标准光源下，将样本变色程度与物理灰卡对比 。</td>
+<td><strong>仪器测量计算</strong>。通过分光测色仪获取数据，并利用数学公式转换等级。</td>
+</tr>
+<tr>
+<td><strong>核心工具</strong></td>
+<td>标准光源箱、物理灰色样卡（9对色块）。</td>
+<td>分光测色仪、符合 A05 算法的计算软件。</td>
+</tr>
+<tr>
+<td><strong>输出结果</strong></td>
+<td>离散等级：1, 1-2, 2, 2-3, 3, 3-4, 4, 4-5, 5。</td>
+<td>连续数值（如 4.2）或舍入后的标准等级（如 4-5） 。</td>
+</tr>
+<tr>
+<td><strong>客观性</strong></td>
+<td>受环境光线、评级员视力及心理状态影响，存在主观偏差 。</td>
+<td>结果高度可重复，不受人为因素干扰，具有客观性。</td>
+</tr>
+<tr>
+<td><strong>适用性</strong></td>
+<td>适合快速定性检查，及纹理复杂、不适合仪器测量的样本。</td>
+<td>适合 R&amp;D 研发、精密对标及第三方公正报告（如 Intertek 报告） 。</td>
+</tr>
+</tbody></table>
+<p>因目前主要使用仪器测试，下述重点介绍<strong>ISO 105-A05</strong>(仪器评定)具体方法。</p>
+<hr>
+<h3 id="三、-色差值与等级的定量对应关系"><a href="#三、-色差值与等级的定量对应关系" class="headerlink" title="三、 色差值与等级的定量对应关系"></a>三、 色差值与等级的定量对应关系</h3><p><strong>ISO 105-A05</strong> 的全称为《纺织品 色牢度试验 第A05部分：测定变色用数字化灰卡评级》（<em>Textiles — Tests for colour fastness — Part A05: Instrumental assessment of change in colour for determination of grey scale rating</em>）。</p>
+<p>该标准的核心功能是将分光测色仪测得的色度数据（如 $L^*$, $a^*$, $b^*$）通过数学公式转换为对应的<strong>灰卡等级（1-5级）</strong>。以下是该标准的关键技术细节：</p>
+<h4 id="1-核心计算逻辑"><a href="#1-核心计算逻辑" class="headerlink" title="1. 核心计算逻辑"></a>1. 核心计算逻辑</h4><p>ISO 105-A05 不直接使用简单的 $\Delta E^*_{ab}$，而是使用一个经过修正的色差值 $\Delta E_F$。其计算公式逻辑如下：</p>
+<ul>
+<li><strong>色差修正</strong>：公式考虑了人眼对于不同色调（Hue）和饱和度（Chroma）变色的敏感度差异。</li>
+<li><strong>级数计算</strong>：将 $\Delta E_F$ 带入特定的对数方程来确定连续等级（如 4.2 级），随后根据舍入规则确定最终等级（如 4-5 级）。</li>
+</ul>
+<h4 id="2-数字化等级与色差-Delta-E-的对应阈值"><a href="#2-数字化等级与色差-Delta-E-的对应阈值" class="headerlink" title="2. 数字化等级与色差 ($\Delta E$) 的对应阈值"></a>2. 数字化等级与色差 ($\Delta E$) 的对应阈值</h4><p>在 ISO 105-A05 的仪器评定体系中，每个等级都有明确的 $\Delta E$ 范围界限（允许存在微小的标准演变差异）：</p>
+<table>
+<thead>
+<tr>
+<th><strong>灰卡等级 (GS)</strong></th>
+<th><strong>色差值范围 (ΔE)</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>5</strong></td>
+<td>$\Delta E \le 0.22$</td>
+<td>视觉无差异</td>
+</tr>
+<tr>
+<td><strong>4-5</strong></td>
+<td><strong>$0.22 &lt; \Delta E \le 1.25$</strong></td>
+<td>极轻微变色</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>$1.25 &lt; \Delta E \le 2.02$</td>
+<td>略有变色</td>
+</tr>
+<tr>
+<td><strong>3-4</strong></td>
+<td>$2.02 &lt; \Delta E \le 2.89$</td>
+<td>明显变色</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>$2.89 &lt; \Delta E \le 4.12$</td>
+<td>较明显变色</td>
+</tr>
+<tr>
+<td><strong>2-3</strong></td>
+<td>$4.12 &lt; \Delta E \le 5.84$</td>
+<td>严重变色</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>$5.84 &lt; \Delta E \le 8.23$</td>
+<td>显著变色</td>
+</tr>
+<tr>
+<td><strong>1-2</strong></td>
+<td>$8.23 &lt; \Delta E \le 11.64$</td>
+<td>极严重变色</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>$\Delta E &gt; 11.64$</td>
+<td>剧烈变色</td>
+</tr>
+</tbody></table>
+<h4 id="3-该标准的优势"><a href="#3-该标准的优势" class="headerlink" title="3. 该标准的优势"></a>3. 该标准的优势</h4><ul>
+<li><strong>客观性</strong>：消除不同检验员之间由于生理差异（如色弱、眼部疲劳）或环境光源波动导致的视觉评价误差。</li>
+<li><strong>高精度</strong>：提供比肉眼观察（只能判出 0.5 级差）更精细的连续数值参考。</li>
+<li><strong>一致性</strong>：确保在全球不同实验室（如 Intertek 的上海分中心）之间具有统一的判定尺度 。</li>
+</ul>
+<p>该标准虽然源自纺织行业，但已成为塑料、建材等工业领域进行耐候性定级的通用底层逻辑。</p>
+<hr>
+<h3 id="四、具体报告分析"><a href="#四、具体报告分析" class="headerlink" title="四、具体报告分析"></a>四、具体报告分析</h3><p>如下述为Intertek的报告截图：</p>
+<p><img src="/img/scwsl.webp"></p>
+<p>根据这份人工加速老化测试报告测试结果 ，针对实测色差值 $\Delta E^* &#x3D; 1.14$ 却被评定为 <strong>4-5 级</strong> 的结果 ，其技术解释如下：</p>
+<h4 id="1-报告核心测试数据"><a href="#1-报告核心测试数据" class="headerlink" title="1. 报告核心测试数据"></a>1. 报告核心测试数据</h4><ul>
+<li><strong>测试对象</strong>：xxx木塑户外地板 。</li>
+<li><strong>测试方法</strong>：ISO 4892-2:2013&#x2F;Amd.1:2021 循环 1（氙弧灯暴露） 。</li>
+<li><strong>测试时长</strong>：2000 小时 。</li>
+<li><strong>实测色差</strong>：$\Delta E^* &#x3D; 1.14$ 。</li>
+<li><strong>灰卡评级</strong>：4-5 级 。</li>
+</ul>
+<h4 id="2-评级为-4-5-级的逻辑依据"><a href="#2-评级为-4-5-级的逻辑依据" class="headerlink" title="2. 评级为 4-5 级的逻辑依据"></a>2. 评级为 4-5 级的逻辑依据</h4><ul>
+<li><strong>标准转换区间差异</strong>：在材料检测行业中，灰卡等级与 $\Delta E$ 的转换通常参照 ISO 105-A05（仪器评定变色等级）。虽然简化版对照表常将 4-5 级的上限设为 1.0，但在实际的仪器计算公式中，<strong>4-5 级的判定区间通常可延伸至 1.25 左右</strong>。因此，$1.14$ 落入 4-5 级区间符合该实验室的判等标准 。</li>
+<li><strong>视觉观察辅助</strong>：报告的“Observation”（观察结果）一栏明确标注为“<strong>Part showed slight color change</strong>”（部分显示轻微颜色变化） 。在 4-5 级的定义中，变色应处于“极微小”到“轻微”之间，这一目测结论支持了 4-5 级的定级。</li>
+<li><strong>数据舍入规则</strong>：实验实验室（如 Intertek）在进行等级转换时，会根据校准过的分光测色仪软件自动计算。若计算所得的连续级数值更接近 4.5（即 4-5 级），则会按此定级 。</li>
+</ul>
+<h4 id="3-老化性能评价"><a href="#3-老化性能评价" class="headerlink" title="3. 老化性能评价"></a>3. 老化性能评价</h4><ul>
+<li><strong>优异性</strong>：对于木塑或复合材料（Decking boards）而言 ，在经历 <strong>2000 小时</strong>（模拟长期户外光照与喷淋）的高强度暴露后 ，色差值仅为 <strong>1.14</strong> ，表明该产品的抗紫外线及耐候性能处于极高水平。</li>
+<li><strong>一致性</strong>：各维度偏差较小（$\Delta L^* &#x3D; -0.81, \Delta a^* &#x3D; 0.35, \Delta b^* &#x3D; 0.72$），说明变色方向主要是轻微变暗和极小程度的偏黄&#x2F;偏红，未出现剧烈的褪色现象 。</li>
+</ul>
+<h3 id="五、测试结果对应户外使用年限推算"><a href="#五、测试结果对应户外使用年限推算" class="headerlink" title="五、测试结果对应户外使用年限推算"></a>五、测试结果对应户外使用年限推算</h3><p>将实验室加速老化测试（如报告中的 2000 小时氙灯老化）推算为具体的户外使用年限，是材料可靠性工程中的核心难点。目前行业内不存在统一、固定的转换比例，但可以通过**等效辐射总量（Total Radiant Exposure）**法进行逻辑推算。</p>
+<p>以下是针对报告结果数据进行年限推算的技术逻辑：</p>
+<h4 id="1-核心推算逻辑：辐射能量等效法"><a href="#1-核心推算逻辑：辐射能量等效法" class="headerlink" title="1. 核心推算逻辑：辐射能量等效法"></a>1. 核心推算逻辑：辐射能量等效法</h4><p>推算的基础是将实验室中受控的紫外辐射能量，与特定地理区域每年的平均太阳辐射能量进行对比。</p>
+<p>实验室辐射能计算 ：</p>
+<ul>
+<li>报告测试条件：辐照度为 $0.51 W&#x2F;(m^2 \cdot nm)$（在 340nm 处）。</li>
+<li>测试时长：$2000 h$ 。</li>
+<li>计算公式：$H_{lab} &#x3D; E \cdot t$。</li>
+<li>在 ISO 4892-2 标准下，该辐照度对应的 300nm-400nm 波段总紫外辐照度约为 $60 W&#x2F;m^2$。</li>
+<li><strong>2000 小时总辐射量</strong>：$60 W&#x2F;m^2 \times 2000 h &#x3D; 120,000 Wh&#x2F;m^2 &#x3D; 432 MJ&#x2F;m^2$（紫外波段）。</li>
+</ul>
+<h4 id="2-不同地理区域的年辐射量参考值"><a href="#2-不同地理区域的年辐射量参考值" class="headerlink" title="2. 不同地理区域的年辐射量参考值"></a>2. 不同地理区域的年辐射量参考值</h4><p>不同地区的年均紫外辐射量差异巨大，导致 2000 小时对应的年限不同：</p>
+<table>
+<thead>
+<tr>
+<th><strong>地理区域（年均 UV 辐射量）</strong></th>
+<th><strong>432 MJ&#x2F;m2 等效户外年限</strong></th>
+<th><strong>气候特点</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>佛罗里达 &#x2F; 亚利桑那</strong> (~280-330 $MJ&#x2F;m^2$)</td>
+<td><strong>1.3 - 1.5 年</strong></td>
+<td>极端高紫外、高湿热&#x2F;干热</td>
+</tr>
+<tr>
+<td><strong>中国华南地区 (上海&#x2F;广州)</strong> (~200-240 $MJ&#x2F;m^2$)</td>
+<td><strong>1.8 - 2.2 年</strong></td>
+<td>中高强度紫外</td>
+</tr>
+<tr>
+<td><strong>中欧 &#x2F; 北欧地区</strong> (~100-140 $MJ&#x2F;m^2$)</td>
+<td><strong>3.1 - 4.3 年</strong></td>
+<td>低紫外强度</td>
+</tr>
+</tbody></table>
+<h4 id="3-影响推算准确性的关键修正因子-Acceleration-Factor-AF"><a href="#3-影响推算准确性的关键修正因子-Acceleration-Factor-AF" class="headerlink" title="3. 影响推算准确性的关键修正因子 (Acceleration Factor, AF)"></a>3. 影响推算准确性的关键修正因子 (Acceleration Factor, AF)</h4><p>简单的辐射等效并不等于实际使用寿命，必须考虑以下变量因子：</p>
+<ul>
+<li><strong>温度因子 ($A_T$)</strong>：报告中黑标准温度为 $(65\pm3)^\circ C$ 。若实际使用环境平均温度较低，材料降解速度会减慢，实验室 2000 小时的代表性会相应拉长。</li>
+<li><strong>水分循环 ($A_W$)</strong>：报告包含每周期 18 分钟的喷淋 。喷淋模拟了雨水和结露对材料表面的热冲击及水解作用。对于聚氨酯或木塑地板，水分引起的应力开裂往往比纯光照更具破坏性。</li>
+<li><strong>材料降解阈值</strong>：报告结果显示 $\Delta E^* &#x3D; 1.14$（4-5 级）。这说明在经历等效于华南地区约 2 年的极端暴露后，材料仍处于“极轻微变色”阶段。<ul>
+<li><strong>外推法</strong>：若假设降解为线性（实际多为非线性），达到 3 级（变色可被明显察觉）可能需要 8000 小时以上。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-行业经验值（针对户外地板-建材）"><a href="#4-行业经验值（针对户外地板-建材）" class="headerlink" title="4. 行业经验值（针对户外地板&#x2F;建材）"></a>4. 行业经验值（针对户外地板&#x2F;建材）</h4><p>在木塑建材（WPC）或户外涂层行业，通用的粗略参考经验如下：</p>
+<ul>
+<li><strong>1000 小时</strong> 氙灯老化（ISO 4892-2）通常对应户外 <strong>1 年</strong> 的使用表现（以中等气候区为准）。</li>
+<li><strong>2000 小时</strong> 达到 4-5 级，意味着该产品在实际户外环境下，<strong>3-5 年</strong> 内保持视觉无显著变色的概率极高。</li>
+</ul>
+<hr>
+<h4 id="技术总结与局限性"><a href="#技术总结与局限性" class="headerlink" title="技术总结与局限性"></a>技术总结与局限性</h4><ol>
+<li><strong>数据支撑</strong>：本报告 2000 小时的测试数据证明了该材料具备优异的长效耐候基础 。</li>
+<li><strong>不确定性</strong>：实验室无法完全模拟大气污染物（酸雨、臭氧）及昼夜温差带来的物理疲劳。</li>
+<li><strong>合规性建议</strong>：在对外技术声明时，建议表述为：“经过 2000 小时人工加速老化测试（等效于特定区域 X 年辐射量），色差维持在 1.14 以内。”</li>
+</ol>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-03-01 17:51:19</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文系统构建了<strong>材料颜色稳定性评估的科学闭环体系</strong>，以 <strong>色差值（$\Delta E$）为量化桥梁</strong>，贯通从仪器测量、标准转换、等级判定到实际耐候寿命推演的全链条。核心贡献在于厘清了工业实践中长期混淆的两个关键维度：  </p>
+<ul>
+<li><strong>CIELAB色度空间中的客观色差计算（$\Delta E^*_{ab}$ 及其修正形式 $\Delta E_F$）</strong>；  </li>
+<li><strong>与人眼感知对齐的抗老化等级（灰卡1–5级）的标准化映射逻辑</strong>，尤其强调 <strong>ISO 105-A05</strong> 作为仪器评定金标准的技术内涵——它并非简单套用$\Delta E$阈值表，而是通过<strong>视觉感知加权修正+对数级数转换</strong>，实现“仪器数据→人类可读等级”的可靠翻译。</li>
+</ul>
+<p>文章进一步揭示了该体系在跨行业（纺织→塑料&#x2F;建材&#x2F;木塑）迁移中的普适性，并以Intertek实测报告为锚点，深入解析了“$\Delta E &#x3D; 1.14 \rightarrow$ 4–5级”这一典型结果背后的三重依据：<strong>标准算法区间容差、视觉观察佐证、软件自动舍入规则</strong>。尤为关键的是，作者超越单纯的数据解读，引入<strong>辐射能量等效法（432 MJ&#x2F;m²紫外辐照量）</strong>，结合地理气候参数与多因子加速修正（温度、湿热循环），将实验室数据转化为具有工程意义的户外使用年限预估（如华南地区约2年，中欧可达4年），同时清醒指出线性外推的局限性及真实环境复杂性的不可完全模拟性。最终落脚于<strong>技术严谨性与商业表达规范性的平衡</strong>——强调以“等效辐射量+实测等级”替代模糊的“X年保质期”宣称，体现专业可靠性工程思维。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#ΔE #ISO105-A05 #抗老化等级 #CIELAB #加速老化等效</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/8698.html" title="材料耐候性评价指南：色差值 $\Delta E$ 与抗老化等级的标准转换及年限推算">https://zhyong.site/posts/8698.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%97%E8%80%81%E5%8C%96%E7%AD%89%E7%BA%A7/" rel="tag"><i class="fa fa-tag"></i> 抗老化等级</a>
+              <a href="/tags/%E5%8A%A0%E9%80%9F%E8%80%81%E5%8C%96%E7%AD%89%E6%95%88/" rel="tag"><i class="fa fa-tag"></i> 加速老化等效</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/f040.html" rel="prev" title="自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本">
+                  <i class="fa fa-angle-left"></i> 自动化工具：将 Markdown 文档转换为静态 PNG 思维导图脚本
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">128k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:34</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
