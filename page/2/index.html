@@ -76,7 +76,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js" defer></script>
 
 
@@ -189,7 +189,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">78</span>
+        <span class="site-state-item-count">80</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -232,6 +232,234 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/e09c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/e09c.html" class="post-title-link" itemprop="url">归纳推理：从经验观察到知识泛化的系统化研究</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-22 08:53:09" itemprop="dateCreated datePublished" datetime="2026-02-22T08:53:09+08:00">2026-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-03-10 00:35:29" itemprop="dateModified" datetime="2026-03-10T00:35:29+08:00">2026-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">逻辑思维</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="note info"><p>本系列逻辑思维文章可查看：<a href="/pages/ljsw.html">逻辑思维方法论全景图</a></p>
+</div>
+
+<h3 id="1-归纳推理的核心本质与分类体系"><a href="#1-归纳推理的核心本质与分类体系" class="headerlink" title="1. 归纳推理的核心本质与分类体系"></a>1. 归纳推理的核心本质与分类体系</h3><p>归纳推理（Inductive Reasoning）被英国知识论学家 C.D.博德（C.D. Broad）描述为“科学的荣耀和哲学的丑闻”。作为一种“知识扩张型”（Ampliative）工具，其战略意义在于允许认识主体从已知的前提跨越到未知的结论，实现知识量的实质性增长。不同于演绎推理中结论已蕴含在前提内的“观念关系”（Relation of Ideas），归纳推理处理的是大卫·休谟所定义的“事实关系”（Matters of Fact），其核心定义是从个别、特殊的经验观察推导出普遍性结论或概率性预判。</p>
+<p>归纳推理的本质特征在于其结论的<strong>或然性（Probabilistic）</strong>，即即便所有前提为真，结论也仅具有概率上的高度支持而非逻辑上的必然性。基于源材料，其分类体系如下：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/e09c.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/c5ba.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/posts/c5ba.html" class="post-title-link" itemprop="url">铝合金及其关键部件表面处理技术</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-21 18:40:15" itemprop="dateCreated datePublished" datetime="2026-02-21T18:40:15+08:00">2026-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-03-10 00:35:29" itemprop="dateModified" datetime="2026-03-10T00:35:29+08:00">2026-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%90%E6%96%99%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">材料科学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%90%E6%96%99%E7%A7%91%E5%AD%A6/%E9%87%91%E5%B1%9E%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">金属工程</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-行业综述：铝合金与铝基复合材料的战略地位"><a href="#1-行业综述：铝合金与铝基复合材料的战略地位" class="headerlink" title="1. 行业综述：铝合金与铝基复合材料的战略地位"></a>1. 行业综述：铝合金与铝基复合材料的战略地位</h2><p>在当代制造业转型进程中，铝合金及其铝基复合材料（AMCs）已成为实现轻量化、能效提升与结构优化的核心战略物资。依托其高比强度（Strength-to-weight ratio）、卓越的导电导热性以及良好的加工塑性，铝材正在航空航天、新能源汽车及精密电子领域大规模替代传统钢材。</p>
+<h3 id="1-1-轻量化效益的量化评估"><a href="#1-1-轻量化效益的量化评估" class="headerlink" title="1.1 轻量化效益的量化评估"></a>1.1 轻量化效益的量化评估</h3><p>根据行业统计与学术研究（Wu &amp; Zhang, 2024），铝材的应用对能耗优化具有显著贡献：</p>
+<ul>
+<li><strong>减排贡献：</strong> 汽车整车重量每降低100kg，其二氧化碳（CO2）排放量可减少约5g&#x2F;km。</li>
+<li><strong>能耗优化：</strong> 车重降低10%，可使电能消耗降低5.5%，续航里程提升5.5%，并显著降低20%的日常运营成本。</li>
+<li><strong>市场趋势：</strong> 预计到2030年，单车平均铝含量将达到570净磅（约258kg），其中铸造铝合金（Cast Aluminum）占比将超过50%，显示出铸造件在结构集成化方面的战略优势。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/c5ba.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1151,234 +1379,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/b9b1.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ZhangYong">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="材料与逻辑">
-      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 材料与逻辑">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/b9b1.html" class="post-title-link" itemprop="url">告别 C 盘爆红：基于 Rust 的开源瘦身神器 WindowsClear</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-15 18:04:49" itemprop="dateCreated datePublished" datetime="2026-02-15T18:04:49+08:00">2026-02-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-10 00:35:29" itemprop="dateModified" datetime="2026-03-10T00:35:29+08:00">2026-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">效率工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>许多 Windows 用户都面临一个困扰：尽管经常清理回收站和临时文件，C 盘空间依然被 <code>AppData</code> 文件夹迅速吞噬。这是因为大量软件（如微信、各类 IDE 等）将数据和缓存默认存储在 C 盘。</p>
-<p><strong>WindowsClear</strong> 是一款专注于 AppData 大文件夹迁移的开源工具，通过“目录联接”技术，不改变分区也能让 C 盘瞬间释放几十 GB 甚至上百 GB 空间。</p>
-<blockquote>
-<p>这款基于 Rust 开发的开源工具 <strong>WindowsClear</strong> 是一款非常实用的 C 盘瘦身神器。不同于传统的删除垃圾文件，它通过“空间腾挪”技术解决 AppData 占用过大的核心痛点。</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/b9b1.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/eb17.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ZhangYong">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="材料与逻辑">
-      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 材料与逻辑">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/posts/eb17.html" class="post-title-link" itemprop="url">终端提效：用 fzf 打造极致的历史命令搜索体验</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-02-15 17:01:06" itemprop="dateCreated datePublished" datetime="2026-02-15T17:01:06+08:00">2026-02-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-10 00:35:29" itemprop="dateModified" datetime="2026-03-10T00:35:29+08:00">2026-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%88%E7%8E%87%E4%BC%98%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">效率优化</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>作为一名在制造业材料研发与 IT 技术间切换的工程师，终端（Terminal）是我最高频工具之一。然而，原生终端的历史搜索（Ctrl+R）交互生硬，难以满足快速定位复杂命令的需求。</p>
-<p>今天分享一个基于 <code>fzf</code> 的 Zsh 增强脚本，只需一个快捷键，即可实现历史命令的模糊搜索与快速回填，推荐使用。</p>
-<h3 id="1-核心功能"><a href="#1-核心功能" class="headerlink" title="1. 核心功能"></a>1. 核心功能</h3><ul>
-<li><strong>模糊匹配</strong>：支持跨字符搜索（如输入 <code>hexo d</code> 匹配 <code>hexo deploy</code>）。</li>
-<li><strong>可视化选择</strong>：在光标下方弹出交互式列表，支持上下跳转。</li>
-<li><strong>安全回填</strong>：选中命令后不立即执行，而是填入输入行，支持二次修改后再回车。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/eb17.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1402,13 +1402,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">153k</span>
+    <span title="站点总字数">159k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:16</span>
+    <span title="站点阅读时长">4:25</span>
   </span>
 </div>
 

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="为了直观地理解APQP（先期产品质量策划）在实际项目中的运作，我们以开发一款**“儿童智能遥控玩具车”**为例，按照APQP第三版的“0+5”阶段框架，以下为推演具体的推进过程： 阶段0：入门（Getting Started）——组建团队与评估风险 具体行动：公司决定开发这款遥控车后，首先任命一位项目经理，并组建一个跨职能团队（包括市场、产品设计、模具工程、注塑工艺、质量、采购及核心供应商）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个玩具车项目，讲清新版 APQP 怎么干">
+<meta property="og:url" content="https://zhyong.site/posts/1474.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="为了直观地理解APQP（先期产品质量策划）在实际项目中的运作，我们以开发一款**“儿童智能遥控玩具车”**为例，按照APQP第三版的“0+5”阶段框架，以下为推演具体的推进过程： 阶段0：入门（Getting Started）——组建团队与评估风险 具体行动：公司决定开发这款遥控车后，首先任命一位项目经理，并组建一个跨职能团队（包括市场、产品设计、模具工程、注塑工艺、质量、采购及核心供应商）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/img/apqpsz1.webp">
+<meta property="og:image" content="https://zhyong.site/img/apqpsz2.webp">
+<meta property="og:image" content="https://zhyong.site/img/apqpsz3.webp">
+<meta property="og:image" content="https://zhyong.site/img/apqpsz4.webp">
+<meta property="article:published_time" content="2026-03-13T13:13:42.000Z">
+<meta property="article:modified_time" content="2026-03-13T13:34:02.130Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="APQP">
+<meta property="article:tag" content="顾客声音转化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/img/apqpsz1.webp">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/1474.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/1474.html","path":"posts/1474.html","title":"一个玩具车项目，讲清新版 APQP 怎么干"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一个玩具车项目，讲清新版 APQP 怎么干 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/1474.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-瞬间"><a href="/memos/" rel="section"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B50%EF%BC%9A%E5%85%A5%E9%97%A8%EF%BC%88Getting-Started%EF%BC%89%E2%80%94%E2%80%94%E7%BB%84%E5%BB%BA%E5%9B%A2%E9%98%9F%E4%B8%8E%E8%AF%84%E4%BC%B0%E9%A3%8E%E9%99%A9"><span class="nav-text">阶段0：入门（Getting Started）——组建团队与评估风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B51%EF%BC%9A%E8%AE%A1%E5%88%92%E5%92%8C%E5%AE%9A%E4%B9%89%E9%A1%B9%E7%9B%AE%EF%BC%88Plan-and-Define-Program%EF%BC%89%E2%80%94%E2%80%94%E6%8D%95%E6%8D%89%E5%AD%A9%E5%AD%90%E4%B8%8E%E5%AE%B6%E9%95%BF%E7%9A%84%E5%A3%B0%E9%9F%B3"><span class="nav-text">阶段1：计划和定义项目（Plan and Define Program）——捕捉孩子与家长的声音</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B52%EF%BC%9A%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%BC%80%E5%8F%91%EF%BC%88Product-Design-and-Development%EF%BC%89%E2%80%94%E2%80%94%E5%9C%A8%E5%9B%BE%E7%BA%B8%E4%B8%8A%E6%B6%88%E7%81%AD%E9%9A%90%E6%82%A3"><span class="nav-text">阶段2：产品设计和开发（Product Design and Development）——在图纸上消灭隐患</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B53%EF%BC%9A%E8%BF%87%E7%A8%8B%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%BC%80%E5%8F%91%EF%BC%88Process-Design-and-Development%EF%BC%89%E2%80%94%E2%80%94%E8%A7%84%E5%88%92%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E9%80%A0%E5%87%BA%E6%9D%A5"><span class="nav-text">阶段3：过程设计和开发（Process Design and Development）——规划怎么把它造出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B54%EF%BC%9A%E4%BA%A7%E5%93%81%E5%92%8C%E8%BF%87%E7%A8%8B%E7%A1%AE%E8%AE%A4%EF%BC%88Product-and-Process-Validation%EF%BC%89%E2%80%94%E2%80%94%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%E4%B8%8E%E9%87%8F%E4%BA%A7%E6%89%B9%E5%87%86"><span class="nav-text">阶段4：产品和过程确认（Product and Process Validation）——实战演练与量产批准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B55%EF%BC%9A%E5%8F%8D%E9%A6%88%E3%80%81%E8%AF%84%E4%BC%B0%E5%92%8C%E7%BA%A0%E6%AD%A3%E6%8E%AA%E6%96%BD%EF%BC%88Feedback-Assessment-and-Corrective-Action%EF%BC%89%E2%80%94%E2%80%94%E5%80%BE%E5%90%AC%E5%B8%82%E5%9C%BA%E5%A3%B0%E9%9F%B3%E5%B9%B6%E6%8C%81%E7%BB%AD%E6%94%B9%E8%BF%9B"><span class="nav-text">阶段5：反馈、评估和纠正措施（Feedback, Assessment and Corrective Action）——倾听市场声音并持续改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/1474.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一个玩具车项目，讲清新版 APQP 怎么干 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个玩具车项目，讲清新版 APQP 怎么干
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-13 21:13:42 / 修改时间：21:34:02" itemprop="dateCreated datePublished" datetime="2026-03-13T21:13:42+08:00">2026-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">研发工具</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>为了直观地理解APQP（先期产品质量策划）在实际项目中的运作，我们以开发一款**“儿童智能遥控玩具车”**为例，按照APQP第三版的“0+5”阶段框架，以下为推演具体的推进过程：</p>
+<h3 id="阶段0：入门（Getting-Started）——组建团队与评估风险"><a href="#阶段0：入门（Getting-Started）——组建团队与评估风险" class="headerlink" title="阶段0：入门（Getting Started）——组建团队与评估风险"></a>阶段0：入门（Getting Started）——组建团队与评估风险</h3><ul>
+<li><strong>具体行动</strong>：公司决定开发这款遥控车后，首先任命一位项目经理，并组建一个跨职能团队（包括市场、产品设计、模具工程、注塑工艺、质量、采购及核心供应商）。</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><strong>玩具开发场景</strong>：<ul>
+<li>团队识别出这款玩具的<strong>高风险因素</strong>：例如遥控芯片的供应链可能存在短缺风险，或者电池供应商（高风险供应商）过去有过发热客诉。</li>
+<li>制定初始的项目时间表（Timing Plan），明确何时出图纸、何时开模、何时试产，以确保能在圣诞节销售旺季前上市。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/apqpsz1.webp"></p>
+<h3 id="阶段1：计划和定义项目（Plan-and-Define-Program）——捕捉孩子与家长的声音"><a href="#阶段1：计划和定义项目（Plan-and-Define-Program）——捕捉孩子与家长的声音" class="headerlink" title="阶段1：计划和定义项目（Plan and Define Program）——捕捉孩子与家长的声音"></a>阶段1：计划和定义项目（Plan and Define Program）——捕捉孩子与家长的声音</h3><ul>
+<li><strong>具体行动</strong>：将“顾客的声音（VOC）”转化为可衡量的研发目标，并输出初始物料清单（BOM）。</li>
+<li><strong>玩具开发场景</strong>：<ul>
+<li><strong>顾客声音（VOC）</strong>：通过市场调研，发现孩子们希望“车子跑得快、有炫酷音效”，而家长们（实际购买者）的痛点是“玩具容易摔坏、材料必须无毒安全”。</li>
+<li><strong>设计与质量目标</strong>：设定防摔目标为“从1.5米高处自由跌落不产生小零件（防吞咽）”，材料符合EN71&#x2F;ASTM环保无毒标准，电池续航至少2小时。</li>
+<li><strong>初始BOM</strong>：列出遥控器、PCBA板、无毒ABS塑料外壳、橡胶轮胎、电池等初步清单。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/apqpsz2.webp"></p>
+<h3 id="阶段2：产品设计和开发（Product-Design-and-Development）——在图纸上消灭隐患"><a href="#阶段2：产品设计和开发（Product-Design-and-Development）——在图纸上消灭隐患" class="headerlink" title="阶段2：产品设计和开发（Product Design and Development）——在图纸上消灭隐患"></a>阶段2：产品设计和开发（Product Design and Development）——在图纸上消灭隐患</h3><ul>
+<li><strong>具体行动</strong>：进行产品设计验证，运用DFMEA（设计失效模式及影响分析），并制造原型样件（Prototype）。</li>
+<li><strong>玩具开发场景</strong>：<ul>
+<li><strong>DFMEA应用</strong>：设计团队在画图纸时提问：“如果车轮轴连接处设计太细会怎样？”后果是“车轮脱落，可能被3岁以下儿童误吞（严重度极高）”。<strong>对策</strong>：加粗车轴设计，并增加卡扣与防脱螺丝双重固定。</li>
+<li><strong>原型样件与控制计划</strong>：利用3D打印制作出几台玩具车原型，制定原型样件控制计划，让试玩儿童进行实地测试。工程师记录下遥控的灵敏度和外壳的抗摔性。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/apqpsz3.webp"></p>
+<h3 id="阶段3：过程设计和开发（Process-Design-and-Development）——规划怎么把它造出来"><a href="#阶段3：过程设计和开发（Process-Design-and-Development）——规划怎么把它造出来" class="headerlink" title="阶段3：过程设计和开发（Process Design and Development）——规划怎么把它造出来"></a>阶段3：过程设计和开发（Process Design and Development）——规划怎么把它造出来</h3><ul>
+<li><strong>具体行动</strong>：设计制造流程，运用PFMEA（过程失效模式及影响分析），制定试生产控制计划和包装规范。</li>
+<li><strong>玩具开发场景</strong>：<ul>
+<li><strong>过程流程图与产线布局</strong>：规划组装线（注塑打壳 -&gt; 焊接电路板 -&gt; 组装车轮 -&gt; 装入包装盒），并规划好车间的平面布局图。</li>
+<li><strong>PFMEA应用</strong>：工艺团队提问：“在注塑外壳时，如果机器温度过高会怎样？”后果是“塑料变脆或产生毛刺，割伤儿童皮肤”。<strong>对策</strong>：在注塑机上增加自动温度报警装置，首件必检毛刺。</li>
+<li><strong>包装规范</strong>：考虑到海运及快递颠簸，设计带有防震内托的吸塑包装，以防玩具车在运输中损坏。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/apqpsz4.webp"></p>
+<h3 id="阶段4：产品和过程确认（Product-and-Process-Validation）——实战演练与量产批准"><a href="#阶段4：产品和过程确认（Product-and-Process-Validation）——实战演练与量产批准" class="headerlink" title="阶段4：产品和过程确认（Product and Process Validation）——实战演练与量产批准"></a>阶段4：产品和过程确认（Product and Process Validation）——实战演练与量产批准</h3><ul>
+<li><strong>具体行动</strong>：进行有效生产运行（试生产），开展MSA（测量系统分析）、SPC（统计过程控制），并最终提交PPAP（生产件批准程序）。</li>
+<li><strong>玩具开发场景</strong>：<ul>
+<li><strong>有效生产运行</strong>：在真实的组装线上，用真实的模具和操作工，连续生产300台玩具车。</li>
+<li><strong>MSA与SPC</strong>：针对“车轮拉拔力”这一关键安全特性（防止脱落），用拉力计进行测试。团队先做MSA，确保拉力计是精准的；然后用SPC控制图分析这300台车的拉拔力数据，确保过程能力（Cpk）达标。</li>
+<li><strong>PPAP与安全投产</strong>：所有测试（跌落、环保、电磁兼容等）通过后，向高层或大客户提交PPAP包获批量产。同时，引入APQP第三版新增的“<strong>安全投产（Safe Launch）</strong>”计划，在量产的前30天内，增加检验频次（例如从抽检改为全检车轮卡扣），以确保万无一失。</li>
+</ul>
+</li>
+</ul>
+<h3 id="阶段5：反馈、评估和纠正措施（Feedback-Assessment-and-Corrective-Action）——倾听市场声音并持续改进"><a href="#阶段5：反馈、评估和纠正措施（Feedback-Assessment-and-Corrective-Action）——倾听市场声音并持续改进" class="headerlink" title="阶段5：反馈、评估和纠正措施（Feedback, Assessment and Corrective Action）——倾听市场声音并持续改进"></a>阶段5：反馈、评估和纠正措施（Feedback, Assessment and Corrective Action）——倾听市场声音并持续改进</h3><ul>
+<li><strong>具体行动</strong>：量产交付后，通过减少变差、提升顾客满意度，并将经验教训记录到知识库中。</li>
+<li><strong>玩具开发场景</strong>：<ul>
+<li>玩具车上市后，电商平台上有少数家长反馈：“电池盖太紧，用螺丝刀很难拧开”。</li>
+<li><strong>纠正措施</strong>：团队重新分析问题，优化了下一次生产批次的电池盖螺丝孔公差。</li>
+<li><strong>经验教训（Lessons Learned）</strong>：将“电池盖公差设计标准”记录到公司的基础FMEA（Family FMEA）和设计知识库中，这样公司明年开发“遥控船”或“遥控飞机”时，就不会再犯同样的错误。</li>
+</ul>
+</li>
+</ul>
+<p>通过上述APQP流程的步步为营，这辆遥控玩具车不仅在源头规避了“危害儿童安全”和“大批量不良报废”的致命风险，还顺利实现了按时、保质、控制成本的量产目标。</p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-03-13 21:15:09</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>该文以“儿童智能遥控玩具车”为真实载体，系统演绎了<strong>APQP第三版“0+5阶段”框架在消费品开发中的全流程落地实践</strong>，超越了理论教条，凸显APQP作为<strong>预防性质量策划工具</strong>的核心价值——即：<strong>在问题发生前识别、分析、控制并固化经验</strong>。全文逻辑严密、场景具象，体现了APQP从“顾客声音（VOC）”出发，经由设计与过程双重失效分析（DFMEA&#x2F;PFMEA）、实物验证（原型→试产→量产）、数据驱动决策（MSA&#x2F;SPC&#x2F;PPAP），最终闭环至组织知识沉淀的完整PDCA循环。</p>
+<p>尤为突出的是其对<strong>新版APQP第三版关键演进点的精准呼应</strong>：<br>✅ 阶段0的前置风险评估与跨职能团队建设，强化项目启动的稳健性；<br>✅ 将“安全投产（Safe Launch）”作为阶段4的刚性要求，体现对量产初期脆弱性的敬畏；<br>✅ 阶段5不仅关注售后问题响应，更强调结构化复盘与<strong>可复用知识资产（如Family FMEA、设计知识库）的构建</strong>，推动企业级能力进化。</p>
+<p>本质上，这不是一个“做PPAP文档”的流程，而是一套<strong>以儿童安全为红线、以客户满意为标尺、以数据和协同为引擎、以组织学习为终点的高成熟度新产品开发治理体系</strong>。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#APQP第三版 #失效模式分析 #安全投产 #顾客声音转化 #知识管理</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/1474.html" title="一个玩具车项目，讲清新版 APQP 怎么干">https://zhyong.site/posts/1474.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%BE%E5%AE%A2%E5%A3%B0%E9%9F%B3%E8%BD%AC%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 顾客声音转化</a>
+              <a href="/tags/APQP/" rel="tag"><i class="fa fa-tag"></i> APQP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/f04.html" rel="prev" title="质量是设计出来的：APQP 核心框架与全流程详解">
+                  <i class="fa fa-angle-left"></i> 质量是设计出来的：APQP 核心框架与全流程详解
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">159k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:25</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
