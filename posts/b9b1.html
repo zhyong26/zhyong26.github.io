@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhyong.site/img/69919b3624e5d.png">
 <meta property="article:published_time" content="2026-02-15T10:04:49.000Z">
-<meta property="article:modified_time" content="2026-03-09T16:35:29.531Z">
+<meta property="article:modified_time" content="2026-03-18T11:53:16.480Z">
 <meta property="article:author" content="ZhangYong">
 <meta property="article:tag" content="Rust">
 <meta property="article:tag" content="Windows优化">
@@ -285,7 +285,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-10 00:35:29" itemprop="dateModified" datetime="2026-03-10T00:35:29+08:00">2026-03-10</time>
+      <time title="修改时间：2026-03-18 19:53:16" itemprop="dateModified" datetime="2026-03-18T19:53:16+08:00">2026-03-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,7 +332,7 @@
 </blockquote>
 <span id="more"></span>
 
-<h3 id="1-核心原理：什么是“目录联接”？"><a href="#1-核心原理：什么是“目录联接”？" class="headerlink" title="1. 核心原理：什么是“目录联接”？"></a>1. 核心原理：什么是“目录联接”？</h3><p>WindowsClear 的核心逻辑不是简单的“删除”，而是**“无感迁移”<strong>。 它利用 Windows 的目录联接（Directory Junction）功能，将文件实际存储在 D 盘或 E 盘，但在 C 盘原位置留下一个“透明的快捷方式”。对于软件来说，它依然认为文件在 C 盘，因此可以</strong>无缝运行**，完全不会破坏软件配置。</p>
+<h3 id="1-核心原理：什么是“目录联接”？"><a href="#1-核心原理：什么是“目录联接”？" class="headerlink" title="1. 核心原理：什么是“目录联接”？"></a>1. 核心原理：什么是“目录联接”？</h3><p>WindowsClear 的核心逻辑不是简单的“删除”，而是“<strong>无感迁移</strong>”。 它利用 Windows 的目录联接（Directory Junction）功能，将文件实际存储在 D 盘或 E 盘，但在 C 盘原位置留下一个“透明的快捷方式”。对于软件来说，它依然认为文件在 C 盘，因此可以<strong>无缝运行</strong>，完全不会破坏软件配置。</p>
 <h3 id="2-工具亮点"><a href="#2-工具亮点" class="headerlink" title="2. 工具亮点"></a>2. 工具亮点</h3><ul>
 <li><strong>极速性能</strong>：基于 Rust 开发，支持多线程并行扫描，扫描 AppData 目录仅需数秒。</li>
 <li><strong>安全可靠</strong>：内置 <strong>Restart Manager</strong> 技术，能自动检测并尝试结束占用文件的进程；迁移失败支持<strong>自动回滚</strong>。</li>
