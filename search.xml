@@ -1,6 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>桌面端 EPUB 工具：Jane Reader及不同阅读器功能对比</title>
+    <url>/posts/49d2.html</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Jane-Reader-概述"><a href="#Jane-Reader-概述" class="headerlink" title="Jane Reader 概述"></a><strong>Jane Reader 概述</strong></h2><p>一直以来在寻找Mac端的epub阅读器，虽然自带的阅读软件非常不错，但需要上传到云端同步，针对仅本地阅读多电子书预览的需求，未找到合适的阅读软件。昨天在逛<a href="https://github.com/jaywcjlove/awesome-mac/blob/master/README-zh.md">awesome-mac&#x2F;README-zh.md</a> 时，终于找到了解决方案。Jane Reader 是一款专注于 <strong>EPUB</strong> 格式的跨平台电子书阅读器。该工具的设计核心在于提供简洁、无干扰的阅读环境，并针对视效自定义与多语言排版进行了深度优化。</p>
+<p><strong>官方站点</strong>：<a href="https://janereader.com/">Jane Reader - 现代化的 epub 阅读器</a></p>
+<span id="more"></span>
+
+<p><img src="/img/read1.webp"></p>
+<h3 id="核心技术参数"><a href="#核心技术参数" class="headerlink" title="核心技术参数"></a><strong>核心技术参数</strong></h3><ul>
+<li><strong>支持平台</strong>：macOS (Intel &amp; Apple Silicon)、Windows (安装版 &amp; 绿色版)。</li>
+<li><strong>当前版本</strong>：v0.21.0 (截至 2026 年第一季度)。</li>
+<li><strong>主要格式</strong>：EPUB（暂不支持带有 DRM 版权保护的文件）。</li>
+<li><strong>界面语言</strong>：支持多种语言，具备简体与繁体中文转换功能。</li>
+</ul>
+<hr>
+<h2 id="主要功能特性"><a href="#主要功能特性" class="headerlink" title="主要功能特性"></a><strong>主要功能特性</strong></h2><h3 id="1-视觉与版式自定义"><a href="#1-视觉与版式自定义" class="headerlink" title="1. 视觉与版式自定义"></a><strong>1. 视觉与版式自定义</strong></h3><ul>
+<li><strong>多配色方案</strong>：内置 6 种配色主题（3 种亮色，3 种暗色），并支持自定义主题。</li>
+<li><strong>自动深浅模式</strong>：界面颜色可随系统设置自动切换，以降低用眼疲劳。</li>
+<li><strong>分栏布局</strong>：支持单栏、双栏或根据窗口大小自动调整布局。</li>
+<li><strong>精细排版控制</strong>：<ul>
+<li>可调整字体（衬线与无衬线）、字号、字重及字间距。</li>
+<li>支持自定义页边距、行高、列间距及最小列宽。</li>
+<li>页眉显示当前章节名，页脚显示页码&#x2F;分栏数（可根据需求隐藏）。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/read2.webp"></p>
+<h3 id="2-交互与阅读体验"><a href="#2-交互与阅读体验" class="headerlink" title="2. 交互与阅读体验"></a><strong>2. 交互与阅读体验</strong></h3><ul>
+<li><strong>翻页模式</strong>：支持水平或垂直翻页方向切换。</li>
+<li><strong>竖排模式</strong>：支持 <code>vertical-lr</code> 写入模式，适配中文与日文的垂直阅读习惯。</li>
+<li><strong>图片操作</strong>：支持点击放大图片、保存图片至本地或复制图片到剪贴板。</li>
+<li><strong>状态记录</strong>：自动保存并恢复每本书的阅读位置及窗口尺寸。</li>
+</ul>
+<h3 id="3-书库管理与标注"><a href="#3-书库管理与标注" class="headerlink" title="3. 书库管理与标注"></a><strong>3. 书库管理与标注</strong></h3><ul>
+<li><strong>书库系统</strong>：支持书籍重命名、标记“已读”状态及追踪阅读进度。</li>
+<li><strong>标注功能</strong>：<ul>
+<li>支持高亮文本与添加笔记。</li>
+<li>书籍封面上会显示高亮&#x2F;笔记数量的角标。</li>
+<li>支持将标注内容导出为 <strong>JSON</strong> 格式。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="技术更新"><a href="#技术更新" class="headerlink" title="技术更新"></a><strong>技术更新</strong></h2><ul>
+<li><strong>增强图片处理</strong>：新增对“多看”图片出血（Bleed）样式的支持。</li>
+<li><strong>性能优化</strong>：改进了 Windows 平台下的窗口缩放性能及书籍导入&#x2F;导出效率。</li>
+<li><strong>自定义扩展</strong>：增加了自定义搜索引擎设置及 UI 语言切换选项。</li>
+</ul>
+<hr>
+<h2 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h2><p>官方下载：<a href="https://janereader.com/#downloads">Jane Reader - 现代化的 epub 阅读器下载</a></p>
+<p>本地下载：<a href="https://dl.zhyong.site/#/soft/Cross-platform/JaneReader?type=folder">点击下载</a></p>
+<hr>
+<h2 id="常见的EPUB-阅读器对比"><a href="#常见的EPUB-阅读器对比" class="headerlink" title="常见的EPUB 阅读器对比"></a>常见的EPUB 阅读器对比</h2><p>以下是 <strong>Jane Reader</strong> 与市场上几款主流 EPUB 阅读器的功能对比表格</p>
+<h3 id="主流-EPUB-阅读器功能对比表-2026"><a href="#主流-EPUB-阅读器功能对比表-2026" class="headerlink" title="主流 EPUB 阅读器功能对比表 (2026)"></a><strong>主流 EPUB 阅读器功能对比表 (2026)</strong></h3><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>Jane Reader</strong></th>
+<th><strong>Calibre (内嵌阅读器)</strong></th>
+<th><strong>Moon+ Reader (静读天下)</strong></th>
+<th><strong>Thorium Reader</strong></th>
+<th><strong>Neat Reader</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>主要平台</strong></td>
+<td>macOS, Windows</td>
+<td>Windows, macOS, Linux</td>
+<td>Android, iOS</td>
+<td>Windows, macOS, Linux</td>
+<td>全平台 (含 Web)</td>
+</tr>
+<tr>
+<td><strong>收费模式</strong></td>
+<td>免费 (Beta 阶段)</td>
+<td>免费开源</td>
+<td>免费版 &#x2F; 专业版 (付费)</td>
+<td>免费开源</td>
+<td>免费版 &#x2F; 会员订阅制</td>
+</tr>
+<tr>
+<td><strong>核心定位</strong></td>
+<td>极简、排版美化</td>
+<td>强力管理、格式转换</td>
+<td>移动端深度自定义</td>
+<td>无障碍支持、EPUB3 标准</td>
+<td>云端同步、跨设备</td>
+</tr>
+<tr>
+<td><strong>竖排模式</strong></td>
+<td><strong>原生支持 (CJK 优化)</strong></td>
+<td>不支持</td>
+<td>支持 (通过设置调整)</td>
+<td>不支持</td>
+<td>部分支持</td>
+</tr>
+<tr>
+<td><strong>排版自定义</strong></td>
+<td>高 (边距、行高、字重)</td>
+<td>中 (需修改 CSS)</td>
+<td>极高 (包含手势控制)</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td><strong>标注功能</strong></td>
+<td>支持 (可导出 JSON)</td>
+<td>强 (支持笔记同步管理)</td>
+<td>强</td>
+<td>基础支持</td>
+<td>强 (支持多端同步)</td>
+</tr>
+<tr>
+<td><strong>书库管理</strong></td>
+<td>基础 (搜索、已读标记)</td>
+<td>极强 (元数据、插件、服务器)</td>
+<td>强 (封面墙、统计)</td>
+<td>基础 (列表显示)</td>
+<td>中 (云端存储)</td>
+</tr>
+<tr>
+<td><strong>内存占用</strong></td>
+<td>较低</td>
+<td>高 (随书库规模增加)</td>
+<td>中</td>
+<td>中</td>
+<td>中</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="核心对比分析"><a href="#核心对比分析" class="headerlink" title="核心对比分析"></a><strong>核心对比分析</strong></h3><h4 id="1-Jane-Reader-vs-Calibre"><a href="#1-Jane-Reader-vs-Calibre" class="headerlink" title="1. Jane Reader vs. Calibre"></a><strong>1. Jane Reader vs. Calibre</strong></h4><ul>
+<li><strong>Jane Reader</strong>：侧重于“读”。界面设计现代，针对中文阅读（如竖排、字体美化）做了特定优化，适合追求视觉体验的用户。</li>
+<li><strong>Calibre</strong>：侧重于“管”。它是电子书管理工具的行业标准，功能涵盖格式转换、DRM 移除及元数据抓取，但阅读器本身的交互体验较为传统。</li>
+</ul>
+<h4 id="2-Jane-Reader-vs-Moon-Reader"><a href="#2-Jane-Reader-vs-Moon-Reader" class="headerlink" title="2. Jane Reader vs. Moon+ Reader"></a><strong>2. Jane Reader vs. Moon+ Reader</strong></h4><ul>
+<li><strong>Jane Reader</strong>：补齐了桌面端（Windows&#x2F;macOS）高质量排版阅读器的空缺，尤其是对 Apple Silicon 的原生支持。</li>
+<li><strong>Moon+ Reader</strong>：目前仍是移动端（安卓）功能最复杂的阅读器，但其桌面端适配程度较低，UI 设计风格偏向传统移动应用。</li>
+</ul>
+<h4 id="3-Jane-Reader-vs-Thorium-Reader"><a href="#3-Jane-Reader-vs-Thorium-Reader" class="headerlink" title="3. Jane Reader vs. Thorium Reader"></a><strong>3. Jane Reader vs. Thorium Reader</strong></h4><ul>
+<li><strong>Jane Reader</strong>：更符合大众审美，操作逻辑直观，针对东亚文字的排版调教（如分栏和竖排）优于 Thorium。</li>
+<li><strong>Thorium Reader</strong>：由 EDRLab 开发，对 EPUB3 标准支持最完整，且在屏幕阅读器兼容性等无障碍功能上具有技术领先性。</li>
+</ul>
+<h4 id="4-Jane-Reader-vs-Neat-Reader"><a href="#4-Jane-Reader-vs-Neat-Reader" class="headerlink" title="4. Jane Reader vs. Neat Reader"></a><strong>4. Jane Reader vs. Neat Reader</strong></h4><ul>
+<li><strong>Jane Reader</strong>：数据存储在本地，无需账户登录，适合在意隐私及纯单机阅读的用户。</li>
+<li><strong>Neat Reader</strong>：商业化程度高，核心卖点是“云端同步”，即在电脑读一半，手机开网页能接着读，但高级功能通常需要订阅。</li>
+</ul>
+<hr>
+<p><strong>建议结论</strong>：</p>
+<ul>
+<li>需要<strong>极致的桌面端视觉美感</strong>或<strong>竖排阅读习惯</strong>，优先选择 <strong>Jane Reader</strong>。</li>
+<li>有<strong>数千本书籍需要整理及转换格式</strong>，必须配合 <strong>Calibre</strong>。</li>
+<li>需要在<strong>多个移动设备间同步进度</strong>，<strong>Neat Reader</strong> 更为合适。</li>
+</ul>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-03-22 10:49:22</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文系统介绍了新兴桌面端 EPUB 阅读器 <strong>Jane Reader</strong> 的定位、技术特性与生态坐标，并通过横向对比主流工具（Calibre、Moon+ Reader、Thorium、Neat Reader），凸显其差异化价值。核心逻辑在于：<strong>Jane Reader 并非试图成为“全能型”电子书平台，而是精准锚定“高质量桌面 EPUB 阅读体验”这一细分需求</strong>。</p>
+<p>其技术亮点体现在三个层面：  </p>
+<ol>
+<li><strong>排版深度可控性</strong>——超越基础字体&#x2F;字号调节，覆盖分栏逻辑、竖排渲染（<code>vertical-lr</code>）、页眉页脚动态内容、出血图支持等专业出版级参数；  </li>
+<li><strong>人因工程导向设计</strong>——自动深浅模式、低内存占用、窗口状态持久化、无干扰界面，体现对长时间专注阅读场景的深刻理解；  </li>
+<li><strong>隐私优先架构</strong>——纯本地运行、无需账户、标注数据导出为开放 JSON 格式，与当前云端同步主导的商业阅读器形成鲜明理念对照。</li>
+</ol>
+<p>对比分析揭示了 EPUB 工具生态的结构性分工：Calibre 是“图书馆管理员”，Thorium 是“标准守门人”，Neat Reader 是“跨端协作者”，而 Jane Reader 则是“桌面阅读美学家”——填补了 macOS&#x2F;Windows 平台上兼顾现代化 UI、东亚文字排版精度与轻量性能的空白。其 Beta 阶段免费策略也暗示了以用户体验口碑驱动发展的产品路径。</p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#EPUB阅读器 #桌面端阅读 #中文竖排 #排版自定义 #隐私优先</p>
+]]></content>
+      <categories>
+        <category>软件推荐</category>
+      </categories>
+      <tags>
+        <tag>EPUB阅读器</tag>
+        <tag>桌面端阅读</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>APQP第二阶段（产品设计和开发）学习与实施指南</title>
     <url>/posts/9475.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="1-APQP第二阶段概述与核心目标"><a href="#1-APQP第二阶段概述与核心目标" class="headerlink" title="1. APQP第二阶段概述与核心目标"></a>1. APQP第二阶段概述与核心目标</h2><p>根据西门子对APQP（产品质量先期策划）的架构定义，第二阶段（产品设计和开发）是整个产品生命周期中极具<strong>前瞻性</strong>的环节。该阶段不仅是设计方案的形成期，更是通过结构化的质量计划为后续生产提供明确证据的关键窗口。</p>
@@ -185,9 +359,9 @@
         <category>研发工具</category>
       </categories>
       <tags>
-        <tag>APQP</tag>
         <tag>VOC转化</tag>
         <tag>QFD质量屋</tag>
+        <tag>APQP</tag>
       </tags>
   </entry>
   <entry>
@@ -359,8 +533,8 @@
         <category>研发工具</category>
       </categories>
       <tags>
-        <tag>顾客声音转化</tag>
         <tag>APQP</tag>
+        <tag>顾客声音转化</tag>
       </tags>
   </entry>
   <entry>
