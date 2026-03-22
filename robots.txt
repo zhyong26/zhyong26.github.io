@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+
+# 建议屏蔽不必要的渲染文件夹或插件目录（可选）
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+
+# 必须指定 Sitemap 地址，引导爬虫抓取
+Sitemap: https://zhyong.site/sitemap.xml
