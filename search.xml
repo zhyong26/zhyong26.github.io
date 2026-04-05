@@ -3,8 +3,7 @@
   <entry>
     <title>APQP 第五阶段：量产、反馈、评定与纠正</title>
     <url>/posts/feda.html</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>写在前面</p>
-<p>终于写到APQP系列的最后一篇了。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>终于写到APQP系列的最后一篇了。</p>
 <p>很多人以为APQP是一个”从策划到PPAP”就结束的项目。<br>但实际上，<strong>第五阶段——量产、反馈、评定与纠正，才是APQP真正贯穿最长时间的阶段</strong>。</p>
 <p>第一到第四阶段，可能只用了6个月到2年；<br>而第五阶段，从第一天量产开始，可能持续5年、10年，甚至更长。</p>
 <p>这一阶段的核心问题只有一个：<strong>量产之后，如何持续保持和改善产品质量？</strong></p>
@@ -8823,8 +8822,8 @@ C --&gt; D[标准操作规程制定]</code></pre>
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>阻燃测试</tag>
         <tag>EN13501</tag>
+        <tag>阻燃测试</tag>
       </tags>
   </entry>
   <entry>
@@ -9094,8 +9093,8 @@ C --&gt; D[标准操作规程制定]</code></pre>
         <category>标准解析</category>
       </categories>
       <tags>
-        <tag>阻燃测试</tag>
         <tag>EN13501</tag>
+        <tag>阻燃测试</tag>
       </tags>
   </entry>
   <entry>
