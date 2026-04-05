@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="写在前面APQP五个阶段中，第四阶段是真正意义上的”大考”。 第一到第三阶段，我们完成了大量的策划、设计和开发工作，但这些工作究竟能不能支撑量产？产品到底能不能满足顾客的要求？ 第四阶段，就是用实际生产来回答这个问题。 如果把APQP比作一场长跑，第四阶段就是”冲刺撞线”前的最后一段。这一阶段的核心任务只有一个：验证——验证过程设计能不能稳定地产出符合要求的产品。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APQP 第四阶段：产品与过程验证">
+<meta property="og:url" content="https://zhyong.site/posts/7c1f.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="写在前面APQP五个阶段中，第四阶段是真正意义上的”大考”。 第一到第三阶段，我们完成了大量的策划、设计和开发工作，但这些工作究竟能不能支撑量产？产品到底能不能满足顾客的要求？ 第四阶段，就是用实际生产来回答这个问题。 如果把APQP比作一场长跑，第四阶段就是”冲刺撞线”前的最后一段。这一阶段的核心任务只有一个：验证——验证过程设计能不能稳定地产出符合要求的产品。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/img/apqp40.webp">
+<meta property="article:published_time" content="2026-04-04T13:27:29.000Z">
+<meta property="article:modified_time" content="2026-04-05T14:15:48.045Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="APQP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/img/apqp40.webp">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/7c1f.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/7c1f.html","path":"posts/7c1f.html","title":"APQP 第四阶段：产品与过程验证"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>APQP 第四阶段：产品与过程验证 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/7c1f.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-瞬间"><a href="/memos/" rel="section"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E7%9A%84%E5%AE%9A%E4%BD%8D"><span class="nav-text">一、第四阶段的定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%E7%BB%99%E4%BA%86%E6%88%91%E4%BB%AC%E4%BB%80%E4%B9%88"><span class="nav-text">1.1 第三阶段给了我们什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E8%A6%81%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88"><span class="nav-text">1.2 第四阶段要验证什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%BB%E5%8A%A1"><span class="nav-text">二、第四阶段的核心任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E8%AF%95%E7%94%9F%E4%BA%A7%EF%BC%88Run-at-Rate%EF%BC%89"><span class="nav-text">任务一：试生产（Run at Rate）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%AF%95%E7%94%9F%E4%BA%A7"><span class="nav-text">什么是试生产</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-text">试生产的目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A6%81%E6%B1%82"><span class="nav-text">试生产的基本要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E7%9A%84%E8%BF%87%E7%A8%8B%E7%9B%91%E6%8E%A7"><span class="nav-text">试生产的过程监控</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E5%90%8E%E7%9A%84%E8%AF%84%E5%AE%A1"><span class="nav-text">试生产后的评审</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%BA%8C%EF%BC%9A%E6%B5%8B%E9%87%8F%E7%B3%BB%E7%BB%9F%E9%AA%8C%E8%AF%81%EF%BC%88MSA%E8%A1%A5%E5%85%85%EF%BC%89"><span class="nav-text">任务二：测量系统验证（MSA补充）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5MSA%E7%9A%84%E9%87%8D%E7%82%B9"><span class="nav-text">第四阶段MSA的重点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E6%9C%9F%E9%97%B4%E7%9A%84%E6%B5%8B%E9%87%8F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">试生产期间的测量注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%89%EF%BC%9A%E5%88%9D%E5%A7%8B%E8%BF%87%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%A1%AE%E8%AE%A4%EF%BC%88Cpk%E8%A1%A5%E5%85%85%EF%BC%89"><span class="nav-text">任务三：初始过程能力确认（Cpk补充）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cpk%E9%AA%8C%E8%AF%81%E7%9A%84%E6%97%B6%E6%9C%BA"><span class="nav-text">Cpk验证的时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cpk%E4%B8%8D%E8%BE%BE%E6%A0%87%E7%9A%84%E5%B8%B8%E8%A7%81%E5%8E%9F%E5%9B%A0"><span class="nav-text">Cpk不达标的常见原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cpk%E7%A0%94%E7%A9%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%A4%E7%A8%B3%E5%87%86%E5%88%99"><span class="nav-text">Cpk研究的数据判稳准则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%9B%9B%EF%BC%9A%E4%BA%A7%E5%93%81%E9%AA%8C%E8%AF%81"><span class="nav-text">任务四：产品验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A7%E5%93%81%E9%AA%8C%E8%AF%81%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">产品验证的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E8%A7%82%E6%A3%80%E9%AA%8C%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">外观检验的注意事项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%BA%E5%AF%B8%E6%A3%80%E9%AA%8C%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">尺寸检验的注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%BA%94%EF%BC%9A%E5%8C%85%E8%A3%85%E5%92%8C%E6%A0%87%E7%AD%BE%E9%AA%8C%E8%AF%81"><span class="nav-text">任务五：包装和标签验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%85%E8%A3%85%E9%AA%8C%E8%AF%81%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">包装验证的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%AA%8C%E8%AF%81%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">标签验证的内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%85%AD%EF%BC%9APPAP%E6%8F%90%E4%BA%A4%E5%87%86%E5%A4%87"><span class="nav-text">任务六：PPAP提交准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPPAP"><span class="nav-text">什么是PPAP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PPAP%E7%9A%84%E4%BA%94%E4%B8%AA%E6%8F%90%E4%BA%A4%E7%AD%89%E7%BA%A7"><span class="nav-text">PPAP的五个提交等级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PPAP%E6%8F%90%E4%BA%A4%E7%9A%84%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6%E6%B8%85%E5%8D%95"><span class="nav-text">PPAP提交的核心文件清单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PPAP%E6%8F%90%E4%BA%A4%E7%BB%93%E6%9E%9C"><span class="nav-text">PPAP提交结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E4%B8%83%EF%BC%9A%E8%AF%95%E7%94%9F%E4%BA%A7%E9%97%AE%E9%A2%98%E7%AE%A1%E7%90%86%E4%B8%8E%E6%94%B9%E5%96%84"><span class="nav-text">任务七：试生产问题管理与改善</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E7%BA%A7"><span class="nav-text">试生产问题的分级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%95%E7%94%9F%E4%BA%A7%E9%97%AE%E9%A2%98%E7%9A%84%E9%97%AD%E7%8E%AF%E7%AE%A1%E7%90%86"><span class="nav-text">试生产问题的闭环管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BF%9B%E5%85%A5%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E7%9A%84%E9%97%A8%E6%A7%9B%E6%9D%A1%E4%BB%B6"><span class="nav-text">三、进入第四阶段的门槛条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E7%9A%84%E6%97%B6%E9%97%B4%E7%BA%BF%EF%BC%88%E5%8F%82%E8%80%83%EF%BC%89"><span class="nav-text">四、第四阶段的时间线（参考）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94"><span class="nav-text">五、常见问题与解答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E6%A0%B8%E5%BF%83%E4%BA%A4%E4%BB%98%E7%89%A9%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="nav-text">六、第四阶段核心交付物检查清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E4%B8%8E%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5%E7%9A%84%E8%A1%94%E6%8E%A5"><span class="nav-text">七、第四阶段与第五阶段的衔接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%883%E2%80%935%E4%B8%AA%EF%BC%89%EF%BC%9A"><span class="nav-text">核心关键词标签（3–5个）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">94</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/7c1f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="APQP 第四阶段：产品与过程验证 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          APQP 第四阶段：产品与过程验证
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-04 21:27:29" itemprop="dateCreated datePublished" datetime="2026-04-04T21:27:29+08:00">2026-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-04-05 22:15:48" itemprop="dateModified" datetime="2026-04-05T22:15:48+08:00">2026-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">研发工具</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>APQP五个阶段中，第四阶段是真正意义上的”大考”。</p>
+<p>第一到第三阶段，我们完成了大量的策划、设计和开发工作，但这些工作究竟能不能支撑量产？<br>产品到底能不能满足顾客的要求？</p>
+<p><strong>第四阶段，就是用实际生产来回答这个问题。</strong></p>
+<p>如果把APQP比作一场长跑，第四阶段就是”冲刺撞线”前的最后一段。<br>这一阶段的核心任务只有一个：<strong>验证</strong>——验证过程设计能不能稳定地产出符合要求的产品。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、第四阶段的定位"><a href="#一、第四阶段的定位" class="headerlink" title="一、第四阶段的定位"></a>一、第四阶段的定位</h2><p>在说具体内容之前，我们先理清第四阶段在APQP整体框架中的位置。</p>
+<h3 id="1-1-第三阶段给了我们什么"><a href="#1-1-第三阶段给了我们什么" class="headerlink" title="1.1 第三阶段给了我们什么"></a>1.1 第三阶段给了我们什么</h3><p>第三阶段（过程设计开发）完成后，我们手里有了：</p>
+<ul>
+<li>经过评审的过程流程图</li>
+<li>完成第一版编制的PFMEA</li>
+<li>经过小规模验证的控制计划</li>
+<li>经过培训的操作工人</li>
+<li>经过MSA验证的测量系统</li>
+<li>初始Cpk达标的过程参数</li>
+</ul>
+<h3 id="1-2-第四阶段要验证什么"><a href="#1-2-第四阶段要验证什么" class="headerlink" title="1.2 第四阶段要验证什么"></a>1.2 第四阶段要验证什么</h3><p>第四阶段（产品与过程验证），要做的事情通俗来说就是：</p>
+<p><strong>用正式的生产条件，生产出正式的产品，验证它到底行不行。</strong></p>
+<p>具体包括：</p>
+<ul>
+<li>试生产（Trial Production &#x2F; Run at Rate）</li>
+<li>测量系统验证（MSA补充）</li>
+<li>初始过程能力确认（Cpk补充）</li>
+<li>作业指导书执行有效性确认</li>
+<li>产品验证（功能、性能、耐久）</li>
+<li>包装和标签验证</li>
+<li>提交PPAP（Production Part Approval Process）</li>
+</ul>
+<hr>
+<h2 id="二、第四阶段的核心任务"><a href="#二、第四阶段的核心任务" class="headerlink" title="二、第四阶段的核心任务"></a>二、第四阶段的核心任务</h2><p><img src="/img/apqp40.webp"></p>
+<h3 id="任务一：试生产（Run-at-Rate）"><a href="#任务一：试生产（Run-at-Rate）" class="headerlink" title="任务一：试生产（Run at Rate）"></a>任务一：试生产（Run at Rate）</h3><p>试生产是第四阶段最核心的工作，也是整个APQP流程中最接近真实量产的一个环节。</p>
+<h4 id="什么是试生产"><a href="#什么是试生产" class="headerlink" title="什么是试生产"></a>什么是试生产</h4><p>试生产不是简单的”做几个样品看看”，而是在<strong>正式的生产环境、使用正式的设备、按照作业指导书操作</strong>，来验证过程能力。</p>
+<h4 id="试生产的目的"><a href="#试生产的目的" class="headerlink" title="试生产的目的"></a>试生产的目的</h4><ul>
+<li>验证过程是否能够稳定运行</li>
+<li>验证产量是否能够达到目标节拍</li>
+<li>验证产品质量是否能够持续满足规格要求</li>
+<li>暴露前三个阶段没有发现的问题</li>
+</ul>
+<h4 id="试生产的基本要求"><a href="#试生产的基本要求" class="headerlink" title="试生产的基本要求"></a>试生产的基本要求</h4><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>生产数量</td>
+<td>通常要求连续生产300~1000件（根据顾客要求）</td>
+</tr>
+<tr>
+<td>生产条件</td>
+<td>使用正式量产设备、正式工装、正式作业指导书</td>
+</tr>
+<tr>
+<td>参与人员</td>
+<td>操作工人应已完成培训</td>
+</tr>
+<tr>
+<td>生产节拍</td>
+<td>达到目标节拍时间（或在目标节拍的±10%内）</td>
+</tr>
+<tr>
+<td>合格率</td>
+<td>符合控制计划的AQL要求</td>
+</tr>
+</tbody></table>
+<h4 id="试生产的过程监控"><a href="#试生产的过程监控" class="headerlink" title="试生产的过程监控"></a>试生产的过程监控</h4><p>试生产过程中，需要持续监控以下数据：</p>
+<ul>
+<li>每小时的产量和合格率</li>
+<li>SPC控制图数据（关键特性）</li>
+<li>异常发生情况和处置记录</li>
+<li>设备运行状况</li>
+</ul>
+<p><strong>试生产期间，如果合格率或过程能力出现异常，必须暂停生产，先解决问题再继续。</strong></p>
+<h4 id="试生产后的评审"><a href="#试生产后的评审" class="headerlink" title="试生产后的评审"></a>试生产后的评审</h4><p>试生产完成后，必须组织跨功能评审，评审内容包括：</p>
+<ul>
+<li>过程运行总结（产量、良率、节拍）</li>
+<li>测量系统是否持续有效</li>
+<li>控制计划是否需要更新</li>
+<li>PFMEA是否有新的发现</li>
+<li>是否准备好提交PPAP</li>
+</ul>
+<hr>
+<h3 id="任务二：测量系统验证（MSA补充）"><a href="#任务二：测量系统验证（MSA补充）" class="headerlink" title="任务二：测量系统验证（MSA补充）"></a>任务二：测量系统验证（MSA补充）</h3><p>试生产期间，测量系统需要持续保持验证状态。</p>
+<h4 id="第四阶段MSA的重点"><a href="#第四阶段MSA的重点" class="headerlink" title="第四阶段MSA的重点"></a>第四阶段MSA的重点</h4><p>第三阶段可能已经完成了部分量具的MSA，但第四阶段需要：</p>
+<ul>
+<li>验证在实际生产环境中，测量系统是否仍然可靠</li>
+<li>对关键特性使用的量具进行<strong>GR&amp;R复测</strong></li>
+<li>如果发现GR&amp;R超标（&gt;30%），必须立即改进</li>
+</ul>
+<h4 id="试生产期间的测量注意事项"><a href="#试生产期间的测量注意事项" class="headerlink" title="试生产期间的测量注意事项"></a>试生产期间的测量注意事项</h4><ul>
+<li>测量人员是否和第三阶段MSA时一致？</li>
+<li>测量方法是否严格按照SOP执行？</li>
+<li>量具是否在校准有效期内？</li>
+<li>测量环境是否和量产一致？</li>
+</ul>
+<hr>
+<h3 id="任务三：初始过程能力确认（Cpk补充）"><a href="#任务三：初始过程能力确认（Cpk补充）" class="headerlink" title="任务三：初始过程能力确认（Cpk补充）"></a>任务三：初始过程能力确认（Cpk补充）</h3><p>试生产过程数据是初始过程能力研究的重要数据来源。</p>
+<h4 id="Cpk验证的时机"><a href="#Cpk验证的时机" class="headerlink" title="Cpk验证的时机"></a>Cpk验证的时机</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">试生产结束后 ＋ 数据量足够（至少100个连续数据） ＝ 初始Cpk研究</span><br><span class="line"></span><br><span class="line">如果Cpk达标 → 进入PPAP提交阶段</span><br><span class="line">如果Cpk不达标 → 回到第三阶段，分析原因，改进过程，再试生产</span><br></pre></td></tr></table></figure>
+
+<h4 id="Cpk不达标的常见原因"><a href="#Cpk不达标的常见原因" class="headerlink" title="Cpk不达标的常见原因"></a>Cpk不达标的常见原因</h4><table>
+<thead>
+<tr>
+<th>原因类型</th>
+<th>典型表现</th>
+<th>解决方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>过程偏移</td>
+<td>分布中心偏离公差中心</td>
+<td>调整工艺参数中心</td>
+</tr>
+<tr>
+<td>过程离散度过大</td>
+<td>标准差σ过大</td>
+<td>查找特殊原因，消除异常波动</td>
+</tr>
+<tr>
+<td>设备能力不足</td>
+<td>设备精度不够</td>
+<td>设备改造或更换</td>
+</tr>
+<tr>
+<td>工装磨损</td>
+<td>工装导致的过程波动</td>
+<td>更换或修复工装</td>
+</tr>
+<tr>
+<td>原材料波动</td>
+<td>来料不稳定导致</td>
+<td>供应商改善或来料检验加严</td>
+</tr>
+</tbody></table>
+<h4 id="Cpk研究的数据判稳准则"><a href="#Cpk研究的数据判稳准则" class="headerlink" title="Cpk研究的数据判稳准则"></a>Cpk研究的数据判稳准则</h4><p>在进行Cpk计算之前，<strong>必须先确认过程是稳定的</strong>。</p>
+<p>判断过程是否稳定，需要满足以下SPC控制图判稳准则（任一违反则过程不稳）：</p>
+<ul>
+<li>连续25个点都在控制限内</li>
+<li>连续35个点中，最多1个点超出控制限</li>
+<li>连续100个点中，最多2个点超出控制限</li>
+</ul>
+<p><strong>过程不稳定时，Cpk数值没有意义，必须先解决异常原因。</strong></p>
+<hr>
+<h3 id="任务四：产品验证"><a href="#任务四：产品验证" class="headerlink" title="任务四：产品验证"></a>任务四：产品验证</h3><p>产品验证是第四阶段的重要组成部分，试生产出来的产品，必须经过严格的验证。</p>
+<h4 id="产品验证的内容"><a href="#产品验证的内容" class="headerlink" title="产品验证的内容"></a>产品验证的内容</h4><table>
+<thead>
+<tr>
+<th>验证类别</th>
+<th>验证项目</th>
+<th>依据标准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>外观检验</td>
+<td>颜色、光泽、表面缺陷</td>
+<td>工程图纸&#x2F;外观标准</td>
+</tr>
+<tr>
+<td>尺寸检验</td>
+<td>关键尺寸是否符合公差</td>
+<td>工程图纸</td>
+</tr>
+<tr>
+<td>功能检验</td>
+<td>产品功能是否正常</td>
+<td>功能规范</td>
+</tr>
+<tr>
+<td>性能检验</td>
+<td>力学性能、耐温性能等</td>
+<td>材料或产品规范</td>
+</tr>
+<tr>
+<td>耐久检验</td>
+<td>寿命测试、老化测试等</td>
+<td>顾客要求或行业标准</td>
+</tr>
+<tr>
+<td>包装检验</td>
+<td>包装完整性、标签正确性</td>
+<td>包装规范</td>
+</tr>
+</tbody></table>
+<h4 id="外观检验的注意事项"><a href="#外观检验的注意事项" class="headerlink" title="外观检验的注意事项"></a>外观检验的注意事项</h4><p>外观检验是最容易产生争议的项目，因为”好看不好看”具有一定主观性。</p>
+<p>建议在试生产阶段：</p>
+<ul>
+<li>使用标准光源箱（D65标准光源），避免自然光差异</li>
+<li>建立<strong>标准样品（Master Sample）</strong>，作为判定基准</li>
+<li>检验人员和判定基准之间达成一致</li>
+<li>记录外观争议案例，反馈到第三阶段更新外观标准</li>
+</ul>
+<h4 id="尺寸检验的注意事项"><a href="#尺寸检验的注意事项" class="headerlink" title="尺寸检验的注意事项"></a>尺寸检验的注意事项</h4><ul>
+<li>三坐标测量机（CMM）等精密量具是否在校准有效期内</li>
+<li>测量方法是否和MSA时一致</li>
+<li>夹具设计是否影响测量准确性</li>
+<li>测量人员是否有足够经验</li>
+</ul>
+<hr>
+<h3 id="任务五：包装和标签验证"><a href="#任务五：包装和标签验证" class="headerlink" title="任务五：包装和标签验证"></a>任务五：包装和标签验证</h3><p>包装和标签是产品的”最后一道关卡”，也是顾客最容易发现问题的环节。</p>
+<h4 id="包装验证的内容"><a href="#包装验证的内容" class="headerlink" title="包装验证的内容"></a>包装验证的内容</h4><ul>
+<li>包装材料是否正确</li>
+<li>包装方式是否符合规范</li>
+<li>防护措施是否足够（防震、防潮、防划伤）</li>
+<li>包装外观是否整洁</li>
+</ul>
+<h4 id="标签验证的内容"><a href="#标签验证的内容" class="headerlink" title="标签验证的内容"></a>标签验证的内容</h4><table>
+<thead>
+<tr>
+<th>验证项目</th>
+<th>具体内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>零件号</td>
+<td>与图纸&#x2F;订单一致</td>
+</tr>
+<tr>
+<td>零件名称</td>
+<td>与图纸&#x2F;订单一致</td>
+</tr>
+<tr>
+<td>数量</td>
+<td>与发货数量一致</td>
+</tr>
+<tr>
+<td>生产批次</td>
+<td>追溯码&#x2F;批次号正确</td>
+</tr>
+<tr>
+<td>生产日期</td>
+<td>符合要求格式</td>
+</tr>
+<tr>
+<td>顾客特殊要求</td>
+<td>如LOT追溯、特殊标记等</td>
+</tr>
+</tbody></table>
+<p><strong>标签错误是PPAP提交中最常见的被退回原因之一，务必在试生产阶段反复核对。</strong></p>
+<hr>
+<h3 id="任务六：PPAP提交准备"><a href="#任务六：PPAP提交准备" class="headerlink" title="任务六：PPAP提交准备"></a>任务六：PPAP提交准备</h3><p>PPAP（Production Part Approval Process，生产件批准程序）是第四阶段最重要的输出物。</p>
+<h4 id="什么是PPAP"><a href="#什么是PPAP" class="headerlink" title="什么是PPAP"></a>什么是PPAP</h4><p>PPAP是供应商向顾客提交的一份”证明文件”——<br>“我的过程能够稳定地生产出满足你要求的产品，你批准我开始正式供货。”</p>
+<h4 id="PPAP的五个提交等级"><a href="#PPAP的五个提交等级" class="headerlink" title="PPAP的五个提交等级"></a>PPAP的五个提交等级</h4><table>
+<thead>
+<tr>
+<th>等级</th>
+<th>提交内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>等级1</td>
+<td>仅需提交外观检验报告（如果有）</td>
+<td>最简</td>
+</tr>
+<tr>
+<td>等级2</td>
+<td>样件+外观+尺寸报告</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>等级3</td>
+<td>样件+外观+尺寸+材料&#x2F;性能报告</td>
+<td>顾客要求时</td>
+</tr>
+<tr>
+<td>等级4</td>
+<td>样件+特定顾客要求</td>
+<td>极少用</td>
+</tr>
+<tr>
+<td>等级5</td>
+<td>样件+全部文件+过程参数</td>
+<td>最全</td>
+</tr>
+</tbody></table>
+<p><strong>通常汽车行业最常用的是等级3。</strong></p>
+<h4 id="PPAP提交的核心文件清单"><a href="#PPAP提交的核心文件清单" class="headerlink" title="PPAP提交的核心文件清单"></a>PPAP提交的核心文件清单</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>文件名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>设计记录</td>
+<td>工程图纸、规格书</td>
+</tr>
+<tr>
+<td>2</td>
+<td>工程变更文件</td>
+<td>任何与初始设计不同的变更</td>
+</tr>
+<tr>
+<td>3</td>
+<td>工程批准</td>
+<td>设计阶段的工程批准证明</td>
+</tr>
+<tr>
+<td>4</td>
+<td>DFMEA</td>
+<td>设计FMEA（如顾客要求）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>过程流程图</td>
+<td>第三阶段完成</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PFMEA</td>
+<td>第三阶段完成</td>
+</tr>
+<tr>
+<td>7</td>
+<td>控制计划</td>
+<td>第三&#x2F;四阶段完成</td>
+</tr>
+<tr>
+<td>8</td>
+<td>尺寸报告</td>
+<td>试生产件尺寸检验结果</td>
+</tr>
+<tr>
+<td>9</td>
+<td>材料&#x2F;性能测试结果</td>
+<td>材料报告、功能测试报告</td>
+</tr>
+<tr>
+<td>10</td>
+<td>初始过程能力研究</td>
+<td>Cpk报告</td>
+</tr>
+<tr>
+<td>11</td>
+<td>测量系统分析</td>
+<td>MSA&#x2F;GR&amp;R报告</td>
+</tr>
+<tr>
+<td>12</td>
+<td>合格实验室文件</td>
+<td>内部或外部实验室资质证明</td>
+</tr>
+<tr>
+<td>13</td>
+<td>外观检验报告</td>
+<td>外观检验结果+标准样品</td>
+</tr>
+<tr>
+<td>14</td>
+<td>样件生产件</td>
+<td>实际试生产的样品</td>
+</tr>
+<tr>
+<td>15</td>
+<td>过程参数</td>
+<td>关键过程参数记录</td>
+</tr>
+<tr>
+<td>16</td>
+<td>作业指导书</td>
+<td>经培训确认的SOP</td>
+</tr>
+<tr>
+<td>17</td>
+<td>检查辅助工具</td>
+<td>量具、夹具的验证记录</td>
+</tr>
+<tr>
+<td>18</td>
+<td>顾客特殊要求</td>
+<td>顾客特定要求的满足证明</td>
+</tr>
+<tr>
+<td>19</td>
+<td>零件提交保证书（PSW）</td>
+<td>零件提交保证书</td>
+</tr>
+<tr>
+<td>20</td>
+<td>外观检验批准</td>
+<td>外观批准记录</td>
+</tr>
+</tbody></table>
+<p><strong>其中PSW（零件提交保证书）是每批PPAP必须提交的核心文件。</strong></p>
+<h4 id="PPAP提交结果"><a href="#PPAP提交结果" class="headerlink" title="PPAP提交结果"></a>PPAP提交结果</h4><p>顾客收到PPAP后，通常有四种反馈：</p>
+<table>
+<thead>
+<tr>
+<th>结果</th>
+<th>含义</th>
+<th>后续行动</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>完全批准（PSW）</td>
+<td>过程批准，可开始正式供货</td>
+<td>按计划量产</td>
+</tr>
+<tr>
+<td>临时批准</td>
+<td>有条件批准，可在限定时间内供货</td>
+<td>在限定时间内完成改善</td>
+</tr>
+<tr>
+<td>拒绝</td>
+<td>提交物不满足要求</td>
+<td>重新试生产，重新提交</td>
+</tr>
+<tr>
+<td>陪同工作</td>
+<td>需要供应商与顾客共同解决问题</td>
+<td>按顾客要求协作</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="任务七：试生产问题管理与改善"><a href="#任务七：试生产问题管理与改善" class="headerlink" title="任务七：试生产问题管理与改善"></a>任务七：试生产问题管理与改善</h3><p>试生产阶段是APQP中”发现问题、解决问题”的最后机会。</p>
+<h4 id="试生产问题的分级"><a href="#试生产问题的分级" class="headerlink" title="试生产问题的分级"></a>试生产问题的分级</h4><table>
+<thead>
+<tr>
+<th>问题等级</th>
+<th>定义</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>严重问题</td>
+<td>影响安全&#x2F;法规&#x2F;基本功能</td>
+<td>立即停产，分析原因，全面改善</td>
+</tr>
+<tr>
+<td>重要问题</td>
+<td>影响产品性能&#x2F;客户使用</td>
+<td>暂停生产，改善后继续试生产</td>
+</tr>
+<tr>
+<td>一般问题</td>
+<td>影响外观&#x2F;包装等</td>
+<td>记录，改善，不影响试生产进度</td>
+</tr>
+</tbody></table>
+<h4 id="试生产问题的闭环管理"><a href="#试生产问题的闭环管理" class="headerlink" title="试生产问题的闭环管理"></a>试生产问题的闭环管理</h4><p>所有在试生产中发现的问题，必须闭环管理：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">问题发现 → 记录 → 分析根本原因 → 制定纠正措施</span><br><span class="line">     ↑                            ↓</span><br><span class="line">     ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← </span><br><span class="line">     </span><br><span class="line">纠正措施执行后 → 验证有效性 → 确认闭环 → 更新PFMEA/Control Plan</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键原则：试生产发现的问题，必须在量产前解决并更新相关文件。</strong></p>
+<hr>
+<h2 id="三、进入第四阶段的门槛条件"><a href="#三、进入第四阶段的门槛条件" class="headerlink" title="三、进入第四阶段的门槛条件"></a>三、进入第四阶段的门槛条件</h2><p>在启动试生产之前，以下条件必须满足：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>前提条件</th>
+<th>确认方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>第三阶段PFMEA已完成并评审</td>
+<td>检查文件</td>
+</tr>
+<tr>
+<td>2</td>
+<td>控制计划（预生产版）已批准</td>
+<td>检查文件</td>
+</tr>
+<tr>
+<td>3</td>
+<td>作业指导书已完成并培训到位</td>
+<td>培训记录</td>
+</tr>
+<tr>
+<td>4</td>
+<td>测量系统MSA已验证（GR&amp;R&lt;30%）</td>
+<td>MSA报告</td>
+</tr>
+<tr>
+<td>5</td>
+<td>初始Cpk已评估（建议≥1.0后再试生产）</td>
+<td>数据分析报告</td>
+</tr>
+<tr>
+<td>6</td>
+<td>设备&#x2F;工装已完成维护和调试</td>
+<td>设备点检记录</td>
+</tr>
+<tr>
+<td>7</td>
+<td>原材料已验证合格</td>
+<td>来料检验记录</td>
+</tr>
+<tr>
+<td>8</td>
+<td>试生产计划已确定</td>
+<td>试生产计划书</td>
+</tr>
+</tbody></table>
+<p><strong>如果这些前提条件不满足就仓促试生产，往往会事倍功半。</strong></p>
+<hr>
+<h2 id="四、第四阶段的时间线（参考）"><a href="#四、第四阶段的时间线（参考）" class="headerlink" title="四、第四阶段的时间线（参考）"></a>四、第四阶段的时间线（参考）</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>核心任务</th>
+<th>预计周期</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>试生产准备</td>
+<td>文件审核、设备工装确认、人员培训</td>
+<td>1~2周</td>
+</tr>
+<tr>
+<td>试生产执行</td>
+<td>Run at Rate + 数据采集</td>
+<td>1~2周</td>
+</tr>
+<tr>
+<td>产品验证</td>
+<td>尺寸、外观、功能测试</td>
+<td>与试生产交叉进行</td>
+</tr>
+<tr>
+<td>问题改善</td>
+<td>不合格项分析 + 纠正措施</td>
+<td>试生产后1~2周</td>
+</tr>
+<tr>
+<td>Cpk补充研究</td>
+<td>SPC + Cpk计算</td>
+<td>试生产后1周</td>
+</tr>
+<tr>
+<td>PPAP编制</td>
+<td>19项文件整理</td>
+<td>1~2周</td>
+</tr>
+<tr>
+<td>PPAP提交与批准</td>
+<td>提交顾客 + 等待反馈</td>
+<td>顾客决定</td>
+</tr>
+</tbody></table>
+<p><em>注：具体周期取决于产品复杂度、顾客要求、团队经验</em></p>
+<hr>
+<h2 id="五、常见问题与解答"><a href="#五、常见问题与解答" class="headerlink" title="五、常见问题与解答"></a>五、常见问题与解答</h2><p><strong>Q1：试生产数量不足怎么办？</strong></p>
+<p>A：试生产数量是PPAP的重要依据。如果数量不足，需要和顾客沟通确认是否可以减少，或者在正式量产中”边产边提交”。</p>
+<hr>
+<p><strong>Q2：Cpk不达标，但顾客急着要货，能否先提交PPAP？</strong></p>
+<p>A：不能。Cpk不达标意味着过程能力不足，产品质量风险高。先改善过程，再提交PPAP。</p>
+<hr>
+<p><strong>Q3：试生产发现PFMEA没有覆盖的问题怎么办？</strong></p>
+<p>A：这是正常现象。立即更新PFMEA，将新发现的失效模式补充进去，并同步更新控制计划。</p>
+<hr>
+<p><strong>Q4：试生产过程中人员变动，新员工操作不熟练怎么办？</strong></p>
+<p>A：试生产是对作业指导书有效性的验证。如果新员工操作有问题，说明SOP培训不到位，需要重新培训。同时，这个经验教训应该反馈到第三阶段，完善 SOP 和培训流程。</p>
+<hr>
+<p><strong>Q5：PPAP被顾客退回，通常是因为什么？</strong></p>
+<p>A：最常见的原因包括：</p>
+<ul>
+<li>零件尺寸不合格（超标）</li>
+<li>检验记录不完整</li>
+<li>标签错误</li>
+<li>提交文件缺项</li>
+<li>Cpk不达标</li>
+<li>外观样品与标准不一致</li>
+</ul>
+<hr>
+<h2 id="六、第四阶段核心交付物检查清单"><a href="#六、第四阶段核心交付物检查清单" class="headerlink" title="六、第四阶段核心交付物检查清单"></a>六、第四阶段核心交付物检查清单</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付物</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>试生产报告（Run at Rate）</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>2</td>
+<td>测量系统分析报告（MSA）</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>3</td>
+<td>初始过程能力研究报告（Cpk）</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>4</td>
+<td>产品验证报告（尺寸+外观+功能）</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>5</td>
+<td>包装和标签验证报告</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PFMEA更新版（包含试生产新发现）</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>7</td>
+<td>控制计划更新版</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>8</td>
+<td>试生产问题清单及闭环记录</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>9</td>
+<td>PPAP全套文件（19项）</td>
+<td>□ 已完成</td>
+</tr>
+<tr>
+<td>10</td>
+<td>零件提交保证书（PSW）</td>
+<td>□ 已完成</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="七、第四阶段与第五阶段的衔接"><a href="#七、第四阶段与第五阶段的衔接" class="headerlink" title="七、第四阶段与第五阶段的衔接"></a>七、第四阶段与第五阶段的衔接</h2><p>第四阶段完成后，意味着：</p>
+<ul>
+<li>过程已经过验证</li>
+<li>产品已经顾客批准</li>
+<li>可以开始正式量产了</li>
+</ul>
+<p>但这并不意味着APQP的工作结束了。</p>
+<p><strong>第五阶段（量产、反馈、评定与纠正）才是真正考验的开始。</strong></p>
+<p>量产阶段，需要持续：</p>
+<ul>
+<li>执行控制计划</li>
+<li>监控SPC数据</li>
+<li>定期进行过程能力复测</li>
+<li>管理顾客反馈</li>
+<li>持续改善</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p><strong>第四阶段是APQP五个阶段中”距离量产最近”的一步。</strong></p>
+<p>它把前三阶段的策划、设计、开发工作全部放到真实的工厂环境里，接受一次全面检验。</p>
+<p>试生产顺利，PPAP提交通过，后面的量产就会顺畅很多；<br>试生产问题百出，PPAP一退再退，后面的量产一定会付出更大的代价。</p>
+<p><strong>所以，第四阶段的核心原则就是：充分准备，一次做对。</strong></p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-04-04 21:31:20</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>APQP（Advanced Product Quality Planning，先期产品质量策划）第四阶段——<strong>产品与过程验证</strong>，是整个APQP流程的“临门一脚”与关键验证关口。该阶段并非独立活动，而是前三阶段（计划与定义、产品设计开发、过程设计开发）成果在真实量产条件下的<strong>系统性压力测试与闭环验证</strong>。其本质是以<strong>试生产（Run at Rate）为载体</strong>，通过在正式设备、工装、人员、节拍和作业指导书条件下连续制造代表性数量的产品，全面检验：<br>✅ <strong>过程是否稳定可控</strong>（Cpk&#x2F;SPC判稳）、<br>✅ <strong>测量系统是否可靠</strong>（MSA&#x2F;GR&amp;R复测）、<br>✅ <strong>产品是否全面符合顾客要求</strong>（尺寸、功能、外观、耐久、包装、标签）、<br>✅ <strong>文件体系是否完备有效</strong>（PFMEA更新、控制计划落地、SOP可执行性），<br>最终输出具有法律与商业效力的<strong>PPAP（生产件批准程序）</strong>，作为获得顾客量产放行许可的核心凭证。</p>
+<p>本阶段强调<strong>证据导向、问题驱动、闭环管理</strong>：所有异常必须根因分析、措施验证、文件更新；任何未闭环问题均不得流入量产。它既是质量策划的“验收考卷”，也是量产风险的“最后一道防火墙”。成功与否直接决定量产爬坡效率、客户信任度及后续质量成本。其底层逻辑是：<strong>用数据说话，以事实批准，靠体系保障。</strong></p>
+<hr>
+<h3 id="核心关键词标签（3–5个）："><a href="#核心关键词标签（3–5个）：" class="headerlink" title="核心关键词标签（3–5个）："></a>核心关键词标签（3–5个）：</h3><p>#APQP第四阶段<br>#试生产（RunAtRate）<br>#PPAP提交<br>#过程能力验证（Cpk&#x2F;SPC）<br>#测量系统分析（MSA）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/7c1f.html" title="APQP 第四阶段：产品与过程验证">https://zhyong.site/posts/7c1f.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/APQP/" rel="tag"><i class="fa fa-tag"></i> APQP</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_wechat"></a>
+      <a class="a2a_button_qzone"></a>
+      <a class="a2a_button_sina_weibo"></a>
+      <a class="a2a_button_douban"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/c176.html" rel="prev" title="APQP 第三阶段：过程设计开发">
+                  <i class="fa fa-angle-left"></i> APQP 第三阶段：过程设计开发
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/feda.html" rel="next" title="APQP 第五阶段：量产、反馈、评定与纠正">
+                  APQP 第五阶段：量产、反馈、评定与纠正 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">223k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:11</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
