@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一、什么是PPAP？PPAP（Production Part Approval Process），中文全称生产件批准程序，是IATF 16949&#x2F;QS-9000质量管理体系中的核心工具之一。 一句话理解PPAP：  供应商用正式量产条件下的产品，向顾客证明“我能够稳定地制造出符合你要求的东西”。  PPAP不是检验报告，而是过程能力的证明。 它的本质是批准一个零件在一个特定的生产过程（工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次搞懂PPAP：从提交到批准的完整指南">
+<meta property="og:url" content="https://zhyong.site/posts/b4fe.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="一、什么是PPAP？PPAP（Production Part Approval Process），中文全称生产件批准程序，是IATF 16949&#x2F;QS-9000质量管理体系中的核心工具之一。 一句话理解PPAP：  供应商用正式量产条件下的产品，向顾客证明“我能够稳定地制造出符合你要求的东西”。  PPAP不是检验报告，而是过程能力的证明。 它的本质是批准一个零件在一个特定的生产过程（工">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/img/ppap1.webp">
+<meta property="article:published_time" content="2026-04-09T15:04:20.000Z">
+<meta property="article:modified_time" content="2026-04-09T15:26:09.689Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="APQP">
+<meta property="article:tag" content="PPAP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/img/ppap1.webp">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/b4fe.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/b4fe.html","path":"posts/b4fe.html","title":"一次搞懂PPAP：从提交到批准的完整指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一次搞懂PPAP：从提交到批准的完整指南 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/b4fe.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li><li class="menu-item menu-item-瞬间"><a href="/memos/" rel="section"><i class="fa fa-mercury fa-fw"></i>瞬间</a></li><li class="menu-item menu-item-相册"><a href="https://gallery.zhyong.site/gallery" rel="section" target="_blank"><i class="fa fa-camera fa-fw"></i>相册</a></li><li class="menu-item menu-item-网盘"><a href="https://dl.zhyong.site/#/" rel="section" target="_blank"><i class="fa fa-file fa-fw"></i>网盘</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFPPAP%EF%BC%9F"><span class="nav-text">一、什么是PPAP？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9APPAP%EF%BC%9F"><span class="nav-text">二、为什么要做PPAP？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81PPAP%E7%9A%84%E4%BA%94%E4%B8%AA%E6%8F%90%E4%BA%A4%E7%AD%89%E7%BA%A7"><span class="nav-text">三、PPAP的五个提交等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81PPAP%E7%9A%84%E5%8D%81%E5%85%AB%E9%A1%B9%E4%BA%A4%E4%BB%98%E4%BB%B6"><span class="nav-text">四、PPAP的十八项交付件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%8F%98%E6%9B%B4%E6%96%87%E4%BB%B6"><span class="nav-text">4.1 设计与工程变更文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%AE%BE%E8%AE%A1%E5%88%86%E6%9E%90"><span class="nav-text">4.2 设计分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%BF%87%E7%A8%8B%E9%AA%8C%E8%AF%81"><span class="nav-text">4.3 设计与过程验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E6%A0%B7%E4%BB%B6%E4%B8%8E%E8%AF%95%E9%AA%8C"><span class="nav-text">4.4 样件与试验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E7%94%9F%E4%BA%A7%E9%AA%8C%E8%AF%81"><span class="nav-text">4.5 生产验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E8%A1%A5%E5%85%85%E6%96%87%E4%BB%B6"><span class="nav-text">4.6 补充文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81PPAP%E6%8F%90%E4%BA%A4%E7%8A%B6%E6%80%81%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%BB%93%E6%9E%9C"><span class="nav-text">五、PPAP提交状态的四种结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81PPAP%E4%B8%8EAPQP%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9A%E5%AE%83%E5%9C%A8%E5%93%AA%E4%B8%AA%E9%98%B6%E6%AE%B5%E5%8F%91%E7%94%9F%EF%BC%9F"><span class="nav-text">六、PPAP与APQP的关系：它在哪个阶段发生？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#APQP%E4%BA%94%E9%98%B6%E6%AE%B5%E4%B8%8EPPAP%E7%9A%84%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB"><span class="nav-text">APQP五阶段与PPAP的对应关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APQP%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="nav-text">APQP第四阶段的完整流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81Run-at-Rate%EF%BC%9APPAP%E7%9A%84%E6%A0%B8%E5%BF%83%E9%AA%8C%E8%AF%81%E7%8E%AF%E8%8A%82"><span class="nav-text">七、Run at Rate：PPAP的核心验证环节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-Run-at-Rate%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-text">7.1 Run at Rate的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-Run-at-Rate%E9%80%9A%E8%BF%87%E7%9A%84%E6%A0%87%E5%87%86"><span class="nav-text">7.2 Run at Rate通过的标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-Run-at-Rate%E5%A4%B1%E8%B4%A5%E5%90%8E%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-text">7.3 Run at Rate失败后怎么办？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%B8%80%E4%BB%BD%E7%9C%9F%E5%AE%9EPPAP%E6%96%87%E4%BB%B6%E5%8C%85%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-text">八、实战案例：一份真实PPAP文件包的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81PPAP%E6%8F%90%E4%BA%A4%E5%90%8E%EF%BC%8C%E9%A1%BE%E5%AE%A2%E5%9C%A8%E8%AF%84%E5%AE%A1%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">九、PPAP提交后，顾客在评审什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81PPAP%E6%89%B9%E5%87%86%E5%90%8E%EF%BC%8C%E8%BF%98%E8%A6%81%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">十、PPAP批准后，还要做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%B8%B8%E8%A7%81PPAP%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94"><span class="nav-text">十一、常见PPAP问题与解答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9APPAP%E7%9A%84%E7%9C%9F%E6%AD%A3%E4%BB%B7%E5%80%BC"><span class="nav-text">十二、总结：PPAP的真正价值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E6%80%BB%E7%BB%93-Qwen-API"><span class="nav-text">AI 总结 (Qwen API)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-text">深度总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E9%94%AE%E8%AF%8D%E6%A0%87%E7%AD%BE%EF%BC%9A"><span class="nav-text">核心关键词标签：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/b4fe.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一次搞懂PPAP：从提交到批准的完整指南 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一次搞懂PPAP：从提交到批准的完整指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-04-09 23:04:20 / 修改时间：23:26:09" itemprop="dateCreated datePublished" datetime="2026-04-09T23:04:20+08:00">2026-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E8%89%BA%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">工艺管理</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一、什么是PPAP？"><a href="#一、什么是PPAP？" class="headerlink" title="一、什么是PPAP？"></a>一、什么是PPAP？</h2><p><strong>PPAP</strong>（Production Part Approval Process），中文全称<strong>生产件批准程序</strong>，是IATF 16949&#x2F;QS-9000质量管理体系中的核心工具之一。</p>
+<p><strong>一句话理解PPAP：</strong></p>
+<blockquote>
+<p>供应商用正式量产条件下的产品，向顾客证明“我能够稳定地制造出符合你要求的东西”。</p>
+</blockquote>
+<p><strong>PPAP不是检验报告，而是过程能力的证明。</strong> 它的本质是批准一个零件在一个特定的生产过程（工装、设备、人员、工艺参数）下，能否持续、稳定、批量地满足顾客的工程设计规格。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="二、为什么要做PPAP？"><a href="#二、为什么要做PPAP？" class="headerlink" title="二、为什么要做PPAP？"></a>二、为什么要做PPAP？</h2><p>很多企业有一个误区：“我交货前做了全检，顾客也收了货，这不是已经证明质量没问题了吗？”</p>
+<p>这个逻辑有一个致命漏洞：<strong>你今天检验合格，不代表明天继续生产还能合格。</strong></p>
+<p>PPAP解决的就是这个问题——<strong>从零件approved的那一刻起，顾客就相信你能持续稳定供货，而不是每次都要等到出了问题再去救火。</strong></p>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>没有PPAP</th>
+<th>有PPAP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首批来料问题</td>
+<td>大量售后反馈才知道</td>
+<td>PPAP试生产阶段就暴露</td>
+</tr>
+<tr>
+<td>过程变异</td>
+<td>靠质检员死守</td>
+<td>用SPC&#x2F;Cpk量化管控</td>
+</tr>
+<tr>
+<td>变更通知</td>
+<td>随意变更工艺</td>
+<td>必须重新提交PPAP</td>
+</tr>
+<tr>
+<td>顾客信任</td>
+<td>每批都抽检</td>
+<td>信任供应商的过程能力</td>
+</tr>
+<tr>
+<td>质量成本</td>
+<td>售后&#x2F;索赔居高不下</td>
+<td>前期投入，换长期稳定</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、PPAP的五个提交等级"><a href="#三、PPAP的五个提交等级" class="headerlink" title="三、PPAP的五个提交等级"></a>三、PPAP的五个提交等级</h2><p>PPAP有<strong>五个提交等级</strong>，等级越高，要求提交的文件越多、越严格。</p>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>要求提交的内容</th>
+<th>常用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Level 1</strong></td>
+<td>外观批准报告（AAR），仅在需要时提交</td>
+<td>内部简单零件</td>
+</tr>
+<tr>
+<td><strong>Level 2</strong></td>
+<td>样件 + 外观批准报告 + 尺寸报告</td>
+<td>最常见的等级</td>
+</tr>
+<tr>
+<td><strong>Level 3</strong></td>
+<td>样件 + 外观报告 + 尺寸报告 + 材料&#x2F;性能试验报告</td>
+<td><strong>汽车行业最常用 ⭐</strong></td>
+</tr>
+<tr>
+<td><strong>Level 4</strong></td>
+<td>样件 + 顾客规定的其他要求</td>
+<td>极少用</td>
+</tr>
+<tr>
+<td><strong>Level 5</strong></td>
+<td>样件 + 全部文件 + 过程参数记录</td>
+<td>设计冻结、长期项目</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>在中国汽车行业，Level 3 是最普遍的要求。</strong> 绝大多数整车厂（丰田、大众、通用、比亚迪等）均要求PPAP按Level 3提交。</p>
+</blockquote>
+<hr>
+<p><img src="/img/ppap1.webp"></p>
+<h2 id="四、PPAP的十八项交付件"><a href="#四、PPAP的十八项交付件" class="headerlink" title="四、PPAP的十八项交付件"></a>四、PPAP的十八项交付件</h2><p>PPAP要求供应商提交<strong>一套完整的证明文件</strong>，共18项（核心项）：</p>
+<h3 id="4-1-设计与工程变更文件"><a href="#4-1-设计与工程变更文件" class="headerlink" title="4.1 设计与工程变更文件"></a>4.1 设计与工程变更文件</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>设计记录</strong>（Design Records）</td>
+<td>产品图纸、技术规格，批准日期、版次</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>授权工程变更文件</strong>（Authorized Engineering Change Documents）</td>
+<td>任何在设计记录发布后发生的工程变更</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-设计分析"><a href="#4-2-设计分析" class="headerlink" title="4.2 设计分析"></a>4.2 设计分析</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td><strong>DFMEA</strong>（设计FMEA）</td>
+<td>设计失效模式与影响分析，适用于主机厂零件</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>过程流程图</strong>（Process Flow Diagram）</td>
+<td>描述从原材料到成品的整个制造过程</td>
+</tr>
+</tbody></table>
+<h3 id="4-3-设计与过程验证"><a href="#4-3-设计与过程验证" class="headerlink" title="4.3 设计与过程验证"></a>4.3 设计与过程验证</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5</td>
+<td><strong>DFMEA</strong>（设计FMEA）</td>
+<td>需有设计批准团队评审签字</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>PFMEA</strong>（过程FMEA）</td>
+<td>过程失效模式与影响分析</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>控制计划</strong>（Control Plan）</td>
+<td>规定过程中的控制点、控制方法、控制频率</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>测量系统分析</strong>（MSA）</td>
+<td>GR&amp;R报告，证明量具的重复性和再现性</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>初始过程能力研究</strong>（Cp&#x2F;Cpk）</td>
+<td>证明过程能力达到要求（通常要求Cpk≥1.33）</td>
+</tr>
+</tbody></table>
+<h3 id="4-4-样件与试验"><a href="#4-4-样件与试验" class="headerlink" title="4.4 样件与试验"></a>4.4 样件与试验</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td><strong>样件</strong>（Sample Parts）</td>
+<td>使用正常量产工装、设备、人员生产的样件</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>尺寸报告</strong>（Dimensional Results）</td>
+<td>符合控制计划的尺寸检验结果</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>材料&#x2F;性能试验结果</strong>（Material &amp; Performance Test Results）</td>
+<td>化学成分、物理性能、机械性能报告</td>
+</tr>
+</tbody></table>
+<h3 id="4-5-生产验证"><a href="#4-5-生产验证" class="headerlink" title="4.5 生产验证"></a>4.5 生产验证</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>13</td>
+<td><strong>生产件批准</strong>（Production Part Approval）</td>
+<td>使用生产件 approval form</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>质量历史</strong>（Quality History）</td>
+<td>此前供货的质量表现（PPM值、退货率等）</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>试用生产运行结果</strong>（Trial Production Run Results）</td>
+<td>Run at Rate 的结果记录</td>
+</tr>
+</tbody></table>
+<h3 id="4-6-补充文件"><a href="#4-6-补充文件" class="headerlink" title="4.6 补充文件"></a>4.6 补充文件</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>交付件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>16</td>
+<td><strong>控制计划反馈表</strong>（Control Plan）</td>
+<td>顾客确认的控制计划</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>散装材料检查清单</strong>（Bulk Material Requirements）</td>
+<td>适用于原材料供应商</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>合格实验室文件</strong>（Laboratory Documentation）</td>
+<td>第三方实验室或内部实验室资质证明</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、PPAP提交状态的四种结果"><a href="#五、PPAP提交状态的四种结果" class="headerlink" title="五、PPAP提交状态的四种结果"></a>五、PPAP提交状态的四种结果</h2><p>供应商提交PPAP后，顾客会给出<strong>四种不同的批准状态</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>含义</th>
+<th>供应商应该怎么做</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>完全批准</strong></td>
+<td>PPAP完全满足顾客要求，可以正式供货</td>
+<td>按此状态持续供货</td>
+</tr>
+<tr>
+<td><strong>临时批准</strong>（Provisional Approval）</td>
+<td>基本满足，但有少量不符项，需在限期内改善</td>
+<td>在规定时间内完成改善，否则批准失效</td>
+</tr>
+<tr>
+<td><strong>拒绝</strong>（Rejected）</td>
+<td>PPAP不符合要求，需重新试生产后再提交</td>
+<td>必须重新做Run at Rate，重新提交</td>
+</tr>
+<tr>
+<td><strong>陪同工作</strong>（Interim&#x2F;Waiver）</td>
+<td>顾客同意在特定条件下先行供货</td>
+<td>需签补充协议，明确责任边界</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>临时批准是双刃剑：</strong> 很多供应商觉得“反正临时批准了，先供货再说”——但一旦过了期限未完成改善，整车厂可能直接启动PPAP重新提交流程，严重时会影响供货资格。</p>
+</blockquote>
+<hr>
+<h2 id="六、PPAP与APQP的关系：它在哪个阶段发生？"><a href="#六、PPAP与APQP的关系：它在哪个阶段发生？" class="headerlink" title="六、PPAP与APQP的关系：它在哪个阶段发生？"></a>六、PPAP与APQP的关系：它在哪个阶段发生？</h2><p><strong>PPAP不是独立存在的，它嵌入在APQP第四阶段（产品与过程验证）中。</strong></p>
+<h3 id="APQP五阶段与PPAP的对应关系"><a href="#APQP五阶段与PPAP的对应关系" class="headerlink" title="APQP五阶段与PPAP的对应关系"></a>APQP五阶段与PPAP的对应关系</h3><table>
+<thead>
+<tr>
+<th>APQP阶段</th>
+<th>名称</th>
+<th>与PPAP的关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Phase 1</strong></td>
+<td>产品策划</td>
+<td>确定顾客特殊要求（CSR），识别PPAP要求</td>
+</tr>
+<tr>
+<td><strong>Phase 2</strong></td>
+<td>产品设计开发</td>
+<td>DFMEA确定关键特性（KPCs），影响PPAP接受准则</td>
+</tr>
+<tr>
+<td><strong>Phase 3</strong></td>
+<td>过程设计开发</td>
+<td>PFMEA + 控制计划 + MSA + Cpk，为PPAP准备全部证据</td>
+</tr>
+<tr>
+<td><strong>Phase 4</strong></td>
+<td><strong>产品与过程验证</strong></td>
+<td><strong>PPAP在这个阶段提交并获得批准</strong></td>
+</tr>
+<tr>
+<td><strong>Phase 5</strong></td>
+<td>量产与持续改善</td>
+<td>按PPAP批准的条件稳定生产，监控SPC</td>
+</tr>
+</tbody></table>
+<h3 id="APQP第四阶段的完整流程"><a href="#APQP第四阶段的完整流程" class="headerlink" title="APQP第四阶段的完整流程"></a>APQP第四阶段的完整流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Phase 4 开始</span><br><span class="line">    ↓</span><br><span class="line">试生产（Run at Rate）→ 300~1000件连续生产</span><br><span class="line">    ↓</span><br><span class="line">测量系统分析（MSA）→ GR&amp;R &lt; 30%（最好 &lt; 10%）</span><br><span class="line">    ↓</span><br><span class="line">初始过程能力研究（Cpk）→ Cpk ≥ 1.33（关键特性 ≥ 1.67）</span><br><span class="line">    ↓</span><br><span class="line">尺寸与性能试验</span><br><span class="line">    ↓</span><br><span class="line">整理PPAP文件包（18项）</span><br><span class="line">    ↓</span><br><span class="line">提交PPAP给顾客</span><br><span class="line">    ↓</span><br><span class="line">顾客评审</span><br><span class="line">    ↓</span><br><span class="line">→ 完全批准 → 进入Phase 5正式量产</span><br><span class="line">→ 临时批准 → 限期改善</span><br><span class="line">→ 拒绝 → 重新Phase 4</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、Run-at-Rate：PPAP的核心验证环节"><a href="#七、Run-at-Rate：PPAP的核心验证环节" class="headerlink" title="七、Run at Rate：PPAP的核心验证环节"></a>七、Run at Rate：PPAP的核心验证环节</h2><p><strong>Run at Rate（生产件批准运行）</strong> 是PPAP最核心的实操环节，指供应商在正式量产工装上、用正式量产过程、连续生产一定数量的零件，以验证“量产条件下的实际产能和品质能力”。</p>
+<h3 id="7-1-Run-at-Rate的要求"><a href="#7-1-Run-at-Rate的要求" class="headerlink" title="7.1 Run at Rate的要求"></a>7.1 Run at Rate的要求</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>典型要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>生产数量</td>
+<td>300~1000件（根据顾客要求）</td>
+</tr>
+<tr>
+<td>生产条件</td>
+<td>正式量产工装 + 正式设备 + 正式人员</td>
+</tr>
+<tr>
+<td>生产节拍</td>
+<td>必须达到目标节拍（节拍±10%）</td>
+</tr>
+<tr>
+<td>合格率</td>
+<td>必须达到AQL要求（通常0.10~0.65）</td>
+</tr>
+<tr>
+<td>记录</td>
+<td>全程记录产量、废品数量、设备参数</td>
+</tr>
+</tbody></table>
+<h3 id="7-2-Run-at-Rate通过的标准"><a href="#7-2-Run-at-Rate通过的标准" class="headerlink" title="7.2 Run at Rate通过的标准"></a>7.2 Run at Rate通过的标准</h3><ul>
+<li>合格品数量达到规定的生产数量</li>
+<li>过程能力Cpk ≥ 1.33（关键特性 Cpk ≥ 1.67）</li>
+<li>GR&amp;R ≤ 30%</li>
+<li>尺寸检验合格率 100%</li>
+<li>无重大质量异常（不允许安全&#x2F;法规特性不合格）</li>
+</ul>
+<h3 id="7-3-Run-at-Rate失败后怎么办？"><a href="#7-3-Run-at-Rate失败后怎么办？" class="headerlink" title="7.3 Run at Rate失败后怎么办？"></a>7.3 Run at Rate失败后怎么办？</h3><p><strong>Step 1：</strong> 立即停止生产，隔离可疑产品</p>
+<p><strong>Step 2：</strong> 组织跨功能团队分析根本原因（5Why、鱼骨图）</p>
+<p><strong>Step 3：</strong> 制定纠正措施（工程变更、工艺参数调整、设备维修等）</p>
+<p><strong>Step 4：</strong> 更新PFMEA和控制计划</p>
+<p><strong>Step 5：</strong> 重新进行Run at Rate</p>
+<p><strong>Step 6：</strong> 重新提交PPAP</p>
+<hr>
+<h2 id="八、实战案例：一份真实PPAP文件包的结构"><a href="#八、实战案例：一份真实PPAP文件包的结构" class="headerlink" title="八、实战案例：一份真实PPAP文件包的结构"></a>八、实战案例：一份真实PPAP文件包的结构</h2><p>以下是一份Level 3 PPAP文件包的标准结构（以汽车零部件为例）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">PPAP 文件包 - [零件名称] - [顾客零件号] - [供应商编号]</span><br><span class="line">│</span><br><span class="line">├── 1. Design Records（设计记录）</span><br><span class="line">│   ├── 产品2D/3D图纸（批准签字版）</span><br><span class="line">│   └── 技术规格书</span><br><span class="line">│</span><br><span class="line">├── 2. Engineering Change Documents（授权工程变更）</span><br><span class="line">│   └── ECO清单及变更文件</span><br><span class="line">│</span><br><span class="line">├── 3. Engineering Approval（工程批准）</span><br><span class="line">│   └── DVP&amp;R报告（设计验证报告）</span><br><span class="line">│</span><br><span class="line">├── 4. DFMEA</span><br><span class="line">│   └── 设计FMEA（已评审签字版）</span><br><span class="line">│</span><br><span class="line">├── 5. Process Flow Diagram（过程流程图）</span><br><span class="line">│   └── 含关键工序标识的流程图</span><br><span class="line">│</span><br><span class="line">├── 6. PFMEA</span><br><span class="line">│   └── 过程FMEA（已评审签字版，RPN高项已关闭）</span><br><span class="line">│</span><br><span class="line">├── 7. Control Plan（控制计划）</span><br><span class="line">│   └── 预生产控制计划（已顾客批准）</span><br><span class="line">│</span><br><span class="line">├── 8. Measurement System Analysis（MSA）</span><br><span class="line">│   ├── GR&amp;R报告（&lt; 30%）</span><br><span class="line">│   └── 量具校准证书</span><br><span class="line">│</span><br><span class="line">├── 9. Initial Process Capability Study（初始过程能力）</span><br><span class="line">│   ├── Cpk计算表（X-bar R chart数据）</span><br><span class="line">│   └── 过程能力分析报告（Cpk ≥ 1.33）</span><br><span class="line">│</span><br><span class="line">├── 10. Sample Production Parts（样件）</span><br><span class="line">│    └── 3~5件实际生产的样件（附样品标签）</span><br><span class="line">│</span><br><span class="line">├── 11. Dimensional Results（尺寸报告）</span><br><span class="line">│    ├── 尺寸检验报告（全尺寸测量）</span><br><span class="line">│    └── CMM报告（如适用）</span><br><span class="line">│</span><br><span class="line">├── 12. Material / Performance Test Results</span><br><span class="line">│    ├── 材料成分报告（化学成分）</span><br><span class="line">│    ├── 力学性能报告（拉伸、冲击等）</span><br><span class="line">│    └── 顾客指定的专项试验报告</span><br><span class="line">│</span><br><span class="line">├── 13. Production Part Approval Form（PPAP表格）</span><br><span class="line">│    └── 按顾客表格格式填写（AIAG PPAP form）</span><br><span class="line">│</span><br><span class="line">├── 14. Quality History（质量历史）</span><br><span class="line">│    └── 近6个月来料检验PPM/合格率趋势</span><br><span class="line">│</span><br><span class="line">├── 15. Trial Production Run Results（试生产运行结果）</span><br><span class="line">│    ├── Run at Rate记录表</span><br><span class="line">│    ├── 产量/废品记录</span><br><span class="line">│    └── 设备工艺参数记录</span><br><span class="line">│</span><br><span class="line">├── 16. Control Plan Feedback（控制计划反馈）</span><br><span class="line">│    └── 顾客对控制计划的确认/批准文件</span><br><span class="line">│</span><br><span class="line">├── 17. Bulk Material Requirements（如适用）</span><br><span class="line">│    └── 原材料检验规范</span><br><span class="line">│</span><br><span class="line">└── 18. Laboratory Documentation（实验室资质）</span><br><span class="line">     └── 实验室认可证书（ISO 17025）或内部实验室记录</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、PPAP提交后，顾客在评审什么？"><a href="#九、PPAP提交后，顾客在评审什么？" class="headerlink" title="九、PPAP提交后，顾客在评审什么？"></a>九、PPAP提交后，顾客在评审什么？</h2><p><strong>评审重点包括：</strong></p>
+<p><strong>① 文件完整性检查</strong></p>
+<ul>
+<li>18项是否全部提交？</li>
+<li>签字、日期、版次是否齐全？</li>
+<li>表格格式是否符合顾客规范？</li>
+</ul>
+<p><strong>② 工程要求的符合性</strong></p>
+<ul>
+<li>尺寸检验结果是否100%在公差内？</li>
+<li>材料性能是否满足规格？</li>
+<li>特殊特性（KPC）是否有完整的验证数据？</li>
+</ul>
+<p><strong>③ 过程能力的证据</strong></p>
+<ul>
+<li>Cpk数据是否真实？</li>
+<li>MSA是否证明测量系统可靠？</li>
+<li>SPC数据是否稳定（不能事后补录）？</li>
+</ul>
+<p><strong>④ FMEA与控制计划的一致性</strong></p>
+<ul>
+<li>PFMEA识别的风险项是否在控制计划中有对应控制措施？</li>
+<li>高RPN项（D&gt;9或RPN&gt;65）是否有明确的消除计划？</li>
+</ul>
+<p><strong>⑤ Run at Rate的真实记录</strong></p>
+<ul>
+<li>设备参数是否稳定？</li>
+<li>产量是否达到要求？</li>
+<li>不良品的处理是否有记录？</li>
+</ul>
+<hr>
+<h2 id="十、PPAP批准后，还要做什么？"><a href="#十、PPAP批准后，还要做什么？" class="headerlink" title="十、PPAP批准后，还要做什么？"></a>十、PPAP批准后，还要做什么？</h2><p><strong>PPAP批准不是终点，而是起点。</strong></p>
+<table>
+<thead>
+<tr>
+<th>批准后阶段</th>
+<th>供应商的责任</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>持续稳定生产</strong></td>
+<td>严格按照PPAP批准的条件（控制计划、工艺参数）执行</td>
+</tr>
+<tr>
+<td><strong>变更管理</strong></td>
+<td>任何变更（工艺、设备、材料、工装）必须通知顾客，可能需要重新PPAP</td>
+</tr>
+<tr>
+<td><strong>监控SPC</strong></td>
+<td>量产阶段持续运行SPC，异常及时处理</td>
+</tr>
+<tr>
+<td><strong>年度PPAP更新</strong></td>
+<td>部分顾客要求每年重新提交PPAP（如供应商管理年度审核）</td>
+</tr>
+<tr>
+<td><strong>问题及时反馈</strong></td>
+<td>发现任何异常及时与顾客质量工程师沟通</td>
+</tr>
+<tr>
+<td><strong>持续改善</strong></td>
+<td>基于量产数据和顾客反馈，持续改善Cpk</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>特别提醒：</strong> 顾客批准PPAP后，很多供应商就开始“放飞自我”——随意调整工艺参数、换材料不通知、减少检验频次。这是PPAP管理中最危险的误区。一旦因此出现质量问题，整车厂会追溯PPAP文件，发现不符，直接触发“Red Supply”（红色供应商）警报，后果非常严重。</p>
+</blockquote>
+<hr>
+<h2 id="十一、常见PPAP问题与解答"><a href="#十一、常见PPAP问题与解答" class="headerlink" title="十一、常见PPAP问题与解答"></a>十一、常见PPAP问题与解答</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>解答</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PPAP一定要顾客批准才能量产吗？</strong></td>
+<td>是的。在汽车行业，未经PPAP批准不得正式供货（除非有顾客书面同意的Interim&#x2F;Waiver）。</td>
+</tr>
+<tr>
+<td><strong>试生产数量多少合适？</strong></td>
+<td>通常300~1000件，具体以顾客要求为准。关键是连续生产，体现真实产能。</td>
+</tr>
+<tr>
+<td><strong>Cpk达不到1.33怎么办？</strong></td>
+<td>必须先改善过程能力再提交PPAP。如果是关键特性（Safety&#x2F;法规），Cpk要求更高（通常≥1.67）。</td>
+</tr>
+<tr>
+<td><strong>GR&amp;R超标可以吗？</strong></td>
+<td>GR&amp;R &gt; 30% 的测量系统是不可接受的，必须先改善MSA（更换量具、培训操作员、改进夹具）后再测Cpk。</td>
+</tr>
+<tr>
+<td><strong>顾客要求Level 3，但公司资源有限怎么办？</strong></td>
+<td>Level 3是行业惯例，建议认真执行。Level 1~2的“省事”会带来更多售后风险和索赔成本。</td>
+</tr>
+<tr>
+<td><strong>供应商自己的实验室可以做PPAP试验吗？</strong></td>
+<td>需要有ISO 17025认可资质，或提供实验室内部校验记录。没有资质的试验数据顾客通常不接受。</td>
+</tr>
+<tr>
+<td><strong>外观件没有尺寸报告怎么办？</strong></td>
+<td>按顾客规范提交外观批准报告（AAR），但材料、性能等其他项目仍需按要求提交。</td>
+</tr>
+<tr>
+<td><strong>小批量多品种怎么Run at Rate？</strong></td>
+<td>与顾客质量工程师协商，可以按“家族零件”方式提交，或对每类产品选取代表性零件做PPAP。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="十二、总结：PPAP的真正价值"><a href="#十二、总结：PPAP的真正价值" class="headerlink" title="十二、总结：PPAP的真正价值"></a>十二、总结：PPAP的真正价值</h2><p><strong>PPAP不是一个“向顾客交差”的行政流程，而是供应商质量管理能力的系统化证明。</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>PPAP的价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>对顾客</strong></td>
+<td>获得零件供应的质量信心，减少来料检验和售后风险</td>
+</tr>
+<tr>
+<td><strong>对供应商</strong></td>
+<td>系统化梳理质量能力，发现并整改过程隐患</td>
+</tr>
+<tr>
+<td><strong>对双方</strong></td>
+<td>建立变更管理机制，确保长期稳定的合作关系</td>
+</tr>
+</tbody></table>
+<p><strong>记住这个逻辑链：</strong></p>
+<blockquote>
+<p>APQP Phase 3（过程开发）做好了 → Run at Rate自然顺利 → PPAP文件完整 → 顾客完全批准 → Phase 5量产稳定 → 持续改善（Cpk提升）</p>
+</blockquote>
+<p><strong>PPAP只是结果，过程能力才是根本。</strong></p>
+<hr>
+<h2 id="AI-总结-Qwen-API"><a href="#AI-总结-Qwen-API" class="headerlink" title="AI 总结 (Qwen API)"></a>AI 总结 (Qwen API)</h2><p>生成时间: 2026-04-09 23:20:59</p>
+<h3 id="深度总结："><a href="#深度总结：" class="headerlink" title="深度总结："></a>深度总结：</h3><p>本文是一份面向制造业（尤其是汽车供应链）的PPAP（生产件批准程序）全景式实践指南，超越了流程罗列，深入阐释了PPAP的<strong>本质、逻辑、风险与战略价值</strong>。其核心立意在于：<strong>PPAP不是形式主义的“交材料”，而是以数据和证据为支撑的过程能力可信度声明</strong>。</p>
+<p>文章系统解构了PPAP的五大支柱：  </p>
+<ol>
+<li><strong>定位本质</strong>——明确PPAP是“对特定过程稳定量产符合性”的<strong>前瞻性批准</strong>，而非事后检验；  </li>
+<li><strong>厘清动因</strong>——直击“为什么必须做”：解决单次合格≠持续受控的根本矛盾，将质量成本前移，构建顾客信任；  </li>
+<li><strong>规范执行</strong>——详述5个提交等级（强调Level 3为行业基准）与18项交付物的内在逻辑链（如DFMEA→PFMEA→控制计划→MSA→Cpk形成闭环验证）；  </li>
+<li><strong>聚焦关键动作</strong>——将Run at Rate定义为PPAP的“心脏环节”，强调其真实性（连续、量产条件、节拍、记录）、严苛性（Cpk≥1.33&#x2F;1.67、GR&amp;R≤30%）与不可替代性；  </li>
+<li><strong>延伸管理纵深</strong>——阐明PPAP批准后非终点，而是进入变更受控、SPC监控、年度复审的<strong>全生命周期质量管理起点</strong>，并警示“批准即放飞”的高危误区。</li>
+</ol>
+<p>全文贯穿APQP框架，凸显PPAP作为APQP第四阶段（产品与过程验证）的输出成果与里程碑，体现IATF 16949“预防为主、过程方法、基于风险”的核心思想。最终落脚于价值升华：PPAP是供应商质量体系成熟度的“体检报告”，是顾客供应链韧性的“信用背书”，更是双方建立长期、透明、可预期合作关系的制度基石。</p>
+<hr>
+<h3 id="核心关键词标签："><a href="#核心关键词标签：" class="headerlink" title="核心关键词标签："></a>核心关键词标签：</h3><p>#PPAP<br>#过程能力<br>#RunAtRate<br>#APQP<br>#IATF16949</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/b4fe.html" title="一次搞懂PPAP：从提交到批准的完整指南">https://zhyong.site/posts/b4fe.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">公众号</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ群</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/APQP/" rel="tag"><i class="fa fa-tag"></i> APQP</a>
+              <a href="/tags/PPAP/" rel="tag"><i class="fa fa-tag"></i> PPAP</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_wechat"></a>
+      <a class="a2a_button_qzone"></a>
+      <a class="a2a_button_sina_weibo"></a>
+      <a class="a2a_button_douban"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/250a.html" rel="prev" title="铝合金阳极氧化工艺详解">
+                  <i class="fa fa-angle-left"></i> 铝合金阳极氧化工艺详解
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">234k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:30</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","jsUrl":"https://unpkg.com/twikoo@1.6.44/dist/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
