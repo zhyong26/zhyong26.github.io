@@ -1,6 +1,1333 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>铝合金牌号系列对比及选型指南</title>
+    <url>/posts/c78c.html</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、铝合金分类体系"><a href="#一、铝合金分类体系" class="headerlink" title="一、铝合金分类体系"></a>一、铝合金分类体系</h2><p>铝合金按<strong>加工方法</strong>分为两大类：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>命名规则</th>
+<th>典型工艺</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>变形铝合金（Wrought）</strong></td>
+<td>四位数字（1xxx~8xxx）</td>
+<td>挤压、轧制、锻造、冲压</td>
+<td>~80%</td>
+</tr>
+<tr>
+<td><strong>铸造铝合金（Cast）</strong></td>
+<td>三位数字+小数（A356.0、ADC12）</td>
+<td>压铸、砂铸、金属模铸造</td>
+<td>~20%</td>
+</tr>
+</tbody></table>
+<p>按<strong>是否可热处理强化</strong>分：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>系列</th>
+<th>强化方式</th>
+<th>强度上限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>不可热处理</strong></td>
+<td>1xxx、3xxx、4xxx、5xxx</td>
+<td>加工硬化（应变硬化）</td>
+<td>~300 MPa</td>
+</tr>
+<tr>
+<td><strong>可热处理</strong></td>
+<td>2xxx、6xxx、7xxx</td>
+<td>析出强化（时效硬化）</td>
+<td>~660 MPa</td>
+</tr>
+</tbody></table>
+<hr>
+<span id="more"></span>
+
+<h2 id="二、变形铝合金八大系列总览"><a href="#二、变形铝合金八大系列总览" class="headerlink" title="二、变形铝合金八大系列总览"></a>二、变形铝合金八大系列总览</h2><table>
+<thead>
+<tr>
+<th>系列</th>
+<th>主合金元素</th>
+<th>强度等级</th>
+<th>耐蚀性</th>
+<th>可焊性</th>
+<th>可加工性</th>
+<th>阳极氧化</th>
+<th>代表牌号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1xxx</strong></td>
+<td>纯铝（≥99%）</td>
+<td>★</td>
+<td>★★★★★</td>
+<td>★★★★★</td>
+<td>★★★★★</td>
+<td>★★★★★</td>
+<td>1050、1100</td>
+</tr>
+<tr>
+<td><strong>2xxx</strong></td>
+<td>铜（Cu）</td>
+<td>★★★★</td>
+<td>★★</td>
+<td>★★</td>
+<td>★★★★</td>
+<td>★★</td>
+<td>2024、2014</td>
+</tr>
+<tr>
+<td><strong>3xxx</strong></td>
+<td>锰（Mn）</td>
+<td>★★</td>
+<td>★★★★</td>
+<td>★★★★</td>
+<td>★★★★</td>
+<td>★★★★</td>
+<td>3003、3105</td>
+</tr>
+<tr>
+<td><strong>4xxx</strong></td>
+<td>硅（Si）</td>
+<td>★★</td>
+<td>★★★★</td>
+<td>★★★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>4032、4043</td>
+</tr>
+<tr>
+<td><strong>5xxx</strong></td>
+<td>镁（Mg）</td>
+<td>★★★</td>
+<td>★★★★★</td>
+<td>★★★★★</td>
+<td>★★★★</td>
+<td>★★★★</td>
+<td>5052、5083</td>
+</tr>
+<tr>
+<td><strong>6xxx</strong></td>
+<td>镁+硅（Mg+Si）</td>
+<td>★★★</td>
+<td>★★★★</td>
+<td>★★★★</td>
+<td>★★★★★</td>
+<td>★★★★★</td>
+<td>6061、6063</td>
+</tr>
+<tr>
+<td><strong>7xxx</strong></td>
+<td>锌（Zn）</td>
+<td>★★★★★</td>
+<td>★★</td>
+<td>★★</td>
+<td>★★★</td>
+<td>★★</td>
+<td>7075、7050</td>
+</tr>
+<tr>
+<td><strong>8xxx</strong></td>
+<td>其他（Li、Fe等）</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>★★★</td>
+<td>8011、8090</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、各系列详细分析"><a href="#三、各系列详细分析" class="headerlink" title="三、各系列详细分析"></a>三、各系列详细分析</h2><h3 id="3-1-1xxx-系列-—-纯铝"><a href="#3-1-1xxx-系列-—-纯铝" class="headerlink" title="3.1 1xxx 系列 — 纯铝"></a>3.1 1xxx 系列 — 纯铝</h3><p><strong>合金元素：</strong> 铝含量 ≥99.00%（如 1050 &#x3D; Al≥99.50%）</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>耐腐蚀性最佳、导电导热性最优、成形性极好、阳极氧化效果最好</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>强度极低（抗拉 70~110 MPa）、不可热处理强化</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>极易成形，可深冲、弯曲，但切削性差（太软粘刀）</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>极好，所有焊接方法均适用</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 铝箔、食品包装、化工容器、导电母排、装饰件、反射板</p>
+<p><strong>常用牌号：</strong></p>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>Al含量</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1050</td>
+<td>≥99.50%</td>
+<td>化工设备、食品容器</td>
+</tr>
+<tr>
+<td>1060</td>
+<td>≥99.60%</td>
+<td>导电材料、散热器</td>
+</tr>
+<tr>
+<td>1100</td>
+<td>≥99.00%</td>
+<td>通用纯铝、装饰件</td>
+</tr>
+<tr>
+<td>1200</td>
+<td>≥99.00%</td>
+<td>铝箔、包装</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-2-2xxx-系列-—-铝铜合金"><a href="#3-2-2xxx-系列-—-铝铜合金" class="headerlink" title="3.2 2xxx 系列 — 铝铜合金"></a>3.2 2xxx 系列 — 铝铜合金</h3><p><strong>合金元素：</strong> Cu 2~6%（部分含 Mg、Mn）</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>高强度（可达 470 MPa）、疲劳强度优异、切削性好</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>耐腐蚀性差（铜导致晶间腐蚀）、可焊性差、阳极氧化效果差</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>切削性优良（T态），但成形性一般（退火态可成形）</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>差，仅摩擦焊可行，常规熔焊易产生热裂纹</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 飞机结构件（蒙皮、翼梁）、汽车轮毂、齿轮、高强度紧固件</p>
+<p><strong>常用牌号：</strong></p>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>抗拉（MPa）</th>
+<th>屈服（MPa）</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2024-T4</td>
+<td>469</td>
+<td>324</td>
+<td>航空主力合金，疲劳强度高</td>
+</tr>
+<tr>
+<td>2014-T6</td>
+<td>483</td>
+<td>414</td>
+<td>锻造件常用，强度高于 2024</td>
+</tr>
+<tr>
+<td>2A12</td>
+<td>470</td>
+<td>325</td>
+<td>国标牌号，等同于 2024</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>2xxx 系列的致命弱点：</strong> 含铜导致耐腐蚀性差，在潮湿&#x2F;盐雾环境中易发生晶间腐蚀和剥落腐蚀。必须做涂层保护（底漆 + 面漆）或包铝处理（Alclad）。阳极氧化效果差，膜层偏暗不均匀。</p>
+</blockquote>
+<hr>
+<h3 id="3-3-3xxx-系列-—-铝锰合金"><a href="#3-3-3xxx-系列-—-铝锰合金" class="headerlink" title="3.3 3xxx 系列 — 铝锰合金"></a>3.3 3xxx 系列 — 铝锰合金</h3><p><strong>合金元素：</strong> Mn 0.5~1.5%</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>耐腐蚀性好、成形性优良、可焊性好、成本低</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>强度低（抗拉 110~200 MPa）、不可热处理强化、装饰性一般</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>深冲性能优异，适合冲压件</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>好，TIG&#x2F;MIG 均可</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 饮料罐体、屋顶板、热交换器、化工储罐、灯具壳体</p>
+<p><strong>常用牌号：</strong></p>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>抗拉（MPa）</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3003-H14</td>
+<td>150</td>
+<td>最通用的 3 系合金，用途最广</td>
+</tr>
+<tr>
+<td>3004-H34</td>
+<td>200</td>
+<td>含 Mg，强度略高于 3003</td>
+</tr>
+<tr>
+<td>3105-H25</td>
+<td>170</td>
+<td>屋顶&#x2F;墙面用铝</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-4-4xxx-系列-—-铝硅合金"><a href="#3-4-4xxx-系列-—-铝硅合金" class="headerlink" title="3.4 4xxx 系列 — 铝硅合金"></a>3.4 4xxx 系列 — 铝硅合金</h3><p><strong>合金元素：</strong> Si 4~13%</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>熔点低（可降 100°C 以上）、流动性好、焊接填充材料首选</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>强度低、用途窄、阳极氧化后颜色偏暗灰</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>主要用于焊丝和钎料</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>极好，是铝合金焊接的标准填充材料</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 焊丝&#x2F;焊条、钎焊板、汽车活塞、建筑构件</p>
+<p><strong>常用牌号：</strong></p>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>Si 含量</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4043</td>
+<td>4.5~6.0%</td>
+<td>通用焊丝（焊 6xxx 系列）</td>
+</tr>
+<tr>
+<td>4047</td>
+<td>11~13%</td>
+<td>钎焊板、汽车散热器</td>
+</tr>
+<tr>
+<td>4032</td>
+<td>11~13% + Cu&#x2F;Mg&#x2F;Ni</td>
+<td>锻造活塞</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-5-5xxx-系列-—-铝镁合金"><a href="#3-5-5xxx-系列-—-铝镁合金" class="headerlink" title="3.5 5xxx 系列 — 铝镁合金"></a>3.5 5xxx 系列 — 铝镁合金</h3><p><strong>合金元素：</strong> Mg 0.5~6%（部分含 Mn、Cr）</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>耐腐蚀性最优（尤其海洋环境）、可焊性极好、疲劳强度高、成形性好</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>强度中等（不可热处理）、高 Mg 合金有应力腐蚀风险（&gt;65°C）、切削性一般</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>冷成形性好，可弯曲、深冲</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>极好，是海洋&#x2F;压力容器首选</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 船舶结构、海洋平台、压力容器、汽车油箱、建筑幕墙、飞机翼肋</p>
+<p><strong>常用牌号：</strong></p>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>抗拉（MPa）</th>
+<th>屈服（MPa）</th>
+<th>延伸率</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5052-H32</td>
+<td>228</td>
+<td>193</td>
+<td>12%</td>
+<td>通用中强度板，应用最广</td>
+</tr>
+<tr>
+<td>5052-O</td>
+<td>193</td>
+<td>89</td>
+<td>25%</td>
+<td>退火态，深冲成形用</td>
+</tr>
+<tr>
+<td>5083-H116</td>
+<td>317</td>
+<td>228</td>
+<td>16%</td>
+<td>船用&#x2F;海洋专用，高强度</td>
+</tr>
+<tr>
+<td>5086-H32</td>
+<td>275</td>
+<td>195</td>
+<td>14%</td>
+<td>海洋环境中等强度</td>
+</tr>
+<tr>
+<td>5754-H22</td>
+<td>240</td>
+<td>185</td>
+<td>11%</td>
+<td>汽车结构件（欧标常用）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>5xxx vs 6xxx 选型：</strong> 5xxx 不可热处理但耐腐蚀更好，适合海洋&#x2F;化工；6xxx 可热处理且综合性能更均衡，适合结构件&#x2F;型材。</p>
+</blockquote>
+<hr>
+<h3 id="3-6-6xxx-系列-—-铝镁硅合金（最通用）"><a href="#3-6-6xxx-系列-—-铝镁硅合金（最通用）" class="headerlink" title="3.6 6xxx 系列 — 铝镁硅合金（最通用）"></a>3.6 6xxx 系列 — 铝镁硅合金（最通用）</h3><p><strong>合金元素：</strong> Mg 0.4~1.2% + Si 0.3~1.5%（形成 Mg₂Si 析出相）</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>综合性能最均衡、可热处理强化、挤压性极好、可焊性好、阳极氧化效果最佳、耐腐蚀好</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>强度不如 2xxx&#x2F;7xxx（T6 态 ~310 MPa）、焊接后热影响区强度下降</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>挤压性最佳，CNC 加工性优良</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>好（TIG&#x2F;MIG），但焊缝附近强度下降 30~40%</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 建筑型材（窗框、幕墙）、汽车车身&#x2F;底盘、自行车架、家具、机械结构件</p>
+<p><strong>常用牌号详细对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>6061-T6</th>
+<th>6063-T6</th>
+<th>6082-T6</th>
+<th>6005A-T6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抗拉（MPa）</td>
+<td>310</td>
+<td>245</td>
+<td>340</td>
+<td>300</td>
+</tr>
+<tr>
+<td>屈服（MPa）</td>
+<td>275</td>
+<td>215</td>
+<td>290</td>
+<td>260</td>
+</tr>
+<tr>
+<td>延伸率</td>
+<td>12%</td>
+<td>10%</td>
+<td>10%</td>
+<td>9%</td>
+</tr>
+<tr>
+<td>硬度（HB）</td>
+<td>95</td>
+<td>75</td>
+<td>100</td>
+<td>90</td>
+</tr>
+<tr>
+<td>挤压性</td>
+<td>良</td>
+<td><strong>最优</strong></td>
+<td>良</td>
+<td>优</td>
+</tr>
+<tr>
+<td>阳极氧化</td>
+<td><strong>最好</strong></td>
+<td>好</td>
+<td>好</td>
+<td>好</td>
+</tr>
+<tr>
+<td>可焊性</td>
+<td>好</td>
+<td>好</td>
+<td>好</td>
+<td>好</td>
+</tr>
+<tr>
+<td>成本（相对）</td>
+<td>1.0x</td>
+<td>0.9x</td>
+<td>1.1x</td>
+<td>1.0x</td>
+</tr>
+<tr>
+<td><strong>典型用途</strong></td>
+<td>结构件&#x2F;通用</td>
+<td>建筑型材&#x2F;装饰</td>
+<td>欧洲标准结构件</td>
+<td>轨道交通</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>6061 vs 6063：</strong> 6061 强度更高，适合承力结构件；6063 挤压性更好、表面质量更优，适合建筑型材和装饰件。两者占铝型材市场的 80% 以上。</p>
+</blockquote>
+<hr>
+<h3 id="3-7-7xxx-系列-—-铝锌合金（超高强度）"><a href="#3-7-7xxx-系列-—-铝锌合金（超高强度）" class="headerlink" title="3.7 7xxx 系列 — 铝锌合金（超高强度）"></a>3.7 7xxx 系列 — 铝锌合金（超高强度）</h3><p><strong>合金元素：</strong> Zn 3~8%（部分含 Mg、Cu、Cr）</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>强度最高（抗拉可达 572 MPa）、比强度最优（接近钢）、硬度高</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>耐腐蚀性差（尤其含 Cu 的）、可焊性差、成本高（1.8~2.5 倍于 6061）、阳极氧化效果差</td>
+</tr>
+<tr>
+<td><strong>加工</strong></td>
+<td>CNC 加工性好但刀具磨损快（含 Cu 牌号）</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>差，7xxx 含 Zn 焊接易产生热裂纹</td>
+</tr>
+</tbody></table>
+<p><strong>典型应用：</strong> 航空航天结构件、自行车&#x2F;赛车零件、攀岩装备、模具、高强度紧固结构</p>
+<p><strong>常用牌号详细对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>7075-T6</th>
+<th>7050-T7451</th>
+<th>7005-T6</th>
+<th>7A04</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抗拉（MPa）</td>
+<td>572</td>
+<td>517</td>
+<td>390</td>
+<td>540</td>
+</tr>
+<tr>
+<td>屈服（MPa）</td>
+<td>503</td>
+<td>455</td>
+<td>350</td>
+<td>480</td>
+</tr>
+<tr>
+<td>延伸率</td>
+<td>11%</td>
+<td>12%</td>
+<td>12%</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>硬度（HB）</td>
+<td>150</td>
+<td>135</td>
+<td>105</td>
+<td>140</td>
+</tr>
+<tr>
+<td>耐腐蚀</td>
+<td>差</td>
+<td><strong>改善（T7 过时效）</strong></td>
+<td>中等</td>
+<td>差</td>
+</tr>
+<tr>
+<td>可焊性</td>
+<td>差</td>
+<td>差</td>
+<td>中等</td>
+<td>差</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>1.8~2.5x</td>
+<td>2.0~3.0x</td>
+<td>1.5x</td>
+<td>1.5x</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>7075 vs 6061 选型决策树：</strong></p>
+<ul>
+<li>强度是核心需求（航空&#x2F;赛车&#x2F;模具） → 7075</li>
+<li>需要焊接 → 6061（7075 不可焊）</li>
+<li>需要阳极氧化 → 6061（7075 氧化效果差）</li>
+<li>需要耐腐蚀 → 6061 或 5052</li>
+<li>成本敏感 → 6061（便宜一半）</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="3-8-8xxx-系列-—-其他合金"><a href="#3-8-8xxx-系列-—-其他合金" class="headerlink" title="3.8 8xxx 系列 — 其他合金"></a>3.8 8xxx 系列 — 其他合金</h3><p><strong>合金元素：</strong> Li（铝锂）、Fe、Sn 等</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>铝锂合金密度更低、刚度更高</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>成本高、加工难度大、应用范围窄</td>
+</tr>
+<tr>
+<td><strong>应用</strong></td>
+<td>航空航天减重（8090）、铝箔（8011）、锂电池铝箔</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、铸造铝合金对比"><a href="#四、铸造铝合金对比" class="headerlink" title="四、铸造铝合金对比"></a>四、铸造铝合金对比</h2><p>铸造铝合金使用独立的命名体系（AA 三位数+小数），按工艺分为压铸和重力&#x2F;低压铸造两大类。</p>
+<h3 id="4-1-主要铸造合金对比"><a href="#4-1-主要铸造合金对比" class="headerlink" title="4.1 主要铸造合金对比"></a>4.1 主要铸造合金对比</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>ADC12 (A383)</th>
+<th>A380</th>
+<th>A356</th>
+<th>A360</th>
+<th>AlSi10Mg</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>标准</strong></td>
+<td>JIS</td>
+<td>ASTM</td>
+<td>ASTM</td>
+<td>ASTM</td>
+<td>EN</td>
+</tr>
+<tr>
+<td><strong>Si 含量</strong></td>
+<td>9.6~12%</td>
+<td>7.5~9.5%</td>
+<td>6.5~7.5%</td>
+<td>9~10%</td>
+<td>9~11%</td>
+</tr>
+<tr>
+<td><strong>Cu 含量</strong></td>
+<td>1.5~3.5%</td>
+<td>3~4%</td>
+<td>≤0.2%</td>
+<td>≤0.6%</td>
+<td>≤0.1%</td>
+</tr>
+<tr>
+<td><strong>Mg 含量</strong></td>
+<td>≤0.3%</td>
+<td>≤0.3%</td>
+<td>0.25~0.45%</td>
+<td>0.4~0.6%</td>
+<td>0.2~0.45%</td>
+</tr>
+<tr>
+<td><strong>抗拉（MPa）</strong></td>
+<td>310</td>
+<td>320</td>
+<td>262（T6）</td>
+<td>325</td>
+<td>295</td>
+</tr>
+<tr>
+<td><strong>屈服（MPa）</strong></td>
+<td>—</td>
+<td>160</td>
+<td>186（T6）</td>
+<td>170</td>
+<td>215</td>
+</tr>
+<tr>
+<td><strong>延伸率</strong></td>
+<td>1.5%</td>
+<td>3.5%</td>
+<td>8%（T6）</td>
+<td>5%</td>
+<td>5%</td>
+</tr>
+<tr>
+<td><strong>硬度（HB）</strong></td>
+<td>80~90</td>
+<td>80</td>
+<td>70（T6）</td>
+<td>85</td>
+<td>85</td>
+</tr>
+<tr>
+<td><strong>铸造方式</strong></td>
+<td>高压压铸</td>
+<td>高压压铸</td>
+<td>砂铸&#x2F;金属模&#x2F;低压</td>
+<td>高压压铸</td>
+<td>砂铸&#x2F;金属模</td>
+</tr>
+<tr>
+<td><strong>流动性</strong></td>
+<td>★★★★★</td>
+<td>★★★★</td>
+<td>★★★</td>
+<td>★★★★</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><strong>可焊性</strong></td>
+<td>差</td>
+<td>差</td>
+<td><strong>好</strong></td>
+<td>中等</td>
+<td><strong>好</strong></td>
+</tr>
+<tr>
+<td><strong>耐蚀性</strong></td>
+<td>中等</td>
+<td>中等</td>
+<td><strong>好</strong></td>
+<td>中等</td>
+<td><strong>好</strong></td>
+</tr>
+<tr>
+<td><strong>阳极氧化</strong></td>
+<td>差（高 Si）</td>
+<td>差（高 Cu）</td>
+<td><strong>好</strong></td>
+<td>中等</td>
+<td>中等</td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td>低</td>
+<td>低</td>
+<td>中</td>
+<td>中</td>
+<td>中高</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-压铸铝合金选型要点"><a href="#4-2-压铸铝合金选型要点" class="headerlink" title="4.2 压铸铝合金选型要点"></a>4.2 压铸铝合金选型要点</h3><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>推荐合金</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>大批量复杂结构件</td>
+<td>ADC12 &#x2F; A380</td>
+<td>流动性最好，适合薄壁复杂件，成本低</td>
+</tr>
+<tr>
+<td>需要 T6 热处理</td>
+<td>A356</td>
+<td>T6 后强度高、延伸率好（8%）</td>
+</tr>
+<tr>
+<td>需要焊接组装</td>
+<td>A356 &#x2F; AlSi10Mg</td>
+<td>低 Cu 含量，焊接性好</td>
+</tr>
+<tr>
+<td>高耐腐蚀（户外&#x2F;海洋）</td>
+<td>A356</td>
+<td>低 Cu，自然氧化膜保护好</td>
+</tr>
+<tr>
+<td>阳极氧化外观件</td>
+<td>A356</td>
+<td>低 Si 低 Cu，氧化效果可接受</td>
+</tr>
+<tr>
+<td>尺寸精度要求高</td>
+<td>ADC12 &#x2F; A380</td>
+<td>压铸尺寸一致性好</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>ADC12 是压铸的”万金油”：</strong> 80% 的压铸件用 ADC12&#x2F;A380，综合性能平衡、成本低、铸造性好。只有需要焊接、高强度或阳极氧化时才换 A356。</p>
+</blockquote>
+<h3 id="4-3-压铸铝合金的前处理特殊性"><a href="#4-3-压铸铝合金的前处理特殊性" class="headerlink" title="4.3 压铸铝合金的前处理特殊性"></a>4.3 压铸铝合金的前处理特殊性</h3><table>
+<thead>
+<tr>
+<th>合金</th>
+<th>脱脂方式</th>
+<th>碱蚀</th>
+<th>出光&#x2F;除灰</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ADC12 &#x2F; A380</td>
+<td><strong>酸性脱脂</strong></td>
+<td>不碱蚀</td>
+<td>含 HF 或环保除灰剂</td>
+<td>高 Si（10%+），碱蚀会留硅灰</td>
+</tr>
+<tr>
+<td>A356</td>
+<td>碱性或酸性均可</td>
+<td>轻度碱蚀</td>
+<td>硝酸出光</td>
+<td>低 Si 低 Cu，前处理较容易</td>
+</tr>
+<tr>
+<td>AlSi10Mg</td>
+<td>酸性脱脂</td>
+<td>轻度碱蚀或不碱蚀</td>
+<td>含 HF 除灰</td>
+<td>高 Si，与 ADC12 类似</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、综合性能雷达图对比（定性）"><a href="#五、综合性能雷达图对比（定性）" class="headerlink" title="五、综合性能雷达图对比（定性）"></a>五、综合性能雷达图对比（定性）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                    强度</span><br><span class="line">                     5</span><br><span class="line">                     │</span><br><span class="line">        可焊性 4 ────┼──── 4 耐蚀性</span><br><span class="line">                    │</span><br><span class="line">        成形性 3 ────┼──── 3 可加工性</span><br><span class="line">                    │</span><br><span class="line">        阳极氧化 2 ──┼──── 2 成本</span><br><span class="line">                     │</span><br><span class="line">                     1</span><br><span class="line"></span><br><span class="line">6061:  强度3 耐蚀4 可焊4 加工5 阳极5 成本5 → 综合最均衡</span><br><span class="line">7075:  强度5 耐蚀2 可焊1 加工3 阳极2 成本2 → 强度之王，其他都差</span><br><span class="line">5052:  强度2 耐蚀5 可焊5 加工4 阳极4 成本5 → 耐腐蚀+可焊首选</span><br><span class="line">2024:  强度4 耐蚀2 可焊1 加工4 阳极2 成本3 → 航空专用</span><br><span class="line">ADC12: 强度2 耐蚀3 可焊1 加工2 阳极1 成本5 → 压铸性价比之王</span><br><span class="line">A356:  强度3 耐蚀4 可焊4 加工3 阳极4 成本4 → 铸造高性能之选</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、常见牌号数据速查表"><a href="#六、常见牌号数据速查表" class="headerlink" title="六、常见牌号数据速查表"></a>六、常见牌号数据速查表</h2><table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>系列</th>
+<th>抗拉 MPa</th>
+<th>屈服 MPa</th>
+<th>延伸率</th>
+<th>密度 g&#x2F;cm³</th>
+<th>硬度 HB</th>
+<th>导热 W&#x2F;mK</th>
+<th>可焊</th>
+<th>阳极</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1050-O</td>
+<td>1xxx</td>
+<td>65</td>
+<td>28</td>
+<td>43%</td>
+<td>2.71</td>
+<td>25</td>
+<td>220</td>
+<td>✅</td>
+<td>✅✅</td>
+</tr>
+<tr>
+<td>1100-H14</td>
+<td>1xxx</td>
+<td>110</td>
+<td>95</td>
+<td>10%</td>
+<td>2.71</td>
+<td>32</td>
+<td>220</td>
+<td>✅</td>
+<td>✅✅</td>
+</tr>
+<tr>
+<td>2024-T4</td>
+<td>2xxx</td>
+<td>469</td>
+<td>324</td>
+<td>20%</td>
+<td>2.78</td>
+<td>120</td>
+<td>121</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>3003-H14</td>
+<td>3xxx</td>
+<td>150</td>
+<td>145</td>
+<td>10%</td>
+<td>2.73</td>
+<td>40</td>
+<td>180</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>5052-H32</td>
+<td>5xxx</td>
+<td>228</td>
+<td>193</td>
+<td>12%</td>
+<td>2.68</td>
+<td>60</td>
+<td>138</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>5083-H116</td>
+<td>5xxx</td>
+<td>317</td>
+<td>228</td>
+<td>16%</td>
+<td>2.66</td>
+<td>75</td>
+<td>117</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>6061-T6</td>
+<td>6xxx</td>
+<td>310</td>
+<td>275</td>
+<td>12%</td>
+<td>2.70</td>
+<td>95</td>
+<td>167</td>
+<td>✅</td>
+<td>✅✅</td>
+</tr>
+<tr>
+<td>6063-T6</td>
+<td>6xxx</td>
+<td>245</td>
+<td>215</td>
+<td>10%</td>
+<td>2.69</td>
+<td>75</td>
+<td>201</td>
+<td>✅</td>
+<td>✅✅</td>
+</tr>
+<tr>
+<td>6082-T6</td>
+<td>6xxx</td>
+<td>340</td>
+<td>290</td>
+<td>10%</td>
+<td>2.71</td>
+<td>100</td>
+<td>180</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>7075-T6</td>
+<td>7xxx</td>
+<td>572</td>
+<td>503</td>
+<td>11%</td>
+<td>2.81</td>
+<td>150</td>
+<td>130</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>7050-T7451</td>
+<td>7xxx</td>
+<td>517</td>
+<td>455</td>
+<td>12%</td>
+<td>2.83</td>
+<td>135</td>
+<td>157</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ADC12</td>
+<td>压铸</td>
+<td>310</td>
+<td>155</td>
+<td>1.5%</td>
+<td>2.64</td>
+<td>85</td>
+<td>96</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>A380</td>
+<td>压铸</td>
+<td>320</td>
+<td>160</td>
+<td>3.5%</td>
+<td>2.71</td>
+<td>80</td>
+<td>96</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>A356-T6</td>
+<td>铸铝</td>
+<td>262</td>
+<td>186</td>
+<td>8%</td>
+<td>2.68</td>
+<td>70</td>
+<td>151</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="七、选型决策矩阵"><a href="#七、选型决策矩阵" class="headerlink" title="七、选型决策矩阵"></a>七、选型决策矩阵</h2><h3 id="7-1-按应用场景推荐"><a href="#7-1-按应用场景推荐" class="headerlink" title="7.1 按应用场景推荐"></a>7.1 按应用场景推荐</h3><table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>首选</th>
+<th>备选</th>
+<th>避免</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建筑型材（窗框&#x2F;幕墙）</td>
+<td>6063</td>
+<td>6061</td>
+<td>7xxx（阳极差）</td>
+</tr>
+<tr>
+<td>机械结构件</td>
+<td>6061-T6</td>
+<td>6082-T6</td>
+<td>纯铝（太软）</td>
+</tr>
+<tr>
+<td>飞机结构件</td>
+<td>2024-T4 &#x2F; 7075-T6</td>
+<td>7050</td>
+<td>5xxx（强度不够）</td>
+</tr>
+<tr>
+<td>船舶&#x2F;海洋结构</td>
+<td>5083</td>
+<td>5052</td>
+<td>2xxx&#x2F;7xxx（腐蚀差）</td>
+</tr>
+<tr>
+<td>汽车车身板</td>
+<td>5182 &#x2F; 6016</td>
+<td>5754</td>
+<td>7xxx</td>
+</tr>
+<tr>
+<td>压铸件（大批量）</td>
+<td>ADC12 &#x2F; A380</td>
+<td>—</td>
+<td>6061（不适合压铸）</td>
+</tr>
+<tr>
+<td>压铸结构件（高强度）</td>
+<td>A356-T6</td>
+<td>AlSi10Mg</td>
+<td>ADC12（不可 T6）</td>
+</tr>
+<tr>
+<td>散热器&#x2F;热管理</td>
+<td>6063 &#x2F; 6061</td>
+<td>1xxx</td>
+<td>7xxx（导热差）</td>
+</tr>
+<tr>
+<td>电子产品外壳</td>
+<td>5052 &#x2F; 6061</td>
+<td>3003</td>
+<td>ADC12（外观差）</td>
+</tr>
+<tr>
+<td>食品&#x2F;化工容器</td>
+<td>1050 &#x2F; 3003</td>
+<td>5052</td>
+<td>2xxx&#x2F;7xxx</td>
+</tr>
+<tr>
+<td>焊接结构件</td>
+<td>5083 &#x2F; 5052</td>
+<td>6061</td>
+<td>2xxx&#x2F;7xxx</td>
+</tr>
+<tr>
+<td>模具</td>
+<td>7075</td>
+<td>6061</td>
+<td>纯铝</td>
+</tr>
+<tr>
+<td>导电母排</td>
+<td>1xxx（1350）</td>
+<td>6101</td>
+<td>7xxx</td>
+</tr>
+</tbody></table>
+<h3 id="7-2-按加工工艺推荐"><a href="#7-2-按加工工艺推荐" class="headerlink" title="7.2 按加工工艺推荐"></a>7.2 按加工工艺推荐</h3><table>
+<thead>
+<tr>
+<th>加工方式</th>
+<th>首选</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>挤压</strong></td>
+<td>6063 &gt; 6061 &gt; 6005A</td>
+<td>挤压性最好</td>
+</tr>
+<tr>
+<td><strong>CNC 加工</strong></td>
+<td>6061 &gt; 7075 &gt; 2024</td>
+<td>切削性好，尺寸稳定</td>
+</tr>
+<tr>
+<td><strong>冲压&#x2F;深冲</strong></td>
+<td>5052-O &gt; 1100 &gt; 3003</td>
+<td>成形性最佳</td>
+</tr>
+<tr>
+<td><strong>焊接</strong></td>
+<td>5052&#x2F;5083 &gt; 6061 &gt; A356</td>
+<td>可焊性 + 焊后强度</td>
+</tr>
+<tr>
+<td><strong>阳极氧化</strong></td>
+<td>6061 &gt; 6063 &gt; 5052</td>
+<td>氧化膜质量最好</td>
+</tr>
+<tr>
+<td><strong>压铸</strong></td>
+<td>ADC12 &gt; A380 &gt; A356</td>
+<td>流动性 + 成本</td>
+</tr>
+<tr>
+<td><strong>钣金折弯</strong></td>
+<td>5052-H32 &gt; 6061-O</td>
+<td>弯曲不开裂</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、表面处理兼容性总结"><a href="#八、表面处理兼容性总结" class="headerlink" title="八、表面处理兼容性总结"></a>八、表面处理兼容性总结</h2><p>这是与前面两份调研报告（底涂工艺、脱脂工艺）直接相关的部分：</p>
+<table>
+<thead>
+<tr>
+<th>牌号</th>
+<th>脱脂</th>
+<th>碱蚀</th>
+<th>化学转化</th>
+<th>阳极氧化</th>
+<th>粉末喷涂</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1xxx</td>
+<td>碱性</td>
+<td>轻度</td>
+<td>✅</td>
+<td>✅✅ 最佳</td>
+<td>✅</td>
+<td>最易处理</td>
+</tr>
+<tr>
+<td>2xxx</td>
+<td>酸性</td>
+<td>轻度或不碱蚀</td>
+<td>✅</td>
+<td>❌ 偏暗不均</td>
+<td>✅（需底涂）</td>
+<td>含 Cu，前处理需谨慎</td>
+</tr>
+<tr>
+<td>3xxx</td>
+<td>碱性</td>
+<td>标准</td>
+<td>✅</td>
+<td>✅ 好</td>
+<td>✅</td>
+<td>常规处理</td>
+</tr>
+<tr>
+<td>5xxx</td>
+<td>碱性</td>
+<td>标准</td>
+<td>✅</td>
+<td>✅ 好</td>
+<td>✅</td>
+<td>常规处理</td>
+</tr>
+<tr>
+<td>6061</td>
+<td>碱性</td>
+<td>标准</td>
+<td>✅</td>
+<td>✅✅ 最好</td>
+<td>✅</td>
+<td>最通用，工艺最成熟</td>
+</tr>
+<tr>
+<td>6063</td>
+<td>碱性</td>
+<td>标准</td>
+<td>✅</td>
+<td>✅ 好</td>
+<td>✅</td>
+<td>型材标准</td>
+</tr>
+<tr>
+<td>7075</td>
+<td>酸性</td>
+<td>轻度</td>
+<td>✅</td>
+<td>❌ 偏暗&#x2F;棕色</td>
+<td>✅（需底涂）</td>
+<td>含 Zn&#x2F;Cu，阳极效果差</td>
+</tr>
+<tr>
+<td>ADC12</td>
+<td><strong>酸性</strong></td>
+<td><strong>不碱蚀</strong></td>
+<td>✅（需专用）</td>
+<td>❌ 高 Si 发灰</td>
+<td>✅（需底涂）</td>
+<td>前处理最特殊</td>
+</tr>
+<tr>
+<td>A380</td>
+<td>酸性</td>
+<td>轻度或不碱蚀</td>
+<td>✅</td>
+<td>❌ 高 Cu</td>
+<td>✅（需底涂）</td>
+<td>类似 ADC12</td>
+</tr>
+<tr>
+<td>A356</td>
+<td>碱性&#x2F;酸性均可</td>
+<td>轻度</td>
+<td>✅</td>
+<td>✅ 可接受</td>
+<td>✅</td>
+<td>铸铝中最好处理</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="九、关键结论"><a href="#九、关键结论" class="headerlink" title="九、关键结论"></a>九、关键结论</h2><ol>
+<li><strong>6xxx 系列（尤其 6061&#x2F;6063）是工业铝材的绝对主力</strong>，占铝材用量的 50% 以上，综合性能最均衡</li>
+<li><strong>压铸铝（ADC12&#x2F;A380）是前处理的最大挑战</strong>，高硅高铜导致碱性脱脂&#x2F;碱蚀&#x2F;阳极氧化全部受限</li>
+<li><strong>7075 强度无敌但代价大</strong>：不可焊、阳极差、耐腐蚀差、贵 2 倍，只在强度是核心需求时使用</li>
+<li><strong>5xxx 是耐腐蚀+可焊的首选</strong>，海洋&#x2F;船舶&#x2F;化工场景不可替代</li>
+<li><strong>选型的核心三角：性能需求 × 加工可行性 × 成本</strong>，三者不可能同时最优，需要根据优先级取舍</li>
+</ol>
+<hr>
+<h2 id="十、来源"><a href="#十、来源" class="headerlink" title="十、来源"></a>十、来源</h2><ol>
+<li><a href="https://baike.baidu.com/item/%E9%93%9D%E5%90%88%E9%87%91%E8%84%B1%E8%84%82%E5%89%82/7210097">百度百科 — 铝合金脱脂剂</a> — 2026-09-07</li>
+<li><a href="https://b2bwiki.baidu.com/article/d0rcj1hftjsnojp3hjug">百度B2B百科 — 压铸铝合金材料选型指南</a> — 2026-09-07</li>
+<li><a href="https://hongju-yz.com/index.php/news/205.html">宏久压铸 — 如何正确选择铝合金压铸用特殊合金</a> — 2026-09-07</li>
+<li><a href="https://empcasting.com/zh/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%93%9D%E5%90%88%E9%87%91-adc12-%E6%98%AF%E5%8E%8B%E9%93%B8%E7%9A%84%E9%A6%96%E9%80%89">EMP Tech — 为什么铝合金 ADC12 是压铸的首选</a> — 2026-09-07</li>
+<li><a href="https://www.sinbo-machining.com/zh/wiki/materials/aluminum">Sinbo Machining — 铝合金 CNC 加工指南：6061、7075、5052 选型对比</a> — 2026-09-07</li>
+<li><a href="https://sendcutsend.com/blog/aluminum-alloy-comparison">SendCutSend — 5052 vs 6061 vs 7075 Comparison</a> — 2026-09-07</li>
+<li><a href="https://www.fictiv.com/articles/cnc-materials-series-pros-and-cons-of-different-aluminum-alloys">Fictiv — Pros and Cons of Different Aluminum Alloys</a> — 2026-09-07</li>
+<li><a href="https://esab.com/cn/chn_zh/esab-university/articles/understanding-the-aluminum-alloy-designation-system">ESAB — 铝合金命名系统</a> — 2026-09-07</li>
+<li><a href="https://www.yotoly.com/news/2181.html">河南永通铝业 — 铝及铝合金的八大系列编号</a> — 2026-09-07</li>
+<li><a href="https://www.tekuanaluminum.com/knowledges/%E9%8B%81%E5%90%88%E9%87%91%E7%B0%A1%E4%BB%8B">德冠铝业 — 铝合金种类介绍</a> — 2026-09-07</li>
+<li><a href="https://www.totalmateria.com/zh/properties/aluminum-grades">Total Materia — 铝材料牌号</a> — 2026-09-07</li>
+<li><a href="https://casting-china.org/zh/a356-vs-a380-aluminum-alloy">铸造中国 — A356 与 A380 铝合金对比</a> — 2026-09-07</li>
+</ol>
+]]></content>
+      <categories>
+        <category>材料科学</category>
+        <category>金属工程</category>
+      </categories>
+      <tags>
+        <tag>铝合金</tag>
+        <tag>工业应用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TPE选型攻略</title>
     <url>/posts/124f.html</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>热塑性弹性体（TPE，Thermoplastic Elastomer）是介于橡胶与塑料之间的一种高分子材料，兼具橡胶的弹性与塑料的加工便利性。在制造业转型升级、轻量化及环保要求日益提高的背景下，TPE正加速替代传统橡胶和PVC，应用覆盖汽车、电子、医疗、消费操品、建筑等众多领域。本文系统梳理TPE的物性特征、成型工艺与典型应用，为研发与采购人员提供快速参考。</p>
@@ -1299,8 +2626,8 @@
         <category>金属工程</category>
       </categories>
       <tags>
-        <tag>表面处理</tag>
         <tag>铝合金</tag>
+        <tag>表面处理</tag>
       </tags>
   </entry>
   <entry>
@@ -5066,8 +6393,8 @@
         <category>研发工具</category>
       </categories>
       <tags>
-        <tag>顾客声音转化</tag>
         <tag>APQP</tag>
+        <tag>顾客声音转化</tag>
       </tags>
   </entry>
   <entry>
@@ -7726,9 +9053,9 @@ C --&gt; D[标准操作规程制定]</code></pre>
         <category>金属工程</category>
       </categories>
       <tags>
-        <tag>表面处理</tag>
         <tag>铝合金</tag>
         <tag>工业应用</tag>
+        <tag>表面处理</tag>
       </tags>
   </entry>
   <entry>
@@ -8861,8 +10188,8 @@ C --&gt; D[标准操作规程制定]</code></pre>
         <category>逻辑思维</category>
       </categories>
       <tags>
-        <tag>80/20法则</tag>
         <tag>演绎推理</tag>
+        <tag>80/20法则</tag>
       </tags>
   </entry>
   <entry>
@@ -11482,8 +12809,8 @@ C --&gt; D[标准操作规程制定]</code></pre>
         <category>文学作品</category>
       </categories>
       <tags>
-        <tag>阅读</tag>
         <tag>80/20法则</tag>
+        <tag>阅读</tag>
       </tags>
   </entry>
 </search>
