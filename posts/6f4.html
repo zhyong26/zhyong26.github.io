@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="理解 η &#x3D; τ &#x2F; γ̇这个公式是牛顿粘性定律，定义了粘度的本质。我们一层层拆开。  第一步：想象一摞扑克牌把流体想象成一摞水平叠放的扑克牌（或一叠纸），你从最上面推： 12345678 →→→ 你的推力 F┌──────────────┐  ← 最顶层（速度最快）│  ╱╱╱╱╱╱╱╱╱  │  ← 各层之间滑动│ ╱╱╱╱╱╱╱╱╱╱  │  ← 层与层之间有摩擦│╱╱╱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何理解动力粘度η">
+<meta property="og:url" content="https://zhyong.site/posts/6f4.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="理解 η &#x3D; τ &#x2F; γ̇这个公式是牛顿粘性定律，定义了粘度的本质。我们一层层拆开。  第一步：想象一摞扑克牌把流体想象成一摞水平叠放的扑克牌（或一叠纸），你从最上面推： 12345678 →→→ 你的推力 F┌──────────────┐  ← 最顶层（速度最快）│  ╱╱╱╱╱╱╱╱╱  │  ← 各层之间滑动│ ╱╱╱╱╱╱╱╱╱╱  │  ← 层与层之间有摩擦│╱╱╱">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-09T13:57:47.000Z">
+<meta property="article:modified_time" content="2026-09-09T14:00:32.341Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="运动粘度">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/6f4.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/6f4.html","path":"posts/6f4.html","title":"如何理解动力粘度η"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何理解动力粘度η | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/6f4.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3-%CE%B7-%CF%84-%CE%B3%CC%87"><span class="nav-text">理解 η &#x3D; τ &#x2F; γ̇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%83%B3%E8%B1%A1%E4%B8%80%E6%91%9E%E6%89%91%E5%85%8B%E7%89%8C"><span class="nav-text">第一步：想象一摞扑克牌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%90%86%E8%A7%A3%E5%89%AA%E5%88%87%E5%BA%94%E5%8A%9B-%CF%84"><span class="nav-text">第二步：理解剪切应力 τ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%90%86%E8%A7%A3%E5%89%AA%E5%88%87%E9%80%9F%E7%8E%87-%CE%B3%CC%87"><span class="nav-text">第三步：理解剪切速率 γ̇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%90%88%E8%B5%B7%E6%9D%A5%E7%90%86%E8%A7%A3-%CE%B7-%CF%84-%CE%B3%CC%87"><span class="nav-text">第四步：合起来理解 η &#x3D; τ &#x2F; γ̇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%85%B3%E9%94%AE%E6%B4%9E%E5%AF%9F-%E2%80%94-%E7%B2%98%E5%BA%A6%E6%98%AF%E2%80%9D%E9%98%BB%E5%8A%9B%E7%B3%BB%E6%95%B0%E2%80%9D"><span class="nav-text">第五步：关键洞察 — 粘度是”阻力系数”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%9A%E8%81%94%E7%B3%BB%E5%88%B0%E4%BD%A0%E7%9A%84%E5%AE%9E%E9%99%85%E5%B7%A5%E8%89%BA"><span class="nav-text">第六步：联系到你的实际工艺</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF-1%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%AC%E5%A4%A9%E7%8E%AF%E6%B0%A7%E5%BA%95%E6%BC%86%E5%8F%98%E7%A8%A0"><span class="nav-text">场景 1：为什么冬天环氧底漆变稠</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF-2%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%96%B7%E6%B6%82%E6%AF%94%E5%88%B7%E6%B6%82%E8%A6%81%E6%B1%82%E6%9B%B4%E4%BD%8E%E7%9A%84%E7%B2%98%E5%BA%A6"><span class="nav-text">场景 2：为什么喷涂比刷涂要求更低的粘度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF-3%EF%BC%9A%E8%A7%A6%E5%8F%98%E6%80%A7%EF%BC%88%E6%96%BD%E5%B7%A5%E5%90%8E%E4%B8%8D%E6%B5%81%E6%8C%82%E7%9A%84%E7%A7%98%E5%AF%86%EF%BC%89"><span class="nav-text">场景 3：触变性（施工后不流挂的秘密）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/6f4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何理解动力粘度η | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何理解动力粘度η
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-09-09 21:57:47 / 修改时间：22:00:32" itemprop="dateCreated datePublished" datetime="2026-09-09T21:57:47+08:00">2026-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%90%E6%96%99%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">材料科学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%90%E6%96%99%E7%A7%91%E5%AD%A6/%E9%AB%98%E5%88%86%E5%AD%90%E6%9D%90%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">高分子材料</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="理解-η-τ-γ̇"><a href="#理解-η-τ-γ̇" class="headerlink" title="理解 η &#x3D; τ &#x2F; γ̇"></a>理解 η &#x3D; τ &#x2F; γ̇</h2><p>这个公式是牛顿粘性定律，定义了粘度的本质。我们一层层拆开。</p>
+<hr>
+<h3 id="第一步：想象一摞扑克牌"><a href="#第一步：想象一摞扑克牌" class="headerlink" title="第一步：想象一摞扑克牌"></a>第一步：想象一摞扑克牌</h3><p>把流体想象成一摞水平叠放的扑克牌（或一叠纸），你从最上面推：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> →→→ 你的推力 F</span><br><span class="line">┌──────────────┐  ← 最顶层（速度最快）</span><br><span class="line">│  ╱╱╱╱╱╱╱╱╱  │  ← 各层之间滑动</span><br><span class="line">│ ╱╱╱╱╱╱╱╱╱╱  │  ← 层与层之间有摩擦</span><br><span class="line">│╱╱╱╱╱╱╱╱╱╱╱  │</span><br><span class="line">┌──────────────┐  ← 最底层（固定不动，速度=0）</span><br><span class="line">└──────────────┘</span><br><span class="line">      厚度 h</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p><strong>你推牌的手感</strong>就是粘度最直观的体验：</p>
+<ul>
+<li>扑克牌之间很滑（摩擦小）→ 类似水，粘度低</li>
+<li>扑克牌之间涂了蜂蜜（摩擦大）→ 类似环氧树脂，粘度高</li>
+</ul>
+<hr>
+<h3 id="第二步：理解剪切应力-τ"><a href="#第二步：理解剪切应力-τ" class="headerlink" title="第二步：理解剪切应力 τ"></a>第二步：理解剪切应力 τ</h3><p><strong>τ（tau）&#x3D; 你施加的”推力”分摊到每单位面积上是多少</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">     推力 F</span><br><span class="line">      →→</span><br><span class="line">┌──────────────┐</span><br><span class="line">│   面积 A      │</span><br><span class="line">└──────────────┘</span><br><span class="line"></span><br><span class="line">τ = F / A     （单位：Pa = N/m²）</span><br></pre></td></tr></table></figure>
+
+<p><strong>直觉：</strong> 同样用力推，推的面积越大，单位面积承受的力越小，所以 τ 越小。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>力 F</th>
+<th>面积 A</th>
+<th>剪切应力 τ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小刮刀刮涂</td>
+<td>10 N</td>
+<td>0.01 m²</td>
+<td>1,000 Pa</td>
+</tr>
+<tr>
+<td>大刮刀刮涂</td>
+<td>10 N</td>
+<td>0.1 m²</td>
+<td>100 Pa</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>τ 大 &#x3D; 你”使劲推”；τ 小 &#x3D; 你”轻轻推”</p>
+</blockquote>
+<hr>
+<h3 id="第三步：理解剪切速率-γ̇"><a href="#第三步：理解剪切速率-γ̇" class="headerlink" title="第三步：理解剪切速率 γ̇"></a>第三步：理解剪切速率 γ̇</h3><p><strong>γ̇（gamma dot）&#x3D; 相邻流体层之间的”速度差”除以”层间距”</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">顶层速度 v</span><br><span class="line">→→→→→→→→→→→→</span><br><span class="line">┌──────────────┐</span><br><span class="line">│  距离 h       │</span><br><span class="line">└──────────────┘</span><br><span class="line">底层速度 0（静止）</span><br><span class="line"></span><br><span class="line">γ̇ = v / h     （单位：s⁻¹ = 每秒）</span><br></pre></td></tr></table></figure>
+
+<p><strong>直觉：</strong> 你推牌推得多快，或者说各层”错开”的速率。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>类比</th>
+<th>γ̇ 大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>涂料在桶里静置</td>
+<td>没人推，各层不动</td>
+<td>≈ 0 s⁻¹</td>
+</tr>
+<tr>
+<td>缓慢搅拌</td>
+<td>慢慢推</td>
+<td>1~10 s⁻¹</td>
+</tr>
+<tr>
+<td>刷涂</td>
+<td>中速推</td>
+<td>100~1,000 s⁻¹</td>
+</tr>
+<tr>
+<td>高速喷涂</td>
+<td>猛烈推</td>
+<td>10,000~100,000 s⁻¹</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="第四步：合起来理解-η-τ-γ̇"><a href="#第四步：合起来理解-η-τ-γ̇" class="headerlink" title="第四步：合起来理解 η &#x3D; τ &#x2F; γ̇"></a>第四步：合起来理解 η &#x3D; τ &#x2F; γ̇</h3><p>把公式翻译成人话：</p>
+<blockquote>
+<p><strong>粘度 &#x3D; 你用了多大的力 ÷ 流体跑了多快</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>你的感受</th>
+<th>τ 大&#x2F;小</th>
+<th>γ̇ 大&#x2F;小</th>
+<th>η 大&#x2F;小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>轻轻搅水，水就流得很快</td>
+<td>很轻松</td>
+<td>小</td>
+<td>大</td>
+<td><strong>小</strong></td>
+</tr>
+<tr>
+<td>使劲搅蜂蜜，蜂蜜才慢慢动</td>
+<td>很费劲</td>
+<td>大</td>
+<td>小</td>
+<td><strong>大</strong></td>
+</tr>
+</tbody></table>
+<p><strong>用数字感受一下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">水（25°C）：</span><br><span class="line">  你施加 τ = 1 Pa → 水以 γ̇ = 1000 s⁻¹ 的速率流动</span><br><span class="line">  η = 1 / 1000 = 0.001 Pa·s = 1 mPa·s</span><br><span class="line"></span><br><span class="line">E-51 环氧树脂（25°C）：</span><br><span class="line">  你施加 τ = 1 Pa → 树脂只以 γ̇ = 0.08 s⁻¹ 的速率流动</span><br><span class="line">  η = 1 / 0.08 = 12.5 Pa·s = 12,500 mPa·s</span><br><span class="line"></span><br><span class="line">同样的力，环氧树脂的流动速率只有水的 1/12500</span><br><span class="line">所以环氧树脂的粘度是水的 12500 倍</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="第五步：关键洞察-—-粘度是”阻力系数”"><a href="#第五步：关键洞察-—-粘度是”阻力系数”" class="headerlink" title="第五步：关键洞察 — 粘度是”阻力系数”"></a>第五步：关键洞察 — 粘度是”阻力系数”</h3><p><strong>η 本质上回答的问题是：让这个流体流动，每单位速度需要花多少力？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">η 大 → 要流得快，必须使很大的力 → &quot;稠&quot;</span><br><span class="line">η 小 → 轻轻一推就流得快 → &quot;稀&quot;</span><br><span class="line"></span><br><span class="line">改写公式：</span><br><span class="line">  τ = η × γ̇</span><br><span class="line">  需要的力 = 粘度 × 你要多快</span><br></pre></td></tr></table></figure>
+
+<p>这个形式更直觉：</p>
+<ul>
+<li>想让蜂蜜流得快（γ̇ 大）→ 需要大力（τ 大），因为 η 大</li>
+<li>想让水流得快（γ̇ 大）→ 不需要多大力（τ 小），因为 η 小</li>
+</ul>
+<hr>
+<h3 id="第六步：联系到你的实际工艺"><a href="#第六步：联系到你的实际工艺" class="headerlink" title="第六步：联系到你的实际工艺"></a>第六步：联系到你的实际工艺</h3><h4 id="场景-1：为什么冬天环氧底漆变稠"><a href="#场景-1：为什么冬天环氧底漆变稠" class="headerlink" title="场景 1：为什么冬天环氧底漆变稠"></a>场景 1：为什么冬天环氧底漆变稠</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">E-51 环氧树脂：</span><br><span class="line">  15°C：η ≈ 20,000 mPa·s → τ/γ̇ 很大 → 搅拌很费力</span><br><span class="line">  25°C：η ≈ 12,000 mPa·s → 正常</span><br><span class="line">  40°C：η ≈  4,000 mPa·s → 轻松搅拌</span><br><span class="line">  </span><br><span class="line">同一个 τ（同样的手劲），15°C 时 γ̇ 只有 40°C 时的 1/5</span><br><span class="line">→ 流体几乎不怎么动</span><br><span class="line">→ 解决方案：加热降粘</span><br></pre></td></tr></table></figure>
+
+<h4 id="场景-2：为什么喷涂比刷涂要求更低的粘度"><a href="#场景-2：为什么喷涂比刷涂要求更低的粘度" class="headerlink" title="场景 2：为什么喷涂比刷涂要求更低的粘度"></a>场景 2：为什么喷涂比刷涂要求更低的粘度</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">喷涂：γ̇ = 10,000~100,000 s⁻¹（通过喷嘴的瞬间速度极高）</span><br><span class="line">  如果 η 太大 → τ = η × γ̇ → 需要的压力极大 → 设备撑不住</span><br><span class="line">  所以喷涂前必须稀释到 500~3,000 mPa·s</span><br><span class="line"></span><br><span class="line">刷涂：γ̇ = 100~1,000 s⁻¹（手动刷，速率较低）</span><br><span class="line">  η 可以高一些（2,000~10,000 mPa·s），因为 γ̇ 小，τ 不会太大</span><br></pre></td></tr></table></figure>
+
+<h4 id="场景-3：触变性（施工后不流挂的秘密）"><a href="#场景-3：触变性（施工后不流挂的秘密）" class="headerlink" title="场景 3：触变性（施工后不流挂的秘密）"></a>场景 3：触变性（施工后不流挂的秘密）</h4><p>很多环氧涂料是<strong>非牛顿流体</strong> — η 不是常数，而是随 γ̇ 变化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">高剪切（刷涂时）：η 变小 → 涂料变稀，好刷开</span><br><span class="line">低剪切（刷完后）：η 恢复变大 → 涂料变稠，不往下流</span><br></pre></td></tr></table></figure>
+
+<p>这就是为什么好的环氧涂料”刷的时候稀，刷完不流” — 触变性（剪切稀化 + 静置恢复）。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">η = τ / γ̇</span><br><span class="line"></span><br><span class="line">翻译：粘度 = 使的力 ÷ 流的速率</span><br><span class="line"></span><br><span class="line">本质：粘度是流体对流动的&quot;抵抗系数&quot;</span><br><span class="line">  - 粘度高 → 同样的力，流得慢</span><br><span class="line">  - 粘度低 → 同样的力，流得快</span><br><span class="line"></span><br><span class="line">单位：1 mPa·s = 1 cP</span><br><span class="line">  水 = 1 mPa·s</span><br><span class="line">  E-51 环氧树脂 ≈ 12,000 mPa·s（水的 12000 倍）</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/6f4.html" title="如何理解动力粘度η">https://zhyong.site/posts/6f4.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">公众号</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ群</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%90%E5%8A%A8%E7%B2%98%E5%BA%A6/" rel="tag"><i class="fa fa-tag"></i> 运动粘度</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_wechat"></a>
+      <a class="a2a_button_qzone"></a>
+      <a class="a2a_button_sina_weibo"></a>
+      <a class="a2a_button_douban"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/c78c.html" rel="prev" title="铝合金牌号系列对比及选型指南">
+                  <i class="fa fa-angle-left"></i> 铝合金牌号系列对比及选型指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">247k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:51</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","jsUrl":"https://unpkg.com/twikoo@1.7.20/dist/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
