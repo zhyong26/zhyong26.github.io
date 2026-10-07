@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhyong.site","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"twikoo","show_count":true,"storage":true,"lazyload":false,"nav":null,"activeClass":"twikoo"},"stickytabs":true,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="研发技术人员的日常里，多半遇到过这几个场景：同一块材料，两个人测出来的数据对不上；DOE 做完，主效应和误差项混在一起分不出高低；来料检验判定合格，产线用起来却频频出问题。这些问题的共同源头，往往不是材料、不是工艺，而是你手里那把「尺子」本身。 MSA（Measurement System Analysis，测量系统分析）就是系统性地审视这把尺子的方法。它不是质量部门的专属报表游戏——对研发而言，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MSA测量系统分析：从概念到实战的研发技术指南">
+<meta property="og:url" content="https://zhyong.site/posts/9c0c.html">
+<meta property="og:site_name" content="材料与逻辑">
+<meta property="og:description" content="研发技术人员的日常里，多半遇到过这几个场景：同一块材料，两个人测出来的数据对不上；DOE 做完，主效应和误差项混在一起分不出高低；来料检验判定合格，产线用起来却频频出问题。这些问题的共同源头，往往不是材料、不是工艺，而是你手里那把「尺子」本身。 MSA（Measurement System Analysis，测量系统分析）就是系统性地审视这把尺子的方法。它不是质量部门的专属报表游戏——对研发而言，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhyong.site/images/msa-04-bias.png">
+<meta property="og:image" content="https://zhyong.site/images/msa-02-runchart.png">
+<meta property="og:image" content="https://zhyong.site/images/msa-03-xbar.png">
+<meta property="og:image" content="https://zhyong.site/images/msa-01-contribution.png">
+<meta property="og:image" content="https://zhyong.site/images/msa-05-criteria.png">
+<meta property="article:published_time" content="2026-10-07T02:48:48.000Z">
+<meta property="article:modified_time" content="2026-10-07T02:53:19.149Z">
+<meta property="article:author" content="ZhangYong">
+<meta property="article:tag" content="GR&amp;R">
+<meta property="article:tag" content="MSA">
+<meta property="article:tag" content="测量系统">
+<meta property="article:tag" content="质量工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhyong.site/images/msa-04-bias.png">
+
+
+<link rel="canonical" href="https://zhyong.site/posts/9c0c.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhyong.site/posts/9c0c.html","path":"posts/9c0c.html","title":"MSA测量系统分析：从概念到实战的研发技术指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MSA测量系统分析：从概念到实战的研发技术指南 | 材料与逻辑</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/7.2.0/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"cdn":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.3/mermaid.min.js","theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://zhyong.site/posts/9c0c.html"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<script defer src="https://u.zhyong.site/script.js" data-website-id="7609cacf-09ed-47e9-85b1-e6111a609ea3"></script>
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="材料与逻辑" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">材料与逻辑</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">从原子到结构，从数据到洞察</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-知识"><a href="/knowledge/" rel="section"><i class="fa fa-star fa-fw"></i>知识</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E6%8A%8A%E6%A6%82%E5%BF%B5%E7%AB%8B%E4%BD%8F%EF%BC%9A%E6%B5%8B%E9%87%8F%E5%80%BC-%E7%9C%9F%E5%AE%9E%E5%80%BC-%E5%8F%98%E5%B7%AE"><span class="nav-text">一、先把概念立住：测量值 &#x3D; 真实值 + 变差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81GR-R%EF%BC%9A%E6%8A%8A%E6%B5%8B%E9%87%8F%E8%AF%AF%E5%B7%AE%E5%AE%9A%E9%87%8F%E6%8B%86%E5%BC%80"><span class="nav-text">二、GR&amp;R：把测量误差定量拆开</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%81%9A%E6%B3%95%EF%BC%9A%E4%BA%A4%E5%8F%89%E6%B3%95-10%C3%973%C3%973"><span class="nav-text">标准做法：交叉法 10×3×3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E8%B4%AF%E7%A9%BF%E5%85%A8%E6%96%87%E7%9A%84%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B"><span class="nav-text">一个贯穿全文的实战案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%AF%BB%E6%87%82%E5%9B%BE%E5%BD%A2%E6%8A%A5%E5%91%8A%EF%BC%9A%E6%9E%81%E5%B7%AE%E5%9B%BE%E4%B8%8E%E5%9D%87%E5%80%BC%E5%9B%BE"><span class="nav-text">三、读懂图形报告：极差图与均值图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%88%A4%E5%AE%9A%E6%A0%87%E5%87%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9B%9B%E5%BC%A0%E6%88%90%E7%BB%A9%E5%8D%95%E4%BC%9A%E6%89%93%E6%9E%B6"><span class="nav-text">四、判定标准：为什么四张成绩单会打架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Wheeler-%E7%9A%84%E8%A1%A5%E5%85%85%E8%A7%86%E8%A7%92%EF%BC%9AEMP-%E4%B8%8E%E7%9B%91%E8%A7%86%E5%99%A8%E7%AD%89%E7%BA%A7"><span class="nav-text">五、Wheeler 的补充视角：EMP 与监视器等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%A0%94%E5%8F%91%E5%9C%BA%E6%99%AF%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%9E%E6%88%98%E5%BA%94%E7%94%A8"><span class="nav-text">六、研发场景的三个实战应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%EF%BC%9ADOE-%E4%B9%8B%E5%89%8D%E5%85%88%E5%81%9A-MSA"><span class="nav-text">场景一：DOE 之前先做 MSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%EF%BC%9A%E7%A0%B4%E5%9D%8F%E6%80%A7%E8%AF%95%E9%AA%8C%E7%94%A8%E5%B5%8C%E5%A5%97%E6%B3%95"><span class="nav-text">场景二：破坏性试验用嵌套法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%EF%BC%9A%E5%AE%9E%E9%AA%8C%E5%AE%A4%E9%97%B4%E6%95%B0%E6%8D%AE%E6%AF%94%E5%AF%B9"><span class="nav-text">场景三：实验室间数据比对</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E5%9D%91%E6%B8%85%E5%8D%95"><span class="nav-text">七、常见坑清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E8%90%BD%E5%9C%B0%E8%B7%AF%E7%BA%BF%E5%9B%BE"><span class="nav-text">八、落地路线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZhangYong</p>
+  <div class="site-description" itemprop="description">专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhyong26" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhyong26" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhyong682025@163.com" title="E-Mail → mailto:zhyong682025@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3724806144" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3724806144" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zhyong.site/posts/9c0c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZhangYong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="材料与逻辑">
+      <meta itemprop="description" content="专注于高分子材料研发、Python/Shell 自动化、AI 工作流集成及数字化生产力工具。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MSA测量系统分析：从概念到实战的研发技术指南 | 材料与逻辑">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MSA测量系统分析：从概念到实战的研发技术指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-10-07 10:48:48 / 修改时间：10:53:19" itemprop="dateCreated datePublished" datetime="2026-10-07T10:48:48+08:00">2026-10-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E8%89%BA%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">工艺管理</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>研发技术人员的日常里，多半遇到过这几个场景：同一块材料，两个人测出来的数据对不上；DOE 做完，主效应和误差项混在一起分不出高低；来料检验判定合格，产线用起来却频频出问题。这些问题的共同源头，往往不是材料、不是工艺，而是你手里那把「尺子」本身。</p>
+<p>MSA（Measurement System Analysis，测量系统分析）就是系统性地审视这把尺子的方法。它不是质量部门的专属报表游戏——对研发而言，<strong>测量系统的能力决定了你所有试验数据的信噪比下限</strong>。这篇文章把概念、算法、判定标准和研发实战一次讲透。</p>
+<span id="more"></span>
+
+<h2 id="一、先把概念立住：测量值-真实值-变差"><a href="#一、先把概念立住：测量值-真实值-变差" class="headerlink" title="一、先把概念立住：测量值 &#x3D; 真实值 + 变差"></a>一、先把概念立住：测量值 &#x3D; 真实值 + 变差</h2><p>你读到的每一个数据，都不是被测对象的真实值，而是真实值叠加了一堆变差之后的观测值。这堆变差里，一部分来自被测对象本身（零件间差异、材料不均匀性），另一部分来自测量系统。MSA 要做的事，就是把后者定量地拆解出来。</p>
+<p>测量系统的特性，行业里习惯概括为「五性」：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>回答的问题</th>
+<th>一句话判断</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分辨力（Resolution）</td>
+<td>尺子刻度够不够细</td>
+<td>至少能读到公差的 1&#x2F;10</td>
+</tr>
+<tr>
+<td>偏倚（Bias）</td>
+<td>测得准不准</td>
+<td>同一标准件反复测，均值偏离基准值多少</td>
+</tr>
+<tr>
+<td>线性（Linearity）</td>
+<td>量程内偏倚是否一致</td>
+<td>小尺寸准、大尺寸不准，就是线性差</td>
+</tr>
+<tr>
+<td>稳定性（Stability）</td>
+<td>随时间漂不漂</td>
+<td>同一标准件隔周测，均值是否守住</td>
+</tr>
+<tr>
+<td>重复性 &amp; 再现性（GR&amp;R）</td>
+<td>测得稳不稳</td>
+<td>同人同件反复测的散布 + 换人的偏移</td>
+</tr>
+</tbody></table>
+<p>其中前四性是「准不准」的问题，GR&amp;R 是「稳不稳」的问题——这个区分贯穿全文，也是绝大多数误用的起点。</p>
+<p>偏倚和线性最容易被忽略，因为它们藏在 GR&amp;R 报告之外。做法其实不复杂：取 5 个覆盖量程的标准件（或用更高等级仪器定值），每件重复测量取均值，均值减去基准值就是偏倚；把各点的偏倚对基准值作图，拟合线如果不水平、不贴零，说明偏倚随量程变化：</p>
+<p><img src="/images/msa-04-bias.png" alt="偏倚与线性分析示意图"></p>
+<p>一台千分尺在 25 mm 附近偏倚 +0.02，到 26 mm 偏到 +0.10——每批货测得都很「稳定」，但每一个数都系统性偏大。这种问题 GR&amp;R 再漂亮也查不出来。</p>
+<h2 id="二、GR-R：把测量误差定量拆开"><a href="#二、GR-R：把测量误差定量拆开" class="headerlink" title="二、GR&amp;R：把测量误差定量拆开"></a>二、GR&amp;R：把测量误差定量拆开</h2><p>GR&amp;R（Gage Repeatability &amp; Reproducibility）是 MSA 的核心工具，它只拆两个成分：</p>
+<ul>
+<li><strong>重复性（EV，Equipment Variation）</strong>：同一个人、同一台设备、同一个零件，连续反复测，读数散布多大——反映设备本身</li>
+<li><strong>再现性（AV，Appraiser Variation）</strong>：换一个人测，整体偏移多大——反映人之间的差异</li>
+</ul>
+<p>看一张实际数据就明白了。取同一个零件，三名操作员每人盲测 3 次：</p>
+<p><img src="/images/msa-02-runchart.png" alt="同一零件9次测量游程图"></p>
+<p>每个人 3 个点散开的幅度，就是重复性；A、B、C 三段均值之间的落差，就是再现性。这张图还有个实用诊断：如果重复性占大头，去查设备（夹持力、温漂、维护状态）；如果再现性占大头，去查人的因素（读数习惯、操作 SOP、培训）。</p>
+<h3 id="标准做法：交叉法-10×3×3"><a href="#标准做法：交叉法-10×3×3" class="headerlink" title="标准做法：交叉法 10×3×3"></a>标准做法：交叉法 10×3×3</h3><p>经典的可重复测量 GR&amp;R（交叉法，Crossed GR&amp;R）流程：</p>
+<ol>
+<li><strong>选 10 个零件</strong>，覆盖生产过程的真实波动——注意，是「过程波动」，不是整个公差范围，后面会讲为什么</li>
+<li><strong>3 名操作员</strong>，每人每个零件<strong>盲测 3 次</strong>（顺序随机、互相看不到读数），共 90 个数据</li>
+<li>用<strong>均值极差法</strong>或**方差分析（ANOVA）**计算方差成分</li>
+<li>输出判定指标和图形报告</li>
+</ol>
+<p>均值极差法用控制图的统计逻辑估算各成分（重复性 &#x3D; 平均极差&#x2F;d₂，零件间 &#x3D; 零件均值的极差&#x2F;d₂*），手算表格就能做；ANOVA 则多拆出一项「操作员×零件交互作用」——某个操作员测软材料偏偏读数偏低，这种交互只有 ANOVA 能看见。有软件条件就用 ANOVA，它是均值极差法的严格上位替代。</p>
+<h3 id="一个贯穿全文的实战案例"><a href="#一个贯穿全文的实战案例" class="headerlink" title="一个贯穿全文的实战案例"></a>一个贯穿全文的实战案例</h3><p>为了让数字不是纸上谈兵，构造一个典型研发场景：铝合金压铸件壁厚测量，千分尺，规格 25±1.0 mm，按 10×3×3 做交叉 GR&amp;R，计算结果：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>AIAG 判定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%StudyVar（GRR 占总变差）</td>
+<td>29.4%（EV 14.1% + AV 25.8%）</td>
+<td>10~30%：有条件接受</td>
+</tr>
+<tr>
+<td>%Contribution（方差占比）</td>
+<td>8.7%（EV 2.0% + AV 6.7%）</td>
+<td>1~9%：有条件接受</td>
+</tr>
+<tr>
+<td>%Tolerance（GRR 占公差）</td>
+<td><strong>43.1%</strong></td>
+<td><strong>&gt;30%：不可接受</strong></td>
+</tr>
+<tr>
+<td>ndc（可区分类别数）</td>
+<td><strong>4</strong></td>
+<td><strong>&lt;5：不足</strong></td>
+</tr>
+<tr>
+<td>再现性 : 重复性</td>
+<td>25.8% : 14.1%</td>
+<td>人的差异是主要矛盾</td>
+</tr>
+</tbody></table>
+<p>同一套数据，四个指标给出四种脸色——这不是矛盾，而是它们各自回答不同的问题。把这件事想通，MSA 就算入门了。</p>
+<h2 id="三、读懂图形报告：极差图与均值图"><a href="#三、读懂图形报告：极差图与均值图" class="headerlink" title="三、读懂图形报告：极差图与均值图"></a>三、读懂图形报告：极差图与均值图</h2><p>数字之外，GR&amp;R 的两张控制图包含大量信息，多数人只看表格不看图，很可惜。</p>
+<p><img src="/images/msa-03-xbar.png" alt="GR&amp;R极差图与均值图"></p>
+<p><strong>极差图（上）</strong>：把每个操作员×每个零件的 3 次读数求极差画出来。所有点受控，说明每人的测量动作稳定一致；如果某人的点系统性偏高，他的操作方式有问题；如果某个零件的极差异常大，可能是零件本身有毛刺、装夹不稳。</p>
+<p><strong>均值图（下）</strong>：把每人每件的均值画出来，叠加按重复性算出的控制限。这张图的关键读法是<strong>控制限外的点数</strong>：控制限宽度反映测量噪声，点的散布反映零件差异。越出控制限的点越多，说明零件间信号相对测量噪声越显著，测量系统越有区分能力。如果所有点都缩在控制限内排成一条横线，意味着零件差异完全被测量噪声淹没——这把尺子测不出零件的不同。</p>
+<p>本案例 30 个均值点有 26 个越出控制限，区分能力尚可，这与前面判定表给出的信号一致。</p>
+<h2 id="四、判定标准：为什么四张成绩单会打架"><a href="#四、判定标准：为什么四张成绩单会打架" class="headerlink" title="四、判定标准：为什么四张成绩单会打架"></a>四、判定标准：为什么四张成绩单会打架</h2><p>看两个口径的分解图，直观感受一下「同一系统、两种算法」：</p>
+<p><img src="/images/msa-01-contribution.png" alt="方差占比与变差占比对比"></p>
+<p>同样的方差成分，<strong>%Contribution 用方差（σ²）占比，%StudyVar 用标准差（σ）占比</strong>，数字上差一个平方关系：8.7% 的方差占比对应 29.4% 的变差占比。所以 AIAG 给两套口径各配了阈值——%Contribution 的 1% &#x2F; 9% 对应 %StudyVar 的 10% &#x2F; 30%，本质上是一回事。</p>
+<p>真正的分歧在分母。三个常用口径回答三个不同问题：</p>
+<table>
+<thead>
+<tr>
+<th>口径</th>
+<th>分母</th>
+<th>回答的问题</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%StudyVar</td>
+<td>总观测变差 6σ</td>
+<td>能否区分<strong>这批样品</strong>的差异</td>
+<td>过程研究、DOE 前的能力确认</td>
+</tr>
+<tr>
+<td>%Tolerance</td>
+<td>公差带</td>
+<td>判合格&#x2F;不合格会不会<strong>判错</strong></td>
+<td>分选检验、出货判定</td>
+</tr>
+<tr>
+<td>ndc</td>
+<td>GRR 本身</td>
+<td>能把产品分成几档</td>
+<td>分级、排序</td>
+</tr>
+</tbody></table>
+<p>本案例是最好的注解：%StudyVar 29.4% 勉强及格，说明「研究过程变差」还凑合；%Tolerance 43.1% 严重超标，说明拿这把千分尺做 25±1.0 的合格判定，误判风险不可接受——公差带 2.0 mm，而测量噪声 6σ 就有 0.86 mm，吃掉了公差的四成多。</p>
+<p><strong>选口径的原则：看这把尺子拿来干什么。</strong> 用于研发测量和过程监控，看 %StudyVar 和 ndc；用于出货判定和分选，%Tolerance 一票否决。案例中的正确结论是：这把千分尺可以用于过程研究，但必须升级（换数显千分尺、固定测量点位、加治具）才能承担合格判定职责。</p>
+<p>还有一个隐含的分母陷阱：<strong>%StudyVar 的分母取决于你选的 10 个零件</strong>。选样时如果刻意挑差异大的零件（混批次、跨规格），分母被撑大，%GR&amp;R 虚低，系统「假装合格」；反之挑 10 个几乎一样的零件，%GR&amp;R 虚高。所以选样必须代表过程的真实波动，并且要在报告中注明样品来源。</p>
+<h2 id="五、Wheeler-的补充视角：EMP-与监视器等级"><a href="#五、Wheeler-的补充视角：EMP-与监视器等级" class="headerlink" title="五、Wheeler 的补充视角：EMP 与监视器等级"></a>五、Wheeler 的补充视角：EMP 与监视器等级</h2><p>到这里都是 AIAG（汽车工业行动集团，MSA 参考手册第四版）的框架。但学术界对它的判定阈值一直有批评，代表人物是统计学家 Donald Wheeler。他的 EMP（Evaluating the Measurement Process）方法主张用<strong>组内相关系数 ICC</strong> 评价测量系统：σ零件² &#x2F; σ总²，即观测变差中有多少比例是真实的产品信号。</p>
+<p>按 ICC 把测量系统分成四个等级，并与 AIAG 的判定对照：</p>
+<p><img src="/images/msa-05-criteria.png" alt="AIAG与EMP判定对比"></p>
+<p>两套标准给出完全不同的结论：AIAG 认为 %StudyVar 30% 只是「有条件接受」的系统，在 EMP 框架里 ICC 高达 91%，是能可靠监测过程均值偏移的<strong>一级监视器</strong>；AIAG 判「需改进」的 45% 系统，EMP 仍评一级。本案例 ICC &#x3D; 0.913，恰好落在第二行。</p>
+<p>分歧的根源在于两套标准的出身：AIAG 来自汽车工业，传统上关注紧公差下的<strong>分选判定</strong>，对测量精度要求苛刻；EMP 出自过程改进传统，关心的是控制图上<strong>能否及时发现均值偏移</strong>——一级监视器在 3σ 偏移发生时，用少量子组就能以接近 1 的概率报警。用途不同，宽严自然不同。</p>
+<p>工程上的务实态度：两套都懂，按用途取用。做产品判定，老老实实按 AIAG 的 %Tolerance；做过程监控和研发测量，EMP 的视角更合理，也解释了为什么很多「不合格」的测量系统在控制图上用得很好。</p>
+<h2 id="六、研发场景的三个实战应用"><a href="#六、研发场景的三个实战应用" class="headerlink" title="六、研发场景的三个实战应用"></a>六、研发场景的三个实战应用</h2><h3 id="场景一：DOE-之前先做-MSA"><a href="#场景一：DOE-之前先做-MSA" class="headerlink" title="场景一：DOE 之前先做 MSA"></a>场景一：DOE 之前先做 MSA</h3><p>这是研发人员最该建立的习惯。DOE 的本质是从噪声里提取信号：重复测量误差会直接进入残差项，抬高效应检验的噪声地板。如果测量系统 %GRR 在 50%，而 DOE 因素的主效应只占总变差 30%，效应检验注定不显著——你会误判「这个因素不重要」，然后做出错误的工艺窗口决策。</p>
+<p>正确顺序：<strong>先对响应量的测量手段做 GR&amp;R → 确认 %GRR 和 ndc 达标 → 再设计试验</strong>。测量噪声大时，应对办法只有两个：升级测量手段，或按误差传递计算加大每组的重复数——后者意味着样品和工时翻倍，晚算不如早算。</p>
+<h3 id="场景二：破坏性试验用嵌套法"><a href="#场景二：破坏性试验用嵌套法" class="headerlink" title="场景二：破坏性试验用嵌套法"></a>场景二：破坏性试验用嵌套法</h3><p>拉伸、冲击、硬度这类测完即报废的项目，无法对同一件样品重复测量，交叉法从根上不适用。嵌套法（Nested GR&amp;R）的思路是：把「同一批次、同一条件下制备的多个样品」视为「同一个零件」的化身，每人测量这组样品中的一份。</p>
+<p>要害在于制样的同质性——嵌套法的重复性估计里混入了制样散差，这是方法固有的局限，报告里必须写明「该 GR&amp;R 含制样变差」。实操建议：制样时固定机台、模穴、工艺参数，把制样变差压到最小，否则测出来的「测量系统不合格」其实是制样不稳定。</p>
+<h3 id="场景三：实验室间数据比对"><a href="#场景三：实验室间数据比对" class="headerlink" title="场景三：实验室间数据比对"></a>场景三：实验室间数据比对</h3><p>研发经常遇到本厂实验室和供应商、第三方实验室数据对不上的纠纷。单次对比说不清谁对谁错，正确的做法是一次小型 GR&amp;R 变体：把同一批留样（嵌套法意义上的「同件」）分发各实验室，按同一 SOP 各测若干次，用再现性成分量化「实验室间差异」。如果实验室间差异显著大于实验室内重复性，问题就不在材料，而在两家测量系统的某个环节——设备、夹具、方法、环境四选一，逐项排查。</p>
+<h2 id="七、常见坑清单"><a href="#七、常见坑清单" class="headerlink" title="七、常见坑清单"></a>七、常见坑清单</h2><ul>
+<li><strong>GR&amp;R 合格 ≠ 测量系统合格</strong>：五性只测了两性，偏倚&#x2F;线性&#x2F;稳定性要靠校准和定期标准件核查补齐</li>
+<li><strong>分辨率不足</strong>：设备读数精度应至少到公差的 1&#x2F;10，ndc 偏低先查这里</li>
+<li><strong>选样骗局</strong>：%StudyVar 的分母随选样变化，样品必须代表过程真实波动</li>
+<li><strong>盲测缺失</strong>：操作员知道彼此读数会互相「校准」，再现性被系统性低估</li>
+<li><strong>稳定地错</strong>：所有指标都好，但偏倚为常数——每个数据都错同一个数，只有标准件核查能暴露</li>
+<li><strong>报告只贴表格</strong>：不看极差图和均值图，丢掉了诊断设备&#x2F;人&#x2F;零件问题的最好线索</li>
+</ul>
+<h2 id="八、落地路线图"><a href="#八、落地路线图" class="headerlink" title="八、落地路线图"></a>八、落地路线图</h2><p>给研发团队的 MSA 最小可行方案：</p>
+<ol>
+<li><strong>建台账</strong>：列出所有用于判定和研发数据采集的测量手段，标出各自承担的判定职责</li>
+<li><strong>按职责分级</strong>：承担合格判定的量具，%Tolerance 必须达标；仅用于过程研究&#x2F;监控的，以 %StudyVar + ndc 为准</li>
+<li><strong>新量具投产前</strong>：做完整五性分析（偏倚、线性、稳定性、GR&amp;R），存档基线</li>
+<li><strong>周期性维护</strong>：校准时补偏倚验证，关键特性定期用标准件做稳定性核查，留存控制图</li>
+<li><strong>重大试验前</strong>：DOE 和能力验证的响应量，先跑一次快速 GR&amp;R（哪怕 5×2×2 的简化版）确认测量能力</li>
+</ol>
+<p>最后一个判断值得写进研发流程的注释里：<strong>数据是决策的地基，MSA 是验收地基的那一步</strong>。地基检查的成本永远低于房子倾斜之后的返工——无论房子是一批货，还是一个工艺窗口的结论。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>AIAG, <em>Measurement Systems Analysis Reference Manual</em>, 4th Edition, 2010</li>
+<li>Donald J. Wheeler, <em>EMP III: Evaluating the Measurement Process &amp; Using Imperfect Data</em>, SPC Press</li>
+<li>Minitab 官方文档：Gage R&amp;R 与 Wheeler’s EMP 判定标准</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ZhangYong
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://zhyong.site/posts/9c0c.html" title="MSA测量系统分析：从概念到实战的研发技术指南">https://zhyong.site/posts/9c0c.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">公众号</span>
+          </span>
+
+          <img class="social-item-img" src="/img/698f222de001c.jpg">
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-qq"></i>
+            </span>
+
+            <span class="label">QQ群</span>
+          </span>
+
+          <img class="social-item-img" src="/img/6991b53c2e5db.png">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://blog.csdn.net/was172">
+            <span class="icon">
+              <i class="fab fa-c"></i>
+            </span>
+
+            <span class="label">CSDN</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MSA/" rel="tag"><i class="fa fa-tag"></i> MSA</a>
+              <a href="/tags/GR-R/" rel="tag"><i class="fa fa-tag"></i> GR&R</a>
+              <a href="/tags/%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 质量工具</a>
+              <a href="/tags/%E6%B5%8B%E9%87%8F%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 测量系统</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_wechat"></a>
+      <a class="a2a_button_qzone"></a>
+      <a class="a2a_button_sina_weibo"></a>
+      <a class="a2a_button_douban"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/6f4.html" rel="prev" title="如何理解动力粘度η">
+                  <i class="fa fa-angle-left"></i> 如何理解动力粘度η
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ZhangYong</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">252k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:01</span>
+  </span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/01/2026 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":false,"envId":"https://c.zhyong.site","jsUrl":"https://unpkg.com/twikoo@1.7.20/dist/twikoo.all.min.js","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+</body>
+</html>
